@@ -1,60 +1,4 @@
 
---[[
--------------------------------------------
--- Addon: LoseControl
--- Version: 6.11
--- Authors: Kouri, millanzarreta
--------------------------------------------
-
--- Changelog:
-
-No more changelogs in this file. To consult the last changes check https://www.curseforge.com/wow/addons/losecontrol/changes
-
-Updated for 8.0.1
-- Added more PvE spells (Uldir Raid, BfA Mythics and BfA Island Expeditions)
-- Added ImmunePhysical category
-- Added Interrupt category
-- Fixed some minor bugs
-
-Updated for 7.3.0 by millanzarreta
-- Added Antorus Raid spells
-- Added The Seat of the Triumvirate spells
-
-Updated for 7.2.5 by millanzarreta
-- Updated the spellID list to reflect the class changes
-- Added more PvE spells (ToS Raid, Chromie Scenario)
-
-Updated for 7.2.0 by millanzarreta
-- Updated the spell ID list to reflect the class changes
-- Added a large amount of PvE spells (EN Raid, ToV Raid, NH Raid and Legions Mythics) to spell ID list
-- Added new option to allows hide party frames when the player is in raid group (never in arena)
-- Improved the code to detect automatically the debuffs without defined duration (before, we had to add manually the spellId to the list)
-- Fixed an error that could cause the icon to not display properly when the effect have not a defined time
-
-Updated for 7.1.0 by millanzarreta
-- Added most spells to spell ID list and corrected others (a lot of work, really...)
-- Fixed the problem with spells that were not showing correctly (spells without duration, such as Solar Beam, Grounding Totem, Smoke Bomb, ...)
-- Added new option to allows manage the blizzard cooldown countdown
-- Added new option to allows remove the cooldown on bars for CC effects (tested for default Bars and Bartender4 Bars)
-- Fixed a bug: now type /lc opens directly the LoseControl panel instead of Interface panel
-
-Updated for 7.0.3 (Legion) by Hid@Emeriss and Wardz
-- Added a large amount of spells, hopefully I didn't miss anything (important)
-- Removed spell IDs that no longer exists.
-- Added Ice Nova (mage) and Rake (druid) to spell ID list
-- Fixed cooldown spiral
-
--- Code Credits - to the people whose code I borrowed and learned from:
-
-Wowwiki
-Kollektiv
-Tuller
-ckknight
-The authors of Nao!!
-And of course, Blizzard
-
-Thanks! :)
-]]
 
 --Anchor to Gladius and Stealth/Alpha w/Gloss Option  Added
 --Player LOCBliz Add All New CC  Added
@@ -10633,8 +10577,10 @@ function Unlock:OnClick()
   				v:EnableMouse(true)
         end
         if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
-          DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
-          ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+          if GladiusButtonBackground and GladiusButtonBackground:GetAlpha() == 0 then
+            DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
+            ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+          end
           if GladdyButtonFrame3 then
             GladdyButtonFrame3:SetAlpha(.5)
             GladdyButtonFrame3.classIcon:SetAlpha(0)
@@ -11651,7 +11597,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
             if not EditModeManagerFrame:UseRaidStylePartyFrames() then
               print("Enable Use Raid Style Party Frames")
             end
-						portrSizeValue = 65
+						portrSizeValue = 62
 					end
 					if unitId == "player" then
 						portrSizeValue = 48
