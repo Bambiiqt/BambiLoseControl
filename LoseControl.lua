@@ -682,6 +682,7 @@ local spellsArenaTable = {
 	{46924 , "Small_Offenisive_CDs"}, -- Bladestorm
 	{132404 , "Small_Defensive_CDs"}, -- Shield Block
 	{97463 , "Small_Defensive_CDs"}, -- Rallying Cry
+	{385391 , "Small_Defensive_CDs"}, -- Rallying Cry
 	{12323 , "Snares_WithCDs"}, -- Piercing Howl
 	{197690 , "Special_Low"}, -- Defensive Stance
 	{199261, "Special_Low"}, -- Death Wish
@@ -8814,6 +8815,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
       	if spellId == 199845 then --Psyflay
       		icon = 537021
       	end
+
+		if spellId == 285515 then --Frost Shock to Frost Nove
+			icon = 135848
+		end
         -----------------------------------------------------------------------------
         --Spell Id same for Friend and Enemey buff/debuff Hacks
         -----------------------------------------------------------------------------
