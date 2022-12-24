@@ -251,7 +251,8 @@ local spellsArenaTable = {
 	{212800, "Big_Defensive_CDs"}, -- Blur
 	{209426 , "Big_Defensive_CDs"}, -- Darkness
 	{206804 , "Big_Defensive_CDs"}, -- Rain From Above
-	--{323802 , "Small_Offenisive_CDs"}, -- The Hunt (Marks Enemy)
+	{370966 , "Player_Party_OffensiveCDs"}, --The Hunt
+	{323802 , "Player_Party_OffensiveCDs"}, --The Hunt
 	{203819, "Small_Defensive_CDs"}, -- Demon Spikes
 	{208796, "Small_Defensive_CDs"}, -- Jagged Spikes
 	{205629, "Freedoms_Speed"}, -- Demonic Trample
@@ -316,7 +317,14 @@ local spellsArenaTable = {
 	----------------
 	-- Evoker
 	----------------
-
+	{370553 , "Drink_Purge"}, --Tip the Scales
+	{378441 , "Immune_Arena"}, --Time Stop (Evoker PvP)
+	{370960 , "Immune_Arena"}, --Emerald Communion
+	{383005 , "Roots_90_Snares"}, -- Chrono Loop
+	{363534 , "Big_Defensive_CDs"}, --Rewind
+	{363916 , "Big_Defensive_CDs"}, --Obsidian Scales
+	{357170 , "Big_Defensive_CDs"}, --Time Dilation
+	{374348 , "Big_Defensive_CDs"}, --Renewing Blaze
 	{378464 , "Small_Defensive_CDs"}, --Nullifying Shroud
 	
 	----------------
@@ -547,6 +555,7 @@ local spellsArenaTable = {
 	{13750 , "Melee_Major_OffenisiveCDs"}, --Adrenaline Rush
 	{121471 , "Melee_Major_OffenisiveCDs"}, --Shadow Blades
 	{185422 , "Melee_Major_OffenisiveCDs"}, --Shadow Dance
+	{360194, "Player_Party_OffensiveCDs"}, --DeathMark (Marks Enenmy)
 	{79140, "Player_Party_OffensiveCDs"}, --Vendetta (Marks Enenmy)
 	{31224 , "Big_Defensive_CDs"}, --Cloak of Shadows
 	{5277, "Big_Defensive_CDs"}, --Evasion
@@ -600,11 +609,11 @@ local spellsArenaTable = {
 	{79206 , "Small_Defensive_CDs"}, --Spiritwalker's Grace
 	{58875 , "Freedoms_Speed"}, --Spirit Walk
 	{192082 , "Freedoms_Speed"}, -- Wind Rush
+	{2645 , "Freedoms_Speed"}, --Ghost Wolf
 	{51490 , "Snares_WithCDs"}, --Thunderstorm
 	--{260881 , "Freedoms_Speed"}, --Spirit Wolf
 	--{204262 , "Freedoms_Speed"}, --Spectral Recovery
 	{208963 , "Special_Low"}, --Skyfury Totem
-	{2645 , "Freedoms_Speed"}, --Ghost Wolf
 	{196840 , "Snares_Ranged_Spamable"}, --Frost Shock
 	{327942 , "Snares_Casted_Melee"}, --Windfury Totem
 
@@ -627,19 +636,21 @@ local spellsArenaTable = {
 	{196364 , "Silence_Arena"}, --Unstable Affliction
 	{221705 , "Special_High"}, --Casting Circle
 	{104773, "Special_High"}, --Unending Resolve
-	{307871, "Roots_90_Snares"}, --Spear of Bastion
+	{353293, "Roots_90_Snares"}, --Shadow Rift
 	{113860, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Instability
 	{113858, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Misery
 	{212295 , "Big_Defensive_CDs"}, --Nether Ward
 	{200587, "Player_Party_OffensiveCDs"}, --Fel Fissure (PvP Talent 50% MS)
+	{1714 , "Player_Party_OffensiveCDs"}, --Curse of Tongues
+	{199954 , "Player_Party_OffensiveCDs"}, --Curse of Fragility
 	{344566 , "Small_Offenisive_CDs"}, --Rapid Contagion
 	{328774 , "Small_Offenisive_CDs"}, --Amplify Curse
-	{1714 , "Small_Offenisive_CDs"}, --Curse of Tongues
-	{199954 , "Small_Offenisive_CDs"}, --Curse of Fragility
 	{80240 , "Small_Offenisive_CDs"}, --Havoc
 	{337170 , "Small_Offenisive_CDs"}, --Madness of the Azj'Aqir (Legendary)
 	{108416 , "Small_Defensive_CDs"}, --Dark Pact
+	{387633 , "Freedoms_Speed"}, --Soulburn: Demonic Circle
 	{702 , "Special_Low"}, --Curse of Weakness
+	{334275 , "Snares_Ranged_Spamable"}, --Curse of Exhaustion
 	{196099, "Snares_Casted_Melee"}, --Grimoire of Sacrifice
 	{285933, "Snares_Casted_Melee"}, --Demon Armor
 	{334320, "Snares_Casted_Melee"}, --Inevitable Demise
@@ -662,6 +673,7 @@ local spellsArenaTable = {
 	{335255 , "Special_High"}, -- Mass Spell Reflection Legendary
 	{105771 , "Roots_90_Snares"}, --Charge
 	{199042 , "Roots_90_Snares"}, --Thunderstruck
+	{307871, "Roots_90_Snares"}, --Spear of Bastion
 	{236236 , "Disarms"}, --Disarm
 	{236077 , "Disarms"}, --Disarm
 	{107574 , "Melee_Major_OffenisiveCDs"}, -- Avatar
@@ -950,6 +962,8 @@ local spellsArenaTable = {
 
 	{127797 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
 	{102793 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
+	{383005 , "ROP_Vortex", "Chrono".."\n".."Loop"}, 				-- Chrono Loop
+	{353293 , "ROP_Vortex", "Shadow".."\n".."Rift"}, 				-- Shadow Rift
 
 	{209749 , "Disarm"},			-- Faerie Swarm (pvp honor talent)
 	{233759 , "Disarm"},			-- Grapple Weapon
@@ -960,10 +974,12 @@ local spellsArenaTable = {
 	{320035 , "Haste_Reduction"},			-- Mirrors of Torment
 	{247777 , "Haste_Reduction"},			-- Mind Trauma
 	{199890 , "Haste_Reduction"},			-- Curse of Tongues
+	{1714 , "Haste_Reduction"},			-- Curse of Tongues
 
 
 	{236273 , "Dmg_Hit_Reduction"},		-- Duel
 	{199892 , "Dmg_Hit_Reduction"},   -- Curse of Weakness
+	{702 , "Dmg_Hit_Reduction"},   -- Curse of Weakness
 	{200947 , "Dmg_Hit_Reduction"},   -- High Winds
 	{356730 , "Dmg_Hit_Reduction"},   -- Viper Venom Healing/Damage Reduction
 	{203268 , "Dmg_Hit_Reduction"},   -- Sticky Tar
@@ -987,6 +1003,7 @@ local spellsArenaTable = {
 	{108843 , "Speed_Freedoms"},		-- Blazing Speed
 	{269513 , "Speed_Freedoms"},		-- Death from Above
 	{197003 , "Speed_Freedoms"},		-- Maneuverability
+	{387633 , "Speed_Freedoms"},   		--Soulburn: Demonic Circle
 	{205629 , "Speed_Freedoms"},		-- Demonic Trample
 	{310143 , "Speed_Freedoms", "Soulshape"},    -- Soulshape
 
@@ -5398,7 +5415,7 @@ local DBdefaults = {
 			Disarms = 50,
 			Melee_Major_OffenisiveCDs = 35,
 			Big_Defensive_CDs = 35,
-			Player_Party_OffensiveCDs = 35,
+			Player_Party_OffensiveCDs = 25,
 			Small_Offenisive_CDs = 25,
 			Small_Defensive_CDs = 25,
 			Freedoms_Speed = 25,
@@ -8819,6 +8836,57 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 		if spellId == 285515 then --Frost Shock to Frost Nove
 			icon = 135848
 		end
+
+		if spellId == 334275 then ----Amplify Curse's Exhaustion
+			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+			TooltipUtil.SurfaceArgs(tooltipData)
+	
+			for _, line in ipairs(tooltipData.lines) do
+				TooltipUtil.SurfaceArgs(line)
+			end
+		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
+		   --print("Aura Info: ", tooltipData.lines[2].leftText)
+			if strfind(tooltipData.lines[2].leftText, "70") then
+				spellIds[spellId] = "SnareMagic70"
+				count = 2
+			else
+				spellIds[spellId] = "SnarePosion50"
+			end
+		end
+
+		if spellId == 702 then ----Amplify Curse's Weakness
+			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+			TooltipUtil.SurfaceArgs(tooltipData)
+	
+			for _, line in ipairs(tooltipData.lines) do
+				TooltipUtil.SurfaceArgs(line)
+			end
+		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
+		   --print("Aura Info: ", tooltipData.lines[2].leftText)
+			if strfind(tooltipData.lines[2].leftText, "100") then
+				spellIds[spellId] = "Dmg_Hit_Reduction"
+				count = 100
+			else
+				spellIds[spellId] = "None"
+			end
+		end
+
+		if spellId == 1714 then ----Amplify Curse's Tongues
+			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+			TooltipUtil.SurfaceArgs(tooltipData)
+	
+			for _, line in ipairs(tooltipData.lines) do
+				TooltipUtil.SurfaceArgs(line)
+			end
+		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
+		   --print("Aura Info: ", tooltipData.lines[2].leftText)
+		   if not strfind(tooltipData.lines[2].leftText, "10") then
+				count = 20
+			else
+
+			end
+		end
+
         -----------------------------------------------------------------------------
         --Spell Id same for Friend and Enemey buff/debuff Hacks
         -----------------------------------------------------------------------------
@@ -9074,6 +9142,20 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
       if spellId == 328530 then --Divine Ascension
         icon = 2103871 --618976 -- or 590341
       end
+
+	  if spellId == 363916 then --Obsidian Scales w/Mettles
+		local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HELPFUL")
+		TooltipUtil.SurfaceArgs(tooltipData)
+
+		for _, line in ipairs(tooltipData.lines) do
+			TooltipUtil.SurfaceArgs(line)
+		end
+	   --print("Unit Aura: ", tooltipData.lines[1].leftText)
+	   --print("Aura Info: ", tooltipData.lines[2].leftText)
+	    if strfind(tooltipData.lines[2].leftText, "Immune") then
+			icon = 1526594
+		end
+	end
 
       -----------------------------------------------------------------------------------------------------------------
       --Hue Change
