@@ -150,14 +150,17 @@ local cleuSpells = { -- nil = Do Not Show
  {205180, 20, nil,  "Small_Offenisive_CDs", "Darkglare", "Darkglare"}, --Warlock Darkglare
  {265187, 15, nil,  "Small_Offenisive_CDs", "Demonic Tyrant", "Demonic Tyrant"}, --Warlock Tyrant
  {353601, 15, nil,  "Small_Offenisive_CDs", "Fel Obelisk", "Fel Obelisk"}, --Fel Obelisk
+ {387979, 6, nil,  "Small_Offenisive_CDs", "Unstable Tear", "Unstable Tear"}, --Unstable Tear
+ {394235, 14, nil,  "Small_Offenisive_CDs", "Shadowy Tear", "Shadowy Tear"}, --Shadowy Tear
+ {394243, 2, nil,  "Small_Offenisive_CDs", "Choas Tear", "Choas Tear"}, --Choas Tear
 
  --Totems
- {8143, 10, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER
+ {8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)
 
 
 --Spell Cast Sucess
  {202770, 8, nil,  "Small_Offenisive_CDs", "Fury of Elune", "Fury of Elune"}, --Fury of Elune
-
+ {202359, 6, nil,  "Small_Offenisive_CDs", "Astral Communion", "Astral Communion"}, --Fury of Elune
  --{spellId, duration. prio, prioArena, name, nameArena} --must have both names
 
 }
@@ -177,16 +180,18 @@ local interrupts = {
 	{217824 , 4},		-- Shield of Virtue (Protec Paladin)
 	{96231  , 4},		-- Rebuke (Paladin)
 	{116705 , 4},		-- Spear Hand Strike (Monk)
-	{29443  , 10},	-- Counterspell (Clutch of Foresight)
+	{29443  , 10},		-- Counterspell (Clutch of Foresight)
 	{2139   , 6},		-- Counterspell (Mage)
 	{147362 , 3},		-- Countershot (Hunter)
 	{187707 , 3},		-- Muzzle (Hunter)
+	{351338 , 4},		-- Quell (Evoker)
 	{97547  , 5},		-- Solar Beam (Druid Balance)
 	{93985  , 4},		-- Skull Bash (Druid Feral)
 	{183752 , 3},		-- Consume Magic (Demon Hunter)
-	{91807 ,  2},   -- Shambling Rush
+	{91807 ,  2},   	-- Shambling Rush
 	{91802  , 2},		-- Shambling Rush (Death Knight)
 	{47528  , 3},		-- Mind Freeze (Death Knight)
+
 
 }
 
@@ -204,9 +209,11 @@ local spellsArenaTable = {
 	{287254 , "CC_Arena"}, --Dead of Winter
 	{207167 , "CC_Arena"}, --Blinding Sleet
 	{334693 , "CC_Arena"}, -- Absolute Zero (Shadowlands Legendary Stun)
+	{377048 , "CC_Arena"}, -- Absolute Zero
 	{204490 , "Silence_Arena"}, --Strangulate
 	{77606 , "Special_High"}, --Dark Simulacrum
 	{315443 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb
+	{383269 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb 
 	{91807 , "Roots_90_Snares"}, --Shambling Rush
 	{204085 , "Roots_90_Snares"}, --Deathchill
 	{233395 , "Roots_90_Snares"}, --Deathchill
@@ -228,6 +235,9 @@ local spellsArenaTable = {
 	{48265 , "Freedoms_Speed"}, -- Death's Advance
 	{212552 , "Freedoms_Speed"}, -- Wraith Walk
 	{45524 , "Snares_Ranged_Spamable"}, --Chains of Ice
+	{356337 , "Snares_Casted_Melee"}, --Rune of Spellwarding
+	--{326867 , "Snares_Casted_Melee"}, --Rune of Spellwarding Shield
+	--{228579 , "Snares_Casted_Melee"}, --Shroud of Winter
 
 	----------------
 	-- Demon Hunter
@@ -235,6 +245,7 @@ local spellsArenaTable = {
 	{196555 , "Immune_Arena"}, -- Netherwalk
 	{211881 , "CC_Arena"}, --Fel Eruption
 	{179057 , "CC_Arena"}, --Choas Nova
+	{200166 , "CC_Arena"}, --Metamorfosis stun
 	{205630 , "CC_Arena"}, --Illidan's Grasp
 	{208618 , "CC_Arena"}, --Illidan's Grasp
 	{221527 , "CC_Arena"}, --Imprison
@@ -245,9 +256,12 @@ local spellsArenaTable = {
 	{188501, "Special_High"}, -- Spectral Sight
 	{354610, "Special_High"}, -- Glimpse
 	{323996 , "Roots_90_Snares"}, --The Hunt NightFae Root
+	{370970 , "Roots_90_Snares"}, --The Hunt 
 	{162264 , "Melee_Major_OffenisiveCDs"}, -- Metamorphosis
 	{187827 , "Melee_Major_OffenisiveCDs"}, -- Metamorphosis
 	{208195, "Melee_Major_OffenisiveCDs"}, -- Demon Soul
+	{347765, "Melee_Major_OffenisiveCDs"}, -- Demon Soul
+	{198589, "Big_Defensive_CDs"}, -- Blur
 	{212800, "Big_Defensive_CDs"}, -- Blur
 	{209426 , "Big_Defensive_CDs"}, -- Darkness
 	{206804 , "Big_Defensive_CDs"}, -- Rain From Above
@@ -256,6 +270,7 @@ local spellsArenaTable = {
 	{203819, "Small_Defensive_CDs"}, -- Demon Spikes
 	{208796, "Small_Defensive_CDs"}, -- Jagged Spikes
 	{205629, "Freedoms_Speed"}, -- Demonic Trample
+	{328605 , "Special_Low"}, --Unstoppable Conflict
 	{213405 , "Snares_Ranged_Spamable"}, --Master of the Glaive
 
 	----------------
@@ -285,7 +300,7 @@ local spellsArenaTable = {
 	{50334 , "Melee_Major_OffenisiveCDs"}, --Berserk (Guardian)
 	{102558 , "Melee_Major_OffenisiveCDs"}, --Incarnation: Guardian of Ursoc
 	{106951, "Melee_Major_OffenisiveCDs"}, --Berserk (Feral)
-	{102543 , "Melee_Major_OffenisiveCDs"}, --Incarnation: King of the Jungle
+	{102543 , "Melee_Major_OffenisiveCDs"}, --Avatar of Ashamane
 	{22812 , "Big_Defensive_CDs"}, --Barkskin
 	{102342 , "Big_Defensive_CDs"}, --IronBark
 	{247563 , "Big_Defensive_CDs"}, --Nature's Grasp
@@ -294,11 +309,15 @@ local spellsArenaTable = {
 	--{33891 , "Big_Defensive_CDs"}, --Tree of life
 	{61336 , "Big_Defensive_CDs"}, --Survival Instincts
 	{202461 , "Small_Offenisive_CDs"}, --Stellar Drift
+	{234084 , "Small_Offenisive_CDs"}, --Moon and Stars
+	{124974 , "Small_Offenisive_CDs"}, --Nature's Vigel
+	{319454 , "Small_Offenisive_CDs"}, --Heart of the Wild
 	{108292 , "Small_Offenisive_CDs"}, --Heart of the Wild (Feral)
 	{108293 , "Small_Offenisive_CDs"}, --Heart of the Wild (Guardian)
 	{108294 , "Small_Offenisive_CDs"}, --Heart of the Wild (Resto)
 	{5217 , "Small_Offenisive_CDs"}, --Tiger's Fury
-	{22842 , "Small_Defensive_CDs"}, --Frenzied Regeneration
+	{202425 , "Small_Offenisive_CDs"}, --Warrior of Elune
+	{22842 , "Small_Defensive_CDs"}, --Frenzied Regenerationw+
 	{192081 , "Small_Defensive_CDs"}, --Ironfur
 	{200947 , "Small_Defensive_CDs"}, --High Winds
 
@@ -307,8 +326,8 @@ local spellsArenaTable = {
 	{77764 , "Freedoms_Speed"}, --Stampeding Roar
 	{106898 , "Freedoms_Speed"}, --Stampeding Roar
 	{252216 , "Freedoms_Speed"}, --Tiger's Dash
-	{201940, "Special_Low"}, --Protector of the Pack
-	{768 , "Special_Low"}, --Cat Forn
+	--{201940, "Special_Low"}, --Protector of the Pack
+	{768 , "Special_Low"}, --Cat Form
 	{5487 , "Special_Low"}, --Bear Form
 	{783 , "Special_Low"}, --Travel Form
 	{197625 , "Special_Low"}, --Moonkin Form
@@ -320,12 +339,39 @@ local spellsArenaTable = {
 	{370553 , "Drink_Purge"}, --Tip the Scales
 	{378441 , "Immune_Arena"}, --Time Stop (Evoker PvP)
 	{370960 , "Immune_Arena"}, --Emerald Communion
+	{372245 , "CC_Arena"}, --Terror of the Skies
+	{360806 , "CC_Arena"}, --Sleep Walk
+	{359816 , "Special_High"}, --Dream Flight
+	{383870 , "Special_High"}, --Swoop Up (Target)
+	{375087 , "Ranged_Major_OffenisiveCDs"}, --Dragonrage
 	{383005 , "Roots_90_Snares"}, -- Chrono Loop
+	{355689 , "Roots_90_Snares"}, -- Landslide
 	{363534 , "Big_Defensive_CDs"}, --Rewind
 	{363916 , "Big_Defensive_CDs"}, --Obsidian Scales
 	{357170 , "Big_Defensive_CDs"}, --Time Dilation
-	{374348 , "Big_Defensive_CDs"}, --Renewing Blaze
+	{383869 , "Small_Offenisive_CDs"}, --Swoop Up (Evoker)
+	{370666 , "Small_Defensive_CDs"}, --Rescue (Evoker)
+	{370667 , "Small_Defensive_CDs"}, --Rescue (Target)
+	{374348 , "Small_Defensive_CDs"}, --Renewing Blaze
 	{378464 , "Small_Defensive_CDs"}, --Nullifying Shroud
+	{357210 , "Small_Defensive_CDs"}, --Deep Breath (Immune to CC)
+	{377509 , "Small_Defensive_CDs"}, --Dream projection
+	{375226 , "Small_Defensive_CDs"}, -- Time Spiral (Death Knight)
+	{375229 , "Small_Defensive_CDs"}, -- Time Spiral (Demon Hunter)
+	{375230 , "Small_Defensive_CDs"}, -- Time Spiral (Druid)
+	{375234 , "Small_Defensive_CDs"}, -- Time Spiral (Evoker)
+	{375238 , "Small_Defensive_CDs"}, -- Time Spiral (Hunter)
+	{375240 , "Small_Defensive_CDs"}, -- Time Spiral (Mage)
+	{375252 , "Small_Defensive_CDs"}, -- Time Spiral (Monk)
+	{375253 , "Small_Defensive_CDs"}, -- Time Spiral (Paladin)
+	{375254 , "Small_Defensive_CDs"}, -- Time Spiral (Priest)
+	{375255 , "Small_Defensive_CDs"}, -- Time Spiral (Rogue)
+	{375256 , "Small_Defensive_CDs"}, -- Time Spiral (Shaman)
+	{375257 , "Small_Defensive_CDs"}, -- Time Spiral (Warlock)
+	{375258 , "Small_Defensive_CDs"}, -- Time Spiral (Warrior)
+	{358267 , "Special_Low"}, --Hover
+	{357214, "Snares_WithCDs"}, -- Wing Buffet
+	{368970, "Snares_WithCDs"}, -- Tail Swipe
 	
 	----------------
 	-- Hunter
@@ -347,6 +393,7 @@ local spellsArenaTable = {
 	{186289 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Eagle
 	{260402 , "Ranged_Major_OffenisiveCDs"}, --Double Tap
 	{288613 , "Ranged_Major_OffenisiveCDs"}, --Trueshot
+	{393456 , "Roots_90_Snares"}, --Entrapment
 	{117526 , "Roots_90_Snares"}, --Binding Shot
 	{117405 , "Roots_90_Snares"}, --Binding Shot
 	{162480 , "Roots_90_Snares"}, --Steel Trap
@@ -377,17 +424,23 @@ local spellsArenaTable = {
 	{"Polymorph" , "CC_Arena"},
 	{82691 , "CC_Arena"}, --Ring of Frost
 	{31661 , "CC_Arena"}, --Dragon's Breath
+	{389831 , "CC_Arena"}, --Snowdrift
 	{317589 , "Silence_Arena"}, --Tormenting Backlash (Venthyr Mage)
 	{66 , "Special_High"}, --Invisibility
 	{32612 , "Special_High"}, --Invisibility
 	{110960 , "Special_High"}, --Greater Invisibility
 	{198158 , "Special_High"}, --Mass Invisibility
 	{190319, "Ranged_Major_OffenisiveCDs"}, --Combustion
+	{383874, "Ranged_Major_OffenisiveCDs"}, --Hyperthermia
 	{12042, "Ranged_Major_OffenisiveCDs"}, --Arcane Power
+	{365362, "Ranged_Major_OffenisiveCDs"}, --Arcane Surge
 	{324220, "Ranged_Major_OffenisiveCDs"}, --Deathborne
 	{12472, "Ranged_Major_OffenisiveCDs"}, --Icy Veins
 	{198144, "Ranged_Major_OffenisiveCDs"}, --Ice Form
+	{342242, "Ranged_Major_OffenisiveCDs"}, --Time Warp
 	{122 , "Roots_90_Snares"}, --Frost Nova
+	{386770, "Roots_90_Snares"}, --Freezing Cold
+	{378760 , "Roots_90_Snares"}, --Frost Bite
 	{198121 , "Roots_90_Snares"}, --Frost Bite
 	{33395 , "Roots_90_Snares"}, --Freeze
 	{157997 , "Roots_90_Snares"}, --Ice Nova
@@ -400,9 +453,13 @@ local spellsArenaTable = {
 	{314793 , "Small_Offenisive_CDs"}, --Mirrors of Torment
 	{116014 , "Small_Offenisive_CDs"}, --Rune of Power
 	{205025 , "Small_Offenisive_CDs"}, --Presence of Mind
+	{382106 , "Small_Offenisive_CDs"}, --Freezing Winds
+	{332928 , "Small_Offenisive_CDs"}, --Siphon Storm
 	{108839 , "Small_Offenisive_CDs"}, --Ice Floes
 	{198065 , "Small_Defensive_CDs"}, --Prismatic Cloak
 	{108843 , "Freedoms_Speed"}, --Blazing Speed
+	{382824 , "Freedoms_Speed"}, --40% Temporal Velocity
+	{384360 , "Freedoms_Speed"}, --20 %Temporal Velocity
 	{120 , "Snares_WithCDs"}, --Cone of Cold
 	{11426 , "Special_Low"}, --Ice Barrier
 	{235313 , "Special_Low"}, --Blazing Barrier
@@ -422,11 +479,13 @@ local spellsArenaTable = {
 	{115078 , "CC_Arena"}, --Paralysis
 	{209584 , "Special_High"}, --Zen Focus Tea
 	{116706 , "Roots_90_Snares"}, --Disable
+	{324382 , "Roots_90_Snares"}, -- Clash
 	{201787 , "Roots_90_Snares"}, --Heavy-Handed Strike
 	{233759 , "Disarms"}, --Grapple Weapon
 	{152173 , "Melee_Major_OffenisiveCDs"}, --Serenity
 	{137639 , "Melee_Major_OffenisiveCDs"}, --Storm, Earth, and Fire
 	{310454 , "Melee_Major_OffenisiveCDs"}, --Weapons of Order
+	{388023 , "Melee_Major_OffenisiveCDs"}, --Ancient Teaching
 	--{325216 , "Melee_Major_OffenisiveCDs"}, --Bonedust Brew (Necrolord)
 	{125174 , "Big_Defensive_CDs"}, --Touch of Karma
 	{116849 , "Big_Defensive_CDs"}, --Life Cacoon
@@ -435,6 +494,7 @@ local spellsArenaTable = {
 	{122278 , "Big_Defensive_CDs"}, --Damoen Harm
 	{115176 , "Big_Defensive_CDs"}, --Zen Meditation
 	{247483 , "Small_Offenisive_CDs"}, --Tigereye Brew
+	{389387 , "Small_Offenisive_CDs"}, --Awakened Feline
 	{201447 , "Freedoms_Speed"}, --Ride the Wind
 	{116841 , "Freedoms_Speed"}, --Tiger's Lust
 	{248646 , "Special_Low"}, --Tigereye Brew
@@ -459,6 +519,7 @@ local spellsArenaTable = {
 	{6940 , "Big_Defensive_CDs"}, --Blessing of Sacrifice
 	{31821 , "Big_Defensive_CDs"}, --Aura Mastery
 	{498 , "Big_Defensive_CDs"}, --Divine Protection
+	{403876 , "Big_Defensive_CDs"}, --Divine Protection
 	{216331 , "Big_Defensive_CDs"}, --Avenging Crusader
 	{184662 , "Big_Defensive_CDs"}, --Shield of Vengeance
 	{205191 , "Big_Defensive_CDs"}, --Eye for an Eye
@@ -469,9 +530,11 @@ local spellsArenaTable = {
 	{105809 , "Small_Defensive_CDs"}, --Holy Avenger
 	{1044 , "Freedoms_Speed"}, --Blessing of Freedom (Not Purgeable)
 	{305395 , "Freedoms_Speed"}, --Blessing of Freedom
-	{221886 , "Freedoms_Speed"}, --Tiger's Lust
+	{221886 , "Freedoms_Speed"}, --Divine Steed
 	{183218 , "Snares_WithCDs"}, --Hand of Hinderance
 	{25771 , "Special_Low"}, --Forbearance
+	{393879 , "Special_Low"}, --Gift of the Golden Val'kyr
+	{387480 , "Special_Low"}, --Sanctified Grounds
 	{247676, "Snares_Casted_Melee"}, --Reckoning
 
 	----------------
@@ -492,6 +555,7 @@ local spellsArenaTable = {
 	{205369 , "CC_Arena"}, --Mind Bomb
 	{226943 , "CC_Arena"}, --Mind Bomb
 	{15487 , "Silence_Arena"}, --Silence_Arena
+	{114404 , "Roots_90_Snares"}, --Void Tendrils
 	{289655 , "Special_High"}, --Holy Word: Concentration
 	{194249, "Ranged_Major_OffenisiveCDs"}, --Surrender to Madness (Both Party and Enemey)
 	{319952, "Ranged_Major_OffenisiveCDs"}, --Voidform
@@ -516,10 +580,6 @@ local spellsArenaTable = {
 	{322457 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
 	--{323673 , "Player_Party_OffensiveCDs"}, --Mindgames(On Enemy)
 	--{319952 , "Player_Party_OffensiveCDs"}, --Surrender to Madness (Both Party and Enemey)
-	{197871 , "Small_Offenisive_CDs"}, --Dark Archangel
-	{197874 , "Small_Offenisive_CDs"}, --Dark Archangel
-	{325013 , "Small_Offenisive_CDs"}, --Boon of the Ascended
-	{247776 , "Small_Offenisive_CDs"}, --Mind Trauma
 	{47536 , "Small_Defensive_CDs"}, --Rapture
 	{197862 , "Small_Defensive_CDs"}, --Archangel
 	{200183 , "Small_Defensive_CDs"}, --Apotheosis
@@ -527,10 +587,18 @@ local spellsArenaTable = {
 	{64901 , "Small_Defensive_CDs"}, --Symbol of Hope
 	{15286 , "Small_Defensive_CDs"}, --Vampiric Embrace
 	{19236 , "Small_Defensive_CDs"}, --Desperate Prayer
+	{391109 , "Small_Offenisive_CDs"}, --Dark Ascension
+	{197871 , "Small_Offenisive_CDs"}, --Dark Archangel
+	{197874 , "Small_Offenisive_CDs"}, --Dark Archangel
+	{325013 , "Small_Offenisive_CDs"}, --Boon of the Ascended
 	{204263 , "Snares_WithCDs"}, --Shining FOrce
+	{391403 , "Snares_WithCDs"}, -- Mind Flay: Insanity
+	{322105, "Special_Low"}, --Shadow Covenant
+	{247776 , "Special_Low"}, --Mind Trauma
 	{193065, "Special_Low"}, --Masochism
 	{265258 , "Special_Low"}, --Twist of Fate
 	{123254 , "Special_Low"}, --Twist of Fate
+	{390978, "Special_Low"}, --Twist of Fate
 	{65081 , "Snares_Casted_Melee"}, --Body and Soul
 	{121557, "Snares_Casted_Melee"}, --Angelic Feather
 
@@ -586,15 +654,19 @@ local spellsArenaTable = {
 	{77505 , "CC_Arena"}, --Earthquake
 	{197214 , "CC_Arena"}, --Sundering
 	{290641 , "Special_High"}, --Ancestral Gift
+	{378078 , "Special_High"}, --Spiritwalker's Aegis
 	{335903 , "Ranged_Major_OffenisiveCDs"}, --Doomwinds (Shadowlands Legendary)
+	{384352  , "Ranged_Major_OffenisiveCDs"}, --Doomwinds
 	{114051 , "Ranged_Major_OffenisiveCDs"}, --Ascendance Enhancement
 	{114050 , "Ranged_Major_OffenisiveCDs"}, --Ascendance
 	{191634 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper
 	{320137 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper
+	{383009 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper (Resto)
 	{204361 , "Ranged_Major_OffenisiveCDs"}, --Bloodlust
 	{204362 , "Ranged_Major_OffenisiveCDs"}, --Heroism
 	{64695 , "Roots_90_Snares"}, --Earthgrab
 	{285515 , "Roots_90_Snares"}, --Surge of Power
+	{356738 , "Roots_90_Snares"},  -- Earth Unleashed
 	{207498 , "Big_Defensive_CDs"}, --Ancestral Protection
 	{108271 , "Big_Defensive_CDs"}, --Astral Shift
 	{210918 , "Big_Defensive_CDs"}, --Ethereal Form
@@ -602,10 +674,13 @@ local spellsArenaTable = {
 	{114052 , "Big_Defensive_CDs"}, --Ascendance
 	{201633 , "Big_Defensive_CDs"}, --Earthen Wall
 	{325174 , "Big_Defensive_CDs"}, --Spirit Link Totem
+	{356824 , "Player_Party_OffensiveCDs"}, --Water Unleashed
 	{201846 , "Small_Offenisive_CDs"}, --Stormbringer
 	{327164, "Small_Offenisive_CDs"}, --Primordial Wave
+	{375986, "Small_Offenisive_CDs"}, --Primordial Wave
 	{333957, "Small_Offenisive_CDs"}, --Feral Spirits
 	{320125 , "Small_Offenisive_CDs"}, --Echoing Shock
+	{210714 , "Small_Offenisive_CDs"}, --Ice Fury
 	{79206 , "Small_Defensive_CDs"}, --Spiritwalker's Grace
 	{58875 , "Freedoms_Speed"}, --Spirit Walk
 	{192082 , "Freedoms_Speed"}, -- Wind Rush
@@ -614,6 +689,7 @@ local spellsArenaTable = {
 	--{260881 , "Freedoms_Speed"}, --Spirit Wolf
 	--{204262 , "Freedoms_Speed"}, --Spectral Recovery
 	{208963 , "Special_Low"}, --Skyfury Totem
+	{383020 , "Special_Low"}, --Tranquil Totem
 	{196840 , "Snares_Ranged_Spamable"}, --Frost Shock
 	{327942 , "Snares_Casted_Melee"}, --Windfury Totem
 
@@ -639,6 +715,8 @@ local spellsArenaTable = {
 	{353293, "Roots_90_Snares"}, --Shadow Rift
 	{113860, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Instability
 	{113858, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Misery
+	--{265273, "Ranged_Major_OffenisiveCDs"}, --Demonic Power
+	{267218, "Ranged_Major_OffenisiveCDs"}, --Nether Portal
 	{212295 , "Big_Defensive_CDs"}, --Nether Ward
 	{200587, "Player_Party_OffensiveCDs"}, --Fel Fissure (PvP Talent 50% MS)
 	{1714 , "Player_Party_OffensiveCDs"}, --Curse of Tongues
@@ -648,7 +726,10 @@ local spellsArenaTable = {
 	{80240 , "Small_Offenisive_CDs"}, --Havoc
 	{337170 , "Small_Offenisive_CDs"}, --Madness of the Azj'Aqir (Legendary)
 	{108416 , "Small_Defensive_CDs"}, --Dark Pact
+	{387636 , "Small_Defensive_CDs"}, --Soulburn: Healthstone
 	{387633 , "Freedoms_Speed"}, --Soulburn: Demonic Circle
+	{111400 , "Freedoms_Speed"}, --Burning Rush
+	{384069 , "Snares_WithCDs"}, --Shadowflame
 	{702 , "Special_Low"}, --Curse of Weakness
 	{334275 , "Snares_Ranged_Spamable"}, --Curse of Exhaustion
 	{196099, "Snares_Casted_Melee"}, --Grimoire of Sacrifice
@@ -667,6 +748,8 @@ local spellsArenaTable = {
 	{199085 , "CC_Arena"}, --Warpath
 	{132168 , "CC_Arena"}, --Shockwave
 	{5246 , "CC_Arena"}, --Intimidating Shout
+	{316593 , "CC_Arena"}, --Intimidating Shout
+	{316595 , "CC_Arena"}, --Intimidating Shout
 	{236273 , "Special_High"}, -- Duel
 	{23920 , "Special_High"}, -- Spell Reflection
 	{147833 , "Special_High"}, -- Intervene
@@ -674,6 +757,8 @@ local spellsArenaTable = {
 	{105771 , "Roots_90_Snares"}, --Charge
 	{199042 , "Roots_90_Snares"}, --Thunderstruck
 	{307871, "Roots_90_Snares"}, --Spear of Bastion
+	{376080, "Roots_90_Snares"}, --Spear of Bastion
+	{356356, "Roots_90_Snares"}, --Warbringer
 	{236236 , "Disarms"}, --Disarm
 	{236077 , "Disarms"}, --Disarm
 	{107574 , "Melee_Major_OffenisiveCDs"}, -- Avatar
@@ -694,9 +779,10 @@ local spellsArenaTable = {
 	{46924 , "Small_Offenisive_CDs"}, -- Bladestorm
 	{132404 , "Small_Defensive_CDs"}, -- Shield Block
 	{97463 , "Small_Defensive_CDs"}, -- Rallying Cry
-	{385391 , "Small_Defensive_CDs"}, -- Rallying Cry
+	{385391 , "Small_Defensive_CDs"}, -- Spell Reflection 20% Magic 
 	{12323 , "Snares_WithCDs"}, -- Piercing Howl
 	{197690 , "Special_Low"}, -- Defensive Stance
+	{386208 , "Special_Low"}, -- Defensive Stance
 	{199261, "Special_Low"}, -- Death Wish
 
 	----------------
@@ -715,6 +801,7 @@ local spellsArenaTable = {
 	{255654 , "CC_Arena"}, --Bull Rush
 	{287712 , "CC_Arena"}, --Haymaker
 	{58984, "Special_High"}, -- Shadowmeld
+	{377362, "Special_High"}, -- Precognition
 	{320267, "Roots_90_Snares"},		-- Soothing Voice (Nightfae)
 	{354051, "Roots_90_Snares"},		-- Nimble Steps (Venthyr)
 	{291944 , "Big_Defensive_CDs"}, -- Regeneratin'
@@ -746,7 +833,7 @@ local spellsArenaTable = {
 	{203337 , "CC"},				-- Freezing Trap (Diamond Ice - pvp honor talent)
 	{24394  , "CC"},				-- Intimidation
 	{213691 , "CC"},				-- Scatter Shot (pvp honor talent)
-	{1513   , "CC"},        -- Scare Beast
+	{1513   , "CC"},        		-- Scare Beast
 
 	{"Hex"  , "CC"},				-- Hex
 	{51514  , "CC"},				-- Hex
@@ -771,17 +858,21 @@ local spellsArenaTable = {
 	{210141 , "CC"},				-- Zombie Explosion (Reanimation PvP Talent)
 	{91800  , "CC"},				-- Gnaw
 	{91797  , "CC"},				-- Monstrous Blow (Dark Transformation)
-	{334693 , "CC"},        -- Absolute Zero (Shadowlands Legendary Stun)
+	{334693 , "CC"},       			-- Absolute Zero (Shadowlands Legendary Stun)
+	{377048 , "CC"},       			-- Absolute Zero
 
 	{33786  , "CC"},				-- Cyclone
 	{5211   , "CC"},				-- Mighty Bash
 	{163505 , "CC"},				-- Rake
 	{203123 , "CC"},				-- Maim
 	{202244 , "CC"},				-- Overrun (pvp honor talent)
-	{99     , "CC"},			-- Incapacitating Roar
+	{99     , "CC"},				-- Incapacitating Roar
 	{2637   , "CC"},				-- Hibernate
 
-	{"Polymorph"   , "CC"},	-- Polymorph
+	{372245   , "CC"},				-- Terror of the Skies
+	{360806   , "CC"},				-- Sleep Walk
+
+	{"Polymorph"   , "CC"},			-- Polymorph
 	{118    , "CC"},				-- Polymorph
 	{61305  , "CC"},				-- Polymorph: Black Cat
 	{28272  , "CC"},				-- Polymorph: Pig
@@ -796,6 +887,8 @@ local spellsArenaTable = {
 	{277787 , "CC"},				-- Polymorph: Direhorn
 	{277792 , "CC"},				-- Polymorph: Bumblebee
 	{161372 , "CC"},				-- Polymorph: Peacock
+	{391622 , "CC"},				-- Polymorph: Duck
+	{389831 , "CC"},				-- Snowdrift
 	{82691  , "CC"},				-- Ring of Frost
 	{140376 , "CC"},				-- Ring of Frost
 	{31661  , "CC"},				-- Dragon's Breath
@@ -829,24 +922,26 @@ local spellsArenaTable = {
 	--{199804 , "CC"},				-- Between the eyes
 
 	{118699 , "CC"},				-- Fear
-	{5484   , "CC"},		    -- Howl of Terror
+	{5484   , "CC"},		    	-- Howl of Terror
 	{6789   , "CC"},				-- Mortal Coil
 	{30283  , "CC"},				-- Shadowfury
 	{710    , "CC"},				-- Banish
 	{22703  , "CC"},				-- Infernal Awakening
-	{213688 , "CC"},		  	-- Fel Cleave (Fel Lord - PvP Talent)
-	{89766  , "CC"},		  	-- Axe Toss (Felguard/Wrathguard)
-	--{347008  , "CC"},		  	-- Axe Toss (Felguard/Wrathguard)
-	{115268 , "CC"},			  -- Mesmerize (Shivarra)
-	{6358   , "CC"},		  	-- Seduction (Succubus)
-	{261589  , "CC"},			  -- Seduction (Succubus)
-	{171017 , "CC"},			  -- Meteor Strike (infernal)
-	{171018 , "CC"},			  -- Meteor Strike (abisal)
+	{213688 , "CC"},		  		-- Fel Cleave (Fel Lord - PvP Talent)
+	{89766  , "CC"},		  		-- Axe Toss (Felguard/Wrathguard)
+	--{347008  , "CC"},		  		-- Axe Toss (Felguard/Wrathguard)
+	{115268 , "CC"},			    -- Mesmerize (Shivarra)
+	{6358   , "CC"},		  		-- Seduction (Succubus)
+	{261589  , "CC"},			 	-- Seduction (Succubus)
+	{171017 , "CC"},			 	-- Meteor Strike (infernal)
+	{171018 , "CC"},			  	-- Meteor Strike (abisal)
 
 	{5246   , "CC"},				-- Intimidating Shout (aoe)
+	{316593 , "CC"},				--Intimidating Shout
+	{316595 , "CC"}, 				--Intimidating Shout
 	{132169 , "CC"},				-- Storm Bolt
-	{325886 , "CC"},        -- Ancient Aftershock
-	{326062 , "CC"},        -- Ancient Aftershock
+	{325886 , "CC"},       			-- Ancient Aftershock
+	{326062 , "CC"},       			-- Ancient Aftershock
 	{132168 , "CC"},				-- Shockwave
 	{199085 , "CC"},				-- Warpath
 
@@ -860,9 +955,9 @@ local spellsArenaTable = {
 	{208618 , "CC"},				-- Illidan's Grasp (throw stun)
 	{213491 , "CC"},				-- Demonic Trample Stun
 
-	{331866 , "CC"},        -- Door of Shadows Fear (Venthyr)
-	{332423 , "CC"},        -- Sparkling Driftglobe Core 35% Stun (Kyrian)
-	{324263 , "CC"},        -- Sulfuric Emission (Necrolord)
+	{331866 , "CC"},        		-- Door of Shadows Fear (Venthyr)
+	{332423 , "CC"},        		-- Sparkling Driftglobe Core 35% Stun (Kyrian)
+	{324263 , "CC"},        		-- Sulfuric Emission (Necrolord)
 	{20549  , "CC"},				-- War Stomp (tauren racial)
 	{107079 , "CC"},				-- Quaking Palm (pandaren racial)
 	{255723 , "CC"},				-- Bull Rush (highmountain tauren racial)
@@ -881,14 +976,18 @@ local spellsArenaTable = {
 	{212638 , "RootPhyiscal_Special"},				-- Tracker's Net (pvp honor talent) -- Also -80% hit chance melee & range physical (CC and Root category)
 	{356723 , "RootPhyiscal_Special"},				-- Scorpid Venom (Chimaeral Sting)
 	{307871 , "RootPhyiscal_Special"},				-- Spear of Bastion
+	{376080 , "RootPhyiscal_Special"},				-- Spear of Bastion
+	{114404 , "RootPhyiscal_Special"}, 				-- Void Tendrils
 
 	{117526 , "Root"},				-- Binding Shot
 	{190927 , "Root"},				-- Harpoon
 	{190925 , "Root"},				-- Harpoon
 	{162480 , "Root"},				-- Steel Trap
+	{393456 , "Root"},				-- Entrapment
 	{53148  , "Root"},				-- Charge (tenacity ability)
 	{64695  , "Root"},				-- Earthgrab (Earthgrab Totem)
-	{285515 , "Root"},	      -- Surge of Power
+	{285515 , "Root"},	    		-- Surge of Power
+	{356738 , "Root"},	     		-- Earth Unleashed
 	{233395 , "Root"},				-- Deathchill (pvp talent)
 	{204085 , "Root"},				-- Deathchill (pvp talent)
 	{91807  , "Root"},				-- Shambling Rush (Dark Transformation)
@@ -896,15 +995,21 @@ local spellsArenaTable = {
 	{170855 , "Root"},				-- Entangling Roots (Nature's Grasp)
 	{45334  , "Root"},				-- Immobilized (Wild Charge - Bear)
 	{102359 , "Root"},				-- Mass Entanglement
+	{355689 , "Root"},				-- Landslide
 	{122    , "Root"},				-- Frost Nova
 	{198121 , "Root"},				-- Frostbite (pvp talent)
+	{386770 , "Root"},				-- Freezing Cold
+	{378760 , "Root"},				-- Frost Bite
 	{157997 , "Root"},				-- Ice Nova
 	{228600 , "Root"},				-- Glacial Spike
 	{33395  , "Root"},				-- Freeze
 	{116706 , "Root"},				-- Disable
+	{324382 , "Root"},				-- Clash
 	{105771 , "Root"},				-- Charge (root)
 	{199042 , "Root"},				-- Thunderstruck
+	{356356 , "Root"},				-- Warbringer
 	{323996 , "Root"},				-- The Hunt
+	{370970 , "Root"},				-- The Hunt
 	{354051 , "Root"},				-- Nimble Steps
 
 	{642    , "ImmunePlayer"},			-- Divine Shield
@@ -917,6 +1022,7 @@ local spellsArenaTable = {
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
+	{378441 , "ImmunePlayer", "Time".."\n".."Stop"},			-- Time Stop
 	{320224 , "ImmunePlayer"},			--Podtender (NightFae: Dreamweaver Tree)
 	{323524 , "ImmunePlayer"},			--Ultimate Form (Necrolord)
 
@@ -932,7 +1038,7 @@ local spellsArenaTable = {
 	{322458 , "Disarm_Warning"}, --Thoughtstolen
 	{322457 , "Disarm_Warning"}, --Thoughtstolen
 
-	{117405 , "CC_Warning", "Binding".."\n".."Shot"},	    -- Binding Shot
+	{117405 , "CC_Warning", "Binding Shot".."\n".."WARNING!!"},	    -- Binding Shot
 	{191241 , "CC_Warning", "Sticky".."\n".."Bomb"},	    -- Sticky Bomb
 
 	{199483 , "Stealth"},     -- Camo
@@ -950,19 +1056,21 @@ local spellsArenaTable = {
 	{58984  , "Stealth"},     -- Meld
 
 	{228050 , "Immune"},			-- Divine Shield (Guardian of the Forgotten Queen)
-	{1022   , "Immune"},	    -- Hand of Protection
-	{204018 , "Immune"},	   	-- Blessing of Spellwarding
+	{1022   , "Immune"},	    	-- Hand of Protection
+	{204018 , "Immune"},	   		-- Blessing of Spellwarding
 	{199448 , "Immune"},			-- Blessing of Sacrifice (Ultimate Sacrifice pvp talent) (not immune}, 100% damage transfered to paladin)
 
 	--  "ImmuneSpell",
 	--	"ImmunePhysical",
 
-	{289655 , "AuraMastery_Cast_Auras"},			-- Holy Word: Concentration
-	{317929 , "AuraMastery_Cast_Auras"},			-- Aura Mastery
+	{289655 , "AuraMastery_Cast_Auras", "Holy Word".."\n".."Concentration"},			-- Holy Word: Concentration
+	{317929 , "AuraMastery_Cast_Auras", "Aura".."\n".."Mastery"},			-- Aura Mastery
+	{377362 , "AuraMastery_Cast_Auras", "Precognition"},			-- Precognition
 
 	{127797 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
 	{102793 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
 	{383005 , "ROP_Vortex", "Chrono".."\n".."Loop"}, 				-- Chrono Loop
+	{383870 , "ROP_Vortex", "Swoop".."\n".."Up"}, 				-- Chrono Loop
 	{353293 , "ROP_Vortex", "Shadow".."\n".."Rift"}, 				-- Shadow Rift
 
 	{209749 , "Disarm"},			-- Faerie Swarm (pvp honor talent)
@@ -971,18 +1079,20 @@ local spellsArenaTable = {
 	{236236 , "Disarm"},			-- Disarm (pvp honor talent - protection)
 	{236077 , "Disarm"},			-- Disarm (pvp honor talent)S
 
-	{320035 , "Haste_Reduction"},			-- Mirrors of Torment
-	{247777 , "Haste_Reduction"},			-- Mind Trauma
-	{199890 , "Haste_Reduction"},			-- Curse of Tongues
-	{1714 , "Haste_Reduction"},			-- Curse of Tongues
+	{320035 , "Haste_Reduction", "Mirrors of".."\n".."Torment"},			-- Mirrors of Torment
+	{247777 , "Haste_Reduction", "Mind".."\n".."Trauma"},			-- Mind Trauma
+	{199890 , "Haste_Reduction", "Curse of".."\n".."Tongues"},			-- Curse of Tongues
+	{1714   , "Haste_Reduction", "Curse of".."\n".."Tongues"},			-- Curse of Tongues
 
 
-	{236273 , "Dmg_Hit_Reduction"},		-- Duel
-	{199892 , "Dmg_Hit_Reduction"},   -- Curse of Weakness
-	{702 , "Dmg_Hit_Reduction"},   -- Curse of Weakness
-	{200947 , "Dmg_Hit_Reduction"},   -- High Winds
-	{356730 , "Dmg_Hit_Reduction"},   -- Viper Venom Healing/Damage Reduction
-	{203268 , "Dmg_Hit_Reduction"},   -- Sticky Tar
+	{236273 , "Dmg_Hit_Reduction", "Duel"},		-- Duel
+	{199892 , "Dmg_Hit_Reduction", "Curse of".."\n".."Weakness"},   -- Curse of Weakness
+	{702    , "Dmg_Hit_Reduction", "Curse of".."\n".."Weakness"},   -- Curse of Weakness
+	{200947 , "Dmg_Hit_Reduction", "High".."\n".."Winds"},   -- High Winds
+	{356730 , "Dmg_Hit_Reduction", "Viper".."\n".."Venom"},   -- Viper Venom Healing/Damage Reduction
+	{203268 , "Dmg_Hit_Reduction", "Sticky".."\n".."Tar"},   -- Sticky Tar
+	{356824 , "Dmg_Hit_Reduction", "Water".."\n".."Unleashed"},   -- Water Unleashed
+	
 
 	--Interrupt
 
@@ -1003,11 +1113,14 @@ local spellsArenaTable = {
 	{108843 , "Speed_Freedoms"},		-- Blazing Speed
 	{269513 , "Speed_Freedoms"},		-- Death from Above
 	{197003 , "Speed_Freedoms"},		-- Maneuverability
-	{387633 , "Speed_Freedoms"},   		--Soulburn: Demonic Circle
+	{387633 , "Speed_Freedoms"},   		-- Soulburn: Demonic Circle
 	{205629 , "Speed_Freedoms"},		-- Demonic Trample
 	{310143 , "Speed_Freedoms", "Soulshape"},    -- Soulshape
+	{370666 , "Speed_Freedoms"},		-- Rescue (Evoker)
+	{383869 , "Speed_Freedoms"},		-- Swoop Up (Evoker)
 
 	{54216 , "Freedoms", "Master's".."\n".."Call"},		-- Master's Call
+	{"Master's Call" , "Freedoms", "Master's".."\n".."Call"},		-- Master's Call
 	{118922 , "Freedoms"},		-- Posthaste
 	{186257 , "Freedoms"},		-- Aspect of the Cheetah
 	{192082 , "Freedoms"},		-- Wind Rush
@@ -1016,10 +1129,13 @@ local spellsArenaTable = {
 	{106898 , "Freedoms", "Stampeding".."\n".."Roar"},		-- Stampeding Roar		-- Stampeding Roar
 	{1850 , "Freedoms", "Dash"},		-- Dash
 	{252216 , "Freedoms", "Tiger's".."\n".."Dash"},			-- Tiger Dash
+	{382824 , "Freedoms", "Temporal".."\n".."Velocity"}, --40% Temporal Velocity
+	{384360 , "Freedoms", "Temporal".."\n".."Velocity"}, --20 %Temporal Velocity
 	{201447 , "Freedoms", "Ride the".."\n".."Wind"},		-- Ride the Wind
 	{116841 , "Freedoms", "Tiger's".."\n".."Lust"},		-- Tiger's Lust
 	{1044 , "Freedoms", "Blessing of".."\n".."Freedom"},	 --Blessing of Freedom (Not Purgeable)
 	{305395 , "Freedoms", "Blessing of".."\n".."Freedom"},	 --Blessing of Freedom (Not Purgeable)
+	{"Blessing of Freedom", "Freedoms", "Blessing of".."\n".."Freedom"},	 --Blessing of Freedom (Not Purgeable)
 	{221886 , "Freedoms"},		-- Divine Steed
 	{36554 , "Freedoms"},		-- Shadowstep
 	{2983 , "Freedoms"},		-- Sprint
@@ -1036,10 +1152,11 @@ local spellsArenaTable = {
 	{29166, "Mana_Regen", "Innervate"},		-- Innervate
 	{64901, "Mana_Regen", "Symbols".."\n".."of Hope"},		-- Symbol of Hope
 
-	--{213644, "CC_Reduction"},		-- Nimble Brew
-	{210256, "CC_Reduction"},		-- Blessing of Sanctuary
+	{210256, "CC_Reduction", "Blessing of".."\n".."Sanctuary"},		-- Blessing of Sanctuary
 	{213610, "CC_Reduction", "Holy".."\n".."Ward"},		-- Holy Ward
 	{236321, "CC_Reduction", "War".."\n".."Banner"},		-- War Banner
+	{383020, "CC_Reduction", "Tranquil".."\n".."Totem"},		-- Tranquil Totem
+	{234084, "CC_Reduction", "Moon".."\n".."& Stars"},		-- Moon and Stars
 
 	{200183, "Personal_Offensives", "Apotheosis"},		-- Apotheosis
 	{319952, "Personal_Offensives"},		-- Surrender to Madness
@@ -1050,16 +1167,18 @@ local spellsArenaTable = {
 	{352875, "Peronsal_Defensives"},		-- Path of the Devoted (Kyrian)
 
 
-	{108839, "Movable_Cast_Auras"},		-- Ice Floes
+	{108839, "Movable_Cast_Auras", "Ice".."\n".."Floes"},		-- Ice Floes
 	{10060, "Movable_Cast_Auras", "Power".."\n".."Infusion"},		-- Power Infusion
 	{331937, "Movable_Cast_Auras"},		-- Euphoria
 	{354054, "Movable_Cast_Auras"},		-- Fatal Flaw
 	{332506, "Movable_Cast_Auras"},		-- Soulsteel Clamps
 	{332505, "Movable_Cast_Auras"},		-- Soulsteel Clamps
 	{315443, "Movable_Cast_Auras"},		-- Abomination Limb
-	{204361 , "Movable_Cast_Auras"},	-- Bloodlust (Shamanism pvp talent)
-	{204362 , "Movable_Cast_Auras"},	-- Heroism (Shamanism pvp talent
-	{208963 , "Movable_Cast_Auras"},	-- Skyfury Totem (Shamanism pvp talent
+	{383269, "Movable_Cast_Auras"},		-- Abomination Limb
+	{204361, "Movable_Cast_Auras", "Bloodlust"},	-- Bloodlust (Shamanism pvp talent)
+	{204362, "Movable_Cast_Auras", "Heroism"},	-- Heroism (Shamanism pvp talent
+	{208963, "Movable_Cast_Auras", "Skyfury".."\n".."Totem"},	-- Skyfury Totem (Shamanism pvp talent
+	--{358267, "Movable_Cast_Auras", "Hover"},		-- Hover
 
 	--"Other", --
 	--"PvE", --PVE only
@@ -1068,37 +1187,47 @@ local spellsArenaTable = {
 	{199845, "SnareSpecial"},		-- Psyflay (pvp honor talent)
 	{198222, "SnareSpecial"},		-- System Shock (pvp honor talent) (90% slow)
 	{200587, "SnareSpecial"},		-- Fel Fissure
-	{308498, "SnareSpecial"},   -- Resonating Arrow (Hunter Kyrain Special)
+	{308498, "SnareSpecial"},   	-- Resonating Arrow (Hunter Kyrain Special)
 	{320267, "SnareSpecial"},		-- Soothing Voice
 	{204206, "SnareSpecial"},		-- Chilled (Chill Streak)
 
 	{45524,  "SnarePhysical70"},		-- Chains of Ice
 	{273977, "SnarePhysical70"},		-- Grip of the Dead
 	{157981, "SnarePhysical70"},		-- Blast Wave
+	{391403, "SnarePhysical70"},		-- Mind Flay: Insanity
 	{115196, "SnarePhysical70"},		-- Crippling Posion
 	{12323 , "SnarePhysical70"},		-- Piercing Howl
 	{198813, "SnarePhysical70"},		-- Vengeful Retreat
 	{247121, "SnarePhysical70"},		-- Metamorphosis
+	{357214, "SnarePhysical70"},		-- Wing Buffet
+	{368970, "SnarePhysical70"},		-- Tail Swipe
+
 
 	{212792, "SnareMagic70"},		-- Cone of Cold
 	{228354, "SnareMagic70"},		-- Flurry
 	{321329, "SnareMagic70"},		-- Ring of Frost
+	{394255, "SnareMagic70"},		-- Freezing Cold
 	{123586, "SnareMagic70"},		-- Flying Serpent Kick
 	{183218, "SnareMagic70"},		-- Hand of Hindrance
 	{204263, "SnareMagic70"},		-- Shining Force
+	{390669, "SnareMagic70"},		-- Apathy
 	{204843, "SnareMagic70"},		-- Sigil of Chains
 	{352448, "SnareMagic70"},		-- Viscous Coating
+	{384069, "SnareMagic70"},		-- Shadowflame
 
 	{195645, "SnarePhysical50"},		-- Wing Clip
 	{135299, "SnarePhysical50"},		-- Tar Trap
-	{5116, "SnarePhysical50"},		-- Concussive Shot
+	{5116, "SnarePhysical50"},			-- Concussive Shot
 	{186387, "SnarePhysical50"},		-- Bursting Shot
-	{51490, "SnarePhysical50"},		-- Thunderstorm
+	{263852, "SnarePhysical50"},		-- Talon Rend
+	{51490, "SnarePhysical50"},			-- Thunderstorm
 	{204408, "SnarePhysical50"},		-- Thunderstorm
 	{288548, "SnarePhysical50"},		-- Frostbolt
-	{50259, "SnarePhysical50"},		-- Dazed
+	{317898, "SnarePhysical50"},		-- Blinding Sleet
+	{389681, "SnarePhysical50"},		-- Clenching Grasp
+	{50259, "SnarePhysical50"},			-- Dazed
 	{232559, "SnarePhysical50"},		-- Thorns
-	{12486, "SnarePhysical50"},		-- Blizzard
+	{12486, "SnarePhysical50"},			-- Blizzard
 	{205021, "SnarePhysical50"},		-- Ray of Frost
 	{236299, "SnarePhysical50"},		-- Chrono Shift
 	{317792, "SnarePhysical50"},		-- Frostbolt
@@ -1106,10 +1235,11 @@ local spellsArenaTable = {
 	{196733, "SnarePhysical50"},		-- Special Delivery
 	{204242, "SnarePhysical50"},		-- Consecration
 	{255937, "SnarePhysical50"},		-- Wake of Ashes
-	{15407, "SnarePhysical50"},		-- Mind Flay
+	{383469, "SnarePhysical50"},		-- Radiant Decree
+	{15407, "SnarePhysical50"},			-- Mind Flay
 	{193473, "SnarePhysical50"},		-- Mind Flay
 	{185763, "SnarePhysical50"},		-- Pistol Shot
-	{1715, "SnarePhysical50"},		-- Hamstring
+	{1715, "SnarePhysical50"},			-- Hamstring
 	{213405, "SnarePhysical50"},		-- Master of the Glaive
 	{355138, "SnarePhysical50"},		-- Shackling (Maledict S2 Slands)
 	{353472, "SnarePhysical50"},		-- Cunning Dreams (Soulshape Snare)
@@ -1117,21 +1247,26 @@ local spellsArenaTable = {
 	{3409, "SnarePosion50"},		-- Crippling Poison (Poison)
 	{354896, "SnarePosion50"},		-- Creeping Venom (Poison)(PVP Stacking)
 	{334275, "SnarePosion50"},		-- Curse of Exhaustion (Curse)
-	{345209, "SnarePosion50"}, -- Infected Wounds (Disease)
+	{345209, "SnarePosion50"}, 		-- Infected Wounds (Disease)
+	{233397, "SnarePosion50"}, 		-- Delirium (Disease)
 
 	{147732, "SnareMagic50"},		-- Frostbrand
-	{3600, "SnareMagic50"},		-- Earthbind
+	{3600, "SnareMagic50"},			-- Earthbind
 	{116947, "SnareMagic50"},		-- Earthbind
 	{196840, "SnareMagic50"},		-- Frostshock
+	{342240, "SnareMagic50"},		-- Ice Strike
 	{279303, "SnareMagic50"},		-- Frostwyrm's Fury
 	{61391, "SnareMagic50"},		-- Typhoon
+	{81281, "SnareMagic50"},		-- Fungal Growth
 	{"Frostbolt", "SnareMagic50"},		-- Frostbolt
 	{59638, "SnareMagic50"},		-- Frostbolt
 	{205708, "SnareMagic50"},		-- Chilled
 	{31589, "SnareMagic50"},		-- Slow
 	{336887, "SnareMagic50"},		-- Lingering Numbness
+	{392983, "SnareMagic50"},		-- Strike of the Windlord
 	{337956, "SnareMagic50"},		-- Mental Recovery
-	{6360, "SnareMagic50"},		-- Whiplash
+	{356084, "SnareMagic50"}, 		-- Blaze of Light
+	{6360, "SnareMagic50"},			-- Whiplash
 	{339051, "SnareMagic50"},		-- Demonic Parole
 	{260369, "SnareMagic50"},		-- Arcane Pulse
 	{321759, "SnareMagic50"},		-- Bearer's Pursuit
@@ -1140,22 +1275,27 @@ local spellsArenaTable = {
 	{339654, "SnarePhysical30"},		-- Tactical Retreat
 	{197385, "SnarePhysical30"},		-- Fury of Air
 	{211793, "SnarePhysical30"},		-- Remorseless Winter
+	{283561, "SnarePhysical30"},		-- Remorseless Winter
 	{206930, "SnarePhysical30"},		-- Heart Strike
 	{338312, "SnarePhysical30"},		-- Unending Grip
-	{2120, "SnarePhysical30"},		-- Flamestrike
+	{392490, "SnarePhysical30"},		-- Enfeeble
+	{2120, "SnarePhysical30"},			-- Flamestrike
 	{289308, "SnarePhysical30"},		-- Frozen Orb
 	{121253, "SnarePhysical30"},		-- Keg Smash
 	{330911, "SnarePhysical30"},		-- Keg Smash
-	{6343, "SnarePhysical30"},		-- Thunder Clap
+	{6343, "SnarePhysical30"},			-- Thunder Clap
+	{396719, "SnarePhysical30"},		-- Thunder Clap
 	{210003, "SnarePhysical30"},		-- Razor Spikes
 	{328506, "SnarePhysical30"},		-- Blessing of Winter
 
-	{58180, "SnareMagic30"}, -- Infected Wounds
-	{206760, "SnareMagic30"}, -- Shadow Grasp
-	{356084, "SnareMagic30"}, -- Blaze of Light
-	{333526, "SnareMagic30"}, -- Spiked Burrs (NightFae)
+	{58180, "SnareMagic30"}, 		-- Infected Wounds
+	{206760, "SnareMagic30"}, 		-- Shadow Grasp
+	{370898, "SnareMagic30"}, 		-- Blaze of Light
+	{333526, "SnareMagic30"}, 		-- Spiked Burrs (NightFae)
 
 	{116189, "Snare"},		-- Provoke
+	{386649, "Snare"},		-- Nightmare
+	{388012, "Snare"},		-- Blessing of Winter
 	{354050, "Snare"},		-- Nimble Steps
 
 	----------------
@@ -1244,8 +1384,8 @@ local spellsArenaTable = {
 	----------------
 
 	{125174 , "Other"},		  	-- Touch of Karma
-  {124280 , "Other"},       -- Touch of Karma Dot
-  {122470 , "Other"},       -- Touch of Karma
+	{124280 , "Other"},       -- Touch of Karma Dot
+	{122470 , "Other"},       -- Touch of Karma
 	{122783 , "Other"},     	-- Diffuse Magic (not immune}, 60% magic damage reduction)
 	{115176 , "Other"},		  	-- Zen Meditation (60% damage reduction)
 	{202248 , "Other"},	      -- Guided Meditation (pvp honor talent) (redirect spells to monk)
@@ -5467,7 +5607,7 @@ local DBdefaults = {
 						ImmuneSpell = true,
 						ImmunePhysical = true,
 						AuraMastery_Cast_Auras = true,
-					  ROP_Vortex = true ,
+					  	ROP_Vortex = true ,
 						Disarm = true,
 						Haste_Reduction = true,
 						Dmg_Hit_Reduction = true,
@@ -5479,11 +5619,11 @@ local DBdefaults = {
 						Freedoms = true,
 						Friendly_Defensives = true,
 						Mana_Regen = true,
-						CC_Reduction = true,
+						CC_Reduction = false,
 						Personal_Offensives = true,
 						Peronsal_Defensives = true,
 						Movable_Cast_Auras = true,
-					  SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
+					  	SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
 						PvE = true,
 						Other = false,
 					 }
@@ -5503,7 +5643,7 @@ local DBdefaults = {
 						ImmuneSpell = true,
 						ImmunePhysical = true,
 						AuraMastery_Cast_Auras = true,
-					  ROP_Vortex = true ,
+					  	ROP_Vortex = true ,
 						Disarm = true,
 						Haste_Reduction = true,
 						Dmg_Hit_Reduction = true,
@@ -5515,7 +5655,7 @@ local DBdefaults = {
 						Freedoms = true,
 						Friendly_Defensives = true,
 						Mana_Regen = true,
-						CC_Reduction = true,
+						CC_Reduction = false,
 						Personal_Offensives = true,
 						Peronsal_Defensives = true,
 						Movable_Cast_Auras = true,
@@ -8078,38 +8218,91 @@ local function ObjectExists(guid, ticker, name, sourceName) --Used for Infrnals 
 	return "Despawned"
 end
 
-local function interruptDuration(destGUID, duration)
-  local _, destClass = GetPlayerInfoByGUID(destGUID)
-  local unitIdFromGUID
-  for _, v in pairs(LCframes) do
-    if (UnitGUID(v.unitId) == destGUID) then
-      unitIdFromGUID = v.unitId
-      break
-    end
-  end
-  local duration2 = duration
-  if (unitIdFromGUID ~= nil) then
-    local duration3 = duration
-    local _, destClass = GetPlayerInfoByGUID(destGUID)
-    for i = 1, 120 do
-      local _, _, _, _, _, _, _, _, _, auxSpellId = UnitAura(unitIdFromGUID, i)
-      if not auxSpellId then break end
-      if (destClass == "DRUID") then
-        if auxSpellId == 234084 then	-- Moon and Stars (Druid) [Interrupted Mechanic Duration -70% (stacks)]
-          duration = duration * 0.3
+-- Function to check if pvp talents are active for the player
+local function ArePvpTalentsActive()
+    local inInstance, instanceType = IsInInstance()
+    if inInstance and (instanceType == "pvp" or instanceType == "arena") then
+        return true
+    elseif inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario") then
+        return false
+    else
+        local talents = C_SpecializationInfo.GetAllSelectedPvpTalentIDs()
+        for _, pvptalent in pairs(talents) do
+            local spellID = select(6, GetPvpTalentInfoByID(pvptalent))
+            if IsPlayerSpell(spellID) then
+                return true
+            end
         end
-      end
-      if auxSpellId == 317920 then		-- Concentration Aura (Paladin) [Interrupted Mechanic Duration -30% (stacks)]
-        duration = duration * 0.7
-      elseif auxSpellId == 383020 then	-- Tranquil Air (Shaman) [Interrupted Mechanic Duration -50% (doesn't stack)]
-        duration3 = duration3 * 0.5
-      end
     end
-    if (duration3 < duration) then
-      duration = duration3
+end
+
+local function interruptDuration(destGUID, duration)
+	local _, destClass = GetPlayerInfoByGUID(destGUID)
+	local unitIdFromGUID
+	for _, v in pairs(LCframes) do
+		if (UnitGUID(v.unitId) == destGUID) then
+			unitIdFromGUID = v.unitId
+			break
+		end
+	end
+	local duration3 = duration
+	if (unitIdFromGUID ~= nil) then
+		local duration3 = duration
+		local shamTranquilAirBuff = false
+		local _, destClass = GetPlayerInfoByGUID(destGUID)
+		for i = 1, 120 do
+			local _, _, _, _, _, _, _, _, _, auxSpellId = UnitAura(unitIdFromGUID, i, "HELPFUL")
+			if not auxSpellId then break end
+			if (destClass == "DRUID") then
+				if auxSpellId == 234084 then	-- Moon and Stars (Druid) [Interrupted Mechanic Duration -70% (stacks)]
+					duration = duration * 0.3
+				end
+			end
+			if auxSpellId == 317920 then		-- Concentration Aura (Paladin) [Interrupted Mechanic Duration -30% (stacks)]
+				duration = duration * 0.7
+			elseif auxSpellId == 383020 then	-- Tranquil Air (Shaman) [Interrupted Mechanic Duration -50% (doesn't stack)]
+				shamTranquilAirBuff = true
+			end
+		end
+		for i = 1, 120 do
+			local _, _, _, _, _, _, _, _, _, auxSpellId = UnitAura(unitIdFromGUID, i, "HARMFUL")
+			if not auxSpellId then break end
+			if auxSpellId == 372048 then	-- Oppressing Roar (Evoker) [Interrupted Mechanic Duration +20%/+50% (PvP/PvE) (stacks)]
+				if ArePvpTalentsActive() then
+					duration = duration * 1.2
+					duration3 = duration3 * 1.2
+				else
+					duration = duration * 1.5
+					duration3 = duration3 * 1.5
+				end
+			end
+		end
+		if (shamTranquilAirBuff) then
+			duration3 = duration3 * 0.5
+			if (duration3 < duration) then
+				duration = duration3
+			end
+		end
+	end
+	return duration
+end
+
+-- Function to check if pvp talents are active for the player
+local function ArePvpTalentsActive()
+    local inInstance, instanceType = IsInInstance()
+    if inInstance and (instanceType == "pvp" or instanceType == "arena") then
+        return true
+    elseif inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario") then
+        return false
+    else
+        local talents = C_SpecializationInfo.GetAllSelectedPvpTalentIDs()
+        for _, pvptalent in pairs(talents) do
+            local spellID = select(6, GetPvpTalentInfoByID(pvptalent))
+            if IsPlayerSpell(spellID) then
+                return true
+            end
+        end
     end
-  end
-  return duration
 end
 
 -- This event check pvp interrupts and targettarget/focustarget unit aura triggers
@@ -8126,8 +8319,8 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 					local priority = LoseControlDB.priority.Interrupt
 					local spellCategory = "Interrupt"
 					if (destGUID == UnitGUID("arena1")) or (destGUID == UnitGUID("arena2")) or (destGUID == UnitGUID("arena3")) or (destGUID == UnitGUID("arena4")) or (destGUID == UnitGUID("arena5")) then
-			       priority = LoseControlDB.priorityArena.Interrupt
-				  end
+			       		priority = LoseControlDB.priorityArena.Interrupt
+				 	end
 					local name, _, icon = GetSpellInfo(spellId)
 					if (InterruptAuras[destGUID] == nil) then
 						InterruptAuras[destGUID] = {}
@@ -8137,101 +8330,101 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 					--print("interrupt", ")", destGUID, "|", GetSpellInfo(spellId), "|", duration, "|", expirationTime, "|", spellId)
 				end
 			elseif (((event == "UNIT_DIED") or (event == "UNIT_DESTROYED") or (event == "UNIT_DISSIPATES")) and (select(2, GetPlayerInfoByGUID(destGUID)) ~= "HUNTER")) then --may need to use UNIT_AURA check for Fiegn Death here to make more accurate
-        if (InterruptAuras[destGUID] ~= nil) then --reset if the source of the kick dies
-				InterruptAuras[destGUID] = nil
-				UpdateUnitAuraByUnitGUID(destGUID, -21)
-		  	end
+       			if (InterruptAuras[destGUID] ~= nil) then --reset if the source of the kick dies
+					InterruptAuras[destGUID] = nil
+					UpdateUnitAuraByUnitGUID(destGUID, -21)
+		  		end
 			end
 		end
 
    	-- Check Channel Interrupts for player
-      if (event == "SPELL_CAST_SUCCESS") then
+     	if (event == "SPELL_CAST_SUCCESS") then
 		    if interruptsIds[spellId] then
-	        if (destGUID == UnitGUID("player")) and (select(7, UnitChannelInfo("player")) == false) then
-           local duration = interruptsIds[spellId]
-  			  	if (duration ~= nil) then
-            duration = interruptDuration(destGUID, duration) or duration
-  					local expirationTime = GetTime() + duration
-  					local priority = LoseControlDB.priority.Interrupt
-  					local spellCategory = "Interrupt"
-  					local name, _, icon = GetSpellInfo(spellId)
-  					if (InterruptAuras[destGUID] == nil) then
-  						InterruptAuras[destGUID] = {}
-  					end
-  					tblinsert(InterruptAuras[destGUID], {  ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
-  					UpdateUnitAuraByUnitGUID(destGUID, -20)
-  		     end
-         end
-       end
-     end
-			-- Check Channel Interrupts for arena
-			if (event == "SPELL_CAST_SUCCESS") then
-				if interruptsIds[spellId] then
-					for i = 1, GetNumArenaOpponents() do
-					  if (destGUID == UnitGUID("arena"..i)) and (select(7, UnitChannelInfo("arena"..i)) == false) then
-		          local duration = interruptsIds[spellId]
-							if (duration ~= nil) then
-                duration = interruptDuration(destGUID, duration) or duration
-								local expirationTime = GetTime() + duration
-								local priority = LoseControlDB.priorityArena.Interrupt
-								local spellCategory = "Interrupt"
-								local name, _, icon = GetSpellInfo(spellId)
-								if (InterruptAuras[destGUID] == nil) then
-									InterruptAuras[destGUID] = {}
-								end
-								tblinsert(InterruptAuras[destGUID], {  ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
-								UpdateUnitAuraByUnitGUID(destGUID, -20)
-					    end
-					  end
+				if (destGUID == UnitGUID("player")) and (select(7, UnitChannelInfo("player")) == false) then
+					local duration = interruptsIds[spellId]
+  			  		if (duration ~= nil) then
+						duration = interruptDuration(destGUID, duration) or duration
+						local expirationTime = GetTime() + duration
+						local priority = LoseControlDB.priority.Interrupt
+						local spellCategory = "Interrupt"
+						local name, _, icon = GetSpellInfo(spellId)
+						if (InterruptAuras[destGUID] == nil) then
+							InterruptAuras[destGUID] = {}
+						end
+						tblinsert(InterruptAuras[destGUID], {  ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
+						UpdateUnitAuraByUnitGUID(destGUID, -20)
 					end
 				end
 			end
-			-- Check Channel Interrupts for party
-			if (event == "SPELL_CAST_SUCCESS") then
-				if interruptsIds[spellId] then
-					for i = 1, GetNumGroupMembers() do
-						 if (destGUID == UnitGUID("party"..i)) and (select(7, UnitChannelInfo("party"..i)) == false) then
-	            local duration = interruptsIds[spellId]
-							if (duration ~= nil) then
-                duration = interruptDuration(destGUID, duration) or duration
-								local expirationTime = GetTime() + duration
-								local priority = LoseControlDB.priority.Interrupt
-								local spellCategory = "Interrupt"
-								local name, _, icon = GetSpellInfo(spellId)
-								if (InterruptAuras[destGUID] == nil) then
-									InterruptAuras[destGUID] = {}
-								end
-								tblinsert(InterruptAuras[destGUID], { ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
-								UpdateUnitAuraByUnitGUID(destGUID, -20)
-	            end
-					  end
+		end
+		-- Check Channel Interrupts for arena
+		if (event == "SPELL_CAST_SUCCESS") then
+			if interruptsIds[spellId] then
+				for i = 1, GetNumArenaOpponents() do
+					if (destGUID == UnitGUID("arena"..i)) and (select(7, UnitChannelInfo("arena"..i)) == false) then
+						local duration = interruptsIds[spellId]
+						if (duration ~= nil) then
+							duration = interruptDuration(destGUID, duration) or duration
+							local expirationTime = GetTime() + duration
+							local priority = LoseControlDB.priorityArena.Interrupt
+							local spellCategory = "Interrupt"
+							local name, _, icon = GetSpellInfo(spellId)
+							if (InterruptAuras[destGUID] == nil) then
+								InterruptAuras[destGUID] = {}
+							end
+							tblinsert(InterruptAuras[destGUID], {  ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
+							UpdateUnitAuraByUnitGUID(destGUID, -20)
+						end
 					end
 				end
 			end
+		end
+		-- Check Channel Interrupts for party
+		if (event == "SPELL_CAST_SUCCESS") then
+			if interruptsIds[spellId] then
+				for i = 1, GetNumGroupMembers() do
+					if (destGUID == UnitGUID("party"..i)) and (select(7, UnitChannelInfo("party"..i)) == false) then
+						local duration = interruptsIds[spellId]
+						if (duration ~= nil) then
+							duration = interruptDuration(destGUID, duration) or duration
+							local expirationTime = GetTime() + duration
+							local priority = LoseControlDB.priority.Interrupt
+							local spellCategory = "Interrupt"
+							local name, _, icon = GetSpellInfo(spellId)
+							if (InterruptAuras[destGUID] == nil) then
+								InterruptAuras[destGUID] = {}
+							end
+							tblinsert(InterruptAuras[destGUID], { ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue })
+							UpdateUnitAuraByUnitGUID(destGUID, -20)
+						end
+					end
+				end
+			end
+		end
 
-			-----------------------------------------------------------------------------------------------------------------
-			--Reset Stealth Table if Unit Dies
-			-----------------------------------------------------------------------------------------------------------------
-			if ((event == "UNIT_DIED") or (event == "UNIT_DESTROYED") or (event == "UNIT_DISSIPATES")) and ((destGUID == UnitGUID("arena1")) or (destGUID == UnitGUID("arena2")) or (destGUID == UnitGUID("arena3")) or (destGUID == UnitGUID("arena4")) or (destGUID == UnitGUID("arena5"))) then
-				if (destGUID == UnitGUID("arena1")) then
-					Arenastealth["arena1"] = nil
-				elseif (destGUID == UnitGUID("arena2")) then
-					Arenastealth["arena2"] = nil
-				elseif (destGUID == UnitGUID("arena3")) then
-					Arenastealth["arena3"] = nil
-       elseif (destGUID == UnitGUID("arena4")) then
-          Arenastealth["arena4"] = nil
-       elseif (destGUID == UnitGUID("arena5")) then
-          Arenastealth["arena5"] = nil
-        end
+		-----------------------------------------------------------------------------------------------------------------
+		--Reset Stealth Table if Unit Dies
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "UNIT_DIED") or (event == "UNIT_DESTROYED") or (event == "UNIT_DISSIPATES")) and ((destGUID == UnitGUID("arena1")) or (destGUID == UnitGUID("arena2")) or (destGUID == UnitGUID("arena3")) or (destGUID == UnitGUID("arena4")) or (destGUID == UnitGUID("arena5"))) then
+			if (destGUID == UnitGUID("arena1")) then
+				Arenastealth["arena1"] = nil
+			elseif (destGUID == UnitGUID("arena2")) then
+				Arenastealth["arena2"] = nil
+			elseif (destGUID == UnitGUID("arena3")) then
+				Arenastealth["arena3"] = nil
+			elseif (destGUID == UnitGUID("arena4")) then
+				Arenastealth["arena4"] = nil
+			elseif (destGUID == UnitGUID("arena5")) then
+				Arenastealth["arena5"] = nil
 			end
+		end
 
       -----------------------------------------------------------------------------------------------------------------
       --Earthen Check (Totems Need a Spawn Time Check)
       -----------------------------------------------------------------------------------------------------------------
       if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 198838) then
         if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-            local duration = 15
+            local duration = 18 --Totemic Focus Makes it 18
             local expirationTime = GetTime() + duration
             if (Earthen[sourceGUID] == nil) then  --source is friendly unit party12345 raid1...
               Earthen[sourceGUID] = {}
@@ -8248,7 +8441,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
             Earthen[sourceGUID] = nil
             end)
         elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-          local duration = 15
+          local duration = 18 --Totemic Focus Makes it 18
               local guid = destGUID
               local spawnTime
               local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
@@ -8256,7 +8449,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
               local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
               local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
               spawnTime = spawnEpoch + spawnEpochOffset
-              print("Earthen Totem Spawned at: "..spawnTime)
+              --print("Earthen Totem Spawned at: "..spawnTime)
               end
             local expirationTime = GetTime() + duration
             if (Earthen[spawnTime] == nil) then --source becomes the totem ><
@@ -8306,7 +8499,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
                 local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
                 local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
                 spawnTime = spawnEpoch + spawnEpochOffset
-                print("Grounding Totem Spawned at: "..spawnTime)
+                --print("Grounding Totem Spawned at: "..spawnTime)
                 end
               local expirationTime = GetTime() + duration
               if (Grounding[spawnTime] == nil) then --source becomes the totem ><
@@ -8329,55 +8522,73 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
           -----------------------------------------------------------------------------------------------------------------
           --WarBanner Check (Totems Need a Spawn Time Check)
           -----------------------------------------------------------------------------------------------------------------
-          if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 236320) then
-            if sourceGUID then
-              local duration = 15
-              local expirationTime = GetTime() + duration
-              if (WarBanner[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
-                WarBanner[sourceGUID] = {}
-              end
-              WarBanner[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-              C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-                if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
-                if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
-                if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
-                if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
-                if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
-              end)
-              C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-              WarBanner[sourceGUID] = nil
-              end)
-            end
-          end
-          if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 236320) then
-            if destGUID then
-              local duration = 15
-              local guid = destGUID
-              local spawnTime
-              local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-              if unitType == "Creature" or unitType == "Vehicle" then
-              local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-              local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-              spawnTime = spawnEpoch + spawnEpochOffset
-              print("WarBanner Totem Spawned at: "..spawnTime)
-              end
-            local expirationTime = GetTime() + duration
-            if (WarBanner[spawnTime] == nil) then --source becomes the totem ><
-              WarBanner[spawnTime] = {}
-            end
-            WarBanner[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-            C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-              if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
-              if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
-              if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
-              if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
-              if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-            end)
-            C_Timer.After(duration +.2, function()	-- execute in some close next frame to accurate use of UnitAura function
-            WarBanner[spawnTime] = nil
-            end)
-          end
-        end
+			if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 236320) then
+				local duration = 15
+				local expirationTime = GetTime() + duration
+
+				if destGUID then
+					if (WarBanner[destGUID] == nil) then
+						WarBanner[destGUID] = {}
+					end
+					WarBanner[destGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+						WarBanner[destGUID] = nil
+					end)
+				end
+
+				if destGUID then
+					if (WarBanner[1] == nil) then
+						WarBanner[1] = {}
+					end
+					WarBanner[1] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+						WarBanner[1] = nil
+					end)
+				end
+			
+				if sourceGUID then
+					if (WarBanner[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
+						WarBanner[sourceGUID] = {}
+					end
+					WarBanner[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+					C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+						if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
+						if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
+						if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
+						if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
+						if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
+					end)
+					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+						WarBanner[sourceGUID] = nil
+					end)
+				end
+
+				if destGUID then
+					local guid = destGUID
+					local spawnTime
+					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+					if unitType == "Creature" or unitType == "Vehicle" then
+						local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+						local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+						spawnTime = spawnEpoch + spawnEpochOffset
+						--print("WarBanner Totem Spawned at: "..spawnTime)
+					end
+					if (WarBanner[spawnTime] == nil) then --source becomes the totem ><
+						WarBanner[spawnTime] = {}
+					end
+					WarBanner[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+					C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+						if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
+						if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
+						if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
+						if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
+						if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
+					end)
+					C_Timer.After(duration +.2, function()	-- execute in some close next frame to accurate use of UnitAura function
+						WarBanner[spawnTime] = nil
+					end)
+				end
+			end
 
 
 			-----------------------------------------------------------------------------------------------------------------
@@ -8477,7 +8688,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 		-----------------------------------------------------------------------------------------------------------------
 		if (((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (cleuPrioCastedSpells[spellId])) then
 			local priority, priorityArena, spellCategory, name
-      ------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
+      	------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
 			if cleuPrioCastedSpells[spellId].priority == nil then
 			 priority = nil
 			else
@@ -8494,7 +8705,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				 spellCategory = cleuPrioCastedSpells[spellId].priorityArena
 				 name = cleuPrioCastedSpells[spellId].nameArena
 				end
-	  	end
+	  		end
 			--------------------------------------------------------------------------------------------------------------------------------
 			if priority then
 				local duration = cleuPrioCastedSpells[spellId].duration
@@ -8502,46 +8713,46 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				if not InterruptAuras[sourceGUID]  then
 						InterruptAuras[sourceGUID] = {}
 				end
-        if not InterruptAuras[destGUID]  then
+       			if not InterruptAuras[destGUID]  then
 						InterruptAuras[destGUID] = {}
 				end
 				local namePrint, _, icon = GetSpellInfo(spellId)
 
-        if spellId == 321686 then -- Mirror image
-          icon = 135994
-        end
-        if spellId == 157299 or spellId == 157319 then --Strom Elemntal
-          icon = 2065626
-        end
-        local guid = destGUID
-        --print(sourceName.." Summoned "..namePrint.." "..substring(destGUID, -7).." for "..duration.." LC")
-				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint})
+				if spellId == 321686 then -- Mirror image
+					icon = 135994
+				end
+				if spellId == 157299 or spellId == 157319 then --Strom Elemntal
+					icon = 2065626
+				end
+				local guid = destGUID
+				--print(sourceName.." Summoned "..namePrint.." "..substring(destGUID, -7).." for "..duration.." LC")
+				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint, ["spell"] = spellId})
 				UpdateUnitAuraByUnitGUID(sourceGUID, -20)
-        local ticker = 1
-        self.ticker = C_Timer.NewTicker(.25, function()
-          if InterruptAuras[sourceGUID] then
-            for k, v in pairs(InterruptAuras[sourceGUID]) do
-    					if v.destGUID then
-                if substring(v.destGUID, -5) == substring(guid, -5) then --string.sub is to help witj Mirror Images bug
-                  if ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName) then
-                    print(v.sourceName.." "..ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
-                    InterruptAuras[sourceGUID][k] = nil
-                    UpdateUnitAuraByUnitGUID(sourceGUID, -20)
-                    break
-                  end
-                end
-              end
-            end
-          end
-      		ticker = ticker + 1
-        end, duration * 4 + 5)
+				local ticker = 1
+				self.ticker = C_Timer.NewTicker(.25, function()
+					if InterruptAuras[sourceGUID] then
+						for k, v in pairs(InterruptAuras[sourceGUID]) do
+							if v.destGUID and v.spell ~= 394243 and v.spell ~= 387979 and v.spell ~= 394235 then --Dimensional Rift Hack
+								if substring(v.destGUID, -5) == substring(guid, -5) then --string.sub is to help witj Mirror Images bug
+									if ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName) then
+										print(v.sourceName.." "..ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
+										InterruptAuras[sourceGUID][k] = nil
+										UpdateUnitAuraByUnitGUID(sourceGUID, -20)
+									break
+									end
+								end
+							end
+						end
+					end
+						ticker = ticker + 1
+				end, duration * 4 + 5)
 			end
 		end
 
     -----------------------------------------------------------------------------------------------------------------
     --CLEU CASTED AURA Spell Cast Check (if Cast dies it will not update currently, not sure how to track that)
     -----------------------------------------------------------------------------------------------------------------
-    if ((event =="SPELL_CAST_SUCCESS" and spellId ==202770) and (cleuPrioCastedSpells[spellId])) then --Fury of Elune
+    if ((event =="SPELL_CAST_SUCCESS" and (spellId ==202770 or spellId == 202359)) and (cleuPrioCastedSpells[spellId])) then --Fury of Elune & Astral Com
       local priority, priorityArena, spellCategory, name
       ------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
       if cleuPrioCastedSpells[spellId].priority == nil then
@@ -8719,18 +8930,20 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				if DuelAura[UnitGUID(unitId)] then --enemyDuel
 					name = "EnemyShadowyDuel"
 					spellIds[spellId] = "Enemy_Smoke_Bomb"
+					customString[spellId] = "Shadowy".."\n".."Duel"
 					--print(unitId.."Duel is Enemy")
 					if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
-					spellIds[spellId] = "Special_High"
+						spellIds[spellId] = "Special_High"
 					end
 				else
 					--print(UnitGUID(unitId).."Duel is Friendly")
 					name = "FriendlyShadowyDuel"
 					spellIds[spellId] = "Friendly_Smoke_Bomb"
+					customString[spellId] = "Shadowy".."\n".."Duel"
 					if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
-					spellIds[spellId] = "Special_High"
+						spellIds[spellId] = "Special_High"
 					end
-	  		end
+	  			end
 			end
 
 			-----------------------------------------------------------------------------------------------------------------
@@ -8744,19 +8957,20 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						expirationTime = SmokeBombAuras[UnitGUID(source)].expirationTime
 						spellIds[spellId] = "Enemy_Smoke_Bomb"
 						--print(unitId.."SmokeBombed is enemy check")
-							if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
-								--print(unitId.."Enemy SmokeBombed in Arean123 check")
-								spellIds[spellId] = "Special_High"
-							end
+						if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
+							--print(unitId.."Enemy SmokeBombed in Arean123 check")
+							spellIds[spellId] = "Special_High"
+						end
 						name = "EnemySmokeBomb"
 					elseif not UnitIsEnemy("player", source) then --Add a check, i rogue bombs in stealth there is a source but the cleu doesnt regester a time
 						duration = SmokeBombAuras[UnitGUID(source)].duration --Add a check, i rogue bombs in stealth there is a source but the cleu doesnt regester a time
 						expirationTime = SmokeBombAuras[UnitGUID(source)].expirationTime
 						spellIds[spellId] = "Friendly_Smoke_Bomb"
-							if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
-								--print(unitId.."Friendly SmokeBombed on Arean123 check")
-								spellIds[spellId] = "Special_High" --
-							end
+						---customString[spellId] = "Friendly".."\n".."Smoke Bomb"
+						if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
+							--print(unitId.."Friendly SmokeBombed on Arean123 check")
+							spellIds[spellId] = "Special_High" --
+						end
 					end
 				else
 					spellIds[spellId] = "Friendly_Smoke_Bomb"
@@ -8772,27 +8986,27 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			-----------------------------------------------------------------------------------------------------------------
 			if spellId == 81261 then
 				local root = {}
-					for i = 1, 40 do
-		      local _, _, _, _, d, e, _, _, _, s = UnitAura(unitId, i, "HARMFUL")
+				for i = 1, 40 do
+					local _, _, _, _, d, e, _, _, _, s = UnitAura(unitId, i, "HARMFUL")
 					if not s then break end
-							if (spellIds[s] == "RootPhyiscal_Special") or (spellIds[s] == "RootMagic_Special") or (spellIds[s] == "Root") or (spellIds[s] == "Roots_90_Snares") then
-								tblinsert(root, {["col1"] = e, ["col2"]  = d})
-							end
+					if (spellIds[s] == "RootPhyiscal_Special") or (spellIds[s] == "RootMagic_Special") or (spellIds[s] == "Root") or (spellIds[s] == "Roots_90_Snares") then
+						tblinsert(root, {["col1"] = e, ["col2"]  = d})
 					end
-					if #root then
-						tblsort(root, cmp_col1)
-					end
-					if root[1] then
+				end
+				if #root then
+					tblsort(root, cmp_col1)
+				end
+				if root[1] then
 					expirationTime = root[1].col1 + .01
 					duration = root[1].col2
-						if source and BeamAura[UnitGUID(source)] then
-							if (expirationTime - GetTime()) >  (BeamAura[UnitGUID(source)].expirationTime - GetTime()) then
-								duration = BeamAura[UnitGUID(source)].duration
-								expirationTime =BeamAura[UnitGUID(source)].expirationTime + .01
-							end
+					if source and BeamAura[UnitGUID(source)] then
+						if (expirationTime - GetTime()) >  (BeamAura[UnitGUID(source)].expirationTime - GetTime()) then
+							duration = BeamAura[UnitGUID(source)].duration
+							expirationTime =BeamAura[UnitGUID(source)].expirationTime + .01
 						end
 					end
 				end
+			end
 
         -----------------------------------------------------------------------------------------------------------------
         --Hide BoneDustBrew if Debuff
@@ -8835,6 +9049,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 		if spellId == 285515 then --Frost Shock to Frost Nove
 			icon = 135848
+		end
+
+		if spellId == 317898 then -- Blinding Sleept Snare
+			icon = 135864
 		end
 
 		if spellId == 334275 then ----Amplify Curse's Exhaustion
@@ -8910,14 +9128,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					--Unseen Table Debuffs
 					-----------------------------------------------------------------------------------------------------------------
 					if strmatch(unitId, "arena") then
-				  if typeUpdate == -200 and UnitExists(unitId) then
-						if not Arenastealth[unitId] then
-							Arenastealth[unitId] = {}
+						if typeUpdate == -200 and UnitExists(unitId) then
+							if not Arenastealth[unitId] then
+								Arenastealth[unitId] = {}
+							end
+							--print(unitId, "Debuff Stealth Table Information Captured", name)
+							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 						end
-						--print(unitId, "Debuff Stealth Table Information Captured", name)
-						tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 					end
-				  end
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration debuffs
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -8930,10 +9148,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              if dispelType then DispelType = dispelType else DispelType = "none" end
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							if dispelType then DispelType = dispelType else DispelType = "none" end
+							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						elseif Priority > maxPriority then
 							maxPriority = Priority
 							maxExpirationTime = expirationTime
@@ -8943,10 +9161,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              if dispelType then DispelType = dispelType else DispelType = "none" end
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							if dispelType then DispelType = dispelType else DispelType = "none" end
+							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						end
 					elseif durationType[spellCategory] then
 						if Priority == maxPriority and expirationTime > maxExpirationTime then
@@ -8957,10 +9175,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              if dispelType then DispelType = dispelType else DispelType = "none" end
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							if dispelType then DispelType = dispelType else DispelType = "none" end
+							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						elseif Priority > maxPriority then
 							maxPriority = Priority
 							maxExpirationTime = expirationTime
@@ -8970,10 +9188,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              if dispelType then DispelType = dispelType else DispelType = "none" end
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							if dispelType then DispelType = dispelType else DispelType = "none" end
+							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						end
 					end
 				end
@@ -9093,37 +9311,50 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
         end
       end
 
-      if spellId == 236321 then -- Warbanner (Totems Need a Spawn Time Check)
-        if source then
-          local unitType, _, _, _, _, _, spawnUID = strsplit("-", UnitGUID(source))
-          if unitType == "Player" then
-            if WarBanner[UnitGUID(source)] then
-            duration = WarBanner[UnitGUID(source)].duration
-            expirationTime = WarBanner[UnitGUID(source)].expirationTime
-            end
-          else
-            for i, p in ipairs(C_NamePlate.GetNamePlates()) do
-              local nameplate = p.namePlateUnitToken
-              if nameplate then
-                local guid = UnitGUID(nameplate)
-                local spawnTime
-                local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-                if unitType == "Creature" or unitType == "Vehicle" then
-                  local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-                  local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-                  spawnTime = spawnEpoch + spawnEpochOffset
-                  --print("WarBanner Buff Check at: "..spawnTime)
-                  if WarBanner[spawnTime] then
-                  duration = WarBanner[spawnTime].duration
-                  expirationTime = WarBanner[spawnTime].expirationTime
-                    break
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
+	  if spellId == 236321 then -- WarBanner (Totems Need a Spawn Time Check)
+		if source then
+			local guid = UnitGUID(source)
+			local spawnTime
+			local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+			if unitType == "Creature" or unitType == "Vehicle" then
+				local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+				local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+				spawnTime = spawnEpoch + spawnEpochOffset
+				--print("WarBanner Buff Check at: "..spawnTime)
+			end
+			if WarBanner[spawnTime] then
+				--print("Spawn: "..UnitName(source))
+				duration = WarBanner[spawnTime].duration
+				expirationTime = WarBanner[spawnTime].expirationTime
+			elseif WarBanner[guid] then
+				--print("guid: "..UnitName(source))
+				duration = WarBanner[guid].duration 
+				expirationTime = WarBanner[guid].expirationTime
+			elseif WarBanner[1] then
+				--print("1: "..UnitName(source))
+				duration = WarBanner[1].duration 
+				expirationTime = WarBanner[1].expirationTime
+			end
+		else
+			--print("No WarBanner Source for: "..unitId)
+			duration = WarBanner[1].duration 
+			expirationTime = WarBanner[1].expirationTime
+		end
+	  end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--Two Buff conidtions like Root Beam
+		-----------------------------------------------------------------------------------------------------------------
+		if spellId == 12472 then
+			for i = 1, 40 do
+				local _, _, c, _, d, e, _, _, _, s = UnitAura(unitId, i, "HELPFUL")
+				if not s then break end
+				if s == 382148 then
+					count = c
+				end
+			end
+		end
+
       -----------------------------------------------------------------------------------------------------------------
       --Icon Changes
       -----------------------------------------------------------------------------------------------------------------
@@ -9142,6 +9373,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
       if spellId == 328530 then --Divine Ascension
         icon = 2103871 --618976 -- or 590341
       end
+
+	  if spellId == 387636 then --Soulburn Healthstone
+		icon = 538745
+	  end
+
+	  if spellId == 385391 then --Spell Reflection 20% Wall
+		icon = 135995
+	  end
 
 	  if spellId == 363916 then --Obsidian Scales w/Mettles
 		local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HELPFUL")
@@ -9182,42 +9421,42 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
       if strmatch(unitId, "arena") then
       else
         if (spellId == 331937) or (spellId == 354054) then --Euphoria Venthyr Haste Buff Hack or Fatal Flaw Versa
-  				if unitId ~= "player" then
-            spellIds[spellId] = "None"
-          else
-            spellIds[spellId] = "Movable_Cast_Auras"
-  				end
-  			end
+			if unitId ~= "player" then
+            	spellIds[spellId] = "None"
+          	else
+            	spellIds[spellId] = "Movable_Cast_Auras"
+			end
+		end
 
         if (spellId == 213610) then --Hide Holy Ward
-          if unitId == "player" then
-            spellIds[spellId] = "None"
-          elseif strmatch(unitId, "arena") then
-            spellIds[spellId] = "Small_Defensive_CDs"
-          else
-            spellIds[spellId] = "CC_Reduction"
-          end
+          	if unitId == "player" then
+           		spellIds[spellId] = "None"
+          	elseif strmatch(unitId, "arena") then
+            	spellIds[spellId] = "Small_Defensive_CDs"
+          	else
+            	spellIds[spellId] = "CC_Reduction"
+          	end
         end
 
         if (spellId == 332505) then --Soulsteel Clamps Hack player Only
-  				if unitId ~= "player" then
-            spellIds[spellId] = "None"
-          elseif strmatch(unitId, "arena") then
-            spellIds[spellId] = "Small_Defensive_CDs"
-          else
-            spellIds[spellId] = "Movable_Cast_Auras"
-  				end
-  			end
+			if unitId ~= "player" then
+            	spellIds[spellId] = "None"
+          	elseif strmatch(unitId, "arena") then
+            	spellIds[spellId] = "Small_Defensive_CDs"
+          	else
+            	spellIds[spellId] = "Movable_Cast_Auras"
+			end
+		end
 
         if (spellId == 332506) then --Soulsteel Clamps Hack player Only
-  				if unitId ~= "player" then
-            spellIds[spellId] = "None"
-          elseif strmatch(unitId, "arena") then
-            spellIds[spellId] = "Small_Defensive_CDs"
-          else
-            spellIds[spellId] = "Movable_Cast_Auras"
-  				end
-  			end
+			if unitId ~= "player" then
+           		spellIds[spellId] = "None"
+          	elseif strmatch(unitId, "arena") then
+           		spellIds[spellId] = "Small_Defensive_CDs"
+          	else
+            	spellIds[spellId] = "Movable_Cast_Auras"
+			end
+		end
       end
       -----------------------------------------------------------------------------
       --Same Spell Id , Differnt Spec , Change Prio
@@ -9295,18 +9534,18 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					-----------------------------------------------------------------------------------------------------------------
 					--Unseen Table Debuffs
 					-----------------------------------------------------------------------------------------------------------------
-			    if strmatch(unitId, "arena") then
-  					if typeUpdate == -200 and UnitExists(unitId) then
-  						if not Arenastealth[unitId] then
-  							Arenastealth[unitId] = {}
-  						end
-			        --print(unitId, "Buff Stealth Table Information Captured", name)
-					      tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
-				     end
-			  	end
+					if strmatch(unitId, "arena") then
+						if typeUpdate == -200 and UnitExists(unitId) then
+							if not Arenastealth[unitId] then
+								Arenastealth[unitId] = {}
+							end
+							--print(unitId, "Buff Stealth Table Information Captured", name)
+							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
+						end
+					end
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-						tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
-						---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
+					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
 						if Priority == maxPriority and expirationTime-duration > newExpirationTime then
 							maxExpirationTime = expirationTime
@@ -9316,10 +9555,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              DispelType = "Buff"
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							DispelType = "Buff"
+              				Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						elseif Priority > maxPriority then
 							maxPriority = Priority
 							maxExpirationTime = expirationTime
@@ -9329,10 +9568,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              DispelType = "Buff"
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							DispelType = "Buff"
+              				Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						end
 					elseif durationType[spellCategory] then
 						if Priority == maxPriority and expirationTime > maxExpirationTime then
@@ -9343,10 +9582,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              DispelType = "Buff"
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							DispelType = "Buff"
+             				 Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						elseif Priority > maxPriority then
 							maxPriority = Priority
 							maxExpirationTime = expirationTime
@@ -9356,10 +9595,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
 							Hue = hue
 							Name = name
-              Count = count
-              Spell = spellId
-              DispelType = "Buff"
-              Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							Count = count
+							Spell = spellId
+							DispelType = "Buff"
+							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 						end
 					end
 				end
@@ -9442,9 +9681,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 									forceEventUnitAuraAtEnd = false
 									Hue = hue
 									Name = name
+									Count = count
 									Spell = spellId
-                  DispelType = "CLEU"
-                  Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+									DispelType = "CLEU"
+									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 									local nextTimerUpdate = expirationTime - GetTime() + 0.05
 									if nextTimerUpdate < 0.05 then
 										nextTimerUpdate = 0.05
@@ -9474,9 +9714,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 									forceEventUnitAuraAtEnd = false
 									Hue = hue
 									Name = name
+									Count = count
 									Spell = spellId
-                  DispelType = "CLEU"
-                  Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+									DispelType = "CLEU"
+									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 									local nextTimerUpdate = expirationTime - GetTime() + 0.05
 									if nextTimerUpdate < 0.05 then
 										nextTimerUpdate = 0.05
@@ -9507,9 +9748,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 									forceEventUnitAuraAtEnd = false
 									Hue = hue
 									Name = name
+									Count = count
 									Spell = spellId
-                  DispelType = "CLEU"
-                  Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+									DispelType = "CLEU"
+									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 									local nextTimerUpdate = expirationTime - GetTime() + 0.05
 									if nextTimerUpdate < 0.05 then
 										nextTimerUpdate = 0.05
@@ -9539,9 +9781,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 									forceEventUnitAuraAtEnd = false
 									Hue = hue
 									Name = name
+									Count = count
 									Spell = spellId
-                  DispelType = "CLEU"
-                  Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+									DispelType = "CLEU"
+									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 									local nextTimerUpdate = expirationTime - GetTime() + 0.05
 									if nextTimerUpdate < 0.05 then
 										nextTimerUpdate = 0.05
@@ -9613,71 +9856,71 @@ end
 --Stealth Filter What to show while unseen Arena Opponents
 -------------------------------------------------------------------------
 	if (not UnitExists(unitId)) then
-    if strmatch(unitId, "arena") then
-			 if Arenastealth[unitId] and #buffs then
-				 local foundbuff = 0
-				 for i = 1, #buffs do
-					 	if ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 >= priority.Special_High)) then --Special_High is Stealth for Arena
-								maxExpirationTime = buffs[i].col3.expirationTime
-								Duration = buffs[i].col3.duration
-								Icon = buffs[i].col3.icon
-								forceEventUnitAuraAtEnd = false
-								Hue = buffs[i].col3.hue
-								Name = buffs[i].col3.name
-								local nextTimerUpdate = (buffs[i].col3.expirationTime - GetTime()) + 0.05
-								if nextTimerUpdate < 0.05 then
-									nextTimerUpdate = 0.05
-								end
-								Ctimer(nextTimerUpdate, function()
-										self:UNIT_AURA(unitId, updatedAuras, -5)
-								end)
-								foundbuff = 1
-								print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
-								break
-							elseif ((buffs[i].col1 == priority.Special_High) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
-								maxExpirationTime = GetTime() + 1
-								Duration = 0
-								Icon = buffs[i].col3.icon
-								forceEventUnitAuraAtEnd = false
-								Hue = buffs[i].col3.hue
-								Name = buffs[i].col3.name
-								foundbuff = 1
-								print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
-								break
+   		 if strmatch(unitId, "arena") then
+			if Arenastealth[unitId] and #buffs then
+				local foundbuff = 0
+				for i = 1, #buffs do
+					if ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 >= priority.Special_High)) then --Special_High is Stealth for Arena
+							maxExpirationTime = buffs[i].col3.expirationTime
+							Duration = buffs[i].col3.duration
+							Icon = buffs[i].col3.icon
+							forceEventUnitAuraAtEnd = false
+							Hue = buffs[i].col3.hue
+							Name = buffs[i].col3.name
+							local nextTimerUpdate = (buffs[i].col3.expirationTime - GetTime()) + 0.05
+							if nextTimerUpdate < 0.05 then
+								nextTimerUpdate = 0.05
 							end
+							Ctimer(nextTimerUpdate, function()
+									self:UNIT_AURA(unitId, updatedAuras, -5)
+							end)
+							foundbuff = 1
+							print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+							break
+						elseif ((buffs[i].col1 == priority.Special_High) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
+							maxExpirationTime = GetTime() + 1
+							Duration = 0
+							Icon = buffs[i].col3.icon
+							forceEventUnitAuraAtEnd = false
+							Hue = buffs[i].col3.hue
+							Name = buffs[i].col3.name
+							foundbuff = 1
+							print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
+							break
 						end
-						if foundbuff == 0 then
-							maxExpirationTime = 0
-							Duration = Duration
-							Icon = Icon
-							forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
-							Hue = Hue
-							Name = Name
-							print(unitId, "No Stealth Buff Found")
-							if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
-								GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
-                if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
-							end
-							if unitId == "arena2" and GladiusClassIconFramearena2 and GladiusHealthBararena2 then
-								GladiusClassIconFramearena2:SetAlpha(GladiusHealthBararena2:GetAlpha())
-                if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(GladiusHealthBararena2:GetAlpha()) end
-							end
-							if unitId == "arena3" and GladiusClassIconFramearena3 and GladiusHealthBararena3 then
-								GladiusClassIconFramearena3:SetAlpha(GladiusHealthBararena3:GetAlpha())
-                if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(GladiusHealthBararena3:GetAlpha()) end
-							end
-              if unitId == "arena4" and GladiusClassIconFramearena4 and GladiusHealthBararena4 then
-                GladiusClassIconFramearena4:SetAlpha(GladiusHealthBararena4:GetAlpha())
-                if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(GladiusHealthBararena4:GetAlpha()) end
-              end
-              if unitId == "arena5" and GladiusClassIconFramearena5 and GladiusHealthBararena5 then
-                GladiusClassIconFramearena5:SetAlpha(GladiusHealthBararena5:GetAlpha())
-                if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(GladiusHealthBararena5:GetAlpha()) end
-              end
-            end
 					end
-		    end
-		  end
+					if foundbuff == 0 then
+						maxExpirationTime = 0
+						Duration = Duration
+						Icon = Icon
+						forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
+						Hue = Hue
+						Name = Name
+						print(unitId, "No Stealth Buff Found")
+						if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
+							GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
+							if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
+						end
+						if unitId == "arena2" and GladiusClassIconFramearena2 and GladiusHealthBararena2 then
+							GladiusClassIconFramearena2:SetAlpha(GladiusHealthBararena2:GetAlpha())
+							if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(GladiusHealthBararena2:GetAlpha()) end
+						end
+						if unitId == "arena3" and GladiusClassIconFramearena3 and GladiusHealthBararena3 then
+							GladiusClassIconFramearena3:SetAlpha(GladiusHealthBararena3:GetAlpha())
+								if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(GladiusHealthBararena3:GetAlpha()) end
+						end
+						if unitId == "arena4" and GladiusClassIconFramearena4 and GladiusHealthBararena4 then
+							GladiusClassIconFramearena4:SetAlpha(GladiusHealthBararena4:GetAlpha())
+							if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(GladiusHealthBararena4:GetAlpha()) end
+						end
+						if unitId == "arena5" and GladiusClassIconFramearena5 and GladiusHealthBararena5 then
+							GladiusClassIconFramearena5:SetAlpha(GladiusHealthBararena5:GetAlpha())
+							if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(GladiusHealthBararena5:GetAlpha()) end
+						end
+					end
+				end
+			end
+		end
 
 
 	for i = 1, #buffs do --creates a layered hue for every icon when a specific priority, or spellid is present
@@ -9698,7 +9941,7 @@ end
 		end
 	if (maxExpirationTime == 0) then -- no (de)buffs found
 		self.maxExpirationTime = 0
-    if self.anchor ~= UIParent and self.drawlayer then
+    	if self.anchor ~= UIParent and self.drawlayer then
 			if self.drawanchor == self.anchor and self.anchor.GetDrawLayer and self.anchor.SetDrawLayer then
 				self.anchor:SetDrawLayer(self.drawlayer) -- restore the original draw layer
 			else
@@ -9712,14 +9955,16 @@ end
 		if self.gloss:IsShown() then
 			self.gloss:Hide()
 		end
-    if self.count:IsShown() then
-    self.count:Hide()
-    end
+		if self.count:IsShown() then
+			self.count:Hide()
+		end
 		self:Hide()
 		self:GetParent():Hide()
-    self.spellCategory = spellIds[Spell]
-	elseif maxExpirationTime ~= self.maxExpirationTime or ((LayeredHue) or (typeUpdate == -55) or (not UnitExists(unitId)))  then -- this is a different (de)buff, so initialize the cooldown
+    	self.spellCategory = spellIds[Spell]
+		self.Spell = Spell
+	elseif maxExpirationTime ~= self.maxExpirationTime or Spell ~= self.Spell or ((LayeredHue) or (typeUpdate == -55) or (not UnitExists(unitId)))  then -- this is a different (de)buff, so initialize the cooldown
 		self.maxExpirationTime = maxExpirationTime
+		self.Spell = Spell
 		if self.anchor ~= UIParent then
 			self:SetFrameLevel(self.anchor:GetParent():GetFrameLevel()+((self.frame.anchor ~= "None" and self.frame.anchor ~= "Blizzard") and 3 or 0)) -- must be dynamic, frame level changes all the time
 			if not self.drawlayer and self.anchor.GetDrawLayer then
@@ -9727,7 +9972,7 @@ end
 			end
 			if self.drawlayer and self.anchor.SetDrawLayer then
 				--self.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
-        self.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
+       		 self.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
 			end
 		end
 
@@ -9736,11 +9981,11 @@ end
 			self.gloss.normalTexture = _G[self.gloss:GetName().."NormalTexture"]
 			self.gloss.normalTexture:SetHeight(self.frame.size)
 			self.gloss.normalTexture:SetWidth(self.frame.size)
-      if self.frame.anchor == "Gladdy" then
-        self.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
-      else
-        self.gloss.normalTexture:SetScale(.9) --.81 for Gladdy
-      end
+			if self.frame.anchor == "Gladdy" then
+				self.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
+			else
+				self.gloss.normalTexture:SetScale(.9) --.81 for Gladdy
+			end
 			self.gloss.normalTexture:ClearAllPoints()
 			self.gloss.normalTexture:SetPoint("CENTER", self, "CENTER")
 			self.gloss:SetNormalTexture("Interface\\AddOns\\LoseControl\\Textures\\Gloss")
@@ -9947,8 +10192,8 @@ end
     self.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
     self.spellCategory = spellIds[Spell]
     self.Priority = priority[self.spellCategory]
-		self:Show()
-		self:GetParent():Show()
+	self:Show()
+	self:GetParent():Show()
     if Duration > 0 then
 			if not self:GetDrawSwipe() then
 				self:SetDrawSwipe(false) --SET TO FALSE TO DISABLE DRAWSWIPE , ADD OPTION FOR THIS

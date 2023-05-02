@@ -2,6 +2,7 @@
 ## Title: Bambi's LoseControl
 ## Author: Bambi, Kouri, millanzarreta
 ## Version: 9.0
+## IconTexture: Interface\AddOns\BambiUi\Icon
 ## Notes: Displays & Discovers (PVE Spells: Discovered Tab) the duration of CC effects
 ## Notes-deDE: Zeigt die Dauer von CC-Effekten auf Ihrem Charakter an
 ## Notes-esES: Exhibe la duración de los efectos del CC sobre su carácter
