@@ -138,6 +138,7 @@ local cleuSpells = { -- nil = Do Not Show
  {248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
 
  {288853, 25, nil,  "Special_Low", "Abomination", "Abomination"}, --Dk Raise Abomination
+ {49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
 
  {123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
 
@@ -201,6 +202,7 @@ local spellsArenaTable = {
 	-- Death Knight
 	----------------
 	{48707 , "Immune_Arena"}, --Anti-Magic Shell
+	{410358 , "Immune_Arena"}, --Anti-Magic Shell w/ Warden
 	{221562 , "CC_Arena"}, --Asphyxiate
 	{108194 , "CC_Arena"}, --Asphyxiate
 	{91800 , "CC_Arena"}, --Gnaw
@@ -220,12 +222,15 @@ local spellsArenaTable = {
 	{47568 , "Melee_Major_OffenisiveCDs"}, --Empower Rune Weapon
 	{207256 , "Melee_Major_OffenisiveCDs"}, --Obliteration
 	{51271 , "Melee_Major_OffenisiveCDs"}, --Pillar of Frost
+	{152279 , "Melee_Major_OffenisiveCDs"}, --Breath of Sindragosa
+	{81256 , "Melee_Major_OffenisiveCDs"}, --Dancing Rune Weapon
 	--{215711 , "Melee_Major_OffenisiveCDs"}, --Soul Reaper
 	--{207289 , "Melee_Major_OffenisiveCDs"}, --Unholy Frenzy
 	{207289 , "Melee_Major_OffenisiveCDs"}, --Unholy Assault
 	{48792 , "Big_Defensive_CDs"}, --Icebound Fortitude
 	{49039 , "Big_Defensive_CDs"}, --Lichborne
 	{145629 , "Big_Defensive_CDs"}, --Anti-Magic Zone
+	{55233 , "Big_Defensive_CDs"}, --Vampiric Blood
 	{194844 , "Big_Defensive_CDs"}, --Bonestorm
 	{114556 , "Big_Defensive_CDs"}, --Purgatory
 	{204206, "Small_Offenisive_CDs"}, --Chill Streak
@@ -235,7 +240,7 @@ local spellsArenaTable = {
 	{48265 , "Freedoms_Speed"}, -- Death's Advance
 	{212552 , "Freedoms_Speed"}, -- Wraith Walk
 	{45524 , "Snares_Ranged_Spamable"}, --Chains of Ice
-	{356337 , "Snares_Casted_Melee"}, --Rune of Spellwarding
+	--{356337 , "Snares_Casted_Melee"}, --Rune of Spellwarding
 	--{326867 , "Snares_Casted_Melee"}, --Rune of Spellwarding Shield
 	--{228579 , "Snares_Casted_Melee"}, --Shroud of Winter
 
@@ -1013,6 +1018,7 @@ local spellsArenaTable = {
 	{354051 , "Root"},				-- Nimble Steps
 
 	{642    , "ImmunePlayer"},			-- Divine Shield
+	{228050 , "ImmunePlayer", "Guardian of the".."\n".."Forgotten Queen"},			-- Divine Shield (Guardian of the Forgotten Queen)
 	{353319 , "ImmunePlayer"},			-- Peaceweaver
 	{47585  , "ImmunePlayer"},			-- Dispersion
 	{27827  , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption
@@ -1022,6 +1028,7 @@ local spellsArenaTable = {
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
+	{410358 , "ImmunePlayer", "Anti-Magic".."\n".."Shell"}, --Anti-Magic Shell w/ Warden
 	{378441 , "ImmunePlayer", "Time".."\n".."Stop"},			-- Time Stop
 	{320224 , "ImmunePlayer"},			--Podtender (NightFae: Dreamweaver Tree)
 	{323524 , "ImmunePlayer"},			--Ultimate Form (Necrolord)
@@ -1055,7 +1062,7 @@ local spellsArenaTable = {
 	{114018 , "Stealth"},	    -- Shroud of Concealment
 	{58984  , "Stealth"},     -- Meld
 
-	{228050 , "Immune"},			-- Divine Shield (Guardian of the Forgotten Queen)
+
 	{1022   , "Immune"},	    	-- Hand of Protection
 	{204018 , "Immune"},	   		-- Blessing of Spellwarding
 	{199448 , "Immune"},			-- Blessing of Sacrifice (Ultimate Sacrifice pvp talent) (not immune}, 100% damage transfered to paladin)
