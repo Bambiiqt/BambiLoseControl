@@ -188,7 +188,7 @@ local interrupts = {
 	{351338 , 4},		-- Quell (Evoker)
 	{97547  , 5},		-- Solar Beam (Druid Balance)
 	{93985  , 4},		-- Skull Bash (Druid Feral)
-	{183752 , 3},		-- Consume Magic (Demon Hunter)
+	{183752 , 3},		-- Disrupt (Demon Hunter)
 	{91807 ,  2},   	-- Shambling Rush
 	{91802  , 2},		-- Shambling Rush (Death Knight)
 	{47528  , 3},		-- Mind Freeze (Death Knight)
@@ -212,7 +212,7 @@ local spellsArenaTable = {
 	{207167 , "CC_Arena"}, --Blinding Sleet
 	{334693 , "CC_Arena"}, -- Absolute Zero (Shadowlands Legendary Stun)
 	{377048 , "CC_Arena"}, -- Absolute Zero
-	{204490 , "Silence_Arena"}, --Strangulate
+	{47476 , "Silence_Arena"}, --Strangulate
 	{77606 , "Special_High"}, --Dark Simulacrum
 	{315443 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb
 	{383269 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb 
@@ -257,7 +257,7 @@ local spellsArenaTable = {
 	{217832 , "CC_Arena"}, --Imprison
 	{207685 , "CC_Arena"}, --Sigil of Misery
 	{213491 , "CC_Arena"}, --Demonic Trample
-	{47476 , "Silence_Arena"}, --Sigil of Silence_Arena
+	{204490 , "Silence_Arena"}, --Sigil of Silence_Arena
 	{188501, "Special_High"}, -- Spectral Sight
 	{354610, "Special_High"}, -- Glimpse
 	{323996 , "Roots_90_Snares"}, --The Hunt NightFae Root
@@ -270,6 +270,7 @@ local spellsArenaTable = {
 	{212800, "Big_Defensive_CDs"}, -- Blur
 	{209426 , "Big_Defensive_CDs"}, -- Darkness
 	{206804 , "Big_Defensive_CDs"}, -- Rain From Above
+	{206803 , "Big_Defensive_CDs"}, -- Rain From Above
 	{370966 , "Player_Party_OffensiveCDs"}, --The Hunt
 	{323802 , "Player_Party_OffensiveCDs"}, --The Hunt
 	{203819, "Small_Defensive_CDs"}, -- Demon Spikes
@@ -9502,6 +9503,13 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
           end
         end
       end
+
+	-----------------------------------------------------------------------------------------------------------------
+	--Hide Illdan's Grasp if Buff
+	-----------------------------------------------------------------------------------------------------------------
+	if spellId == 205630 then
+		spellIds[spellId] = "None" --I'lldians Grasp Hide CC on Friends
+	end
 
       -----------------------------------------------------------------------------------------------------------------
       --Show Surrander to Madness if Buff
