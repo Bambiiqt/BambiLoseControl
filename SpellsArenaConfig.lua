@@ -536,7 +536,7 @@ local function CreateMenu()
 	UISpellsArenaConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
 
 
-	UISpellsArenaConfig.ScrollFrame = CreateFrame("ScrollFrame", nil, UISpellsArenaConfig, "UIPanelScrollFrameTemplate");
+	UISpellsArenaConfig.ScrollFrame = CreateFrame("ScrollFrame", nil, UISpellsArenaConfig, "ScrollFrameTemplate");
 	UISpellsArenaConfig.ScrollFrame:SetPoint("TOPLEFT", LoseControlSpellsArenaConfigDialogBG, "TOPLEFT", 4, -8);
 	UISpellsArenaConfig.ScrollFrame:SetPoint("BOTTOMRIGHT", LoseControlSpellsArenaConfigDialogBG, "BOTTOMRIGHT", -3, 4);
 	UISpellsArenaConfig.ScrollFrame:SetClipsChildren(true);

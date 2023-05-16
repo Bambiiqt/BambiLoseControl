@@ -9999,7 +9999,7 @@ end
 			if self.frame.anchor == "Gladdy" then
 				self.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
 			else
-				self.gloss.normalTexture:SetScale(.9) --.81 for Gladdy
+				self.gloss.normalTexture:SetScale(.9) --.88 Gladius 
 			end
 			self.gloss.normalTexture:ClearAllPoints()
 			self.gloss.normalTexture:SetPoint("CENTER", self, "CENTER")
@@ -10199,79 +10199,79 @@ end
 				end
 			end)
 		end
-    if Spell and Spell == 199448 then --Ultimate Sac Glow
-      ActionButton_ShowOverlayGlow(self)
-    else
-      ActionButton_HideOverlayGlow(self)
-    end
-    self.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-    self.spellCategory = spellIds[Spell]
-    self.Priority = priority[self.spellCategory]
-	self:Show()
-	self:GetParent():Show()
-    if Duration > 0 then
+		if Spell and Spell == 199448 then --Ultimate Sac Glow
+			ActionButton_ShowOverlayGlow(self)
+		else
+			ActionButton_HideOverlayGlow(self)
+		end
+		self.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+		self.spellCategory = spellIds[Spell]
+		self.Priority = priority[self.spellCategory]
+		self:Show()
+		self:GetParent():Show()
+		if Duration > 0 then
 			if not self:GetDrawSwipe() then
 				self:SetDrawSwipe(false) --SET TO FALSE TO DISABLE DRAWSWIPE , ADD OPTION FOR THIS
 			end
-      if (maxExpirationTime - GetTime()) > (9*60+59) then
-        self:SetCooldown(GetTime(), 0)
-        self:SetCooldown(GetTime(), 0)
-      else
-		     self:SetCooldown( maxExpirationTime - Duration, Duration )
-      end
+			if (maxExpirationTime - GetTime()) > (9*60+59) then
+				self:SetCooldown(GetTime(), 0)
+				self:SetCooldown(GetTime(), 0)
+			else
+				self:SetCooldown( maxExpirationTime - Duration, Duration )
+			end
 		else
 			if self:GetDrawSwipe() then
 				if LoseControlDB.DrawSwipeSetting > 0 then
-				self:SetDrawSwipe(true)
+					self:SetDrawSwipe(true)
 				else
-				self:SetDrawSwipe(false)
+					self:SetDrawSwipe(false)
 				end
 			end
 			self:SetCooldown(GetTime(), 0)
 			self:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
 		end
-			if (self.unitId == "arena1") or (self.unitId == "arena2") or (self.unitId == "arena3") or (self.unitId == "arena4") or (self.unitId == "arena5") then --Chris sets alpha timer/frame inherot of frame of selected units
-				if self.frame.anchor == "Gladius" then
-					self:GetParent():SetAlpha(self.anchor:GetAlpha())
-					if (not UnitExists(unitId)) then
-						if unitId == "arena1" and GladiusClassIconFramearena1 then
-							self:GetParent():SetAlpha(0.8)
-							GladiusClassIconFramearena1:SetAlpha(0)
-              --if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(0) end
-						end
-						if unitId == "arena2" and GladiusClassIconFramearena2 then
-							self:GetParent():SetAlpha(0.8)
-							GladiusClassIconFramearena2:SetAlpha(0)
-              --if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(0) end
-						end
-						if unitId == "arena3" and GladiusClassIconFramearena3 then
-							self:GetParent():SetAlpha(0.8)
-							GladiusClassIconFramearena3:SetAlpha(0)
-              --if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(0) end
-						end
-            if unitId == "arena4" and GladiusClassIconFramearena4 then
-              self:GetParent():SetAlpha(0.8)
-              GladiusClassIconFramearena4:SetAlpha(0)
-              --if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(0) end
-            end
-            if unitId == "arena5" and GladiusClassIconFramearena5 then
-              self:GetParent():SetAlpha(0.8)
-              GladiusClassIconFramearena5:SetAlpha(0)
-              --if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(0) end
-            end
+		if (self.unitId == "arena1") or (self.unitId == "arena2") or (self.unitId == "arena3") or (self.unitId == "arena4") or (self.unitId == "arena5") then --Chris sets alpha timer/frame inherot of frame of selected units
+			if self.frame.anchor == "Gladius" then
+				self:GetParent():SetAlpha(self.anchor:GetAlpha())
+				if (not UnitExists(unitId)) then
+					if unitId == "arena1" and GladiusClassIconFramearena1 then
+						self:GetParent():SetAlpha(0.8)
+						GladiusClassIconFramearena1:SetAlpha(0)
+						--if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(0) end
+					end
+					if unitId == "arena2" and GladiusClassIconFramearena2 then
+						self:GetParent():SetAlpha(0.8)
+						GladiusClassIconFramearena2:SetAlpha(0)
+						--if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(0) end
+					end
+					if unitId == "arena3" and GladiusClassIconFramearena3 then
+						self:GetParent():SetAlpha(0.8)
+						GladiusClassIconFramearena3:SetAlpha(0)
+						--if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(0) end
+					end
+					if unitId == "arena4" and GladiusClassIconFramearena4 then
+						self:GetParent():SetAlpha(0.8)
+						GladiusClassIconFramearena4:SetAlpha(0)
+						--if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(0) end
+					end
+					if unitId == "arena5" and GladiusClassIconFramearena5 then
+						self:GetParent():SetAlpha(0.8)
+						GladiusClassIconFramearena5:SetAlpha(0)
+						--if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(0) end
 					end
 				end
-	  	else
-				self:GetParent():SetAlpha(self.frame.alpha) -- hack to apply transparency to the cooldown timer
+			end
+		else
+			self:GetParent():SetAlpha(self.frame.alpha) -- hack to apply transparency to the cooldown timer
 		end
 	end
-  if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" then
-    if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
-      LoseControl:Silence(LoseControlplayer)
-    else
-      if playerSilence then playerSilence:Hide() end
-    end
-  end
+	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" then
+		if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
+			LoseControl:Silence(LoseControlplayer)
+		else
+			if playerSilence then playerSilence:Hide() end
+		end
+	end
 end
 
 
@@ -10688,7 +10688,7 @@ function Unlock:OnClick()
 	if self:GetChecked() then
 		local onlyOneUnlockLoop = true
 		_G[O.."UnlockText"]:SetText(L["Unlock"] .. L[" (drag an icon to move)"])
-    local onlyOneUnlockLoop = true
+    	local onlyOneUnlockLoop = true
 		unlocknewline:SetPoint("TOPLEFT", title, "TOPLEFT", 0, 18)
 		unlocknewline:Show()
 		local keys = {} -- for random icon sillyness
@@ -10702,359 +10702,378 @@ function Unlock:OnClick()
 			if frame.enabled and (_G[anchors[frame.anchor][k]] or (type(anchors[frame.anchor][k])=="table" and anchors[frame.anchor][k] or frame.anchor == "None")) then -- only unlock frames whose anchor exists
 				v:RegisterUnitEvents(false)
 
-        local duration, newDuration, startTime, startDuration = v:GetCooldownDuration()
-        if duration ~= 0 then
-          startTime, startDuration = v:GetCooldownTimes()
-          newDuration = (startDuration/1000 + startTime/1000) - GetTime()
-          v:SetCooldown( startTime/1000, 15 )
-        end
+				local duration, newDuration, startTime, startDuration = v:GetCooldownDuration()
+				if duration ~= 0 then
+					startTime, startDuration = v:GetCooldownTimes()
+					newDuration = (startDuration/1000 + startTime/1000) - GetTime()
+					v:SetCooldown( startTime/1000, 15 )
+				end
 
-        if not newDuration or newDuration < 1 then
-	         v.textureicon = select(3, GetSpellInfo(keys[random(#keys)]))
-        end
+				if not newDuration or newDuration < 1 then
+					v.textureicon = select(3, GetSpellInfo(keys[random(#keys)]))
+				end
 
 				if _G[anchors[frame.anchor][k]] then
 					if not _G[anchors[frame.anchor][k]]:IsVisible() then
 						local frame = anchors[frame.anchor][k]
-					 end
+					end
 				end
 				if frame.anchor == "None" then
-		      v.parent:SetParent(UIParant) -- detach the frame from its parent or else it won't show if the parent is hidden
-        	v.texture:SetTexture(v.textureicon)
-          v.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-          v:SetSwipeTexture("Interface\Cooldown\edge")
-          v:SetFrameLevel(1)
-          if LoseControlDB.InterruptOverlay then
-          	v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background.blp")
-            v.iconInterruptBackground:Show()
-          else
-            if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
-              v.iconInterruptBackground:Hide()
-            end
-          end
+					v.parent:SetParent(UIParant) -- detach the frame from its parent or else it won't show if the parent is hidden
+					v.texture:SetTexture(v.textureicon)
+					v.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+					v:SetSwipeTexture("Interface\Cooldown\edge")
+					v:SetFrameLevel(1)
+					if LoseControlDB.InterruptOverlay then
+						v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background.blp")
+						v.iconInterruptBackground:Show()
+					else
+						if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
+						v.iconInterruptBackground:Hide()
+						end
+					end
 				elseif frame.anchor == "Blizzard" then
-		      v.parent:SetParent(v.anchor:GetParent())
-          SetPortraitToTexture(v.texture, v.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          v:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
-          if LoseControlDB.InterruptOverlay then
-            v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
-            v.iconInterruptBackground:Show()
-          else
-            if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
-              v.iconInterruptBackground:Hide()
-            end
-          end
-        else
-        	v.texture:SetTexture(v.textureicon)
-          v.texture:SetTexCoord(0.01, .99, 0.01, .99)
-          v.parent:SetParent(v.anchor:GetParent())
-          v:SetSwipeTexture("Interface\Cooldown\edge")
-          if LoseControlDB.InterruptOverlay then
-          	v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background.blp")
-            v.iconInterruptBackground:Show()
-          else
-            if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
-              v.iconInterruptBackground:Hide()
-            end
-          end
+					v.parent:SetParent(v.anchor:GetParent())
+					SetPortraitToTexture(v.texture, v.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					v:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+					if LoseControlDB.InterruptOverlay then
+						v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
+						v.iconInterruptBackground:Show()
+					else
+						if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
+						v.iconInterruptBackground:Hide()
+						end
+					end
+				elseif frame.anchor == "Gladius" then
+					v.texture:SetTexture(v.textureicon)
+					v.texture:SetTexCoord(0.01, .99, 0.01, .99)
+					--Crop Borders
+					--local n = 2
+					--v.texture:SetTexCoord(n / 64, 1 - n / 64, n / 64, 1 - n / 64)
+					v.parent:SetParent(v.anchor:GetParent())
+					v:SetSwipeTexture("Interface\Cooldown\edge")
+					if LoseControlDB.InterruptOverlay then
+						v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
+						v.iconInterruptBackground:Show()
+					else
+						if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
+						v.iconInterruptBackground:Hide()
+						end
+					end
+				else
+					v.texture:SetTexture(v.textureicon)
+					v.texture:SetTexCoord(0.01, .99, 0.01, .99)
+					v.parent:SetParent(v.anchor:GetParent())
+					v:SetSwipeTexture("Interface\Cooldown\edge")
+					if LoseControlDB.InterruptOverlay then
+						v.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background.blp")
+						v.iconInterruptBackground:Show()
+					else
+						if not LoseControlDB.InterruptOverlay and v.iconInterruptBackground then
+						v.iconInterruptBackground:Hide()
+						end
+					end
 				end
-        if v.anchor ~= UIParent and v.drawlayer then
-          if v.drawanchor == v.anchor and v.anchor.GetDrawLayer and v.anchor.SetDrawLayer then
-            v.anchor:SetDrawLayer(v.drawlayer) -- restore the original draw layer
-          else
-            v.drawlayer = nil
-            v.drawanchor = nil
-          end
-        end
-        if v.anchor ~= UIParent then
-          v:SetFrameLevel(v.anchor:GetParent():GetFrameLevel()+((v.frame.anchor ~= "None" and v.frame.anchor ~= "Blizzard") and 3 or 0)) -- must be dynamic, frame level changes all the time
-          if not v.drawlayer and v.anchor.GetDrawLayer then
-            v.drawlayer = v.anchor:GetDrawLayer() -- back up the current draw layer
-          end
-          if v.drawlayer and v.anchor.SetDrawLayer then
-            --v.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
-            v.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
-          end
-        end
+
+				if v.anchor ~= UIParent and v.drawlayer then
+					if v.drawanchor == v.anchor and v.anchor.GetDrawLayer and v.anchor.SetDrawLayer then
+						v.anchor:SetDrawLayer(v.drawlayer) -- restore the original draw layer
+					else
+						v.drawlayer = nil
+						v.drawanchor = nil
+					end
+				end
+
+				if v.anchor ~= UIParent then
+					v:SetFrameLevel(v.anchor:GetParent():GetFrameLevel()+((v.frame.anchor ~= "None" and v.frame.anchor ~= "Blizzard") and 3 or 0)) -- must be dynamic, frame level changes all the time
+					if not v.drawlayer and v.anchor.GetDrawLayer then
+						v.drawlayer = v.anchor:GetDrawLayer() -- back up the current draw layer
+					end
+					if v.drawlayer and v.anchor.SetDrawLayer then
+						--v.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
+						v.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
+					end
+				end
+
+				local spellSchoolInteruptsTable = {
+					[1] = {true, 0},
+					[2] = {true, 0},
+					[4] = {true, 0},
+					[8] = {true, 0},
+					[16] = {true, 0},
+					[32] = {true, 0},
+					[64] = {true, 0},
+				}
+
+				for schoolIntId, schoolIntFrame in pairs(v.iconInterruptList) do
+					if spellSchoolInteruptsTable[schoolIntId][1] and LoseControlDB.InterruptIcons then
+						if (not schoolIntFrame:IsShown()) then
+							schoolIntFrame:Show()
+						end
+						local orderInt = 1
+						for schoolInt2Id, schoolInt2Info in pairs(spellSchoolInteruptsTable) do
+							if ((schoolInt2Info[1]) and ((spellSchoolInteruptsTable[schoolIntId][2] < schoolInt2Info[2]) or ((spellSchoolInteruptsTable[schoolIntId][2] == schoolInt2Info[2]) and (schoolIntId > schoolInt2Id)))) then
+								orderInt = orderInt + 1
+							end
+						end
+						schoolIntFrame:SetPoint("BOTTOMRIGHT", v.interruptIconOrderPos[orderInt][1], v.interruptIconOrderPos[orderInt][2])
+						schoolIntFrame.interruptIconOrder = orderInt
+					elseif schoolIntFrame:IsShown() then
+						schoolIntFrame.interruptIconOrder = nil
+						schoolIntFrame:Hide()
+					end
+				end
 
 
-        local spellSchoolInteruptsTable = {
-          [1] = {true, 0},
-          [2] = {true, 0},
-          [4] = {true, 0},
-          [8] = {true, 0},
-          [16] = {true, 0},
-          [32] = {true, 0},
-          [64] = {true, 0},
-        }
+				local Count = tonumber(strmatch(k, "%d"))
+				if k == "player" then Count = 3 end
+				if Count then
+					if ((k == "player" and LoseControlDB.CountTextplayer) or ((k == "party1" or k == "party2" or k == "party3" or k == "party4") and  LoseControlDB.CountTextparty)) and not (v.frame.anchor == "Blizzard") then
+						if ( Count >= 1 ) then
+							local countText = Count
+							if ( Count >= 100 ) then
+								countText = BUFF_STACKS_OVERFLOW
+							end
+							v.count:ClearAllPoints()
+							v.count:SetFont(STANDARD_TEXT_FONT, v.frame.size*.415 , "OUTLINE")
+							if strmatch(k, "party") then
+								v.count:SetPoint("TOPLEFT", 1, v.frame.size*.415/2.5);
+								v.count:SetJustifyH("RIGHT");
+							else
+								v.count:SetPoint("TOPRIGHT", -1, v.frame.size*.415/2.5);
+								v.count:SetJustifyH("RIGHT");
+							end
+							v.count:Show();
+							v.count:SetText(countText)
+							else
+							if v.count:IsShown() then
+								v.count:Hide()
+							end
+						end
+					elseif (k == "arena1" or k == "arena2" or k == "arena3" or k == "arena4" or k == "arena5") and not (v.frame.anchor == "Blizzard") and LoseControlDB.CountTextarena then
+						if ( Count >= 1 ) then
+							local countText = Count
+							if ( Count >= 100 ) then
+								countText = BUFF_STACKS_OVERFLOW
+							end
+							v.count:ClearAllPoints()
+							v.count:SetFont(STANDARD_TEXT_FONT,  v.frame.size*.333, "OUTLINE")
+							v.count:SetPoint("BOTTOMRIGHT", 0, 0);
+							v.count:SetJustifyH("RIGHT");
+							v.count:Show();
+							v.count:SetText(countText)
+						else
+							if v.count:IsShown() then
+								v.count:Hide()
+							end
+						end
+					end
+				else
+					if v.count:IsShown() then
+						v.count:Hide()
+					end
+				end
 
-        for schoolIntId, schoolIntFrame in pairs(v.iconInterruptList) do
-          if spellSchoolInteruptsTable[schoolIntId][1] and LoseControlDB.InterruptIcons then
-            if (not schoolIntFrame:IsShown()) then
-              schoolIntFrame:Show()
-            end
-            local orderInt = 1
-            for schoolInt2Id, schoolInt2Info in pairs(spellSchoolInteruptsTable) do
-              if ((schoolInt2Info[1]) and ((spellSchoolInteruptsTable[schoolIntId][2] < schoolInt2Info[2]) or ((spellSchoolInteruptsTable[schoolIntId][2] == schoolInt2Info[2]) and (schoolIntId > schoolInt2Id)))) then
-                orderInt = orderInt + 1
-              end
-            end
-            schoolIntFrame:SetPoint("BOTTOMRIGHT", v.interruptIconOrderPos[orderInt][1], v.interruptIconOrderPos[orderInt][2])
-            schoolIntFrame.interruptIconOrder = orderInt
-          elseif schoolIntFrame:IsShown() then
-            schoolIntFrame.interruptIconOrder = nil
-            schoolIntFrame:Hide()
-          end
-        end
-
-
-        local Count = tonumber(strmatch(k, "%d"))
-        if k == "player" then Count = 3 end
-        if Count then
-            if ((k == "player" and LoseControlDB.CountTextplayer) or ((k == "party1" or k == "party2" or k == "party3" or k == "party4") and  LoseControlDB.CountTextparty)) and not (v.frame.anchor == "Blizzard") then
-             if ( Count >= 1 ) then
-              local countText = Count
-              if ( Count >= 100 ) then
-               countText = BUFF_STACKS_OVERFLOW
-              end
-              v.count:ClearAllPoints()
-              v.count:SetFont(STANDARD_TEXT_FONT, v.frame.size*.415 , "OUTLINE")
-              if strmatch(k, "party") then
-                v.count:SetPoint("TOPLEFT", 1, v.frame.size*.415/2.5);
-                v.count:SetJustifyH("RIGHT");
-              else
-                v.count:SetPoint("TOPRIGHT", -1, v.frame.size*.415/2.5);
-                v.count:SetJustifyH("RIGHT");
-              end
-              v.count:Show();
-              v.count:SetText(countText)
-             else
-              if v.count:IsShown() then
-                v.count:Hide()
-              end
-             end
-          elseif (k == "arena1" or k == "arena2" or k == "arena3" or k == "arena4" or k == "arena5") and not (v.frame.anchor == "Blizzard") and LoseControlDB.CountTextarena then
-            if ( Count >= 1 ) then
-             local countText = Count
-             if ( Count >= 100 ) then
-              countText = BUFF_STACKS_OVERFLOW
-             end
-             v.count:ClearAllPoints()
-             v.count:SetFont(STANDARD_TEXT_FONT,  v.frame.size*.333, "OUTLINE")
-             v.count:SetPoint("BOTTOMRIGHT", 0, 0);
-             v.count:SetJustifyH("RIGHT");
-             v.count:Show();
-             v.count:SetText(countText)
-            else
-             if v.count:IsShown() then
-               v.count:Hide()
-             end
-            end
-           end
-        else
-          if v.count:IsShown() then
-            v.count:Hide()
-          end
-        end
-
-        local Types = { "Magic", "Curse", "Disease", "Poison", "none", "Buff", "CLEU" }
-        local Text = "Player Text".."\n".."For Spell Type"
-        if Text and k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
-          v.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.25, "OUTLINE")
-          v.Ltext:SetText(Text)
-          v.Ltext:Show()
-        elseif k == "player" then
-          if v.Ltext:IsShown() then
-            v.Ltext:Hide()
-          end
-        end
-        local DispelType = Types[math.random(1,7)]
-        if  k == "player" and LoseControlDB.displayTypeDot and DispelType then
-          v.dispelTypeframe:SetHeight(v.frame.size*.105)
-          v.dispelTypeframe:SetWidth(v.frame.size*.105)
-          v.dispelTypeframe.tex:SetDesaturated(nil)
-          v.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
-          v.dispelTypeframe:ClearAllPoints()
-          if v.Ltext:IsShown()  then
-            v.dispelTypeframe:SetPoint("RIGHT", v.Ltext, "LEFT", -2, 0)
-          else
-            v.dispelTypeframe:SetPoint("TOP", v, "BOTTOM", 0, -1)
-          end
-          v.dispelTypeframe:Show()
-        elseif k == "player" then
-          if v.dispelTypeframe:IsShown() then
-            v.dispelTypeframe:Hide()
-          end
-        end
+				local Types = { "Magic", "Curse", "Disease", "Poison", "none", "Buff", "CLEU" }
+				local Text = "Player Text".."\n".."For Spell Type"
+				if Text and k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
+					v.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.25, "OUTLINE")
+					v.Ltext:SetText(Text)
+					v.Ltext:Show()
+				elseif k == "player" then
+					if v.Ltext:IsShown() then
+						v.Ltext:Hide()
+					end
+				end
+				local DispelType = Types[math.random(1,7)]
+				if  k == "player" and LoseControlDB.displayTypeDot and DispelType then
+					v.dispelTypeframe:SetHeight(v.frame.size*.105)
+					v.dispelTypeframe:SetWidth(v.frame.size*.105)
+					v.dispelTypeframe.tex:SetDesaturated(nil)
+					v.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
+					v.dispelTypeframe:ClearAllPoints()
+					if v.Ltext:IsShown()  then
+						v.dispelTypeframe:SetPoint("RIGHT", v.Ltext, "LEFT", -2, 0)
+					else
+						v.dispelTypeframe:SetPoint("TOP", v, "BOTTOM", 0, -1)
+					end
+						v.dispelTypeframe:Show()
+				elseif k == "player" then
+					if v.dispelTypeframe:IsShown() then
+						v.dispelTypeframe:Hide()
+					end
+				end
 				v.text:Show()
 				v:Show()
 				v:GetParent():Show()
 				v:SetDrawSwipe(true)
-        if k == "player" and v.frame.anchor ~= "Blizzard" then
-          v.playerSilence:SetWidth(v.frame.size*.9)
-          v.playerSilence:SetHeight(v.frame.size*.9)
-          v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-          v.playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.9*.25, "OUTLINE")
-          v.playerSilence.Ltext:SetText("Silence")
-          if not newDuration or newDuration < 1 then
-            v.playerSilence.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
-            v.playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-            v.playerSilence.cooldown:SetCooldown( GetTime(), 15 )
-          end
-        end
-        if k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.SilenceIcon then
-          v.playerSilence:Show()
-        elseif not LoseControlDB.SilenceIcon and k == "player" then
-          if v.playerSilence:IsShown() then
-            v.playerSilence:Hide()
-          end
-        end
-        if frame.anchor == "Blizzard" then
-		      v:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-        else
-          v:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) --becasue we are setting the file
-        end
-        if not newDuration or newDuration < 1 then
-  				v:SetCooldown( GetTime(), 15 )
-          if (onlyOneUnlockLoop) then
-            self.nextUnlockLoopTime = GetTime()+15
-            C_Timer.After(15, Unlock.LoopFunction)
-            onlyOneUnlockLoop = false
-          end
-        end
+				if k == "player" and v.frame.anchor ~= "Blizzard" then
+					v.playerSilence:SetWidth(v.frame.size*.9)
+					v.playerSilence:SetHeight(v.frame.size*.9)
+					v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+					v.playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.9*.25, "OUTLINE")
+					v.playerSilence.Ltext:SetText("Silence")
+					if not newDuration or newDuration < 1 then
+						v.playerSilence.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
+						v.playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+						v.playerSilence.cooldown:SetCooldown( GetTime(), 15 )
+					end
+				end
+				if k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.SilenceIcon then
+					v.playerSilence:Show()
+				elseif not LoseControlDB.SilenceIcon and k == "player" then
+					if v.playerSilence:IsShown() then
+						v.playerSilence:Hide()
+					end
+				end
+				if frame.anchor == "Blizzard" then
+					v:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+				else
+					v:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) --becasue we are setting the file
+				end
+				if not newDuration or newDuration < 1 then
+					v:SetCooldown( GetTime(), 15 )
+					if (onlyOneUnlockLoop) then
+						self.nextUnlockLoopTime = GetTime()+15
+						C_Timer.After(15, Unlock.LoopFunction)
+						onlyOneUnlockLoop = false
+					end
+				end
 
 				v:GetParent():SetAlpha(frame.alpha) -- hack to apply the alpha to the cooldown timer
-      	if frame.anchor == "None" or (frame.anchor == "Blizzard" and strmatch(k, "party")) then
-  				v:SetMovable(true)
-  				v:RegisterForDrag("LeftButton")
-  				v:EnableMouse(true)
-        end
-        if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
-          if GladiusButtonBackground and GladiusButtonBackground:GetAlpha() == 0 then
-            DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
-            ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-          end
-          if GladdyButtonFrame3 then
-            GladdyButtonFrame3:SetAlpha(.5)
-            GladdyButtonFrame3.classIcon:SetAlpha(0)
-            v:SetAlpha(.5)
-          end
-          if GladiusClassIconFramearena3 then
-            GladiusButtonFramearena3:SetAlpha(.5)
-            GladiusClassIconFramearena3:SetAlpha(0)
-            v:SetAlpha(.5)
-          end
-        end
-        if LoseControlDB.EnableGladiusGloss and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
-          v.gloss:SetFrameLevel((v:GetParent():GetFrameLevel()) + 10)
-          v.gloss:SetNormalTexture("Interface\\AddOns\\LoseControl\\Textures\\Gloss")
-          v.gloss.normalTexture = _G[v.gloss:GetName().."NormalTexture"]
-          v.gloss.normalTexture:ClearAllPoints()
-          v.gloss.normalTexture:SetPoint("CENTER", v, "CENTER")
-          v.gloss.normalTexture:SetVertexColor(1, 1, 1, 0.4)
-          if frame.anchor == "Gladdy" then
-            v.gloss.normalTexture:SetHeight(v.frame.size + 2)
-            v.gloss.normalTexture:SetWidth(v.frame.size + 2)
-          else
-            v.gloss.normalTexture:SetHeight(v.frame.size )
-            v.gloss.normalTexture:SetWidth(v.frame.size )
-          end
-          if frame.anchor == "Gladdy" then
-            v.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
-          else
-            v.gloss.normalTexture:SetScale(.9) --.81 for Gladdy
-          end
-          if (not v.gloss:IsShown()) then
-            v.gloss:Show()
-          end
-        elseif not LoseControlDB.EnableGladiusGloss then
-            v.gloss:Hide()
-        end
+				if frame.anchor == "None" or (frame.anchor == "Blizzard" and strmatch(k, "party")) then
+					v:SetMovable(true)
+					v:RegisterForDrag("LeftButton")
+					v:EnableMouse(true)
+				end
+				if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
+					if GladiusButtonBackground and GladiusButtonBackground:GetAlpha() == 0 then
+						DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
+						ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+					end
+					if GladdyButtonFrame3 then
+						GladdyButtonFrame3:SetAlpha(.5)
+						GladdyButtonFrame3.classIcon:SetAlpha(0)
+						v:SetAlpha(.5)
+					end
+					if GladiusClassIconFramearena3 then
+						GladiusButtonFramearena3:SetAlpha(.5)
+						GladiusClassIconFramearena3:SetAlpha(0)
+						v:SetAlpha(.5)
+					end
+				end
+				if LoseControlDB.EnableGladiusGloss and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
+					v.gloss:SetFrameLevel((v:GetParent():GetFrameLevel()) + 10)
+					v.gloss:SetNormalTexture("Interface\\AddOns\\LoseControl\\Textures\\Gloss")
+					v.gloss.normalTexture = _G[v.gloss:GetName().."NormalTexture"]
+					v.gloss.normalTexture:ClearAllPoints()
+					v.gloss.normalTexture:SetPoint("CENTER", v, "CENTER")
+					v.gloss.normalTexture:SetVertexColor(1, 1, 1, 0.3)
+					if frame.anchor == "Gladdy" then
+						v.gloss.normalTexture:SetHeight(v.frame.size + 2)
+						v.gloss.normalTexture:SetWidth(v.frame.size + 2)
+					else
+						v.gloss.normalTexture:SetHeight(v.frame.size )
+						v.gloss.normalTexture:SetWidth(v.frame.size )
+					end
+					if frame.anchor == "Gladdy" then
+						v.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
+					else
+						v.gloss.normalTexture:SetScale(.88) --.81 for Gladdy
+					end
+				
+					if (not v.gloss:IsShown()) then
+							v.gloss:Show()
+					end
+				elseif not LoseControlDB.EnableGladiusGloss then
+					v.gloss:Hide()
+				end
 			end
 		end
 		LCframeplayer2.maxExpirationTime = 0
 		LCframeplayer2.unlockMode = true
-  	local frame = LoseControlDB.frames.player2
+		local frame = LoseControlDB.frames.player2
 		if frame.enabled and (_G[anchors[frame.anchor][LCframeplayer2.fakeUnitId or LCframeplayer2.unitId]] or (type(anchors[frame.anchor][LCframeplayer2.unitId])=="table" and anchors[frame.anchor][LCframeplayer2.unitId] or frame.anchor == "None")) then -- only unlock frames whose anchor exists
-      LCframeplayer2:RegisterUnitEvents(false)
+			LCframeplayer2:RegisterUnitEvents(false)
 
-      local duration, newDuration = LCframeplayer2:GetCooldownDuration()
-      if duration ~= 0 then
-        local startTime, startDuration = LCframeplayer2:GetCooldownTimes()
-        newDuration = (startDuration/1000 + startTime/1000) - GetTime()
-      end
+			local duration, newDuration = LCframeplayer2:GetCooldownDuration()
+			if duration ~= 0 then
+				local startTime, startDuration = LCframeplayer2:GetCooldownTimes()
+				newDuration = (startDuration/1000 + startTime/1000) - GetTime()
+			end
 
-      if not newDuration or newDuration < 1 then
-         LCframeplayer2.textureicon = select(3, GetSpellInfo(keys[random(#keys)]))
-      end
+			if not newDuration or newDuration < 1 then
+				LCframeplayer2.textureicon = select(3, GetSpellInfo(keys[random(#keys)]))
+			end
 
-      if frame.anchor == "None" then
-		     LCframeplayer2.parent:SetParent(UIParant) -- detach the frame from its parent or else it won't show if the parent is hidden
-      elseif frame.anchor == "Blizzard" then
-        LCframeplayer2.parent:SetParent(LCframeplayer2.anchor:GetParent())
-        SetPortraitToTexture(LCframeplayer2.texture, LCframeplayer2.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-        LCframeplayer2:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+			if frame.anchor == "None" then
+					LCframeplayer2.parent:SetParent(UIParant) -- detach the frame from its parent or else it won't show if the parent is hidden
+			elseif frame.anchor == "Blizzard" then
+				LCframeplayer2.parent:SetParent(LCframeplayer2.anchor:GetParent())
+				SetPortraitToTexture(LCframeplayer2.texture, LCframeplayer2.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+				LCframeplayer2:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
 
-        if LoseControlDB.InterruptOverlay then
-          LCframeplayer2.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
-          LCframeplayer2.iconInterruptBackground:Show()
-        else
-          if not LoseControlDB.InterruptOverlay and LCframeplayer2.iconInterruptBackground then
-            LCframeplayer2.iconInterruptBackground:Hide()
-          end
-        end
-      else
-        LCframeplayer2.texture:SetTexture(v.textureicon)
-      end
-      if LCframeplayer2.anchor ~= UIParent and LCframeplayer2.drawlayer then
-        if LCframeplayer2.drawanchor == LCframeplayer2.anchor and LCframeplayer2.anchor.GetDrawLayer and LCframeplayer2.anchor.SetDrawLayer then
-          LCframeplayer2.anchor:SetDrawLayer(LCframeplayer2.drawlayer) -- restore the original draw layer
-        else
-          LCframeplayer2.drawlayer = nil
-          LCframeplayer2.drawanchor = nil
-        end
-      end
-      if LCframeplayer2.anchor ~= UIParent then
-        LCframeplayer2:SetFrameLevel(LCframeplayer2.anchor:GetParent():GetFrameLevel()+((LCframeplayer2.frame.anchor ~= "None" and LCframeplayer2.frame.anchor ~= "Blizzard") and 3 or 0)) -- must be dynamic, frame leLCframeplayer2el changes all the time
-        if not LCframeplayer2.drawlayer and LCframeplayer2.anchor.GetDrawLayer then
-          LCframeplayer2.drawlayer = LCframeplayer2.anchor:GetDrawLayer() -- back up the current draw layer
-        end
-        if LCframeplayer2.drawlayer and LCframeplayer2.anchor.SetDrawLayer then
-          --LCframeplayer2.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I'LCframeplayer2e found for keeping the debuff texture LCframeplayer2isible with the cooldown spiral on top of it.
-          LCframeplayer2.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I'LCframeplayer2e found for keeping the debuff texture LCframeplayer2isible with the cooldown spiral on top of it.
-        end
-      end
+				if LoseControlDB.InterruptOverlay then
+					LCframeplayer2.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
+					LCframeplayer2.iconInterruptBackground:Show()
+				else
+					if not LoseControlDB.InterruptOverlay and LCframeplayer2.iconInterruptBackground then
+						LCframeplayer2.iconInterruptBackground:Hide()
+					end
+				end
+			else
+				LCframeplayer2.texture:SetTexture(v.textureicon)
+			end
+
+			if LCframeplayer2.anchor ~= UIParent and LCframeplayer2.drawlayer then
+				if LCframeplayer2.drawanchor == LCframeplayer2.anchor and LCframeplayer2.anchor.GetDrawLayer and LCframeplayer2.anchor.SetDrawLayer then
+					LCframeplayer2.anchor:SetDrawLayer(LCframeplayer2.drawlayer) -- restore the original draw layer
+				else
+					LCframeplayer2.drawlayer = nil
+					LCframeplayer2.drawanchor = nil
+				end
+			end
+
+			if LCframeplayer2.anchor ~= UIParent then
+				LCframeplayer2:SetFrameLevel(LCframeplayer2.anchor:GetParent():GetFrameLevel()+((LCframeplayer2.frame.anchor ~= "None" and LCframeplayer2.frame.anchor ~= "Blizzard") and 3 or 0)) -- must be dynamic, frame leLCframeplayer2el changes all the time
+				if not LCframeplayer2.drawlayer and LCframeplayer2.anchor.GetDrawLayer then
+					LCframeplayer2.drawlayer = LCframeplayer2.anchor:GetDrawLayer() -- back up the current draw layer
+				end
+				if LCframeplayer2.drawlayer and LCframeplayer2.anchor.SetDrawLayer then
+					--LCframeplayer2.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I'LCframeplayer2e found for keeping the debuff texture LCframeplayer2isible with the cooldown spiral on top of it.
+					LCframeplayer2.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I'LCframeplayer2e found for keeping the debuff texture LCframeplayer2isible with the cooldown spiral on top of it.
+				end
+			end
 			LCframeplayer2.text:Show()
 			LCframeplayer2:Show()
 			LCframeplayer2:GetParent():Show()
 			LCframeplayer2:SetDrawSwipe(true)
 			LCframeplayer2:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
 
-      if not newDuration or newDuration < 1 then
-	       LCframeplayer2:SetCooldown( GetTime(), 15 )
-      end
+			if not newDuration or newDuration < 1 then
+				LCframeplayer2:SetCooldown( GetTime(), 15 )
+			end
 			LCframeplayer2:GetParent():SetAlpha(frame.alpha) -- hack to apply the alpha to the cooldown timer
-
 		end
 	else
 		_G[O.."UnlockText"]:SetText(L["Unlock"])
 		for k, v in pairs(LCframes) do
 			unlocknewline:Hide()
-      local frame = LoseControlDB.frames[k]
-      if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
-        if GladdyButtonFrame3 then
-          GladdyButtonFrame3:SetAlpha(1)
-          GladdyButtonFrame3.classIcon:SetAlpha(1)
-          v:SetAlpha(1)
-        end
-        if GladiusClassIconFramearena3 then
-          GladiusButtonFramearena3:SetAlpha(1)
-          GladiusClassIconFramearena3:SetAlpha(1)
-          v:SetAlpha(1)
-          DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
-          ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-        end
-      end
+			local frame = LoseControlDB.frames[k]
+			if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
+				if GladdyButtonFrame3 then
+				GladdyButtonFrame3:SetAlpha(1)
+				GladdyButtonFrame3.classIcon:SetAlpha(1)
+				v:SetAlpha(1)
+				end
+				if GladiusClassIconFramearena3 then
+				GladiusButtonFramearena3:SetAlpha(1)
+				GladiusClassIconFramearena3:SetAlpha(1)
+				v:SetAlpha(1)
+				DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
+				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+				end
+			end
 			v.unlockMode = falseI
 			v:EnableMouse(false)
 			v:RegisterForDrag()
@@ -11067,6 +11086,7 @@ function Unlock:OnClick()
 		LCframeplayer2:PLAYER_ENTERING_WORLD()
 	end
 end
+
 Unlock:SetScript("OnClick", Unlock.OnClick)
 
 local DisableBlizzardCooldownCount = CreateFrame("CheckButton", O.."DisableBlizzardCooldownCount", OptionsPanel, "OptionsBaseCheckButtonTemplate")
@@ -11906,7 +11926,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					if GladiusClassIconFramearena1 then
 						local W = GladiusClassIconFramearena1:GetWidth()
 						local H = GladiusClassIconFramearena1:GetWidth()
-						print("|cff00ccffLoseControl|r".." : "..unitId.." GladiusClassIconFrame Size "..mathfloor(H))
+						print("|cff00ccffLoseControl|r".." : "..unitId.." GladiusClassIconFrame Size "..mathfloor(H).." or ".. H)
 						portrSizeValue = W
 					else
 						if (strfind(unitId, "arena")) then
