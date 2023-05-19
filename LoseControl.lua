@@ -128,40 +128,39 @@ local colorTypes = {
 -- Thanks to all the people on the Curse.com and WoWInterface forums who help keep this list up to date :)
 local cleuSpells = { -- nil = Do Not Show
 --Spell Summon Sucess
- {188616, 60, "PvE",  "Snares_Casted_Melee", "Earth Ele", "Earth Ele"}, --Shaman Earth Ele
- {118323, 60, "PvE",  "Snares_Casted_Melee", "Primal Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
- {188592, 30, nil,  "Special_Low", "Fire Ele", "Fire Ele"}, --Shaman Fire Ele
- {118291, 30, nil,  "Special_Low", "Primal Fire Ele", "Primal Fire Ele"}, --Shaman Primal Fire Ele
- {157299, 30, nil,  "Special_Low", "Storm Ele", "Storm Ele"}, --Shaman Strom Ele
- {157319, 30, nil,  "Special_Low", "Primal Storm Ele", "Prima Storm Ele"}, --Shaman Primal Strom Ele **********
+	{288853, 25, nil,  "Special_Low", "Abomination", "Abomination"}, --Dk Raise Abomination
+	{49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
 
- {248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
+	{248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
 
- {288853, 25, nil,  "Special_Low", "Abomination", "Abomination"}, --Dk Raise Abomination
- {49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
+	{321686, 40, "PvE",  "Special_Low", "Mirror Image", "Mirror Image"}, --Mirror Images
 
- {123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
+	{123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
+	
+	{34433, 15, nil,  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon
+	{123040, 12, nil,  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
 
- {34433, 15, nil,  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon
- {123040, 12, nil,  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
-
- {321686, 40, "PvE",  "Special_Low", "Mirror Image", "Mirror Image"}, --Mirror Images
-
- {111685, 30, nil,  "Ranged_Major_OffenisiveCDs", "Infernals", "Infernals"}, --Warlock Infernals
- {205180, 20, nil,  "Small_Offenisive_CDs", "Darkglare", "Darkglare"}, --Warlock Darkglare
- {265187, 15, nil,  "Small_Offenisive_CDs", "Demonic Tyrant", "Demonic Tyrant"}, --Warlock Tyrant
- {353601, 15, nil,  "Small_Offenisive_CDs", "Fel Obelisk", "Fel Obelisk"}, --Fel Obelisk
- {387979, 6, nil,  "Small_Offenisive_CDs", "Unstable Tear", "Unstable Tear"}, --Unstable Tear
- {394235, 14, nil,  "Small_Offenisive_CDs", "Shadowy Tear", "Shadowy Tear"}, --Shadowy Tear
- {394243, 2, nil,  "Small_Offenisive_CDs", "Choas Tear", "Choas Tear"}, --Choas Tear
-
- --Totems
- {8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)
+	{188616, 60, "PvE",  "Snares_Casted_Melee", "Earth Ele", "Earth Ele"}, --Shaman Earth Ele
+	{118323, 60, "PvE",  "Snares_Casted_Melee", "Primal Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
+	{188592, 30, nil,  "Special_Low", "Fire Ele", "Fire Ele"}, --Shaman Fire Ele
+	{118291, 30, nil,  "Special_Low", "Primal Fire Ele", "Primal Fire Ele"}, --Shaman Primal Fire Ele
+	{157299, 30, nil,  "Special_Low", "Storm Ele", "Storm Ele"}, --Shaman Strom Ele
+	{157319, 30, nil,  "Special_Low", "Primal Storm Ele", "Prima Storm Ele"}, --Shaman Primal Strom Ele **********
+	--Totems
+	{8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)
+	
+	{111685, 30, nil,  "Ranged_Major_OffenisiveCDs", "Infernals", "Infernals"}, --Warlock Infernals
+	{205180, 20, nil,  "Small_Offenisive_CDs", "Darkglare", "Darkglare"}, --Warlock Darkglare
+	{265187, 15, nil,  "Small_Offenisive_CDs", "Demonic Tyrant", "Demonic Tyrant"}, --Warlock Tyrant
+	{353601, 15, nil,  "Small_Offenisive_CDs", "Fel Obelisk", "Fel Obelisk"}, --Fel Obelisk
+	{387979, 6, nil,  "Small_Offenisive_CDs", "Unstable Tear", "Unstable Tear"}, --Unstable Tear
+	{394235, 14, nil,  "Small_Offenisive_CDs", "Shadowy Tear", "Shadowy Tear"}, --Shadowy Tear
+	{394243, 2, nil,  "Small_Offenisive_CDs", "Choas Tear", "Choas Tear"}, --Choas Tear
 
 
 --Spell Cast Sucess
- {202770, 8, nil,  "Small_Offenisive_CDs", "Fury of Elune", "Fury of Elune"}, --Fury of Elune
- {202359, 6, nil,  "Small_Offenisive_CDs", "Astral Communion", "Astral Communion"}, --Fury of Elune
+	{202770, 8, nil,  "Small_Offenisive_CDs", "Fury of Elune", "Fury of Elune"}, --Fury of Elune
+	{202359, 6, nil,  "Small_Offenisive_CDs", "Astral Communion", "Astral Communion"}, --Fury of Elune
  --{spellId, duration. prio, prioArena, name, nameArena} --must have both names
 
 }
@@ -8473,7 +8472,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 					Earthen[sourceGUID] = nil
 				end)
 			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-			local duration = 18 --Totemic Focus Makes it 18
+				local duration = 18 --Totemic Focus Makes it 18
 				local guid = destGUID
 				local spawnTime
 				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
@@ -8524,15 +8523,15 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				end)
 			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
 				local duration = 3
-					local guid = destGUID
-					local spawnTime
-					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-					if unitType == "Creature" or unitType == "Vehicle" then
-					local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-					local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-					spawnTime = spawnEpoch + spawnEpochOffset
-					--print("Grounding Totem Spawned at: "..spawnTime)
-					end
+				local guid = destGUID
+				local spawnTime
+				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+				if unitType == "Creature" or unitType == "Vehicle" then
+				local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+				local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+				spawnTime = spawnEpoch + spawnEpochOffset
+				--print("Grounding Totem Spawned at: "..spawnTime)
+				end
 				local expirationTime = GetTime() + duration
 				if (Grounding[spawnTime] == nil) then --source becomes the totem ><
 					Grounding[spawnTime] = {}
@@ -9013,6 +9012,10 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				icon = 517161
 			end
 
+			if spellId == 317898 then -- Blinding Sleept Snare
+				icon = 135864
+			end
+			
 			if spellId == 317589 then --Mirros of Toremnt, Tormenting Backlash (Venthyr Mage) to Frost Jaw
 				icon = 538562
 			end
@@ -9027,10 +9030,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 			if spellId == 285515 then --Frost Shock to Frost Nove
 				icon = 135848
-			end
-
-			if spellId == 317898 then -- Blinding Sleept Snare
-				icon = 135864
 			end
 
 			-----------------------------------------------------------------------------
@@ -9063,7 +9062,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				if strfind(tooltipData.lines[2].leftText, "70") then
 					spellIds[spellId] = "SnareMagic70"
 					count = 70
-					Tooltip:
 				else
 					spellIds[spellId] = "SnarePosion50"
 				end
