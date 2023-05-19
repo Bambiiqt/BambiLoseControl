@@ -360,52 +360,52 @@ local function CustomPVPDropDownCompileSpells(spell , newPrio, oldPrio, c, durat
 end
 
 local function createDropdown(opts)
-	    local dropdown_name = '$parent_' .. opts['name'] .. '_dropdown'
-	    local menu_items = opts['items'] or {}
-	    local title_text = opts['title'] or ''
-	    local dropdown_width = 0
-	    local default_val = opts['defaultVal'] or ''
-	    local change_func = opts['changeFunc'] or function (dropdown_val) end
+	local dropdown_name = '$parent_' .. opts['name'] .. '_dropdown'
+	local menu_items = opts['items'] or {}
+	local title_text = opts['title'] or ''
+	local dropdown_width = 0
+	local default_val = opts['defaultVal'] or ''
+	local change_func = opts['changeFunc'] or function (dropdown_val) end
 
-	    local dropdown = CreateFrame("Frame", dropdown_name, opts['parent'], 'UIDropDownMenuTemplate')
-	    local dd_title = dropdown:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-	    dd_title:SetPoint("TOPLEFT", 20, 10)
+	local dropdown = CreateFrame("Frame", dropdown_name, opts['parent'], 'UIDropDownMenuTemplate')
+	local dd_title = dropdown:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+	dd_title:SetPoint("TOPLEFT", 20, 10)
 
-	    for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
-	        dd_title:SetText(item)
-	        local text_width = dd_title:GetStringWidth() + 20
-	        if text_width > dropdown_width then
-	            dropdown_width = text_width
-	        end
-	    end
-
-	    UIDropDownMenu_SetWidth(dropdown, 1)
-	    UIDropDownMenu_SetText(dropdown, 1)
-	    dd_title:SetText(title_text)
-
-	    UIDropDownMenu_Initialize(dropdown, function(self, level, _)
-	        local info = UIDropDownMenu_CreateInfo()
-	        for key, val in pairs(menu_items) do
-						if L[val] then val = L[val] end
-	            info.text = val;
-	            info.checked = false
-							if val == default_val then
-								info.checked = true
-							end
-	            info.menuList= key
-	            info.hasArrow = false
-	            info.func = function(b)
-	                UIDropDownMenu_SetSelectedValue(dropdown, b.value, b.value)
-	                UIDropDownMenu_SetText(dropdown, b.value)
-	                b.checked = true
-	                change_func(dropdown, b.value)
-	            end
-	            UIDropDownMenu_AddButton(info)
-	        end
-	    end)
-
-	    return dropdown
+	for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
+		dd_title:SetText(item)
+		local text_width = dd_title:GetStringWidth() + 20
+		if text_width > dropdown_width then
+			dropdown_width = text_width
 		end
+	end
+
+	UIDropDownMenu_SetWidth(dropdown, 1)
+	UIDropDownMenu_SetText(dropdown, 1)
+	dd_title:SetText(title_text)
+
+	UIDropDownMenu_Initialize(dropdown, function(self, level, _)
+		local info = UIDropDownMenu_CreateInfo()
+		for key, val in pairs(menu_items) do
+					if L[val] then val = L[val] end
+			info.text = val;
+			info.checked = false
+						if val == default_val then
+							info.checked = true
+						end
+			info.menuList= key
+			info.hasArrow = false
+			info.func = function(b)
+				UIDropDownMenu_SetSelectedValue(dropdown, b.value, b.value)
+				UIDropDownMenu_SetText(dropdown, b.value)
+				b.checked = true
+				change_func(dropdown, b.value)
+			end
+			UIDropDownMenu_AddButton(info)
+		end
+	end)
+
+	return dropdown
+end
 
 local function SetTabs(frame, numTabs, ...)
 	frame.numTabs = numTabs;
@@ -471,44 +471,44 @@ local function SetTabs(frame, numTabs, ...)
 		tab.content.bg = tab.content:CreateTexture(nil, "BACKGROUND");
 		tab.content.bg:SetAllPoints(true);
 		tab.content.spellstext  =	tab.content:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	--tab.content.bg:SetColorTexture(math.random(), math.random(), math.random(), 0.6);
+		--tab.content.bg:SetColorTexture(math.random(), math.random(), math.random(), 0.6);
 
 		table.insert(contents, tab.content);
 
 		if tabs[i] == "Interrupt" then
-			else
+		else
 			tab.content.input = CreateFrame("EditBox", tab:GetName()..'CustomSpells', 	tab.content, 'InputBoxTemplate')
-	  	tab.content.input:SetSize(150,22)
-	  	tab.content.input:SetAutoFocus(false)
-	    tab.content.input:SetMaxLetters(30)
-	    tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 45, -14)
-	    tab.content.input:SetScript('OnChar', function(self, customspelltext)
-	    			  	tab.content.input.customspelltext = self:GetText()
-	    end)
-	    --
-	  	tab.content.add = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content.input, "UIPanelButtonTemplate")
-	  	tab.content.add:SetSize(50,22)
-	    tab.content.add:SetPoint("TOPLEFT",	tab.content.input, "TOPRIGHT", 2, 0)
-	    tab.content.add:SetText("Add")
-	  	tab.content.add:SetScript("OnClick", function(self, addenemy)
+			tab.content.input:SetSize(150,22)
+			tab.content.input:SetAutoFocus(false)
+			tab.content.input:SetMaxLetters(30)
+			tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 45, -14)
+			tab.content.input:SetScript('OnChar', function(self, customspelltext)
+				tab.content.input.customspelltext = self:GetText()
+			end)
+			--
+			tab.content.add = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content.input, "UIPanelButtonTemplate")
+			tab.content.add:SetSize(50,22)
+			tab.content.add:SetPoint("TOPLEFT",	tab.content.input, "TOPRIGHT", 2, 0)
+			tab.content.add:SetText("Add")
+			tab.content.add:SetScript("OnClick", function(self, addenemy)
 				if tab.content.input.customspelltext then
-				local spell = GetSpellInfo(tonumber(tab.content.input.customspelltext))
-				if spell then spell = tonumber(tab.content.input.customspelltext) else spell = tab.content.input.customspelltext end
-				CustomAddedCompileSpells(spell, tabs[i])
+					local spell = GetSpellInfo(tonumber(tab.content.input.customspelltext))
+					if spell then spell = tonumber(tab.content.input.customspelltext) else spell = tab.content.input.customspelltext end
+					CustomAddedCompileSpells(spell, tabs[i])
 				else
 					print("|cff00ccffLoseControl|r : Please Enter a spellId or Name")
 				end
-	    end)
+	    	end)
 		end
 
 		tab.content.reset = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content, "UIPanelButtonTemplate")
 		tab.content.reset:SetSize(70,22)
 		tab.content.reset:SetScale(.7)
-			if tabs[i] == "Interrupt" then
-				tab.content.reset:SetPoint("CENTER", tab.content,  "CENTER", 860, 245 )
-			else
-				tab.content.reset:SetPoint("CENTER", tab.content,  "CENTER", 860, 197 )
-			end
+		if tabs[i] == "Interrupt" then
+			tab.content.reset:SetPoint("CENTER", tab.content,  "CENTER", 860, 245 )
+		else
+			tab.content.reset:SetPoint("CENTER", tab.content,  "CENTER", 860, 197 )
+		end
 		tab.content.reset:SetText("Enable All")
 		tab.content.reset:SetScript("OnClick", function(self, enable)
 			SpellsConfig:EnableAll(i)
@@ -531,15 +531,15 @@ local function SetTabs(frame, numTabs, ...)
 		tab:SetPoint("TOPLEFT", UISpellsConfig, "BOTTOMLEFT", 6, 7);
 		rowCount = 1
 		else
-				if rowCount <= 9 then
-			 		tab:SetPoint("TOPLEFT", _G[frameName.."Tab"..(i - 1)], "TOPRIGHT", -3.25, 0);
-					rowCount = rowCount + 1
+			if rowCount <= 9 then
+				tab:SetPoint("TOPLEFT", _G[frameName.."Tab"..(i - 1)], "TOPRIGHT", -3.25, 0);
+				rowCount = rowCount + 1
 	    	else
-					y = 7 - (25 * rows)
-					tab:SetPoint("TOPLEFT", UISpellsConfig, "BOTTOMLEFT", 6, y);
-					rows = rows + 1
-					rowCount = 1
-	    end
+				y = 7 - (25 * rows)
+				tab:SetPoint("TOPLEFT", UISpellsConfig, "BOTTOMLEFT", 6, y);
+				rows = rows + 1
+				rowCount = 1
+	    	end
 		end
 	end
 
@@ -572,8 +572,8 @@ local function CreateMenu()
 	UISpellsConfig.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
 
 	UISpellsConfig.ScrollFrame.ScrollBar:ClearAllPoints();
-  UISpellsConfig.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", UISpellsConfig.ScrollFrame, "TOPRIGHT", -12, -18);
-  UISpellsConfig.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", UISpellsConfig.ScrollFrame, "BOTTOMRIGHT", -7, 18);
+  	UISpellsConfig.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", UISpellsConfig.ScrollFrame, "TOPRIGHT", -12, -18);
+  	UISpellsConfig.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", UISpellsConfig.ScrollFrame, "BOTTOMRIGHT", -7, 18);
 
 	local allContents = SetTabs(UISpellsConfig, #tabs, unpack(tabs));
 
@@ -585,7 +585,7 @@ end
 -- SpellsConfig functions
 --------------------------------------
 function SpellsConfig:Addon_Load()
-if not UISpellsConfig then CreateMenu(); SpellsConfig:UpdateAllSpellList() end
+	if not UISpellsConfig then CreateMenu(); SpellsConfig:UpdateAllSpellList() end
 end
 
 function SpellsConfig:Toggle() --Builds the Table
@@ -638,14 +638,14 @@ function SpellsConfig:EnableAll(i)
 		spellID = spellCheck.spellID
 		_G.LoseControlDB.spellEnabled[spellID] = true
 		spellCheck:SetChecked(_G.LoseControlDB.spellEnabled[spellID] or false);
-		end
 	end
+end
 
 function SpellsConfig:DisableAll(i)
 	local c = contents[i]
 	for l = 1, (#L.spells[1][i]) do
-	local spellID, _, _, _, duration = unpack(L.spells[1][i][l])
-	local spellCheck = GetSpellFrame(spellID, duration, c)
+		local spellID, _, _, _, duration = unpack(L.spells[1][i][l])
+		local spellCheck = GetSpellFrame(spellID, duration, c)
 		spellCheck.icon = _G[spellCheck:GetName().."Icon"]
 		spellCheck.icon.check = spellCheck
 		spellID = spellCheck.spellID
@@ -661,24 +661,24 @@ local c = contents[i]
 		local spellCheck = GetSpellFrame(spellID, duration, c)
 		if not  spellCheck then return end
 		spellCheck:Hide()
-		end
 	end
+end
 
 function SpellsConfig:UpdateSpellList(i)
-local numberOfSpellChecksPerRow = 5
+	local numberOfSpellChecksPerRow = 5
 	if i == nil then return end
-		local c = contents[i]
-		local previousSpellID = nil
-		local Y = -10
-		local X = 230
-		local spellCount = 1
+	local c = contents[i]
+	local previousSpellID = nil
+	local Y = -10
+	local X = 230
+	local spellCount = 1
 
-		c.spellstext:SetText("|cff00ccffSpells|r : "..#L.spells[1][i])
-		c.spellstext:SetPoint("TOPLEFT", c, "TOPLEFT", 5, 0);
+	c.spellstext:SetText("|cff00ccffSpells|r : "..#L.spells[1][i])
+	c.spellstext:SetPoint("TOPLEFT", c, "TOPLEFT", 5, 0);
 
-		for l = 1, #L.spells[1][i] do
+	for l = 1, #L.spells[1][i] do
 		local spellID, prio, _, _, duration, customname, _, cleuEvent = unpack(L.spells[1][i][l])
-		 if (spellID) then
+		if (spellID) then
 			local spellCheck = GetSpellFrame(spellID, duration, c)
 			if spellCheck then
 				if (previousSpellID) then
@@ -743,18 +743,18 @@ local numberOfSpellChecksPerRow = 5
 				    ['parent']=spellCheck,
 				    ['title']='',
 				    ['items']= tabsDrop,
-				    ['defaultVal']=prio,
-				    ['changeFunc']=function(dropdown_frame, dropdown_val)
-							local spell = GetSpellInfo(tonumber(spellID))
-							if spell then spell = tonumber(spellID) else spell = spellID end
-								for k, v in ipairs(tabs) do
-									if dropdown_val == L[v] then
-										dropdown_val = v
-									end
-								end
-							 CustomPVPDropDownCompileSpells(spell, dropdown_val, tabs[i], c, duration)
-							 spellCheck:SetChecked(_G.LoseControlDB.spellEnabled[spellID] or false)
+				    ['defaultVal'] = prio,
+				    ['changeFunc'] = function(dropdown_frame, dropdown_val)
+						local spell = GetSpellInfo(tonumber(spellID))
+						if spell then spell = tonumber(spellID) else spell = spellID end
+						for k, v in ipairs(tabs) do
+							if dropdown_val == L[v] then
+								dropdown_val = v
 							end
+						end
+						CustomPVPDropDownCompileSpells(spell, dropdown_val, tabs[i], c, duration)
+						spellCheck:SetChecked(_G.LoseControlDB.spellEnabled[spellID] or false)
+					end
 				}
 
 				if not duration then

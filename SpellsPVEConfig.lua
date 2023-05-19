@@ -414,48 +414,48 @@ local function createDropdown(opts)
 end
 
 local function createDropdownAdd(opts)
-  local dropdown_name = '$parent_' .. opts['name'] .. '_dropdown'
-  local menu_items = opts['items'] or {}
-  local title_text = opts['title'] or ''
-  local dropdown_width = 0
-  local default_val = opts['defaultVal'] or ''
-  local change_func = opts['changeFunc'] or function (dropdown_val) end
+	local dropdown_name = '$parent_' .. opts['name'] .. '_dropdown'
+	local menu_items = opts['items'] or {}
+	local title_text = opts['title'] or ''
+	local dropdown_width = 0
+	local default_val = opts['defaultVal'] or ''
+	local change_func = opts['changeFunc'] or function (dropdown_val) end
 
-  local dropdown = CreateFrame("Frame", dropdown_name, opts['parent'], 'UIDropDownMenuTemplate')
-  local dd_title = dropdown:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-  dd_title:SetPoint("TOPLEFT", 20, 10)
+	local dropdown = CreateFrame("Frame", dropdown_name, opts['parent'], 'UIDropDownMenuTemplate')
+	local dd_title = dropdown:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+	dd_title:SetPoint("TOPLEFT", 20, 10)
 
-  for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
-      dd_title:SetText(item)
-      local text_width = dd_title:GetStringWidth() + 20
-      if text_width > dropdown_width then
-          dropdown_width = text_width
-      end
-  end
+	for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
+		dd_title:SetText(item)
+		local text_width = dd_title:GetStringWidth() + 20
+		if text_width > dropdown_width then
+			dropdown_width = text_width
+		end
+	end
 
-  UIDropDownMenu_SetWidth(dropdown, dropdown_width)
-  UIDropDownMenu_SetText(dropdown, dropdown_val)
-  dd_title:SetText(title_text)
+	UIDropDownMenu_SetWidth(dropdown, dropdown_width)
+	UIDropDownMenu_SetText(dropdown, dropdown_val)
+	dd_title:SetText(title_text)
 
-  UIDropDownMenu_Initialize(dropdown, function(self, level, _)
-      local info = UIDropDownMenu_CreateInfo()
-      for key, val in pairs(menu_items) do
-				if L[val] then val = L[val] end
-          info.text = val;
-          info.checked = false
-          info.menuList= key
-          info.hasArrow = false
-          info.func = function(b)
-              UIDropDownMenu_SetSelectedValue(dropdown, b.value, b.value)
-              UIDropDownMenu_SetText(dropdown, b.value)
-              b.checked = true
-              change_func(dropdown, b.value)
-          end
-          UIDropDownMenu_AddButton(info)
-      end
-  end)
+	UIDropDownMenu_Initialize(dropdown, function(self, level, _)
+		local info = UIDropDownMenu_CreateInfo()
+		for key, val in pairs(menu_items) do
+					if L[val] then val = L[val] end
+			info.text = val;
+			info.checked = false
+			info.menuList= key
+			info.hasArrow = false
+			info.func = function(b)
+				UIDropDownMenu_SetSelectedValue(dropdown, b.value, b.value)
+				UIDropDownMenu_SetText(dropdown, b.value)
+				b.checked = true
+				change_func(dropdown, b.value)
+			end
+			UIDropDownMenu_AddButton(info)
+		end
+	end)
 
-  return dropdown
+	return dropdown
 end
 
 local function SetTabs(frame, numTabs, ...)
@@ -525,24 +525,24 @@ local function SetTabs(frame, numTabs, ...)
 
 		table.insert(contents, tab.content);
 
-	if tabs[i] == "Discovered LC Spells" then
+		if tabs[i] == "Discovered LC Spells" then
 		else
-		tab.content.input = CreateFrame("EditBox", tab:GetName()..'CustomSpells', 	tab.content, 'InputBoxTemplate')
-  	tab.content.input:SetSize(150,22)
-  	tab.content.input:SetAutoFocus(false)
-  	tab.content.input:SetMaxLetters(30)
-  	tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 45, -6)
-  	tab.content.input:SetScript('OnChar', function(self, customspelltext)
-    tab.content.input.customspelltext = self:GetText()
-    end)
-    local drop_val
-		local drop_opts = {
-				['name']='raid',
-				['parent']= tab.content.input,
-				['title']='',
-				['items']= tabsType,
-				['defaultVal']='',
-				['changeFunc'] = function(dropdown_frame, dropdown_val)
+			tab.content.input = CreateFrame("EditBox", tab:GetName()..'CustomSpells', 	tab.content, 'InputBoxTemplate')
+			tab.content.input:SetSize(150,22)
+			tab.content.input:SetAutoFocus(false)
+			tab.content.input:SetMaxLetters(30)
+			tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 45, -6)
+			tab.content.input:SetScript('OnChar', function(self, customspelltext)
+				tab.content.input.customspelltext = self:GetText()
+			end)
+			local drop_val
+			local drop_opts = {
+					['name']='raid',
+					['parent']= tab.content.input,
+					['title']='',
+					['items']= tabsType,
+					['defaultVal']='',
+					['changeFunc'] = function(dropdown_frame, dropdown_val)
 					drop_val = dropdown_val
 					for k, v in ipairs(tabsType) do
 							if dropdown_val == L[v] then
@@ -550,50 +550,50 @@ local function SetTabs(frame, numTabs, ...)
 							end
 						end
 					end
-		}
-		local dropdown = createDropdownAdd(drop_opts)
-		dropdown:SetPoint("TOP", tab.content.input, "CENTER", -4, -10)
-		dropdown:SetScale(.85)
+			}
+			local dropdown = createDropdownAdd(drop_opts)
+			dropdown:SetPoint("TOP", tab.content.input, "CENTER", -4, -10)
+			dropdown:SetScale(.85)
 
-  	tab.content.add = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content.input, "UIPanelButtonTemplate")
-    tab.content.add:SetSize(50,22)
-  	tab.content.add:SetPoint("TOPLEFT",	tab.content.input, "TOPRIGHT", 2, 0)
-  	tab.content.add:SetText("Add")
-  	tab.content.add:SetScript("OnClick", function(self, addenemy)
-			local spell = GetSpellInfo(tonumber(tab.content.input.customspelltext))
-			if spell then spell = tonumber(tab.content.input.customspelltext) else spell = tab.content.input.customspelltext end
-			if drop_val and tab.content.input.customspelltext then
-	  	CustomAddedCompileSpells(spell, drop_val, i)
-			else
-			print("|cff00ccffLoseControl|r : Please Select a Spell Type or Enter a spellId or Name")
-			end
-    end)
-	end
+			tab.content.add = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content.input, "UIPanelButtonTemplate")
+			tab.content.add:SetSize(50,22)
+			tab.content.add:SetPoint("TOPLEFT",	tab.content.input, "TOPRIGHT", 2, 0)
+			tab.content.add:SetText("Add")
+			tab.content.add:SetScript("OnClick", function(self, addenemy)
+				local spell = GetSpellInfo(tonumber(tab.content.input.customspelltext))
+				if spell then spell = tonumber(tab.content.input.customspelltext) else spell = tab.content.input.customspelltext end
+				if drop_val and tab.content.input.customspelltext then
+					CustomAddedCompileSpells(spell, drop_val, i)
+				else
+				print("|cff00ccffLoseControl|r : Please Select a Spell Type or Enter a spellId or Name")
+				end
+			end)
+		end
 
-	tab.content.reset = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content, "UIPanelButtonTemplate")
-	tab.content.reset:SetSize(70,22)
-	tab.content.reset:SetScale(.7)
+		tab.content.reset = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content, "UIPanelButtonTemplate")
+		tab.content.reset:SetSize(70,22)
+		tab.content.reset:SetScale(.7)
 		if tabs[i] == "Discovered LC Spells" then
 			tab.content.reset:SetPoint("CENTER", tab.content, "CENTER", 860, 245 )
 		else
 			tab.content.reset:SetPoint("CENTER", tab.content, "CENTER", 860, 209 )
 		end
-	tab.content.reset:SetText("Enable All")
-	tab.content.reset:SetScript("OnClick", function(self, enable)
-		SpellsPVEConfig:EnableAll(i)
-		L.OptionsFunctions:UpdateAll()
-	end)
+		tab.content.reset:SetText("Enable All")
+		tab.content.reset:SetScript("OnClick", function(self, enable)
+			SpellsPVEConfig:EnableAll(i)
+			L.OptionsFunctions:UpdateAll()
+		end)
 
 
-	tab.content.disable = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content, "UIPanelButtonTemplate")
-	tab.content.disable:SetSize(70,22)
-	tab.content.disable:SetScale(.7)
-	tab.content.disable:SetPoint("CENTER",	tab.content.reset, "CENTER", 0, -20)
-	tab.content.disable:SetText("Disable All")
-	tab.content.disable:SetScript("OnClick", function(self, disable)
-		SpellsPVEConfig:DisableAll(i)
-		L.OptionsFunctions:UpdateAll()
-	end)
+		tab.content.disable = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content, "UIPanelButtonTemplate")
+		tab.content.disable:SetSize(70,22)
+		tab.content.disable:SetScale(.7)
+		tab.content.disable:SetPoint("CENTER",	tab.content.reset, "CENTER", 0, -20)
+		tab.content.disable:SetText("Disable All")
+		tab.content.disable:SetScript("OnClick", function(self, disable)
+			SpellsPVEConfig:DisableAll(i)
+			L.OptionsFunctions:UpdateAll()
+		end)
 
 
 		if (i == 1) then
@@ -603,12 +603,12 @@ local function SetTabs(frame, numTabs, ...)
 			if rowCount <= 9 then
 		 		tab:SetPoint("TOPLEFT", _G[frameName.."Tab"..(i - 1)], "TOPRIGHT", -3.25, 0);
 				rowCount = rowCount + 1
-    	else
+    		else
 				y = 7 - (25 * rows)
 				tab:SetPoint("TOPLEFT", UISpellsPVEConfig, "BOTTOMLEFT", 6, y);
 				rows = rows + 1
 				rowCount = 1
-	    end
+	    	end
 		end
 	end
 
@@ -659,7 +659,7 @@ end
 -- SpellsPVEConfig functions
 --------------------------------------
 function SpellsPVEConfig:Addon_Load()
-if not UISpellsPVEConfig then CreateMenu(); SpellsPVEConfig:UpdateAllSpellList() end
+	if not UISpellsPVEConfig then CreateMenu(); SpellsPVEConfig:UpdateAllSpellList() end
 end
 
 function SpellsPVEConfig:Toggle() --Builds the Table
@@ -675,29 +675,29 @@ function SpellsPVEConfig:UpdateTab(i)
 end
 
 function SpellsPVEConfig:WipeAll()
-if not UISpellsPVEConfig then return end
-SpellsPVEConfig:WipeAllSpellList()
+	if not UISpellsPVEConfig then return end
+	SpellsPVEConfig:WipeAllSpellList()
 end
 
 function SpellsPVEConfig:UpdateAll()
-if not UISpellsPVEConfig then return end
+	if not UISpellsPVEConfig then return end
 	SpellsPVEConfig:UpdateAllSpellList()
 end
 
 function SpellsPVEConfig:WipeAllSpellList()
 	for i = 1, #tabs do
-	SpellsPVEConfig:WipeSpellList(i)
+		SpellsPVEConfig:WipeSpellList(i)
 	end
 end
 
 function SpellsPVEConfig:UpdateAllSpellList()
 	for i = 1, #tabs do
-	SpellsPVEConfig:UpdateSpellList(i, true)
+		SpellsPVEConfig:UpdateSpellList(i, true)
 	end
 end
 function SpellsPVEConfig:ResetAllSpellList()
 	for i = 1, #tabs do
-	SpellsPVEConfig:EnableAll(i)
+		SpellsPVEConfig:EnableAll(i)
 	end
 end
 
@@ -809,14 +809,14 @@ local numberOfSpellChecksPerRow = 5
 							end
 							spellCheck.icon:SetNormalTexture(GetSpellTexture(spellID) or 1)
 						else
-						aString = spellID..": "..prio
-						local cutString = substring(aString, 0, 23);
+							aString = spellID..": "..prio
+							local cutString = substring(aString, 0, 23);
 							if customname then
 								spellCheck.text:SetText(cutString.."\n".."("..customname..")");
 							else
 								spellCheck.text:SetText(cutString);
 							end
-						spellCheck.icon:SetNormalTexture(1008124)
+							spellCheck.icon:SetNormalTexture(1008124)
 						end
 					end
 					spellCheck:Show()
@@ -899,7 +899,7 @@ local numberOfSpellChecksPerRow = 5
 						else
 							spellCheck.text:SetText(cutString);
 						end
-					spellCheck.icon:SetNormalTexture(1008124)
+						spellCheck.icon:SetNormalTexture(1008124)
 					end
 
 					local drop_opts = {
@@ -907,8 +907,8 @@ local numberOfSpellChecksPerRow = 5
 							['parent']=spellCheck,
 							['title']='',
 							['items']= tabsDrop,
-							['defaultVal']=prio,
-							['changeFunc']=function(dropdown_frame, dropdown_val)
+							['defaultVal'] = prio,
+							['changeFunc'] = function(dropdown_frame, dropdown_val)
 								local spell = GetSpellInfo(tonumber(spellID))
 								if spell then spell = tonumber(spellID) else spell = spellID end
 								for k, v in ipairs(tabsType) do
@@ -931,8 +931,8 @@ local numberOfSpellChecksPerRow = 5
 										spellCheck.text:SetText(cutString.."\n".."Custom Priority");
 										spellCheck.icon:SetNormalTexture(1008124)
 									end
-								 end
-							 end
+								end
+							end
 					}
 
 					if not duration then
@@ -945,10 +945,10 @@ local numberOfSpellChecksPerRow = 5
 					spellCheck.spellID = spellID
 					spellCheck:SetScript("OnClick",
 						function()
-						 GameTooltip:Hide()
-						 _G.LoseControlDB.spellEnabled[spellCheck.spellID] = spellCheck:GetChecked()
-						 L.OptionsFunctions:UpdateAll()
-						 makeAndShowSpellTTPVE(spellCheck)
+							GameTooltip:Hide()
+							_G.LoseControlDB.spellEnabled[spellCheck.spellID] = spellCheck:GetChecked()
+							L.OptionsFunctions:UpdateAll()
+							makeAndShowSpellTTPVE(spellCheck)
 						end
 					);
 					spellCheck:SetScript("OnEnter", function(self)

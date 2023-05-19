@@ -5424,7 +5424,7 @@ local DBdefaults = {
 	lossOfControlRoot = 0,
 	DrawSwipeSetting = 0,
 	DiscoveredSpells = { },
-  customString = { },
+  	customString = { },
 
 	spellEnabled = { },
 	spellEnabledArena = { },
@@ -5452,13 +5452,13 @@ local DBdefaults = {
 	showNPCInterruptsTargetTarget = true,
 	showNPCInterruptsFocusTarget = true,
 	duplicatePlayerPortrait = true,
-  PlayerText = true,
-  ArenaPlayerText = false,
-  displayTypeDot = true,
-  SilenceIcon = true,
-  CountTextplayer = true,
-  CountTextparty = true,
-  CountTextarena = true,
+	PlayerText = true,
+	ArenaPlayerText = false,
+	displayTypeDot = true,
+	SilenceIcon = true,
+	CountTextplayer = true,
+	CountTextparty = true,
+	CountTextarena = true,
 	priority = {		-- higher numbers have more priority; 0 = disabled
 			CC = 100,
 			Silence = 95,
@@ -6489,39 +6489,39 @@ local DBdefaults = {
 			categoriesEnabled = {
 				buff = {
 					friendly = {
-						 CC = true,
-						 Silence = true,
-						 RootPhyiscal_Special = true,
-						 RootMagic_Special = true,
-						 Root = true,
-						 ImmunePlayer = false,
-						 Disarm_Warning = false,
-						 CC_Warning = false,
-						 Enemy_Smoke_Bomb = true,
-						 Stealth = false,
-						 Immune = true,
-						 ImmuneSpell = true,
-						 ImmunePhysical = true,
-						 AuraMastery_Cast_Auras = false,
-					   ROP_Vortex = true,
-						 Disarm = true,
-						 Haste_Reduction = false,
-						 Dmg_Hit_Reduction = false,
-						 AOE_DMG_Modifiers = true,
-						 Friendly_Smoke_Bomb = true,
-						 AOE_Spell_Refections = true,
-						 Trees = true,
-						 Speed_Freedoms = true,
-						 Freedoms = true,
-						 Friendly_Defensives = false,
-						 Mana_Regen = false,
-						 CC_Reduction = true,
-						 Personal_Offensives = false,
-						 Peronsal_Defensives = false,
-						 Movable_Cast_Auras = true,
-					   SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
-						 PvE = true,
-						 Other = false,
+							CC = true,
+							Silence = true,
+							RootPhyiscal_Special = true,
+							RootMagic_Special = true,
+							Root = true,
+							ImmunePlayer = false,
+							Disarm_Warning = false,
+							CC_Warning = false,
+							Enemy_Smoke_Bomb = true,
+							Stealth = false,
+							Immune = true,
+							ImmuneSpell = true,
+							ImmunePhysical = true,
+							AuraMastery_Cast_Auras = false,
+							ROP_Vortex = true,
+							Disarm = true,
+							Haste_Reduction = false,
+							Dmg_Hit_Reduction = false,
+							AOE_DMG_Modifiers = true,
+							Friendly_Smoke_Bomb = true,
+							AOE_Spell_Refections = true,
+							Trees = true,
+							Speed_Freedoms = true,
+							Freedoms = true,
+							Friendly_Defensives = false,
+							Mana_Regen = false,
+							CC_Reduction = true,
+							Personal_Offensives = false,
+							Peronsal_Defensives = false,
+							Movable_Cast_Auras = true,
+							SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
+							PvE = true,
+							Other = false,
 					 }
 				},
 					debuff ={
@@ -6542,8 +6542,8 @@ local DBdefaults = {
 							AuraMastery_Cast_Auras = false,
 							ROP_Vortex = true,
 							Disarm = true,
-              Haste_Reduction = false,
- 						  Dmg_Hit_Reduction = false,
+              				Haste_Reduction = false,
+ 						  	Dmg_Hit_Reduction = false,
 							AOE_DMG_Modifiers = true,
 							Friendly_Smoke_Bomb = true,
 							AOE_Spell_Refections = true,
@@ -6574,39 +6574,39 @@ local DBdefaults = {
 			categoriesEnabled = {
 				buff = {
 					friendly = {
-						 CC = true,
-						 Silence = true,
-						 RootPhyiscal_Special = true,
-						 RootMagic_Special = true,
-						 Root = true,
-						 ImmunePlayer = false,
-						 Disarm_Warning = false,
-						 CC_Warning = false,
-						 Enemy_Smoke_Bomb = true,
-						 Stealth = false,
-						 Immune = true,
-						 ImmuneSpell = true,
-						 ImmunePhysical = true,
-						 AuraMastery_Cast_Auras = false,
-					   ROP_Vortex = true,
-						 Disarm = true,
-             Haste_Reduction = false,
-						 Dmg_Hit_Reduction = false,
-						 AOE_DMG_Modifiers = true,
-						 Friendly_Smoke_Bomb = true,
-						 AOE_Spell_Refections = true,
-						 Trees = true,
-						 Speed_Freedoms = true,
-						 Freedoms = true,
-						 Friendly_Defensives = false,
-						 Mana_Regen = false,
-						 CC_Reduction = true,
-						 Personal_Offensives = false,
-						 Peronsal_Defensives = false,
-						 Movable_Cast_Auras = true,
-					   SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
-						 PvE = true,
-						 Other = false,
+							CC = true,
+							Silence = true,
+							RootPhyiscal_Special = true,
+							RootMagic_Special = true,
+							Root = true,
+							ImmunePlayer = false,
+							Disarm_Warning = false,
+							CC_Warning = false,
+							Enemy_Smoke_Bomb = true,
+							Stealth = false,
+							Immune = true,
+							ImmuneSpell = true,
+							ImmunePhysical = true,
+							AuraMastery_Cast_Auras = false,
+							ROP_Vortex = true,
+							Disarm = true,
+							Haste_Reduction = false,
+							Dmg_Hit_Reduction = false,
+							AOE_DMG_Modifiers = true,
+							Friendly_Smoke_Bomb = true,
+							AOE_Spell_Refections = true,
+							Trees = true,
+							Speed_Freedoms = true,
+							Freedoms = true,
+							Friendly_Defensives = false,
+							Mana_Regen = false,
+							CC_Reduction = true,
+							Personal_Offensives = false,
+							Peronsal_Defensives = false,
+							Movable_Cast_Auras = true,
+							SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
+							PvE = true,
+							Other = false,
 					 }
 				},
 					debuff ={
@@ -6627,8 +6627,8 @@ local DBdefaults = {
 							AuraMastery_Cast_Auras = false,
 							ROP_Vortex = true,
 							Disarm = true,
-              Haste_Reduction = false,
-			        Dmg_Hit_Reduction = false,
+              				Haste_Reduction = false,
+			        		Dmg_Hit_Reduction = false,
 							AOE_DMG_Modifiers = true,
 							Friendly_Smoke_Bomb = true,
 							AOE_Spell_Refections = true,
@@ -6659,39 +6659,39 @@ local DBdefaults = {
 			categoriesEnabled = {
 				buff = {
 					friendly = {
-						 CC = true,
-						 Silence = true,
-						 RootPhyiscal_Special = true,
-						 RootMagic_Special = true,
-						 Root = true,
-						 ImmunePlayer = false,
-						 Disarm_Warning = false,
-						 CC_Warning = false,
-						 Enemy_Smoke_Bomb = true,
-						 Stealth = false,
-						 Immune = true,
-						 ImmuneSpell = true,
-						 ImmunePhysical = true,
-						 AuraMastery_Cast_Auras = false,
-					   ROP_Vortex = true,
-						 Disarm = true,
-             Haste_Reduction = false,
-						 Dmg_Hit_Reduction = false,
-						 AOE_DMG_Modifiers = true,
-						 Friendly_Smoke_Bomb = true,
-						 AOE_Spell_Refections = true,
-						 Trees = true,
-						 Speed_Freedoms = true,
-						 Freedoms = true,
-						 Friendly_Defensives = false,
-						 Mana_Regen = false,
-						 CC_Reduction = true,
-						 Personal_Offensives = false,
-						 Peronsal_Defensives = false,
-						 Movable_Cast_Auras = true,
-					   SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
-						 PvE = true,
-						 Other = false,
+						CC = true,
+						Silence = true,
+						RootPhyiscal_Special = true,
+						RootMagic_Special = true,
+						Root = true,
+						ImmunePlayer = false,
+						Disarm_Warning = false,
+						CC_Warning = false,
+						Enemy_Smoke_Bomb = true,
+						Stealth = false,
+						Immune = true,
+						ImmuneSpell = true,
+						ImmunePhysical = true,
+						AuraMastery_Cast_Auras = false,
+						ROP_Vortex = true,
+						Disarm = true,
+						Haste_Reduction = false,
+						Dmg_Hit_Reduction = false,
+						AOE_DMG_Modifiers = true,
+						Friendly_Smoke_Bomb = true,
+						AOE_Spell_Refections = true,
+						Trees = true,
+						Speed_Freedoms = true,
+						Freedoms = true,
+						Friendly_Defensives = false,
+						Mana_Regen = false,
+						CC_Reduction = true,
+						Personal_Offensives = false,
+						Peronsal_Defensives = false,
+						Movable_Cast_Auras = true,
+						SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
+						PvE = true,
+						Other = false,
 					 }
 				},
 					debuff ={
@@ -6712,8 +6712,8 @@ local DBdefaults = {
 							AuraMastery_Cast_Auras = false,
 							ROP_Vortex = true,
 							Disarm = true,
-              Haste_Reduction = false,
- 					    Dmg_Hit_Reduction = false,
+             				Haste_Reduction = false,
+ 					    	Dmg_Hit_Reduction = false,
 							AOE_DMG_Modifiers = true,
 							Friendly_Smoke_Bomb = true,
 							AOE_Spell_Refections = true,
@@ -6730,7 +6730,7 @@ local DBdefaults = {
 							PvE = true,
 							Other = false,
 						}
-			},
+				},
 				interrupt = {
 					friendly = true
 				}
@@ -6744,39 +6744,39 @@ local DBdefaults = {
 			categoriesEnabled = {
 				buff = {
 					friendly = {
-						 CC = true,
-						 Silence = true,
-						 RootPhyiscal_Special = true,
-						 RootMagic_Special = true,
-						 Root = true,
-						 ImmunePlayer = false,
-						 Disarm_Warning = false,
-						 CC_Warning = false,
-						 Enemy_Smoke_Bomb = true,
-						 Stealth = false,
-						 Immune = true,
-						 ImmuneSpell = true,
-						 ImmunePhysical = true,
-						 AuraMastery_Cast_Auras = false,
-					   ROP_Vortex = true,
-						 Disarm = true,
-             Haste_Reduction = false,
-						 Dmg_Hit_Reduction = false,
-						 AOE_DMG_Modifiers = true,
-						 Friendly_Smoke_Bomb = true,
-						 AOE_Spell_Refections = true,
-						 Trees = true,
-						 Speed_Freedoms = true,
-						 Freedoms = true,
-						 Friendly_Defensives = false,
-						 Mana_Regen = false,
-						 CC_Reduction = true,
-						 Personal_Offensives = false,
-						 Peronsal_Defensives = false,
-						 Movable_Cast_Auras = true,
-					   SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
-						 PvE = true,
-						 Other = false,
+							CC = true,
+							Silence = true,
+							RootPhyiscal_Special = true,
+							RootMagic_Special = true,
+							Root = true,
+							ImmunePlayer = false,
+							Disarm_Warning = false,
+							CC_Warning = false,
+							Enemy_Smoke_Bomb = true,
+							Stealth = false,
+							Immune = true,
+							ImmuneSpell = true,
+							ImmunePhysical = true,
+							AuraMastery_Cast_Auras = false,
+							ROP_Vortex = true,
+							Disarm = true,
+							Haste_Reduction = false,
+							Dmg_Hit_Reduction = false,
+							AOE_DMG_Modifiers = true,
+							Friendly_Smoke_Bomb = true,
+							AOE_Spell_Refections = true,
+							Trees = true,
+							Speed_Freedoms = true,
+							Freedoms = true,
+							Friendly_Defensives = false,
+							Mana_Regen = false,
+							CC_Reduction = true,
+							Personal_Offensives = false,
+							Peronsal_Defensives = false,
+							Movable_Cast_Auras = true,
+							SnareSpecial = true, SnarePhysical70 = true, SnareMagic70 = true, SnarePhysical50 = true, SnarePosion50 = true, SnareMagic50 = true, SnarePhysical30 = true, SnareMagic30  = true, Snare = true,
+							PvE = true,
+							Other = false,
 					 }
 				},
 					debuff ={
@@ -6797,8 +6797,8 @@ local DBdefaults = {
 							AuraMastery_Cast_Auras = false,
 							ROP_Vortex = true,
 							Disarm = true,
-              Haste_Reduction = false,
- 						  Dmg_Hit_Reduction = false,
+              				Haste_Reduction = false,
+ 						 	Dmg_Hit_Reduction = false,
 							AOE_DMG_Modifiers = true,
 							Friendly_Smoke_Bomb = true,
 							AOE_Spell_Refections = true,
@@ -6815,7 +6815,7 @@ local DBdefaults = {
 							PvE = true,
 							Other = false,
 						}
-			},
+				},
 				interrupt = {
 					friendly = true
 				}
@@ -6831,7 +6831,7 @@ local DBdefaults = {
 					friendly = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
-						},
+				},
 					enemy    = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true, 	Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
@@ -6863,7 +6863,7 @@ local DBdefaults = {
 					friendly = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
-						},
+				},
 					enemy    = {
 						Drink_Purge = true,Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
@@ -6895,7 +6895,7 @@ local DBdefaults = {
 					friendly = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
-						},
+				},
 					enemy    = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
@@ -6927,7 +6927,7 @@ local DBdefaults = {
 					friendly = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
-						},
+				},
 					enemy    = {
 						Drink_Purge = true,Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
@@ -6959,7 +6959,7 @@ local DBdefaults = {
 					friendly = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
-						},
+				},
 					enemy    = {
 						Drink_Purge = true,	Immune_Arena = true, CC_Arena = true,	Silence_Arena = true,		Special_High = true, Ranged_Major_OffenisiveCDs = true, Roots_90_Snares = true,	Disarms = true,	Melee_Major_OffenisiveCDs = true,	Big_Defensive_CDs = true,	Player_Party_OffensiveCDs = true,
 						Small_Offenisive_CDs = true,	Small_Defensive_CDs = true,	Freedoms_Speed = true,	Snares_WithCDs = true,	Special_Low = true,	Snares_Ranged_Spamable = true,	Snares_Casted_Melee = true
@@ -6990,13 +6990,13 @@ local LoseControlDB -- local reference to the addon settings. this gets initiali
 -These functions filter to show newest buffs
 -------------------------------------------]]
 local function cmp_col1(lhs, rhs)
- return lhs.col1 > rhs.col1
+ 	return lhs.col1 > rhs.col1
 end
 
 local function cmp_col1_col2(lhs, rhs)
- if lhs.col1 > rhs.col1 then return true end
- if lhs.col1 < rhs.col1 then return false end
- return lhs.col2 > rhs.col2
+	if lhs.col1 > rhs.col1 then return true end
+	if lhs.col1 < rhs.col1 then return false end
+	return lhs.col2 > rhs.col2
 end
 
 local locBliz = CreateFrame("Frame")
@@ -7004,63 +7004,63 @@ locBliz:RegisterEvent("LOSS_OF_CONTROL_ADDED")
 locBliz:SetScript("OnEvent", function(self, event, ...)
 	if (event == "LOSS_OF_CONTROL_ADDED") then
 		for i = 1, 40 do
-		local data = CLocData(i);
-		 	if not data then break end
+			local data = CLocData(i);
+			if not data then break end
 
-        local customString = LoseControlDB.customString
+			local customString = LoseControlDB.customString
 
-			  local locType = data.locType;
-			 	local spellID = data.spellID;
-			 	local text = data.displayText;
-			 	local iconTexture = data.iconTexture;
-			 	local startTime = data.startTime;
-			 	local timeRemaining = data.timeRemaining;
-			 	local duration = data.duration;
-			 	local lockoutSchool = data.lockoutSchool;
-			 	local priority = data.priority;
-			 	local displayType = data.displayType;
-				local name, instanceType, _, _, _, _, _, instanceID, _, _ = GetInstanceInfo()
-				local ZoneName = GetZoneText()
-				local Type
+			local locType = data.locType;
+			local spellID = data.spellID;
+			local text = data.displayText;
+			local iconTexture = data.iconTexture;
+			local startTime = data.startTime;
+			local timeRemaining = data.timeRemaining;
+			local duration = data.duration;
+			local lockoutSchool = data.lockoutSchool;
+			local priority = data.priority;
+			local displayType = data.displayType;
+			local name, instanceType, _, _, _, _, _, instanceID, _, _ = GetInstanceInfo()
+			local ZoneName = GetZoneText()
+			local Type
 
-        if locType == "SCHOOL_INTERRUPT" then text = strformat("%s Locked", GetSchoolString(lockoutSchool)) end
+			if locType == "SCHOOL_INTERRUPT" then text = strformat("%s Locked", GetSchoolString(lockoutSchool)) end
 
-        string[spellID] = customString[spellID] or text
+			string[spellID] = customString[spellID] or text
 
-		  	if not spellIds[spellID] and  (lockoutSchool == 0 or nil or false) then
-			  	if (locType == "STUN_MECHANIC") or (locType =="PACIFY") or (locType =="STUN") or (locType =="FEAR") or (locType =="CHARM") or (locType =="CONFUSE") or (locType =="POSSESS") or (locType =="FEAR_MECHANIC") or (locType =="FEAR") then
-								 print("Found New CC",locType,"", spellID)
-								 Type = "CC"
-					elseif locType == "DISARM" then
-								 print("Found New Disarm",locType,"", spellID)
-							   Type = "Disarm"
-					elseif (locType == "PACIFYSILENCE") or (locType =="SILENCE") then
-						    print("Found New Silence",locType,"", spellID)
-						 	  Type = "Silence"
-					elseif locType == "ROOT" then
-						  	print("Found New Root",locType,"", spellID)
-								Type = "Root"
-					else
-								print("Found New Other",locType,"", spellID)
-								Type = "Other"
-					end
-					spellIds[spellID] = Type
-					LoseControlDB.spellEnabled[spellID]= true
-					tblinsert(LoseControlDB.customSpellIds, {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
-					tblinsert(L.spells[#L.spells][tabsIndex[Type]], {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
-					L.SpellsPVEConfig:UpdateTab(#L.spells-1)
-			  elseif (not interruptsIds[spellID]) and lockoutSchool > 0 then
-					print("Found New Interrupt",locType,"", spellID)
-					interruptsIds[spellID] = duration
-					LoseControlDB.spellEnabled[spellID]= true
-					tblinsert(LoseControlDB.customSpellIds, {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
-					tblinsert(L.spells[#L.spells][tabsIndex["Interrupt"]], {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
-					L.SpellsPVEConfig:UpdateTab(#L.spells-1)
+			if not spellIds[spellID] and  (lockoutSchool == 0 or nil or false) then
+				if (locType == "STUN_MECHANIC") or (locType =="PACIFY") or (locType =="STUN") or (locType =="FEAR") or (locType =="CHARM") or (locType =="CONFUSE") or (locType =="POSSESS") or (locType =="FEAR_MECHANIC") or (locType =="FEAR") then
+					print("Found New CC",locType,"", spellID)
+					Type = "CC"
+				elseif locType == "DISARM" then
+					print("Found New Disarm",locType,"", spellID)
+					Type = "Disarm"
+				elseif (locType == "PACIFYSILENCE") or (locType =="SILENCE") then
+					print("Found New Silence",locType,"", spellID)
+					Type = "Silence"
+				elseif locType == "ROOT" then
+					print("Found New Root",locType,"", spellID)
+					Type = "Root"
 				else
+					print("Found New Other",locType,"", spellID)
+					Type = "Other"
 				end
+				spellIds[spellID] = Type
+				LoseControlDB.spellEnabled[spellID]= true
+				tblinsert(LoseControlDB.customSpellIds, {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
+				tblinsert(L.spells[#L.spells][tabsIndex[Type]], {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
+				L.SpellsPVEConfig:UpdateTab(#L.spells-1)
+			elseif (not interruptsIds[spellID]) and lockoutSchool > 0 then
+				print("Found New Interrupt",locType,"", spellID)
+				interruptsIds[spellID] = duration
+				LoseControlDB.spellEnabled[spellID]= true
+				tblinsert(LoseControlDB.customSpellIds, {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
+				tblinsert(L.spells[#L.spells][tabsIndex["Interrupt"]], {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
+				L.SpellsPVEConfig:UpdateTab(#L.spells-1)
+			else
 			end
 		end
-	end)
+	end
+end)
 
 
 local tooltip = CreateFrame("GameTooltip", "DebuffTextDebuffScanTooltip", UIParent, "GameTooltipTemplate")
@@ -7071,9 +7071,9 @@ local function GetDebuffText(unitId, debuffNum)
 	tooltip:Hide()
 	if snarestring then
 		if strmatch(snarestring, "Movement") or strmatch(snarestring, "movement") then
-		return true
-	  else
-		return false
+			return true
+		else
+			return false
 		end
 	end
 end
@@ -7391,7 +7391,7 @@ function LoseControl:CompileArenaSpells()
 			spellsArena[i] = {}
 		end
 	end
---Sort the spells
+	--Sort the spells
 	for k, v in ipairs(spellsArenaTable) do
 		local spellID, prio = unpack(v)
 		tblinsert(spellsArena[tabsArenaIndex[prio]], ({spellID, prio }))
@@ -7410,8 +7410,8 @@ function LoseControl:CompileArenaSpells()
 				if customSpells[spellID] then
 					local CspellID, Cprio, Ck = unpack(customSpells[spellID])
 					if CspellID == spellID and Cprio == prio then
-					tblremove(_G.LoseControlDB.customSpellIdsArena, Ck)
-					print("|cff00ccffLoseControl|r : "..spellID.." : "..prio.." |cff009900Restored Arena Spell to Orginal Value|r")
+						tblremove(_G.LoseControlDB.customSpellIdsArena, Ck)
+						print("|cff00ccffLoseControl|r : "..spellID.." : "..prio.." |cff009900Restored Arena Spell to Orginal Value|r")
 					else
 						if type(spellID) == "number" then
 							if GetSpellInfo(spellID) then
@@ -7419,7 +7419,7 @@ function LoseControl:CompileArenaSpells()
 								--print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..name..") Modified Arena Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
 							end
 						else
-								--print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." (not spellId) Modified Arena Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+							--print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." (not spellId) Modified Arena Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
 						end
 						tblinsert(toremove, {i , l, removed, spellID})
 						removed = removed + 1
@@ -7427,10 +7427,10 @@ function LoseControl:CompileArenaSpells()
 				else
 					local HspellID, Hprio = unpack(hash[spellID])
 					if type(spellID) == "number" then
-							local name = GetSpellInfo(spellID)
-							--print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Arena Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+						local name = GetSpellInfo(spellID)
+						--print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Arena Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
 					else
-							--print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Arena Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+						--print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Arena Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
 					end
 					tblinsert(toremove, {i , l, removed, spellID})
 					removed = removed + 1
@@ -7440,8 +7440,8 @@ function LoseControl:CompileArenaSpells()
 	end
 	--Now Remove all the Duplicates and Custom Spells
 	for k, v in ipairs(toremove) do
-	local i, l, r, s = unpack(v)
-	tblremove(spellsArena[i], l - r)
+		local i, l, r, s = unpack(v)
+		tblremove(spellsArena[i], l - r)
 	end
 	--ReAdd all dbCustom Spells to spells
 	for k,v in ipairs(_G.LoseControlDB.customSpellIdsArena) do
@@ -7459,14 +7459,14 @@ function LoseControl:CompileArenaSpells()
 	end
 
 	for k, v in ipairs(interrupts) do
-	local spellID, duration = unpack(v)
-	tblinsert(spellsArena[tabsArenaIndex["Interrupt"]], 1, {spellID , "Interrupt", nil, nil, duration})
+		local spellID, duration = unpack(v)
+		tblinsert(spellsArena[tabsArenaIndex["Interrupt"]], 1, {spellID , "Interrupt", nil, nil, duration})
 	end
 
 	for k, v in ipairs(cleuSpells) do
-	local spellID, duration, _, prioArena, _, customnameArena = unpack(v)
+		local spellID, duration, _, prioArena, _, customnameArena = unpack(v)
 		if prioArena then
-		tblinsert(spellsArena[tabsArenaIndex[prioArena]], 1, {spellID , prioArena, nil, nil, duration, customnameArena, nil, "cleuEventArena"})
+			tblinsert(spellsArena[tabsArenaIndex[prioArena]], 1, {spellID , prioArena, nil, nil, duration, customnameArena, nil, "cleuEventArena"})
 		end
 	end
 
@@ -7476,17 +7476,17 @@ function LoseControl:CompileArenaSpells()
 --ARENAENABLED-------------------------------------------------------------------------------------------
 	for k in pairs(spellIdsArena) do
 		if _G.LoseControlDB.spellEnabledArena[k] == nil then
-		_G.LoseControlDB.spellEnabledArena[k]= true
+			_G.LoseControlDB.spellEnabledArena[k]= true
 		end
 	end
 	for k in pairs(interruptsIds) do
 		if _G.LoseControlDB.spellEnabledArena[k] == nil then
-		_G.LoseControlDB.spellEnabledArena[k]= true
+			_G.LoseControlDB.spellEnabledArena[k]= true
 		end
 	end
 	for k in pairs(cleuPrioCastedSpells) do --cleuPrioCastedSpells is just the one list
 		if _G.LoseControlDB.spellEnabledArena[cleuPrioCastedSpells[k].nameArena] == nil then
-		_G.LoseControlDB.spellEnabledArena[cleuPrioCastedSpells[k].nameArena]= true
+			_G.LoseControlDB.spellEnabledArena[cleuPrioCastedSpells[k].nameArena]= true
 		end
 	end
 
@@ -7494,164 +7494,163 @@ end
 
 function LoseControl:CompileSpells(typeUpdate)
 
-		spellIds = {}
-		interruptsIds = {}
-		cleuPrioCastedSpells = {}
+	spellIds = {}
+	interruptsIds = {}
+	cleuPrioCastedSpells = {}
 
-		local	spells = {}
-		local spellsLua = {}
-		local hash = {}
-		local customSpells = {}
-		local toremove = {}
-		--Build Custom Table for Check
-		for k, v in ipairs(_G.LoseControlDB.customSpellIds) do
-			local spellID, prio, _, _, _, _, tabId  = unpack(v)
-			customSpells[spellID] = {spellID, prio, tabId, k}
+	local	spells = {}
+	local spellsLua = {}
+	local hash = {}
+	local customSpells = {}
+	local toremove = {}
+	--Build Custom Table for Check
+	for k, v in ipairs(_G.LoseControlDB.customSpellIds) do
+		local spellID, prio, _, _, _, _, tabId  = unpack(v)
+		customSpells[spellID] = {spellID, prio, tabId, k}
+	end
+	--Build the Spells Table
+	for i = 1, (#spellsTable) do
+		if spells[i] == nil then
+			spells[i] = {}
 		end
-		--Build the Spells Table
-		for i = 1, (#spellsTable) do
-			if spells[i] == nil then
-		    spells[i] = {}
-			end
-	    for l = 1, (#tabs) do
-				if spells[i][l] == nil then
-					spells[i][l] = {}
-	    	end
-			end
-		end
-		--Sort the spells
-		for i = 1, (#spellsTable) do
-   		for l = 2, #spellsTable[i] do
-				local spellID, prio = unpack(spellsTable[i][l])
-        tblinsert(spells[i][tabsIndex[prio]], ({spellID, prio}))
-				spellsLua[spellID] = true
+		for l = 1, (#tabs) do
+			if spells[i][l] == nil then
+				spells[i][l] = {}
 			end
 		end
+	end
+	--Sort the spells
+	for i = 1, (#spellsTable) do
+		for l = 2, #spellsTable[i] do
+			local spellID, prio = unpack(spellsTable[i][l])
+			tblinsert(spells[i][tabsIndex[prio]], ({spellID, prio}))
+			spellsLua[spellID] = true
+		end
+	end
 
     for i = 1, (#spellsTable) do
-      for l = 2, #spellsTable[i] do
-        local spellID, prio, string = unpack(spellsTable[i][l])
-        if string then
-          _G.LoseControlDB.customString[spellID] = string
-        end
-      end
+		for l = 2, #spellsTable[i] do
+			local spellID, prio, string = unpack(spellsTable[i][l])
+			if string then
+				_G.LoseControlDB.customString[spellID] = string
+			end
+		end
     end
 
-		L.spellsLua = spellsLua
-		--Clean up Spell List, Remove all Duplicates and Custom Spells (Will ReADD Custom Spells Later)
-		for i = 1, (#spells) do
-			for l = 1, (#spells[i]) do
-				local removed = 0
-				for x = 1, (#spells[i][l]) do
-					local spellID, prio = unpack(spells[i][l][x])
-					if (not hash[spellID]) and (not customSpells[spellID]) then
-						hash[spellID] = {spellID, prio}
-					else
-						if customSpells[spellID] then
-							local CspellID, Cprio, CtabId, Ck = unpack(customSpells[spellID])
-							if CspellID == spellID and Cprio == prio and CtabId == i then
+	L.spellsLua = spellsLua
+	--Clean up Spell List, Remove all Duplicates and Custom Spells (Will ReADD Custom Spells Later)
+	for i = 1, (#spells) do
+		for l = 1, (#spells[i]) do
+			local removed = 0
+			for x = 1, (#spells[i][l]) do
+				local spellID, prio = unpack(spells[i][l][x])
+				if (not hash[spellID]) and (not customSpells[spellID]) then
+					hash[spellID] = {spellID, prio}
+				else
+					if customSpells[spellID] then
+						local CspellID, Cprio, CtabId, Ck = unpack(customSpells[spellID])
+						if CspellID == spellID and Cprio == prio and CtabId == i then
 							tblremove(_G.LoseControlDB.customSpellIds, Ck)
 							print("|cff00ccffLoseControl|r : "..spellID.." : "..prio.." |cff009900Restored to Orginal Value|r")
-              elseif CspellID == spellID and CtabId == #spells then
-              tblremove(_G.LoseControlDB.customSpellIds, Ck)
-              print("|cff00ccffLoseControl|r : "..spellID.." : "..prio.." |cff009900Added from Discovered Spells to LC Database (Reconfigure if Needed)|r")
-							else
-								if type(spellID) == "number" then
-									if GetSpellInfo(spellID) then
-										local name = GetSpellInfo(spellID)
-										print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..name..") Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
-									end
-								else
-										print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." (not spellId) Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
-								end
-								tblinsert(toremove, {i , l, x, removed, spellID})
-								removed = removed + 1
-							end
+						elseif CspellID == spellID and CtabId == #spells then
+							tblremove(_G.LoseControlDB.customSpellIds, Ck)
+							print("|cff00ccffLoseControl|r : "..spellID.." : "..prio.." |cff009900Added from Discovered Spells to LC Database (Reconfigure if Needed)|r")
 						else
-							local HspellID, Hprio = unpack(hash[spellID])
 							if type(spellID) == "number" then
+								if GetSpellInfo(spellID) then
 									local name = GetSpellInfo(spellID)
-									print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+									print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..name..") Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+								end
 							else
-									print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+								print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." (not spellId) Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
 							end
 							tblinsert(toremove, {i , l, x, removed, spellID})
 							removed = removed + 1
 						end
+					else
+						local HspellID, Hprio = unpack(hash[spellID])
+						if type(spellID) == "number" then
+							local name = GetSpellInfo(spellID)
+							print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+						else
+							print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+						end
+						tblinsert(toremove, {i , l, x, removed, spellID})
+						removed = removed + 1
 					end
 				end
 			end
 		end
-		--Now Remove all the Duplicates and Custom Spells
-		for k, v in ipairs(toremove) do
+	end
+	--Now Remove all the Duplicates and Custom Spells
+	for k, v in ipairs(toremove) do
 		local i, l, x, r, s = unpack(v)
 		tblremove(spells[i][l], x - r)
-		end
-  	--ReAdd all dbCustom Spells to spells
-			for k,v in ipairs(_G.LoseControlDB.customSpellIds) do
-				local spellID, prio, instanceType, zone, duration, customname, row, cleuEvent, position  = unpack(v)
-				if prio ~= "Delete" then
-					if duration then
-							interruptsIds[spellID] = duration
-					end
-          if customname == "Discovered" then row = #spells end
-					if position then
-          	tblinsert(spells[row][position], 1, v)
-					else
-            tblinsert(spells[row][tabsIndex[prio]], 1, v) --v[7]: Category to enter spell / v[8]: Tab to update / v[9]: Table
-					end
-				end
+	end
+	--ReAdd all dbCustom Spells to spells
+	for k,v in ipairs(_G.LoseControlDB.customSpellIds) do
+		local spellID, prio, instanceType, zone, duration, customname, row, cleuEvent, position  = unpack(v)
+		if prio ~= "Delete" then
+			if duration then
+					interruptsIds[spellID] = duration
 			end
-  	--Make spellIds from Spells for AuraFilter
-		for i = 1, #spells do
-			for l = 1, #spells[i] do
-				for x = 1, #spells[i][l] do
-					spellIds[spells[i][l][x][1]] = spells[i][l][x][2]
-				end
+			if customname == "Discovered" then row = #spells end
+			if position then
+				tblinsert(spells[row][position], 1, v)
+			else
+				tblinsert(spells[row][tabsIndex[prio]], 1, v) --v[7]: Category to enter spell / v[8]: Tab to update / v[9]: Table
 			end
 		end
-		--Make interruptIds for cleu -- only need to compile 1x for arena and players
-		for k, v in ipairs(interrupts) do
-		local spellID, duration = unpack(v)
-		interruptsIds[spellID] = duration
+	end
+	--Make spellIds from Spells for AuraFilter
+	for i = 1, #spells do
+		for l = 1, #spells[i] do
+			for x = 1, #spells[i][l] do
+				spellIds[spells[i][l][x][1]] = spells[i][l][x][2]
+			end
 		end
-		--Make cleuPrioCastedSpells for cleu -- only need to compile 1x for arena and players
-		for _, v in ipairs(cleuSpells) do
+	end
+	--Make interruptIds for cleu -- only need to compile 1x for arena and players
+	for k, v in ipairs(interrupts) do
+	local spellID, duration = unpack(v)
+	interruptsIds[spellID] = duration
+	end
+	--Make cleuPrioCastedSpells for cleu -- only need to compile 1x for arena and players
+	for _, v in ipairs(cleuSpells) do
 		local spellID, duration, prio, prioArena, cleuEvent, cleuEventArena = unpack(v)
 		cleuPrioCastedSpells[spellID] = {["duration"] = duration, ["priority"] = prio, ["priorityArena"] = prioArena,  ["name"] = cleuEvent,  ["nameArena"] = cleuEventArena}
-		end
-		--Add interrupts to Spells for Table
-		for k, v in ipairs(interrupts) do
+	end
+	--Add interrupts to Spells for Table
+	for k, v in ipairs(interrupts) do
 		local spellID, duration = unpack(v)
 		tblinsert(spells[1][tabsIndex["Interrupt"]], 1, {spellID , "Interrupt", nil, nil, duration})
-		end
-		--Add cleuPrioCastedSpells  to Spells for Table
-		for k, v in ipairs(cleuSpells) do
+	end
+	--Add cleuPrioCastedSpells  to Spells for Table
+	for k, v in ipairs(cleuSpells) do
 		local spellID, duration, prio, _, customname = unpack(v)
-			if prio then
+		if prio then
 			tblinsert(spells[1][tabsIndex[prio]], 1, {spellID , prio, nil, nil, duration, customname, nil, "cleuEvent"})			--body...
-			end
 		end
+	end
 
-		L.spells = spells
-		L.spellIds = spellIds
-		--check for any 1st time spells being added and set to On
-		for k in pairs(spellIds) do --spellIds is the combined PVE list, Spell List and the Discovered & Custom lists from tblinsert above
-			if _G.LoseControlDB.spellEnabled[k] == nil then
+	L.spells = spells
+	L.spellIds = spellIds
+	--check for any 1st time spells being added and set to On
+	for k in pairs(spellIds) do --spellIds is the combined PVE list, Spell List and the Discovered & Custom lists from tblinsert above
+		if _G.LoseControlDB.spellEnabled[k] == nil then
 			_G.LoseControlDB.spellEnabled[k]= true
-			end
 		end
-		for k in pairs(interruptsIds) do --interruptsIds is the list and the Discovered list from tblinsert above
-			if _G.LoseControlDB.spellEnabled[k] == nil then
+	end
+	for k in pairs(interruptsIds) do --interruptsIds is the list and the Discovered list from tblinsert above
+		if _G.LoseControlDB.spellEnabled[k] == nil then
 			_G.LoseControlDB.spellEnabled[k]= true
-			end
 		end
-		for k in pairs(cleuPrioCastedSpells) do --cleuPrioCastedSpells is just the one list
-			if _G.LoseControlDB.spellEnabled[cleuPrioCastedSpells[k].name] == nil then
+	end
+	for k in pairs(cleuPrioCastedSpells) do --cleuPrioCastedSpells is just the one list
+		if _G.LoseControlDB.spellEnabled[cleuPrioCastedSpells[k].name] == nil then
 			_G.LoseControlDB.spellEnabled[cleuPrioCastedSpells[k].name]= true
-			end
 		end
-
+	end
 end
 
 
@@ -7876,6 +7875,7 @@ function LoseControl:CheckGladiusUnitsAnchors(updateFrame)
 		end
 	end
 end
+
 function LoseControl:CheckGladdyUnitsAnchors(updateFrame)
   if (strfind(self.unitId, "arena")) and LoseControlDB.frames[self.unitId].anchor == "Gladdy" then
     local inInstance, instanceType = IsInInstance();  local gladdyFrame;  local frames = {}
@@ -7956,13 +7956,14 @@ function LoseControl:CheckGladdyUnitsAnchors(updateFrame)
 		end
 	end
 end
+
 -- Initialize a frame's position and register for events
 function LoseControl:PLAYER_ENTERING_WORLD() -- this correctly anchors enemy arena frames that aren't created until you zone into an arena
 	local unitId = self.unitId
 	self.frame = LoseControlDB.frames[self.fakeUnitId or unitId] -- store a local reference to the frame's settings
 	local frame = self.frame
 	local inInstance, instanceType = IsInInstance()
-  if (instanceType=="arena" or instanceType=="pvp") then LoseControlDB.priority["PvE"] = 0 else LoseControlDB.priority["PvE"] = 10 end --Disables PVE in Arena
+  	if (instanceType=="arena" or instanceType=="pvp") then LoseControlDB.priority["PvE"] = 0 else LoseControlDB.priority["PvE"] = 10 end --Disables PVE in Arena
 	local enabled = frame.enabled and not (
 		inInstance and instanceType == "pvp" and (
 			( LoseControlDB.disablePartyInBG and strfind(unitId, "party") ) or
@@ -7978,18 +7979,18 @@ function LoseControl:PLAYER_ENTERING_WORLD() -- this correctly anchors enemy are
 		end)
 	end
 	if strfind(unitId, "arena") then
-	if (Gladius ~= nil) and (self.GladiusDelayedSearch == nil) then
-		self.GladiusDelayedSearch = GetTime()
-		Ctimer(3, function()	-- delay checking to make sure all variables of the other addons are loaded
-			self:CheckGladiusUnitsAnchors(true)
-		end)
-	end
-    if IsAddOnLoaded("Gladdy") and (self.GladdyDelayedSearch == nil) then
-    self.GladdyDelayedSearch = GetTime()
-    Ctimer(3, function()	-- delay checking to make sure all variables of the other addons are loaded
-      self:CheckGladdyUnitsAnchors(true)
-    end)
-  end
+		if (Gladius ~= nil) and (self.GladiusDelayedSearch == nil) then
+			self.GladiusDelayedSearch = GetTime()
+			Ctimer(3, function()	-- delay checking to make sure all variables of the other addons are loaded
+				self:CheckGladiusUnitsAnchors(true)
+			end)
+		end
+		if IsAddOnLoaded("Gladdy") and (self.GladdyDelayedSearch == nil) then
+			self.GladdyDelayedSearch = GetTime()
+			Ctimer(3, function()	-- delay checking to make sure all variables of the other addons are loaded
+			self:CheckGladdyUnitsAnchors(true)
+			end)
+		end
 	end
 	self.anchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
 	self.unitGUID = UnitGUID(self.unitId)
@@ -8046,8 +8047,8 @@ function LoseControl:GROUP_ROSTER_UPDATE()
 	self.unitGUID = UnitGUID(unitId)
 	self:CheckSUFUnitsAnchors(true)
 	if (frame == nil) or (unitId == nil) and (strfind(unitId, "arena")) then
-	self:CheckGladiusUnitsAnchors(true)
-  self:CheckGladdyUnitsAnchors(true)
+		self:CheckGladiusUnitsAnchors(true)
+  		self:CheckGladdyUnitsAnchors(true)
 	end
 	if enabled and not self.unlockMode then
 		self:UNIT_AURA(unitId, updatedAuras, 0)
@@ -8101,7 +8102,7 @@ function LoseControl:ARENA_OPPONENT_UPDATE()
 	self.unitGUID = UnitGUID(self.unitId)
 	self:CheckSUFUnitsAnchors(true)
 	self:CheckGladiusUnitsAnchors(true)
-  self:CheckGladdyUnitsAnchors(true)
+  	self:CheckGladdyUnitsAnchors(true)
 
 
 	if enabled and not self.unlockMode then
@@ -8111,7 +8112,7 @@ end
 
 function LoseControl:ARENA_PREP_OPPONENT_SPECIALIZATIONS()
 	self:CheckGladiusUnitsAnchors(true)
-  self:CheckGladdyUnitsAnchors(true)
+ 	self:CheckGladdyUnitsAnchors(true)
 	self:ARENA_OPPONENT_UPDATE()
 end
 
@@ -8121,51 +8122,51 @@ ArenaSeen:RegisterEvent("ARENA_OPPONENT_UPDATE")
 ArenaSeen:SetScript("OnEvent", function(self, event, ...)
 	local unit, arg2 = ...;
 	if (event == "ARENA_OPPONENT_UPDATE") then
-	if (unit =="arena1") or (unit =="arena2") or (unit =="arena3") or (unit =="arena4") or (unit =="arena5") then
-		if arg2 == "seen" then
-			if UnitExists(unit) then
-        if (unit =="arena1") and (GladiusClassIconFramearena1 or GladdyButtonFrame1) then
-		      if 	GladiusClassIconFramearena1 then GladiusClassIconFramearena1:SetAlpha(1) end
-          if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(1) end
+		if (unit =="arena1") or (unit =="arena2") or (unit =="arena3") or (unit =="arena4") or (unit =="arena5") then
+			if arg2 == "seen" then
+				if UnitExists(unit) then
+					if (unit =="arena1") and (GladiusClassIconFramearena1 or GladdyButtonFrame1) then
+						if GladiusClassIconFramearena1 then GladiusClassIconFramearena1:SetAlpha(1) end
+						if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(1) end
 						local guid = UnitGUID(unit)
 						UpdateUnitAuraByUnitGUID(guid, -250)
-				end
-				if (unit =="arena2") and (GladiusClassIconFramearena2 or GladdyButtonFrame2) then
-          if 	GladiusClassIconFramearena2 then GladiusClassIconFramearena2:SetAlpha(1) end
-          if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(1) end
+					end
+					if (unit =="arena2") and (GladiusClassIconFramearena2 or GladdyButtonFrame2) then
+						if GladiusClassIconFramearena2 then GladiusClassIconFramearena2:SetAlpha(1) end
+						if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(1) end
 						local guid = UnitGUID(unit)
 						UpdateUnitAuraByUnitGUID(guid, -250)
-				end
-				if (unit =="arena3") and (GladiusClassIconFramearena3 or GladdyButtonFrame3) then
-          if 	GladiusClassIconFramearena3 then GladiusClassIconFramearena3:SetAlpha(1) end
-          if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(1) end
+					end
+					if (unit =="arena3") and (GladiusClassIconFramearena3 or GladdyButtonFrame3) then
+						if GladiusClassIconFramearena3 then GladiusClassIconFramearena3:SetAlpha(1) end
+						if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(1) end
 						local guid = UnitGUID(unit)
 						UpdateUnitAuraByUnitGUID(guid, -250)
+					end
+					if (unit =="arena4") and (GladiusClassIconFramearena4 or GladdyButtonFrame4) then
+						if GladiusClassIconFramearena4 then GladiusClassIconFramearena4:SetAlpha(1) end
+						if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(1) end
+						local guid = UnitGUID(unit)
+						UpdateUnitAuraByUnitGUID(guid, -250)
+					end
+					if (unit =="arena5") and (GladiusClassIconFramearena5 or GladdyButtonFrame5) then
+						if GladiusClassIconFramearena5 then GladiusClassIconFramearena5:SetAlpha(1) end
+						if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(1) end
+						local guid = UnitGUID(unit)
+						UpdateUnitAuraByUnitGUID(guid, -250)
+					end
+					Arenastealth[unit] = nil
 				end
-        if (unit =="arena4") and (GladiusClassIconFramearena4 or GladdyButtonFrame4) then
-          if 	GladiusClassIconFramearena4 then GladiusClassIconFramearena4:SetAlpha(1) end
-          if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(1) end
-            local guid = UnitGUID(unit)
-            UpdateUnitAuraByUnitGUID(guid, -250)
-        end
-        if (unit =="arena5") and (GladiusClassIconFramearena5 or GladdyButtonFrame5) then
-          if 	GladiusClassIconFramearena5 then GladiusClassIconFramearena5:SetAlpha(1) end
-          if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(1) end
-            local guid = UnitGUID(unit)
-            UpdateUnitAuraByUnitGUID(guid, -250)
-        end
-			Arenastealth[unit] = nil
-			end
-		elseif arg2 == "unseen" then
+			elseif arg2 == "unseen" then
 				local guid = UnitGUID(unit)
 				UpdateUnitAuraByUnitGUID(guid, -200)
-		elseif arg2 == "destroyed" then
-			Arenastealth[unit] = nil
-		elseif arg2 == "cleared" then
-			Arenastealth[unit] = nil
+			elseif arg2 == "destroyed" then
+				Arenastealth[unit] = nil
+			elseif arg2 == "cleared" then
+				Arenastealth[unit] = nil
+			end
 		end
 	end
-end
 end)
 
 local function Split(s, delimiter)
@@ -8295,24 +8296,6 @@ local function interruptDuration(destGUID, duration)
 	return duration
 end
 
--- Function to check if pvp talents are active for the player
-local function ArePvpTalentsActive()
-    local inInstance, instanceType = IsInInstance()
-    if inInstance and (instanceType == "pvp" or instanceType == "arena") then
-        return true
-    elseif inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario") then
-        return false
-    else
-        local talents = C_SpecializationInfo.GetAllSelectedPvpTalentIDs()
-        for _, pvptalent in pairs(talents) do
-            local spellID = select(6, GetPvpTalentInfoByID(pvptalent))
-            if IsPlayerSpell(spellID) then
-                return true
-            end
-        end
-    end
-end
-
 -- This event check pvp interrupts and targettarget/focustarget unit aura triggers
 function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 	if self.unitId == "target" then
@@ -8345,7 +8328,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			end
 		end
 
-   	-- Check Channel Interrupts for player
+   		-- Check Channel Interrupts for player
      	if (event == "SPELL_CAST_SUCCESS") then
 		    if interruptsIds[spellId] then
 				if (destGUID == UnitGUID("player")) and (select(7, UnitChannelInfo("player")) == false) then
@@ -8427,269 +8410,268 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			end
 		end
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Earthen Check (Totems Need a Spawn Time Check)
-      -----------------------------------------------------------------------------------------------------------------
-      if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 198838) then
-        if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-            local duration = 18 --Totemic Focus Makes it 18
-            local expirationTime = GetTime() + duration
-            if (Earthen[sourceGUID] == nil) then  --source is friendly unit party12345 raid1...
-              Earthen[sourceGUID] = {}
-            end
-            Earthen[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-            C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-              if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
-              if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
-              if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
-              if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
-              if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
-            end)
-            C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-            Earthen[sourceGUID] = nil
-            end)
-        elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-          local duration = 18 --Totemic Focus Makes it 18
-              local guid = destGUID
-              local spawnTime
-              local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-              if unitType == "Creature" or unitType == "Vehicle" then
-              local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-              local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-              spawnTime = spawnEpoch + spawnEpochOffset
-              --print("Earthen Totem Spawned at: "..spawnTime)
-              end
-            local expirationTime = GetTime() + duration
-            if (Earthen[spawnTime] == nil) then --source becomes the totem ><
-              Earthen[spawnTime] = {}
-            end
-            Earthen[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-            C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-              if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
-              if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
-              if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
-              if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
-              if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-            end)
-            C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-            Earthen[spawnTime] = nil
-            end)
-          end
+		-----------------------------------------------------------------------------------------------------------------
+		--Shaodwy Duel Enemy Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 207736)) then
+			if sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+				local duration = 5
+				local expirationTime = GetTime() + duration
+				if (DuelAura[sourceGUID] == nil) then
+					DuelAura[sourceGUID] = {}
+				end
+				if (DuelAura[destGUID] == nil) then
+					DuelAura[destGUID] = {}
+				end
+				DuelAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime, ["destGUID"] = destGUID }
+				DuelAura[destGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime, ["destGUID"] = destGUID }
+				--print("cleu enemy Dueled Data Stored destGUID is"..destGUID)
+				--print("cleu enemy Dueled Data Stored sourceGUID is"..sourceGUID)
+				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					DuelAura[sourceGUID] = nil
+					DuelAura[destGUID] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--SmokeBomb Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 212182 or spellId == 359053)) then
+			if (sourceGUID ~= nil) then
+				local duration = 5
+				local expirationTime = GetTime() + duration
+				if (SmokeBombAuras[sourceGUID] == nil) then
+					SmokeBombAuras[sourceGUID] = {}
+				end
+			SmokeBombAuras[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					SmokeBombAuras[sourceGUID] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--Earthen Check (Totems Need a Spawn Time Check)
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 198838) then
+			if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+				local duration = 18 --Totemic Focus Makes it 18
+				local expirationTime = GetTime() + duration
+				if (Earthen[sourceGUID] == nil) then  --source is friendly unit party12345 raid1...
+					Earthen[sourceGUID] = {}
+				end
+				Earthen[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
+					if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
+					if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
+					if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
+					if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
+				end)
+				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+					Earthen[sourceGUID] = nil
+				end)
+			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+			local duration = 18 --Totemic Focus Makes it 18
+				local guid = destGUID
+				local spawnTime
+				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+				if unitType == "Creature" or unitType == "Vehicle" then
+					local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+					local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+					spawnTime = spawnEpoch + spawnEpochOffset
+					--print("Earthen Totem Spawned at: "..spawnTime)
+				end
+				local expirationTime = GetTime() + duration
+				if (Earthen[spawnTime] == nil) then --source becomes the totem ><
+					Earthen[spawnTime] = {}
+				end
+				Earthen[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
+					if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
+					if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
+					if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
+					if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
+				end)
+				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+					Earthen[spawnTime] = nil
+				end)
+			end
         end
 
         -----------------------------------------------------------------------------------------------------------------
         --Grounding Check (Totems Need a Spawn Time Check)
         -----------------------------------------------------------------------------------------------------------------
-        if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 204336) then
-          if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-              local duration = 3
-              local expirationTime = GetTime() + duration
-              if (Grounding[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
-                Grounding[sourceGUID] = {}
-              end
-              Grounding[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-              C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-                if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
-                if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
-                if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
-                if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
-                if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
-              end)
-              C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-              Grounding[sourceGUID] = nil
-              end)
-          elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-            local duration = 3
-                local guid = destGUID
-                local spawnTime
-                local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-                if unitType == "Creature" or unitType == "Vehicle" then
-                local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-                local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-                spawnTime = spawnEpoch + spawnEpochOffset
-                --print("Grounding Totem Spawned at: "..spawnTime)
-                end
-              local expirationTime = GetTime() + duration
-              if (Grounding[spawnTime] == nil) then --source becomes the totem ><
-                Grounding[spawnTime] = {}
-              end
-              Grounding[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-              C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-                if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
-                if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
-                if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
-                if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
-                if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-              end)
-              C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-              Grounding[spawnTime] = nil
-              end)
-            end
-          end
-
-          -----------------------------------------------------------------------------------------------------------------
-          --WarBanner Check (Totems Need a Spawn Time Check)
-          -----------------------------------------------------------------------------------------------------------------
-			if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 236320) then
-				local duration = 15
+		if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 204336) then
+			if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+				local duration = 3
 				local expirationTime = GetTime() + duration
-
-				if destGUID then
-					if (WarBanner[destGUID] == nil) then
-						WarBanner[destGUID] = {}
-					end
-					WarBanner[destGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-						WarBanner[destGUID] = nil
-					end)
+				if (Grounding[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
+					Grounding[sourceGUID] = {}
 				end
-
-				if destGUID then
-					if (WarBanner[1] == nil) then
-						WarBanner[1] = {}
-					end
-					WarBanner[1] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-						WarBanner[1] = nil
-					end)
-				end
-			
-				if sourceGUID then
-					if (WarBanner[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
-						WarBanner[sourceGUID] = {}
-					end
-					WarBanner[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-						if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
-						if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
-						if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
-						if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
-						if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
-					end)
-					C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-						WarBanner[sourceGUID] = nil
-					end)
-				end
-
-				if destGUID then
+				Grounding[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
+					if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
+					if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
+					if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
+					if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
+				end)
+				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+					Grounding[sourceGUID] = nil
+				end)
+			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+				local duration = 3
 					local guid = destGUID
 					local spawnTime
 					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
 					if unitType == "Creature" or unitType == "Vehicle" then
-						local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-						local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-						spawnTime = spawnEpoch + spawnEpochOffset
-						--print("WarBanner Totem Spawned at: "..spawnTime)
+					local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+					local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+					spawnTime = spawnEpoch + spawnEpochOffset
+					--print("Grounding Totem Spawned at: "..spawnTime)
 					end
-					if (WarBanner[spawnTime] == nil) then --source becomes the totem ><
-						WarBanner[spawnTime] = {}
-					end
-					WarBanner[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
-						if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
-						if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
-						if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
-						if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
-						if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-					end)
-					C_Timer.After(duration +.2, function()	-- execute in some close next frame to accurate use of UnitAura function
-						WarBanner[spawnTime] = nil
-					end)
+				local expirationTime = GetTime() + duration
+				if (Grounding[spawnTime] == nil) then --source becomes the totem ><
+					Grounding[spawnTime] = {}
 				end
+				Grounding[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
+					if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
+					if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
+					if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
+					if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
+				end)
+				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+					Grounding[spawnTime] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--WarBanner Check (Totems Need a Spawn Time Check)
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 236320) then
+			local duration = 15
+			local expirationTime = GetTime() + duration
+
+			if destGUID then
+				if (WarBanner[destGUID] == nil) then
+					WarBanner[destGUID] = {}
+				end
+				WarBanner[destGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					WarBanner[destGUID] = nil
+				end)
 			end
 
+			if destGUID then
+				if (WarBanner[1] == nil) then
+					WarBanner[1] = {}
+				end
+				WarBanner[1] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					WarBanner[1] = nil
+				end)
+			end
+		
+			if sourceGUID then
+				if (WarBanner[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
+					WarBanner[sourceGUID] = {}
+				end
+				WarBanner[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
+					if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
+					if UnitExists("party2") then UpdateUnitAuraByUnitGUID(UnitGUID("party2"), -20) end
+					if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
+					if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
+				end)
+				C_Timer.After(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					WarBanner[sourceGUID] = nil
+				end)
+			end
 
-			-----------------------------------------------------------------------------------------------------------------
-			--SmokeBomb Check
-			-----------------------------------------------------------------------------------------------------------------
-			if ((event == "SPELL_CAST_SUCCESS") and (spellId == 212182 or spellId == 359053)) then
-				if (sourceGUID ~= nil) then
+			if destGUID then
+				local guid = destGUID
+				local spawnTime
+				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+				if unitType == "Creature" or unitType == "Vehicle" then
+					local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+					local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+					spawnTime = spawnEpoch + spawnEpochOffset
+					--print("WarBanner Totem Spawned at: "..spawnTime)
+				end
+				if (WarBanner[spawnTime] == nil) then --source becomes the totem ><
+					WarBanner[spawnTime] = {}
+				end
+				WarBanner[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
+					if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
+					if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
+					if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
+					if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
+					if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
+				end)
+				C_Timer.After(duration +.2, function()	-- execute in some close next frame to accurate use of UnitAura function
+					WarBanner[spawnTime] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--Barrier Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 62618)) then
+			if (sourceGUID ~= nil) then
+				local duration = 10
+				local expirationTime = GetTime() + duration
+				if (Barrier[sourceGUID] == nil) then
+					Barrier[sourceGUID] = {}
+				end
+				Barrier[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
+					Barrier[sourceGUID] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--SGrounds Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 34861)) then
+			if (sourceGUID ~= nil) then
 				local duration = 5
 				local expirationTime = GetTime() + duration
-					if (SmokeBombAuras[sourceGUID] == nil) then
-						SmokeBombAuras[sourceGUID] = {}
-					end
-			  	SmokeBombAuras[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-					SmokeBombAuras[sourceGUID] = nil
-					end)
-			  end
+				if (SGrounds[sourceGUID] == nil) then
+					SGrounds[sourceGUID] = {}
+				end
+				SGrounds[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
+					SGrounds[sourceGUID] = nil
+				end)
 			end
+		end
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Barrier Check
-      -----------------------------------------------------------------------------------------------------------------
-      if ((event == "SPELL_CAST_SUCCESS") and (spellId == 62618)) then
-        if (sourceGUID ~= nil) then
-        local duration = 10
-        local expirationTime = GetTime() + duration
-          if (Barrier[sourceGUID] == nil) then
-            Barrier[sourceGUID] = {}
-          end
-          Barrier[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-          Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
-          Barrier[sourceGUID] = nil
-          end)
-        end
-      end
-
-      -----------------------------------------------------------------------------------------------------------------
-      --SGrounds Check
-      -----------------------------------------------------------------------------------------------------------------
-      if ((event == "SPELL_CAST_SUCCESS") and (spellId == 34861)) then
-        if (sourceGUID ~= nil) then
-        local duration = 5
-        local expirationTime = GetTime() + duration
-          if (SGrounds[sourceGUID] == nil) then
-            SGrounds[sourceGUID] = {}
-          end
-          SGrounds[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-          Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
-          SGrounds[sourceGUID] = nil
-          end)
-        end
-      end
-
-			-----------------------------------------------------------------------------------------------------------------
-			--Root Beam Check
-			-----------------------------------------------------------------------------------------------------------------
-			if ((event == "SPELL_CAST_SUCCESS") and (spellId == 78675)) then
-				if (sourceGUID ~= nil) then
-					local duration = 8
-					local expirationTime = GetTime() + duration
-					if (BeamAura[sourceGUID] == nil) then
-						BeamAura[sourceGUID] = {}
-					end
-					BeamAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-					Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+		-----------------------------------------------------------------------------------------------------------------
+		--Solar Beam Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 78675)) then
+			if (sourceGUID ~= nil) then
+				local duration = 8
+				local expirationTime = GetTime() + duration
+				if (BeamAura[sourceGUID] == nil) then
+					BeamAura[sourceGUID] = {}
+				end
+				BeamAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
 					BeamAura[sourceGUID] = nil
-					end)
-				end
+				end)
 			end
-
-			-----------------------------------------------------------------------------------------------------------------
-			--Shaodwy Duel Enemy Check
-			-----------------------------------------------------------------------------------------------------------------
-			if ((event == "SPELL_CAST_SUCCESS") and (spellId == 207736)) then
-				if sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-					local duration = 5
-					local expirationTime = GetTime() + duration
-					if (DuelAura[sourceGUID] == nil) then
-						DuelAura[sourceGUID] = {}
-					end
-					if (DuelAura[destGUID] == nil) then
-						DuelAura[destGUID] = {}
-					end
-					DuelAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime, ["destGUID"] = destGUID }
-					DuelAura[destGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime, ["destGUID"] = destGUID }
-					--print("cleu enemy Dueled Data Stored destGUID is"..destGUID)
-					--print("cleu enemy Dueled Data Stored sourceGUID is"..sourceGUID)
-					Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-					DuelAura[sourceGUID] = nil
-					DuelAura[destGUID] = nil
-					end)
-				end
-			end
+		end
 
 		-----------------------------------------------------------------------------------------------------------------
 		--CLEU SUMMONS Spell Cast Check (if Cast dies it will not update currently, not sure how to track that)
@@ -8698,20 +8680,20 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			local priority, priorityArena, spellCategory, name
       	------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
 			if cleuPrioCastedSpells[spellId].priority == nil then
-			 priority = nil
+				priority = nil
 			else
-			 priority = LoseControlDB.priority[cleuPrioCastedSpells[spellId].priority]
-			 spellCategory = cleuPrioCastedSpells[spellId].priority
-			 name = cleuPrioCastedSpells[spellId].name
+				priority = LoseControlDB.priority[cleuPrioCastedSpells[spellId].priority]
+				spellCategory = cleuPrioCastedSpells[spellId].priority
+				name = cleuPrioCastedSpells[spellId].name
 			end
 			------------------------------------------Arena123-----------------------------------------------------------------------------
 			if (sourceGUID == UnitGUID("arena1")) or (sourceGUID == UnitGUID("arena2")) or (sourceGUID == UnitGUID("arena3")) or (sourceGUID == UnitGUID("arena4")) or (sourceGUID == UnitGUID("arena5")) then
 				if cleuPrioCastedSpells[spellId].priorityArena == nil then
-				 priority = nil
+					priority = nil
 				else
-				 priority = LoseControlDB.priorityArena[cleuPrioCastedSpells[spellId].priorityArena]
-				 spellCategory = cleuPrioCastedSpells[spellId].priorityArena
-				 name = cleuPrioCastedSpells[spellId].nameArena
+					priority = LoseControlDB.priorityArena[cleuPrioCastedSpells[spellId].priorityArena]
+					spellCategory = cleuPrioCastedSpells[spellId].priorityArena
+					name = cleuPrioCastedSpells[spellId].nameArena
 				end
 	  		end
 			--------------------------------------------------------------------------------------------------------------------------------
@@ -8719,10 +8701,10 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				local duration = cleuPrioCastedSpells[spellId].duration
 				local expirationTime = GetTime() + duration
 				if not InterruptAuras[sourceGUID]  then
-						InterruptAuras[sourceGUID] = {}
+					InterruptAuras[sourceGUID] = {}
 				end
        			if not InterruptAuras[destGUID]  then
-						InterruptAuras[destGUID] = {}
+					InterruptAuras[destGUID] = {}
 				end
 				local namePrint, _, icon = GetSpellInfo(spellId)
 
@@ -8752,52 +8734,52 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 							end
 						end
 					end
-						ticker = ticker + 1
+					ticker = ticker + 1
 				end, duration * 4 + 5)
 			end
 		end
 
-    -----------------------------------------------------------------------------------------------------------------
-    --CLEU CASTED AURA Spell Cast Check (if Cast dies it will not update currently, not sure how to track that)
-    -----------------------------------------------------------------------------------------------------------------
-    if ((event =="SPELL_CAST_SUCCESS" and (spellId ==202770 or spellId == 202359)) and (cleuPrioCastedSpells[spellId])) then --Fury of Elune & Astral Com
-      local priority, priorityArena, spellCategory, name
-      ------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
-      if cleuPrioCastedSpells[spellId].priority == nil then
-       priority = nil
-      else
-       priority = LoseControlDB.priority[cleuPrioCastedSpells[spellId].priority]
-       spellCategory = cleuPrioCastedSpells[spellId].priority
-       name = cleuPrioCastedSpells[spellId].name
-      end
-      ------------------------------------------Arena123-----------------------------------------------------------------------------
-      if (sourceGUID == UnitGUID("arena1")) or (sourceGUID == UnitGUID("arena2")) or (sourceGUID == UnitGUID("arena3")) or (sourceGUID == UnitGUID("arena4")) or (sourceGUID == UnitGUID("arena5")) then
-        if cleuPrioCastedSpells[spellId].priorityArena == nil then
-         priority = nil
-        else
-         priority = LoseControlDB.priorityArena[cleuPrioCastedSpells[spellId].priorityArena]
-         spellCategory = cleuPrioCastedSpells[spellId].priorityArena
-         name = cleuPrioCastedSpells[spellId].nameArena
-        end
-      end
-      --------------------------------------------------------------------------------------------------------------------------------
-      if priority then
-        local duration = cleuPrioCastedSpells[spellId].duration
-        local expirationTime = GetTime() + duration
-        if not InterruptAuras[sourceGUID]  then
-            InterruptAuras[sourceGUID] = {}
-        end
-        if not InterruptAuras[destGUID]  then
-            InterruptAuras[destGUID] = {}
-        end
-        local namePrint, _, icon = GetSpellInfo(spellId)
+		-----------------------------------------------------------------------------------------------------------------
+		--CLEU CASTED AURA Spell Cast Check (if Cast dies it will not update currently, not sure how to track that)
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event =="SPELL_CAST_SUCCESS" and (spellId ==202770 or spellId == 202359)) and (cleuPrioCastedSpells[spellId])) then --Fury of Elune & Astral Com
+			local priority, priorityArena, spellCategory, name
+			------------------------------------------Player/Party/Target/Etc-------------------------------------------------------------
+			if cleuPrioCastedSpells[spellId].priority == nil then
+				priority = nil
+			else
+				priority = LoseControlDB.priority[cleuPrioCastedSpells[spellId].priority]
+				spellCategory = cleuPrioCastedSpells[spellId].priority
+				name = cleuPrioCastedSpells[spellId].name
+			end
+			------------------------------------------Arena123-----------------------------------------------------------------------------
+			if (sourceGUID == UnitGUID("arena1")) or (sourceGUID == UnitGUID("arena2")) or (sourceGUID == UnitGUID("arena3")) or (sourceGUID == UnitGUID("arena4")) or (sourceGUID == UnitGUID("arena5")) then
+				if cleuPrioCastedSpells[spellId].priorityArena == nil then
+					priority = nil
+				else
+					priority = LoseControlDB.priorityArena[cleuPrioCastedSpells[spellId].priorityArena]
+					spellCategory = cleuPrioCastedSpells[spellId].priorityArena
+					name = cleuPrioCastedSpells[spellId].nameArena
+				end
+			end
+			--------------------------------------------------------------------------------------------------------------------------------
+			if priority then
+				local duration = cleuPrioCastedSpells[spellId].duration
+				local expirationTime = GetTime() + duration
+				if not InterruptAuras[sourceGUID]  then
+					InterruptAuras[sourceGUID] = {}
+				end
+				if not InterruptAuras[destGUID]  then
+					InterruptAuras[destGUID] = {}
+				end
+				local namePrint, _, icon = GetSpellInfo(spellId)
 
-        local guid = destGUID
-        --print(sourceName.." Summoned "..namePrint.." "..substring(destGUID, -7).." for "..duration.." LC")
-        tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint})
-        UpdateUnitAuraByUnitGUID(sourceGUID, -20)
-      end
-    end
+				local guid = destGUID
+				--print(sourceName.." Summoned "..namePrint.." "..substring(destGUID, -7).." for "..duration.." LC")
+				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint})
+				UpdateUnitAuraByUnitGUID(sourceGUID, -20)
+			end
+		end
 
 		-----------------------------------------------------------------------------------------------------------------
 		--Cold Snap Reset (Resets Block/Barrier/Nova/CoC)
@@ -8806,16 +8788,16 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			local needUpdateUnitAura = false
 			if (InterruptAuras[sourceGUID] ~= nil) then
 				for k, v in pairs(InterruptAuras[sourceGUID]) do
-          if v.spellSchool then
-  					if (bit_band(v.spellSchool, 16) > 0) then
-  						needUpdateUnitAura = true
-  						if (v.spellSchool > 16) then
-  							InterruptAuras[sourceGUID][k].spellSchool = InterruptAuras[sourceGUID][k].spellSchool - 16
-  						else
-  							InterruptAuras[sourceGUID][k] = nil
-  						end
-  					end
-          end
+					if v.spellSchool then
+						if (bit_band(v.spellSchool, 16) > 0) then
+							needUpdateUnitAura = true
+							if (v.spellSchool > 16) then
+								InterruptAuras[sourceGUID][k].spellSchool = InterruptAuras[sourceGUID][k].spellSchool - 16
+							else
+								InterruptAuras[sourceGUID][k] = nil
+							end
+						end
+					end
 				end
 				if (next(InterruptAuras[sourceGUID]) == nil) then
 					InterruptAuras[sourceGUID] = nil
@@ -8827,27 +8809,27 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 		end
 
 	elseif (self.unitId == "targettarget" and self.unitGUID ~= nil and (not(LoseControlDB.disablePlayerTargetTarget) or (self.unitGUID ~= playerGUID)) and (not(LoseControlDB.disableTargetTargetTarget) or (self.unitGUID ~= LCframes.target.unitGUID))) or (self.unitId == "focustarget" and self.unitGUID ~= nil and (not(LoseControlDB.disablePlayerFocusTarget) or (self.unitGUID ~= playerGUID)) and (not(LoseControlDB.disableFocusFocusTarget) or (self.unitGUID ~= LCframes.focus.unitGUID))) then
-			-- Manage targettarget/focustarget UNIT_AURA triggers
-			local _, event, _, _, _, _, _, destGUID = CombatLogGetCurrentEventInfo()
-			if (destGUID ~= nil and destGUID == self.unitGUID) then
-				if (event == "SPELL_AURA_APPLIED") or (event == "SPELL_PERIODIC_AURA_APPLIED") or
-				 (event == "SPELL_AURA_REMOVED") or (event == "SPELL_PERIODIC_AURA_REMOVED") or
-				 (event == "SPELL_AURA_APPLIED_DOSE") or (event == "SPELL_PERIODIC_AURA_APPLIED_DOSE") or
-				 (event == "SPELL_AURA_REMOVED_DOSE") or (event == "SPELL_PERIODIC_AURA_REMOVED_DOSE") or
-				 (event == "SPELL_AURA_REFRESH") or (event == "SPELL_PERIODIC_AURA_REFRESH") or
-				 (event == "SPELL_AURA_BROKEN") or (event == "SPELL_PERIODIC_AURA_BROKEN") or
-				 (event == "SPELL_AURA_BROKEN_SPELL") or (event == "SPELL_PERIODIC_AURA_BROKEN_SPELL") or
-				 (event == "UNIT_DIED") or (event == "UNIT_DESTROYED") or (event == "UNIT_DISSIPATES") then
-					local timeCombatLogAuraEvent = GetTime()
-					Ctimer(0.01, function()	-- execute in some close next frame to accurate use of UnitAura function
-						if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent ~= timeCombatLogAuraEvent)) then
-							self:UNIT_AURA(self.unitId, updatedAuras, 3)
-						end
-					end)
-				end
+		-- Manage targettarget/focustarget UNIT_AURA triggers
+		local _, event, _, _, _, _, _, destGUID = CombatLogGetCurrentEventInfo()
+		if (destGUID ~= nil and destGUID == self.unitGUID) then
+			if (event == "SPELL_AURA_APPLIED") or (event == "SPELL_PERIODIC_AURA_APPLIED") or
+				(event == "SPELL_AURA_REMOVED") or (event == "SPELL_PERIODIC_AURA_REMOVED") or
+				(event == "SPELL_AURA_APPLIED_DOSE") or (event == "SPELL_PERIODIC_AURA_APPLIED_DOSE") or
+				(event == "SPELL_AURA_REMOVED_DOSE") or (event == "SPELL_PERIODIC_AURA_REMOVED_DOSE") or
+				(event == "SPELL_AURA_REFRESH") or (event == "SPELL_PERIODIC_AURA_REFRESH") or
+				(event == "SPELL_AURA_BROKEN") or (event == "SPELL_PERIODIC_AURA_BROKEN") or
+				(event == "SPELL_AURA_BROKEN_SPELL") or (event == "SPELL_PERIODIC_AURA_BROKEN_SPELL") or
+				(event == "UNIT_DIED") or (event == "UNIT_DESTROYED") or (event == "UNIT_DISSIPATES") then
+				local timeCombatLogAuraEvent = GetTime()
+				Ctimer(0.01, function()	-- execute in some close next frame to accurate use of UnitAura function
+					if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent ~= timeCombatLogAuraEvent)) then
+						self:UNIT_AURA(self.unitId, updatedAuras, 3)
+					end
+				end)
 			end
 		end
 	end
+end
 
 
 -- This is the main event. Check for (de)buffs and update the frame icon and cooldown.
@@ -8857,7 +8839,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 	local priority = LoseControlDB.priority
 	local durationType = LoseControlDB.durationType
 	local enabled = LoseControlDB.spellEnabled
-  local customString = LoseControlDB.customString
+	local customString = LoseControlDB.customString
 	local spellIds = spellIds
 
 	if strmatch(unitId, "arena") or ((UnitGUID(unitId) == UnitGUID("arena1")) or (UnitGUID(unitId) == UnitGUID("arena2")) or (UnitGUID(unitId) == UnitGUID("arena3")) or (UnitGUID(unitId) == UnitGUID("arena4")) or (UnitGUID(unitId) == UnitGUID("arena5"))) then
@@ -8911,16 +8893,16 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					L.SpellsPVEConfig:UpdateTab(#L.spells-1)
 					local locClass = "Creature"
 					if source then
-					local guid, name = UnitGUID(source), UnitName(source)
-					local type, zero, server_id, instance_id, zone_uid, npc_id, spawn_uid = strsplit("-",guid);
+						local guid, name = UnitGUID(source), UnitName(source)
+						local type, zero, server_id, instance_id, zone_uid, npc_id, spawn_uid = strsplit("-",guid);
 						if type == "Creature" then
-						 print(name .. "'s NPC id is " .. npc_id)
+							print(name .. "'s NPC id is " .. npc_id)
 						elseif type == "Vignette" then
-						 print(name .. " is a Vignette and should have its npc_id be zero (" .. npc_id .. ").") --Vignette" refers to NPCs that appear as a rare when you first encounter them, but appear as a common after you've looted them once.
+							print(name .. " is a Vignette and should have its npc_id be zero (" .. npc_id .. ").") --Vignette" refers to NPCs that appear as a rare when you first encounter them, but appear as a common after you've looted them once.
 						elseif type == "Player" then
-						 local Class, engClass, locRace, engRace, gender, name, server = GetPlayerInfoByGUID(guid)
-						 print(Class.." "..name .. " is a player.")
-					  else
+							local Class, engClass, locRace, engRace, gender, name, server = GetPlayerInfoByGUID(guid)
+							print(Class.." "..name .. " is a player.")
+					  	else
 						end
 						locClass = Class
 					else
@@ -9016,116 +8998,120 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				end
 			end
 
-        -----------------------------------------------------------------------------------------------------------------
-        --Hide BoneDustBrew if Debuff
-        -----------------------------------------------------------------------------------------------------------------
-      --[[if spellId == 325216 then
-          spellIds[spellId] = "None" --Bonedust Pop on enemy hide
-        end]]
 
-        -----------------------------------------------------------------------------------------------------------------
-        --Hide Surrander if Debuff
-        -----------------------------------------------------------------------------------------------------------------
-        if spellId == 319952 then
-          spellIds[spellId] = "None" --Surrander to Madness Pop on enemy hide
-        end
 
-        -----------------------------------------------------------------------------------------------------------------
-        --Icon Changes
-        -----------------------------------------------------------------------------------------------------------------
-        if spellId == 45524 then --Chains of Ice Dk
-          --icon = 463560
-          --icon = 236922
-          icon = 236925
-        end
-
-        if spellId == 317589 then --Mirros of Toremnt, Tormenting Backlash (Venthyr Mage) to Frost Jaw
-          icon = 538562
-        end
-
-        if spellId == 334693 then --Abosolute Zero Frost Dk Legendary Stun to Cube
-          icon = 517161
-        end
-
-        if spellId == 115196 then --Shiv
-          icon = 135428
-        end
-
-      	if spellId == 199845 then --Psyflay
-      		icon = 537021
-      	end
-
-		if spellId == 285515 then --Frost Shock to Frost Nove
-			icon = 135848
-		end
-
-		if spellId == 317898 then -- Blinding Sleept Snare
-			icon = 135864
-		end
-
-		if spellId == 334275 then ----Amplify Curse's Exhaustion
-			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
-			TooltipUtil.SurfaceArgs(tooltipData)
-	
-			for _, line in ipairs(tooltipData.lines) do
-				TooltipUtil.SurfaceArgs(line)
+			-----------------------------------------------------------------------------------------------------------------
+			--Icon Changes
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 45524 then --Chains of Ice Dk
+				--icon = 463560
+				--icon = 236922
+				icon = 236925
 			end
-		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
-		   --print("Aura Info: ", tooltipData.lines[2].leftText)
-			if strfind(tooltipData.lines[2].leftText, "70") then
-				spellIds[spellId] = "SnareMagic70"
-				count = 2
-			else
-				spellIds[spellId] = "SnarePosion50"
-			end
-		end
 
-		if spellId == 702 then ----Amplify Curse's Weakness
-			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
-			TooltipUtil.SurfaceArgs(tooltipData)
-	
-			for _, line in ipairs(tooltipData.lines) do
-				TooltipUtil.SurfaceArgs(line)
+			if spellId == 334693 then --Abosolute Zero Frost Dk Legendary Stun to Cube
+				icon = 517161
 			end
-		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
-		   --print("Aura Info: ", tooltipData.lines[2].leftText)
-			if strfind(tooltipData.lines[2].leftText, "100") then
-				spellIds[spellId] = "Dmg_Hit_Reduction"
-				count = 100
-			else
-				spellIds[spellId] = "None"
+
+			if spellId == 317589 then --Mirros of Toremnt, Tormenting Backlash (Venthyr Mage) to Frost Jaw
+				icon = 538562
 			end
-		end
 
-		if spellId == 1714 then ----Amplify Curse's Tongues
-			local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
-			TooltipUtil.SurfaceArgs(tooltipData)
-	
-			for _, line in ipairs(tooltipData.lines) do
-				TooltipUtil.SurfaceArgs(line)
+			if spellId == 115196 then --Shiv
+				icon = 135428
 			end
-		   --print("Unit Aura: ", tooltipData.lines[1].leftText)
-		   --print("Aura Info: ", tooltipData.lines[2].leftText)
-		   if not strfind(tooltipData.lines[2].leftText, "10") then
-				count = 20
-			else
 
+			if spellId == 199845 then --Psyflay
+				icon = 537021
 			end
-		end
 
-        -----------------------------------------------------------------------------
-        --Spell Id same for Friend and Enemey buff/debuff Hacks
-        -----------------------------------------------------------------------------
-        --[[if spellId == 325216 then
-          spellIds[spellId] = "None" --Bonedust pop on enemy hide ,
-        end]]
+			if spellId == 285515 then --Frost Shock to Frost Nove
+				icon = 135848
+			end
 
-        -----------------------------------------------------------------------------------------------------------------
-        --Hue Change
-        -----------------------------------------------------------------------------------------------------------------
-        if spellId == 320035 then -- Mirros of Torment Haste Reduction
-          hue = "Purple"
-        end
+			if spellId == 317898 then -- Blinding Sleept Snare
+				icon = 135864
+			end
+
+			-----------------------------------------------------------------------------
+			--Prio Change Spell Id same for Friend and Enemey buff/debuff Hacks
+			-----------------------------------------------------------------------------
+			--[[if spellId == 325216 then
+			spellIds[spellId] = "None" --Bonedust pop on enemy hide ,
+			end]]
+
+			-----------------------------------------------------------------------------------------------------------------
+			--Prio Change Hide Surrander if Debuff
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 319952 then
+				spellIds[spellId] = "None" --Surrander to Madness Pop on enemy hide
+			end
+
+			-----------------------------------------------------------------------------
+			--Prio Change
+			-----------------------------------------------------------------------------
+
+			if spellId == 334275 then ----Amplify Curse's Exhaustion
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
+		
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+				--print("Unit Aura: ", tooltipData.lines[1].leftText)
+				--print("Aura Info: ", tooltipData.lines[2].leftText)
+				if strfind(tooltipData.lines[2].leftText, "70") then
+					spellIds[spellId] = "SnareMagic70"
+					count = 70
+					Tooltip:
+				else
+					spellIds[spellId] = "SnarePosion50"
+				end
+			end
+
+			if spellId == 702 then ----Amplify Curse's Weakness
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
+		
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+				--print("Unit Aura: ", tooltipData.lines[1].leftText)
+				--print("Aura Info: ", tooltipData.lines[2].leftText)
+				if strfind(tooltipData.lines[2].leftText, "100") then
+					spellIds[spellId] = "Dmg_Hit_Reduction"
+					count = 100
+				else
+					spellIds[spellId] = "None"
+				end
+			end
+
+			-----------------------------------------------------------------------------
+			--Count Change
+			-----------------------------------------------------------------------------
+
+			if spellId == 1714 then ----Amplify Curse's Tongues
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
+		
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+				--print("Unit Aura: ", tooltipData.lines[1].leftText)
+				--print("Aura Info: ", tooltipData.lines[2].leftText)
+				if not strfind(tooltipData.lines[2].leftText, "10") then
+					count = 20
+				else
+
+				end
+			end
+
+			-----------------------------------------------------------------------------------------------------------------
+			--Hue Change
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 320035 then -- Mirros of Torment Haste Reduction
+				hue = "Purple"
+			end
 
 			local spellCategory = spellIds[spellId] or spellIds[name]
 			local Priority = priority[spellCategory]
@@ -9221,195 +9207,120 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				localForceEventUnitAuraAtEnd = (self.unitId == "targettarget")
 			end
 
-      -----------------------------------------------------------------------------w
-			--Ghost Wolf hack for Spectral Recovery and Spirit Wolf
-			------------------------------------------------------------------------------
-      if spellId == 2645 then
-        local ghostwolf = {}
-        for i = 1, 40 do
-        local _, _, c, _, _, _, _, _, _, s = UnitAura(unitId, i, "HELPFUL")
-        if not s then break end
-          if s == 204262 or s == 260881 then
-            tblinsert(ghostwolf, {s, c})
-          end
-        end
-        if #ghostwolf == 2 then
-          if ghostwolf[1][1] == 260881 then
-            count = ghostwolf[1][2]
-          else
-            count = ghostwolf[2][2]
-          end
-          hue = "GhostPurple"
-        elseif #ghostwolf == 1 then
-          if ghostwolf[1][1] == 260881 then --Just Spirit Wolf
-            count = ghostwolf[1][2]
-          elseif ghostwolf[1][1] == 204262 then -- Just Spectral Recovery
-            hue = "GhostPurple"
-          end
-        end
-      end
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Barrier Add Timer Check For Arena
-      -----------------------------------------------------------------------------------------------------------------
-      if spellId == 81782 then -- Barrier
-        if source and Barrier[UnitGUID(source)] then
-          duration = Barrier[UnitGUID(source)].duration
-          expirationTime = Barrier[UnitGUID(source)].expirationTime
-        end
-      end
+			-----------------------------------------------------------------------------------------------------------------
+			--Totems Add Timer Check For Arena
+			-----------------------------------------------------------------------------------------------------------------
 
-      -----------------------------------------------------------------------------------------------------------------
-      --SGrounds Add Timer Check For Arena
-      -----------------------------------------------------------------------------------------------------------------
-      if spellId == 289655 then -- SGrounds
-        if source and SGrounds[UnitGUID(source)] then
-          duration = SGrounds[UnitGUID(source)].duration
-          expirationTime = SGrounds[UnitGUID(source)].expirationTime
-        end
-      end
-
-      -----------------------------------------------------------------------------------------------------------------
-      --Totems Add Timer Check For Arena
-      -----------------------------------------------------------------------------------------------------------------
-
-      if spellId == 201633 then -- Earthen Totem (Totems Need a Spawn Time Check)
-        if source and not UnitIsEnemy("player", source) then
-          if Earthen[UnitGUID(source)] then
-          duration = Earthen[UnitGUID(source)].duration
-          expirationTime = Earthen[UnitGUID(source)].expirationTime
-          end
-        elseif source and UnitIsEnemy("player", source) then
-          local guid = UnitGUID(source)
-          local spawnTime
-          local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-          if unitType == "Creature" or unitType == "Vehicle" then
-          local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-          local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-          spawnTime = spawnEpoch + spawnEpochOffset
-          --print("Earthen Buff Check at: "..spawnTime)
-          end
-          if Earthen[spawnTime] then
-          duration = Earthen[spawnTime].duration
-          expirationTime = Earthen[spawnTime].expirationTime
-          end
-        end
-      end
-
-      if spellId == 8178 then -- Grounding (Totems Need a Spawn Time Check)
-        if source and not UnitIsEnemy("player", source) then
-          if Grounding[UnitGUID(source)] then
-          duration = Grounding[UnitGUID(source)].duration
-          expirationTime = Grounding[UnitGUID(source)].expirationTime
-          end
-        elseif source and UnitIsEnemy("player", source) then
-          local guid = UnitGUID(source)
-          local spawnTime
-          local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-          if unitType == "Creature" or unitType == "Vehicle" then
-          local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-          local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-          spawnTime = spawnEpoch + spawnEpochOffset
-          --print("Grounding Buff Check at: "..spawnTime)
-          end
-          if Grounding[spawnTime] then
-          duration = Grounding[spawnTime].duration
-          expirationTime = Grounding[spawnTime].expirationTime
-          end
-        end
-      end
-
-	  if spellId == 236321 then -- WarBanner (Totems Need a Spawn Time Check)
-		if source then
-			local guid = UnitGUID(source)
-			local spawnTime
-			local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-			if unitType == "Creature" or unitType == "Vehicle" then
-				local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-				local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-				spawnTime = spawnEpoch + spawnEpochOffset
-				--print("WarBanner Buff Check at: "..spawnTime)
-			end
-			if WarBanner[spawnTime] then
-				--print("Spawn: "..UnitName(source))
-				duration = WarBanner[spawnTime].duration
-				expirationTime = WarBanner[spawnTime].expirationTime
-			elseif WarBanner[guid] then
-				--print("guid: "..UnitName(source))
-				duration = WarBanner[guid].duration 
-				expirationTime = WarBanner[guid].expirationTime
-			elseif WarBanner[1] then
-				--print("1: "..UnitName(source))
-				duration = WarBanner[1].duration 
-				expirationTime = WarBanner[1].expirationTime
-			end
-		else
-			--print("No WarBanner Source for: "..unitId)
-			duration = WarBanner[1].duration 
-			expirationTime = WarBanner[1].expirationTime
-		end
-	  end
-
-		-----------------------------------------------------------------------------------------------------------------
-		--Two Buff conidtions like Root Beam
-		-----------------------------------------------------------------------------------------------------------------
-		if spellId == 12472 then
-			for i = 1, 40 do
-				local _, _, c, _, d, e, _, _, _, s = UnitAura(unitId, i, "HELPFUL")
-				if not s then break end
-				if s == 382148 then
-					count = c
+			if spellId == 201633 then -- Earthen Totem (Totems Need a Spawn Time Check)
+				if source and not UnitIsEnemy("player", source) then
+					if Earthen[UnitGUID(source)] then
+						duration = Earthen[UnitGUID(source)].duration
+						expirationTime = Earthen[UnitGUID(source)].expirationTime
+					end
+				elseif source and UnitIsEnemy("player", source) then
+					local guid = UnitGUID(source)
+					local spawnTime
+					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+					if unitType == "Creature" or unitType == "Vehicle" then
+						local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+						local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+						spawnTime = spawnEpoch + spawnEpochOffset
+						--print("Earthen Buff Check at: "..spawnTime)
+					end
+					if Earthen[spawnTime] then
+						duration = Earthen[spawnTime].duration
+						expirationTime = Earthen[spawnTime].expirationTime
+					end
 				end
 			end
-		end
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Icon Changes
-      -----------------------------------------------------------------------------------------------------------------
-      if spellId == 317929 then --Aura Mastery Cast Immune Pally
-        icon = 135863
-      end
+			if spellId == 8178 then -- Grounding (Totems Need a Spawn Time Check)
+				if source and not UnitIsEnemy("player", source) then
+					if Grounding[UnitGUID(source)] then
+						duration = Grounding[UnitGUID(source)].duration
+						expirationTime = Grounding[UnitGUID(source)].expirationTime
+					end
+				elseif source and UnitIsEnemy("player", source) then
+					local guid = UnitGUID(source)
+					local spawnTime
+					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+					if unitType == "Creature" or unitType == "Vehicle" then
+						local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+						local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+						spawnTime = spawnEpoch + spawnEpochOffset
+						--print("Grounding Buff Check at: "..spawnTime)
+					end
+					if Grounding[spawnTime] then
+						duration = Grounding[spawnTime].duration
+						expirationTime = Grounding[spawnTime].expirationTime
+					end
+				end
+			end
 
-      if spellId == 199545 then --Steed of Glory Hack
-    		icon = 135890
-    	end
+			if spellId == 236321 then -- WarBanner (Totems Need a Spawn Time Check)
+				if source then
+					local guid = UnitGUID(source)
+					local spawnTime
+					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+					if unitType == "Creature" or unitType == "Vehicle" then
+						local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+						local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+						spawnTime = spawnEpoch + spawnEpochOffset
+						--print("WarBanner Buff Check at: "..spawnTime)
+					end
+					if WarBanner[spawnTime] then
+						--print("Spawn: "..UnitName(source))
+						duration = WarBanner[spawnTime].duration
+						expirationTime = WarBanner[spawnTime].expirationTime
+					elseif WarBanner[guid] then
+						--print("guid: "..UnitName(source))
+						duration = WarBanner[guid].duration 
+						expirationTime = WarBanner[guid].expirationTime
+					elseif WarBanner[1] then
+						--print("1: "..UnitName(source))
+						duration = WarBanner[1].duration 
+						expirationTime = WarBanner[1].expirationTime
+					end
+				else
+					--print("No WarBanner Source for: "..unitId)
+					duration = WarBanner[1].duration 
+					expirationTime = WarBanner[1].expirationTime
+				end
+			end
 
-      if spellId == 329543 then --Divine Ascension
-        icon = 2103871 --618976 -- or 590341
-      end
+			-----------------------------------------------------------------------------------------------------------------
+			--Barrier Add Timer Check For Arena
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 81782 then -- Barrier
+				if source and Barrier[UnitGUID(source)] then
+					duration = Barrier[UnitGUID(source)].duration
+					expirationTime = Barrier[UnitGUID(source)].expirationTime
+				end
+			end
 
-      if spellId == 328530 then --Divine Ascension
-        icon = 2103871 --618976 -- or 590341
-      end
+			-----------------------------------------------------------------------------------------------------------------
+			--SGrounds Add Timer Check For Arena
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 289655 then -- SGrounds
+				if source and SGrounds[UnitGUID(source)] then
+					duration = SGrounds[UnitGUID(source)].duration
+					expirationTime = SGrounds[UnitGUID(source)].expirationTime
+				end
+			end
 
-	  if spellId == 387636 then --Soulburn Healthstone
-		icon = 538745
-	  end
-
-	  if spellId == 385391 then --Spell Reflection 20% Wall
-		icon = 135995
-	  end
-
-	  if spellId == 363916 then --Obsidian Scales w/Mettles
-		local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HELPFUL")
-		TooltipUtil.SurfaceArgs(tooltipData)
-
-		for _, line in ipairs(tooltipData.lines) do
-			TooltipUtil.SurfaceArgs(line)
-		end
-	   --print("Unit Aura: ", tooltipData.lines[1].leftText)
-	   --print("Aura Info: ", tooltipData.lines[2].leftText)
-	    if strfind(tooltipData.lines[2].leftText, "Immune") then
-			icon = 1526594
-		end
-	end
-
-      -----------------------------------------------------------------------------------------------------------------
-      --Hue Change
-      -----------------------------------------------------------------------------------------------------------------
-      --[[if spellId == 199448 then -- Ultimate Sac Color Change
-        hue = "Yellow"
-      end]]
+			-----------------------------------------------------------------------------------------------------------------
+			--Two Buff conidtions Icy Veins Stacks
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 12472 then
+				for i = 1, 40 do
+					local _, _, c, _, d, e, _, _, _, s = UnitAura(unitId, i, "HELPFUL")
+					if not s then break end
+					if s == 382148 then
+						count = c
+					end
+				end
+			end
 
 			-----------------------------------------------------------------------------
 			--Mass Invis
@@ -9418,127 +9329,193 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				if source then
 					if (UnitGUID(source) ~= UnitGUID(unitId)) then
 						duration = 5
-				  	expirationTime = GetTime() + duration
+				  		expirationTime = GetTime() + duration
 					end
 				end
 			end
 
-      -----------------------------------------------------------------------------
-      --Player Only Hacks to Disable on party12 or Target, Focus, Pet and Player Frame
-      ------------------------------------------------------------------------------
-      if strmatch(unitId, "arena") then
-      else
-        if (spellId == 331937) or (spellId == 354054) then --Euphoria Venthyr Haste Buff Hack or Fatal Flaw Versa
-			if unitId ~= "player" then
-            	spellIds[spellId] = "None"
-          	else
-            	spellIds[spellId] = "Movable_Cast_Auras"
+			-----------------------------------------------------------------------------
+			--Player Only Hacks to Disable on party12 or Target, Focus, Pet and Player Frame
+			------------------------------------------------------------------------------
+			if strmatch(unitId, "arena") then
+			else
+				if (spellId == 331937) or (spellId == 354054) then --Euphoria Venthyr Haste Buff Hack or Fatal Flaw Versa
+					if unitId ~= "player" then
+						spellIds[spellId] = "None"
+					else
+						spellIds[spellId] = "Movable_Cast_Auras"
+					end
+				end
+
+				if (spellId == 213610) then --Hide Holy Ward
+					if unitId == "player" then
+						spellIds[spellId] = "None"
+					elseif strmatch(unitId, "arena") then
+						spellIds[spellId] = "Small_Defensive_CDs"
+					else
+						spellIds[spellId] = "CC_Reduction"
+					end
+				end
+
+				if (spellId == 332505) then --Soulsteel Clamps Hack player Only
+					if unitId ~= "player" then
+						spellIds[spellId] = "None"
+					elseif strmatch(unitId, "arena") then
+						spellIds[spellId] = "Small_Defensive_CDs"
+					else
+						spellIds[spellId] = "Movable_Cast_Auras"
+					end
+				end
+
+				if (spellId == 332506) then --Soulsteel Clamps Hack player Only
+					if unitId ~= "player" then
+						spellIds[spellId] = "None"
+					elseif strmatch(unitId, "arena") then
+						spellIds[spellId] = "Small_Defensive_CDs"
+					else
+						spellIds[spellId] = "Movable_Cast_Auras"
+					end
+				end
 			end
-		end
 
-        if (spellId == 213610) then --Hide Holy Ward
-          	if unitId == "player" then
-           		spellIds[spellId] = "None"
-          	elseif strmatch(unitId, "arena") then
-            	spellIds[spellId] = "Small_Defensive_CDs"
-          	else
-            	spellIds[spellId] = "CC_Reduction"
-          	end
-        end
-
-        if (spellId == 332505) then --Soulsteel Clamps Hack player Only
-			if unitId ~= "player" then
-            	spellIds[spellId] = "None"
-          	elseif strmatch(unitId, "arena") then
-            	spellIds[spellId] = "Small_Defensive_CDs"
-          	else
-            	spellIds[spellId] = "Movable_Cast_Auras"
+			-----------------------------------------------------------------------------------------------------------------
+			--Icon Changes
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 317929 then --Aura Mastery Cast Immune Pally
+				icon = 135863
 			end
-		end
 
-        if (spellId == 332506) then --Soulsteel Clamps Hack player Only
-			if unitId ~= "player" then
-           		spellIds[spellId] = "None"
-          	elseif strmatch(unitId, "arena") then
-           		spellIds[spellId] = "Small_Defensive_CDs"
-          	else
-            	spellIds[spellId] = "Movable_Cast_Auras"
+			if spellId == 199545 then --Steed of Glory Hack
+					icon = 135890
+				end
+
+			if spellId == 329543 then --Divine Ascension
+				icon = 2103871 --618976 -- or 590341
 			end
-		end
-      end
-      -----------------------------------------------------------------------------
-      --Same Spell Id , Differnt Spec , Change Prio
-      ------------------------------------------------------------------------------
 
-      if (spellId == 31884) then --Avenging Wrath
-        local i, specID
-        if strmatch(unitId, "arena") then
-          i = strfind(unitId, "%d")
-  				specID = GetArenaOpponentSpec(i);
-          if specID then
-            if (specID == 70) or (specID == 66) then
-              --print("Ret Wings Active "..unitId)
-              spellIds[spellId] = "Big_Defensive_CDs" --Ranged_Major_OffenisiveCDs Sets Prio to Ret/Prot Wings to DMG
-            else
-              --print("Holy Wings Active "..unitId)
-              spellIds[spellId] = "Big_Defensive_CDs" --Sets Prio to Holyw Wings to Defensive
-            end
-          end
-        end
-      end
+			if spellId == 328530 then --Divine Ascension
+				icon = 2103871 --618976 -- or 590341
+			end
 
-      if (spellId == 310454) then --Weapons of Order
-        local i, specID
-        if strmatch(unitId, "arena") then
-          i = strfind(unitId, "%d")
-  				specID = GetArenaOpponentSpec(i);
-          if specID then
-            if (specID == 269) or (specID == 268) then
-              --print("WW Weapons Active "..unitId)
-              spellIds[spellId] = "Melee_Major_OffenisiveCDs" --Ranged_Major_OffenisiveCDs Sets Prio to Ret/Prot Wings to DMG
-            else
-              --print("MW Weapons Active "..unitId)
-              spellIds[spellId] = "None" --Sets Prio to Holy Wings to Defensive
-            end
-          end
-        end
-      end
+			if spellId == 387636 then --Soulburn Healthstone
+				icon = 538745
+			end
 
-	-----------------------------------------------------------------------------------------------------------------
-	--Hide Illdan's Grasp if Buff
-	-----------------------------------------------------------------------------------------------------------------
-	if spellId == 205630 then
-		spellIds[spellId] = "None" --I'lldians Grasp Hide CC on Friends
-	end
+			if spellId == 385391 then --Spell Reflection 20% Wall
+				icon = 135995
+			end
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Show Surrander to Madness if Buff
-      -----------------------------------------------------------------------------------------------------------------
-      if spellId == 319952 then
-        spellIds[spellId] = "Ranged_Major_OffenisiveCDs" --Surrander to Madness Pop on enemy hide
-        if unitId == "player" then
-        spellIds[spellId] = "Personal_Offensives"
-        end
-      end
+			if spellId == 363916 then --Obsidian Scales w/Mettles
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HELPFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
 
-      -----------------------------------------------------------------------------------------------------------------
-      --Stack Editing
-      -----------------------------------------------------------------------------------------------------------------
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+				--print("Unit Aura: ", tooltipData.lines[1].leftText)
+				--print("Aura Info: ", tooltipData.lines[2].leftText)
+				if strfind(tooltipData.lines[2].leftText, "Immune") then
+					icon = 1526594
+				end
+			end
 
-      if spellId == 248646 then -- WW Tiger Eye Stacks, Removes Timer
-        duration = 0
-        expirationTime = GetTime() + 1
-      end
+			-----------------------------------------------------------------------------
+			--Prio Change: Same Spell Id , Differnt Spec
+			------------------------------------------------------------------------------
+			if (spellId == 31884) then --Avenging Wrath
+				local i, specID
+				if strmatch(unitId, "arena") then
+					i = strfind(unitId, "%d")
+							specID = GetArenaOpponentSpec(i);
+					if specID then
+						if (specID == 70) or (specID == 66) then
+							--print("Ret Wings Active "..unitId)
+							spellIds[spellId] = "Big_Defensive_CDs" --Ranged_Major_OffenisiveCDs Sets Prio to Ret/Prot Wings to DMG
+						else
+							--print("Holy Wings Active "..unitId)
+							spellIds[spellId] = "Big_Defensive_CDs" --Sets Prio to Holyw Wings to Defensive
+						end
+					end
+				end
+			end
 
-      if spellId == 334320 then -- Lock Drain LIfe Stacks, Removes Timer  247676
-        duration = 0
-        expirationTime = GetTime() + 1
-      end
+			if (spellId == 310454) then --Weapons of Order
+				local i, specID
+				if strmatch(unitId, "arena") then
+					i = strfind(unitId, "%d")
+							specID = GetArenaOpponentSpec(i);
+					if specID then
+						if (specID == 269) or (specID == 268) then
+							--print("WW Weapons Active "..unitId)
+							spellIds[spellId] = "Melee_Major_OffenisiveCDs" --Ranged_Major_OffenisiveCDs Sets Prio to Ret/Prot Wings to DMG
+						else
+							--print("MW Weapons Active "..unitId)
+							spellIds[spellId] = "None" --Sets Prio to Holy Wings to Defensive
+						end
+					end
+				end
+			end
 
-      if spellId == 247676 then -- Reckoning Ret Stacks, Removes Timer
-        duration = 0
-        expirationTime = GetTime() + 1
-      end
+			-----------------------------------------------------------------------------------------------------------------
+			--Prio Change: Buff
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 205630 then
+				spellIds[spellId] = "None" --I'lldians Grasp Hide CC on Friends
+			end
+
+			if spellId == 319952 then
+				spellIds[spellId] = "Ranged_Major_OffenisiveCDs" --Surrander to Madness Pop on enemy hide
+				if unitId == "player" then
+					spellIds[spellId] = "Personal_Offensives"
+				end
+			end
+
+			-----------------------------------------------------------------------------------------------------------------
+			--Count Editing
+			-----------------------------------------------------------------------------------------------------------------
+
+			if spellId == 248646 then -- WW Tiger Eye Stacks, Removes Timer
+				duration = 0
+				expirationTime = GetTime() + 1
+			end
+
+			if spellId == 334320 then -- Lock Drain LIfe Stacks, Removes Timer  247676
+				duration = 0
+				expirationTime = GetTime() + 1
+			end
+
+			if spellId == 247676 then -- Reckoning Ret Stacks, Removes Timer
+				duration = 0
+				expirationTime = GetTime() + 1
+			end
+
+			-----------------------------------------------------------------------------w
+			--Ghost Wolf hack for Spectral Recovery and Spirit Wolf
+			------------------------------------------------------------------------------
+			if spellId == 2645 then
+				local ghostwolf = {}
+				for i = 1, 40 do
+					local _, _, c, _, _, _, _, _, _, s = UnitAura(unitId, i, "HELPFUL")
+					if not s then break end
+					if s == 204262 or s == 260881 then
+						tblinsert(ghostwolf, {s, c})
+					end
+				end
+				if #ghostwolf == 2 then
+					if ghostwolf[1][1] == 260881 then
+						count = ghostwolf[1][2]
+					else
+						count = ghostwolf[2][2]
+					end
+					hue = "GhostPurple"
+				elseif #ghostwolf == 1 then
+					if ghostwolf[1][1] == 260881 then --Just Spirit Wolf
+						count = ghostwolf[1][2]
+					elseif ghostwolf[1][1] == 204262 then -- Just Spectral Recovery
+						hue = "GhostPurple"
+					end
+				end
+			end
 
 			local spellCategory = spellIds[spellId] or spellIds[name]
 			local Priority = priority[spellCategory]
@@ -9644,34 +9621,34 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					local spellId = v.spellId
 					if (not enabled[spellId]) and (not enabled[name]) then spellId = nil; name = nil; Priority = 0 end
 					if spellCategory ~= "Interrupt" and ((Priority == 0) or (not self.frame.categoriesEnabled.buff[reactionToPlayer][spellCategory])) then
-							if (expirationTime < GetTime()) then
+						if (expirationTime < GetTime()) then
 							InterruptAuras[self.unitGUID][k] = nil
 							if (next(InterruptAuras[self.unitGUID]) == nil) then
 								InterruptAuras[self.unitGUID] = nil
 							end
-							end
+						end
 					elseif (spellCategory == "Interrupt") and ((Priority == 0) or (not self.frame.categoriesEnabled.interrupt[reactionToPlayer])) then
-							if (expirationTime < GetTime()) then
+						if (expirationTime < GetTime()) then
 							InterruptAuras[self.unitGUID][k] = nil
 							if (next(InterruptAuras[self.unitGUID]) == nil) then
 								InterruptAuras[self.unitGUID] = nil
 							end
-							end
+						end
 					else
 						if Priority then
 							-----------------------------------------------------------------------------------------------------------------
 							--Unseen Table Debuffs
 							-----------------------------------------------------------------------------------------------------------------
-					    if strmatch(unitId, "arena") then
-  							if typeUpdate == -200 and UnitExists(unitId) then
-  								if not Arenastealth[unitId] then
-  									Arenastealth[unitId] = {}
-  								end
-  								--print(unitId, "cleu Stealth Table Information Captured", name)
-  								local localForceEventUnitAuraAtEnd = false
-  								tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
-  							end
-				  		end
+							if strmatch(unitId, "arena") then
+								if typeUpdate == -200 and UnitExists(unitId) then
+									if not Arenastealth[unitId] then
+										Arenastealth[unitId] = {}
+									end
+									--print(unitId, "cleu Stealth Table Information Captured", name)
+									local localForceEventUnitAuraAtEnd = false
+									tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
+								end
+							end
 							---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 							local localForceEventUnitAuraAtEnd = false
 							tblinsert(buffs,  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue }}) -- this will create a table to show the highest duration cleu
@@ -9848,112 +9825,112 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 		end
 	end
 
-----------------------------------------------------------------------
---Filters for highest aura duration of specfied priority will not work for cleu , currently set for all snares
-----------------------------------------------------------------------
+	----------------------------------------------------------------------
+	--Filters for highest aura duration of specfied priority will not work for cleu , currently set for all snares
+	----------------------------------------------------------------------
 	if #buffs then
 		tblsort(buffs, cmp_col1)
 		tblsort(buffs, cmp_col1_col2)
 	end
 
-----------------------------------------------------------------------
---transfer stealth table to buffs
-----------------------------------------------------------------------
-if Arenastealth[unitId] and (not UnitExists(unitId)) then
-	for i = 1, #Arenastealth[unitId] do
-	  buffs[i] =  {["col1"] = Arenastealth[unitId][i].col1 , ["col2"]  = Arenastealth[unitId][i].col2 , ["col3"] = { ["name"] = Arenastealth[unitId][i].col3.name, ["duration"] = Arenastealth[unitId][i].col3.duration, ["expirationTime"] = Arenastealth[unitId][i].col3.expirationTime,  ["icon"] = Arenastealth[unitId][i].col3.icon, ["localForceEventUnitAuraAtEnd"] = Arenastealth[unitId][i].col3.localForceEventUnitAuraAtEnd, ["hue"] = Arenastealth[unitId][i].col3.hue }}
+	----------------------------------------------------------------------
+	--transfer stealth table to buffs
+	----------------------------------------------------------------------
+	if Arenastealth[unitId] and (not UnitExists(unitId)) then
+		for i = 1, #Arenastealth[unitId] do
+			buffs[i] =  {["col1"] = Arenastealth[unitId][i].col1 , ["col2"]  = Arenastealth[unitId][i].col2 , ["col3"] = { ["name"] = Arenastealth[unitId][i].col3.name, ["duration"] = Arenastealth[unitId][i].col3.duration, ["expirationTime"] = Arenastealth[unitId][i].col3.expirationTime,  ["icon"] = Arenastealth[unitId][i].col3.icon, ["localForceEventUnitAuraAtEnd"] = Arenastealth[unitId][i].col3.localForceEventUnitAuraAtEnd, ["hue"] = Arenastealth[unitId][i].col3.hue }}
+		end
+		tblsort(buffs, cmp_col1)
+		tblsort(buffs, cmp_col1_col2)
 	end
-	tblsort(buffs, cmp_col1)
-	tblsort(buffs, cmp_col1_col2)
-end
 
------------------------------------------------------------------------
---Stealth Filter What to show while unseen Arena Opponents
--------------------------------------------------------------------------
+	-----------------------------------------------------------------------
+	--Stealth Filter What to show while unseen Arena Opponents
+	-------------------------------------------------------------------------
 	if (not UnitExists(unitId)) then
    		 if strmatch(unitId, "arena") then
 			if Arenastealth[unitId] and #buffs then
 				local foundbuff = 0
 				for i = 1, #buffs do
 					if ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 >= priority.Special_High)) then --Special_High is Stealth for Arena
-							maxExpirationTime = buffs[i].col3.expirationTime
-							Duration = buffs[i].col3.duration
-							Icon = buffs[i].col3.icon
-							forceEventUnitAuraAtEnd = false
-							Hue = buffs[i].col3.hue
-							Name = buffs[i].col3.name
-							local nextTimerUpdate = (buffs[i].col3.expirationTime - GetTime()) + 0.05
-							if nextTimerUpdate < 0.05 then
-								nextTimerUpdate = 0.05
-							end
-							Ctimer(nextTimerUpdate, function()
-									self:UNIT_AURA(unitId, updatedAuras, -5)
-							end)
-							foundbuff = 1
-							print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
-							break
-						elseif ((buffs[i].col1 == priority.Special_High) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
-							maxExpirationTime = GetTime() + 1
-							Duration = 0
-							Icon = buffs[i].col3.icon
-							forceEventUnitAuraAtEnd = false
-							Hue = buffs[i].col3.hue
-							Name = buffs[i].col3.name
-							foundbuff = 1
-							print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
-							break
+						maxExpirationTime = buffs[i].col3.expirationTime
+						Duration = buffs[i].col3.duration
+						Icon = buffs[i].col3.icon
+						forceEventUnitAuraAtEnd = false
+						Hue = buffs[i].col3.hue
+						Name = buffs[i].col3.name
+						local nextTimerUpdate = (buffs[i].col3.expirationTime - GetTime()) + 0.05
+						if nextTimerUpdate < 0.05 then
+							nextTimerUpdate = 0.05
 						end
+						Ctimer(nextTimerUpdate, function()
+								self:UNIT_AURA(unitId, updatedAuras, -5)
+						end)
+						foundbuff = 1
+						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+						break
+					elseif ((buffs[i].col1 == priority.Special_High) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
+						maxExpirationTime = GetTime() + 1
+						Duration = 0
+						Icon = buffs[i].col3.icon
+						forceEventUnitAuraAtEnd = false
+						Hue = buffs[i].col3.hue
+						Name = buffs[i].col3.name
+						foundbuff = 1
+						print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
+						break
 					end
-					if foundbuff == 0 then
-						maxExpirationTime = 0
-						Duration = Duration
-						Icon = Icon
-						forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
-						Hue = Hue
-						Name = Name
-						print(unitId, "No Stealth Buff Found")
-						if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
-							GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
-							if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
-						end
-						if unitId == "arena2" and GladiusClassIconFramearena2 and GladiusHealthBararena2 then
-							GladiusClassIconFramearena2:SetAlpha(GladiusHealthBararena2:GetAlpha())
-							if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(GladiusHealthBararena2:GetAlpha()) end
-						end
-						if unitId == "arena3" and GladiusClassIconFramearena3 and GladiusHealthBararena3 then
-							GladiusClassIconFramearena3:SetAlpha(GladiusHealthBararena3:GetAlpha())
-								if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(GladiusHealthBararena3:GetAlpha()) end
-						end
-						if unitId == "arena4" and GladiusClassIconFramearena4 and GladiusHealthBararena4 then
-							GladiusClassIconFramearena4:SetAlpha(GladiusHealthBararena4:GetAlpha())
-							if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(GladiusHealthBararena4:GetAlpha()) end
-						end
-						if unitId == "arena5" and GladiusClassIconFramearena5 and GladiusHealthBararena5 then
-							GladiusClassIconFramearena5:SetAlpha(GladiusHealthBararena5:GetAlpha())
-							if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(GladiusHealthBararena5:GetAlpha()) end
-						end
+				end
+				if foundbuff == 0 then
+					maxExpirationTime = 0
+					Duration = Duration
+					Icon = Icon
+					forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
+					Hue = Hue
+					Name = Name
+					print(unitId, "No Stealth Buff Found")
+					if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
+						GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
+						if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
+					end
+					if unitId == "arena2" and GladiusClassIconFramearena2 and GladiusHealthBararena2 then
+						GladiusClassIconFramearena2:SetAlpha(GladiusHealthBararena2:GetAlpha())
+						if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(GladiusHealthBararena2:GetAlpha()) end
+					end
+					if unitId == "arena3" and GladiusClassIconFramearena3 and GladiusHealthBararena3 then
+						GladiusClassIconFramearena3:SetAlpha(GladiusHealthBararena3:GetAlpha())
+							if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(GladiusHealthBararena3:GetAlpha()) end
+					end
+					if unitId == "arena4" and GladiusClassIconFramearena4 and GladiusHealthBararena4 then
+						GladiusClassIconFramearena4:SetAlpha(GladiusHealthBararena4:GetAlpha())
+						if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(GladiusHealthBararena4:GetAlpha()) end
+					end
+					if unitId == "arena5" and GladiusClassIconFramearena5 and GladiusHealthBararena5 then
+						GladiusClassIconFramearena5:SetAlpha(GladiusHealthBararena5:GetAlpha())
+						if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(GladiusHealthBararena5:GetAlpha()) end
 					end
 				end
 			end
 		end
-
+	end
 
 	for i = 1, #buffs do --creates a layered hue for every icon when a specific priority, or spellid is present
 		if not buffs[i] then break end
 			if (buffs[i].col3.name == "EnemySmokeBomb") or (buffs[i].col3.name == "EnemyShadowyDuel") then --layered hue conidition
 				if buffs[i].col3.expirationTime > GetTime() then
 					if LoseControlDB.RedSmokeBomb then
-					LayeredHue = true
-					Hue = "Red"
+						LayeredHue = true
+						Hue = "Red"
 					end
 				local remaining = buffs[i].col3.expirationTime - GetTime() -- refires on layer exit, to reset the icons
 				if  remaining  < 0.05 then
 					 remaining  = 0.05
 				end
 				Ctimer(remaining + .05, function() self:UNIT_AURA(unitId, updatedAuras, -55) end)
-				end
 			end
 		end
+	end
+
 	if (maxExpirationTime == 0) then -- no (de)buffs found
 		self.maxExpirationTime = 0
     	if self.anchor ~= UIParent and self.drawlayer then
@@ -9987,7 +9964,7 @@ end
 			end
 			if self.drawlayer and self.anchor.SetDrawLayer then
 				--self.anchor:SetDrawLayer("BACKGROUND") -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
-       		 self.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
+       		 	self.anchor:SetDrawLayer("BACKGROUND", -1) -- Temporarily put the portrait texture below the debuff texture. This is the only reliable method I've found for keeping the debuff texture visible with the cooldown spiral on top of it.
 			end
 		end
 
@@ -10015,178 +9992,178 @@ end
 			end
 		end
 
-    if Count then
-      if ((unitId == "player" and LoseControlDB.CountTextplayer) or ((unitId == "party1" or unitId == "party2" or unitId == "party3" or unitId == "party4") and  LoseControlDB.CountTextparty)) and not (self.frame.anchor == "Blizzard") then
-       if ( Count > 1 ) then
-        local countText = Count
-        if ( Count >= 100 ) then
-         countText = BUFF_STACKS_OVERFLOW
-        end
-        self.count:ClearAllPoints()
-        self.count:SetFont(STANDARD_TEXT_FONT, self.frame.size*.415, "OUTLINE")
-        if strmatch(unitId, "party") then
-          self.count:SetPoint("TOPLEFT", 1, self.frame.size*.415/2.5);
-          self.count:SetJustifyH("RIGHT");
-        else
-          self.count:SetPoint("TOPRIGHT", -1, self.frame.size*.415/2.5);
-          self.count:SetJustifyH("RIGHT");
-        end
-        self.count:Show();
-        self.count:SetText(countText)
-       else
-        if self.count:IsShown() then
-          self.count:Hide()
-        end
-       end
-    elseif (unitId == "arena1" or unitId == "arena2" or unitId == "arena3" or unitId == "arena4" or unitId == "arena5") and LoseControlDB.CountTextarena and not (self.frame.anchor == "Blizzard") then
-      if ( Count > 1 ) then
-       local countText = Count
-       if ( Count >= 100 ) then
-        countText = BUFF_STACKS_OVERFLOW
-       end
-       self.count:ClearAllPoints()
-       self.count:SetFont(STANDARD_TEXT_FONT, self.frame.size*.333, "OUTLINE")
-       self.count:SetPoint("BOTTOMRIGHT", 0, 0);
-       self.count:SetJustifyH("RIGHT");
-       self.count:Show();
-       self.count:SetText(countText)
-      else
-       if self.count:IsShown() then
-         self.count:Hide()
-       end
-      end
-     end
-    else
-      if self.count:IsShown() then
-        self.count:Hide()
-      end
-    end
+		if Count then
+			if ((unitId == "player" and LoseControlDB.CountTextplayer) or ((unitId == "party1" or unitId == "party2" or unitId == "party3" or unitId == "party4") and  LoseControlDB.CountTextparty)) and not (self.frame.anchor == "Blizzard") then
+				if ( Count > 1 ) then
+					local countText = Count
+					if ( Count >= 100 ) then
+						countText = BUFF_STACKS_OVERFLOW
+					end
+					self.count:ClearAllPoints()
+					self.count:SetFont(STANDARD_TEXT_FONT, self.frame.size*.415, "OUTLINE")
+					if strmatch(unitId, "party") then
+						self.count:SetPoint("TOPLEFT", 1, self.frame.size*.415/2.5);
+						self.count:SetJustifyH("RIGHT");
+					else
+						self.count:SetPoint("TOPRIGHT", -1, self.frame.size*.415/2.5);
+						self.count:SetJustifyH("RIGHT");
+					end
+					self.count:Show();
+					self.count:SetText(countText)
+				else
+				if self.count:IsShown() then
+					self.count:Hide()
+				end
+			end
+			elseif (unitId == "arena1" or unitId == "arena2" or unitId == "arena3" or unitId == "arena4" or unitId == "arena5") and LoseControlDB.CountTextarena and not (self.frame.anchor == "Blizzard") then
+				if ( Count > 1 ) then
+					local countText = Count
+					if ( Count >= 100 ) then
+						countText = BUFF_STACKS_OVERFLOW
+					end
+					self.count:ClearAllPoints()
+					self.count:SetFont(STANDARD_TEXT_FONT, self.frame.size*.333, "OUTLINE")
+					self.count:SetPoint("BOTTOMRIGHT", 0, 0);
+					self.count:SetJustifyH("RIGHT");
+					self.count:Show();
+					self.count:SetText(countText)
+				else
+					if self.count:IsShown() then
+						self.count:Hide()
+					end
+				end
+			end
+		else
+			if self.count:IsShown() then
+				self.count:Hide()
+			end
+		end
 
-    local inInstance, instanceType = IsInInstance()
-    if (instanceType == "arena" or instanceType == "pvp") and LoseControlDB.ArenaPlayerText then
-      --Do Nothing
-    else
-      if Text and unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
-        self.Ltext:SetFont(STANDARD_TEXT_FONT, self.frame.size*.25, "OUTLINE")
-        self.Ltext:SetText(Text)
-        self.Ltext:Show()
-      elseif unitId == "player" and self.frame.anchor ~= "Blizzard" then
-        if self.Ltext:IsShown() then
-          self.Ltext:Hide()
-        end
-      end
-    end
+		local inInstance, instanceType = IsInInstance()
+		if (instanceType == "arena" or instanceType == "pvp") and LoseControlDB.ArenaPlayerText then
+			--Do Nothing
+		else
+			if Text and unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
+				self.Ltext:SetFont(STANDARD_TEXT_FONT, self.frame.size*.25, "OUTLINE")
+				self.Ltext:SetText(Text)
+				self.Ltext:Show()
+			elseif unitId == "player" and self.frame.anchor ~= "Blizzard" then
+				if self.Ltext:IsShown() then
+					self.Ltext:Hide()
+				end
+			end
+		end
 
-    if  unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.displayTypeDot and DispelType then
-      self.dispelTypeframe:SetHeight(self.frame.size*.105)
-      self.dispelTypeframe:SetWidth(self.frame.size*.105)
-      self.dispelTypeframe.tex:SetDesaturated(nil)
-      self.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
-      self.dispelTypeframe:ClearAllPoints()
-      if self.Ltext:IsShown() then
-        self.dispelTypeframe:SetPoint("RIGHT", self.Ltext, "LEFT", -2, 0)
-      else
-        self.dispelTypeframe:SetPoint("TOP", self, "BOTTOM", 0, -1)
-      end
-      self.dispelTypeframe:Show()
-    elseif unitId == "player" and self.frame.anchor ~= "Blizzard" then
-      if self.dispelTypeframe:IsShown() then
-        self.dispelTypeframe:Hide()
-      end
-    end
+		if  unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.displayTypeDot and DispelType then
+			self.dispelTypeframe:SetHeight(self.frame.size*.105)
+			self.dispelTypeframe:SetWidth(self.frame.size*.105)
+			self.dispelTypeframe.tex:SetDesaturated(nil)
+			self.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
+			self.dispelTypeframe:ClearAllPoints()
+			if self.Ltext:IsShown() then
+				self.dispelTypeframe:SetPoint("RIGHT", self.Ltext, "LEFT", -2, 0)
+			else
+				self.dispelTypeframe:SetPoint("TOP", self, "BOTTOM", 0, -1)
+			end
+			self.dispelTypeframe:Show()
+		elseif unitId == "player" and self.frame.anchor ~= "Blizzard" then
+			if self.dispelTypeframe:IsShown() then
+				self.dispelTypeframe:Hide()
+			end
+		end
 
-  	if maxPriorityIsInterrupt then
-      if LoseControlDB.InterruptOverlay and interruptsIds[Spell] then
-  			if self.frame.anchor == "Blizzard" then
-  				self.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait") --CHRIS
-  			else
-  				self.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background") --CHRIS
-  			end
-  			if (not self.iconInterruptBackground:IsShown()) then
-  				self.iconInterruptBackground:Show()
-  			end
-  		else
-  			if self.iconInterruptBackground then
-  				self.iconInterruptBackground:Hide()
-  			end
-      end
+		if maxPriorityIsInterrupt then
+			if LoseControlDB.InterruptOverlay and interruptsIds[Spell] then
+				if self.frame.anchor == "Blizzard" then
+					self.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait") --CHRIS
+				else
+					self.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background") --CHRIS
+				end
+				if (not self.iconInterruptBackground:IsShown()) then
+					self.iconInterruptBackground:Show()
+				end
+			else
+				if self.iconInterruptBackground then
+					self.iconInterruptBackground:Hide()
+				end
+			end
 		end
 		if self.frame.anchor == "Blizzard" then  --CHRIS DISABLE SQ
-      if Hue then
-        if Hue == "Red" then -- Changes Icon Hue to Red
-          SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Red_No_Desaturate" then -- Changes Hue to Red and any Icon Greater
-          SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
-          self.texture:SetDesaturated(nil) --Destaurate  Icon
-          self.texture:SetVertexColor(1, 0, 0); --Red Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Yellow" then -- Changes Hue to Yellow and any Icon Greater
-          SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate  Icon
-          self.texture:SetVertexColor(1, 1, 0); --Yellow Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Purple" then -- Changes Hue to Purple and any Icon Greater
-          SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(1, 0, 1); --Purple Hue Set For Smoke Bomb Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "GhostPurple" then -- Changes Hue to Purple and any Icon Greater
-          SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-          self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(.65, .5, .9);  --Purple Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        end
-      else
-        SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a filHuee applying a circular opacity mask making it look round like portraits
-        self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
-        self.texture:SetDesaturated(nil) --Destaurate Icon
-        self.texture:SetVertexColor(1, 1, 1)
-        self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) ---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-      end
+			if Hue then
+				if Hue == "Red" then -- Changes Icon Hue to Red
+					SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Red_No_Desaturate" then -- Changes Hue to Red and any Icon Greater
+					SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
+					self.texture:SetDesaturated(nil) --Destaurate  Icon
+					self.texture:SetVertexColor(1, 0, 0); --Red Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Yellow" then -- Changes Hue to Yellow and any Icon Greater
+					SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate  Icon
+					self.texture:SetVertexColor(1, 1, 0); --Yellow Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Purple" then -- Changes Hue to Purple and any Icon Greater
+					SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(1, 0, 1); --Purple Hue Set For Smoke Bomb Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "GhostPurple" then -- Changes Hue to Purple and any Icon Greater
+					SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(.65, .5, .9);  --Purple Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				end
+			else
+				SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a filHuee applying a circular opacity mask making it look round like portraits
+				self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+				self.texture:SetDesaturated(nil) --Destaurate Icon
+				self.texture:SetVertexColor(1, 1, 1)
+				self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) ---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+			end
 		else
-      if Hue then
-        self:SetSwipeTexture("Interface\Cooldown\edge")
-        if Hue == "Red" then -- Changes Icon Hue to Red
-          self.texture:SetTexture(Icon)   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Red_No_Desaturate" then -- Changes Hue to Red and any Icon Greater
-          self.texture:SetTexture(Icon)   --SetIcon
-          self.texture:SetDesaturated(nil) --Destaurate Icon
-          self.texture:SetVertexColor(1, 0, 0); --Red Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Yellow" then -- Changes Hue to Yellow and any Icon Greater
-          self.texture:SetTexture(Icon)   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(1, 1, 0); --Yellow Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "Purple" then -- Changes Hue to Purple and any Icon Greater
-          self.texture:SetTexture(Icon)   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(1, 0, 1); --Purple Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        elseif Hue == "GhostPurple" then -- Changes Hue to Purple and any Icon Greater
-          self.texture:SetTexture(Icon)   --Set Icon
-          self.texture:SetDesaturated(1) --Destaurate Icon
-          self.texture:SetVertexColor(.65, .5, .9); --Purple Hue Set For Icon
-          self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-        end
-      else
-        self:SetSwipeTexture("Interface\Cooldown\edge")
-        self.texture:SetTexture(Icon)
-        self.texture:SetDesaturated(nil) --Destaurate Icon
-        self.texture:SetVertexColor(1, 1, 1)
-        self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) ---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
-      end
+			if Hue then
+				self:SetSwipeTexture("Interface\Cooldown\edge")
+				if Hue == "Red" then -- Changes Icon Hue to Red
+					self.texture:SetTexture(Icon)   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Red_No_Desaturate" then -- Changes Hue to Red and any Icon Greater
+					self.texture:SetTexture(Icon)   --SetIcon
+					self.texture:SetDesaturated(nil) --Destaurate Icon
+					self.texture:SetVertexColor(1, 0, 0); --Red Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Yellow" then -- Changes Hue to Yellow and any Icon Greater
+					self.texture:SetTexture(Icon)   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(1, 1, 0); --Yellow Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "Purple" then -- Changes Hue to Purple and any Icon Greater
+					self.texture:SetTexture(Icon)   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(1, 0, 1); --Purple Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				elseif Hue == "GhostPurple" then -- Changes Hue to Purple and any Icon Greater
+					self.texture:SetTexture(Icon)   --Set Icon
+					self.texture:SetDesaturated(1) --Destaurate Icon
+					self.texture:SetVertexColor(.65, .5, .9); --Purple Hue Set For Icon
+					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+				end
+			else
+				self:SetSwipeTexture("Interface\Cooldown\edge")
+				self.texture:SetTexture(Icon)
+				self.texture:SetDesaturated(nil) --Destaurate Icon
+				self.texture:SetVertexColor(1, 1, 1)
+				self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting) ---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
+			end
 		end
 		if forceEventUnitAuraAtEnd and maxExpirationTime > 0 and Duration > 0 then
 			local nextTimerUpdate = maxExpirationTime - GetTime() + 0.10
@@ -10278,82 +10255,80 @@ end
 
 
 function LoseControl:Silence(frame)
-  local playerSilence = frame.playerSilence
-  local Icon, Duration, maxPriority, maxExpirationTime
+  	local playerSilence = frame.playerSilence
+  	local Icon, Duration, maxPriority, maxExpirationTime
 	local maxPriority = 1
 	local maxExpirationTime = 0
 	local priority = LoseControlDB.priority
-  for i = 1, 40 do
-    local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HARMFUL")
-    if duration == 0 and expirationTime == 0 then
-      expirationTime = GetTime() + 1 -- normal expirationTime = 0
-    end
-    local spellCategory = spellIds[spellId] or spellIds[name]
+	for i = 1, 40 do
+		local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HARMFUL")
+		if duration == 0 and expirationTime == 0 then
+			expirationTime = GetTime() + 1 -- normal expirationTime = 0
+		end
+		local spellCategory = spellIds[spellId] or spellIds[name]
 		local Priority = priority[spellCategory]
-    if spellCategory == "Silence" then
-      if expirationTime > maxExpirationTime then
+		if spellCategory == "Silence" then
+			if expirationTime > maxExpirationTime then
 				maxExpirationTime = expirationTime
 				Duration = duration
 				Icon = icon
 			end
-    end
-  end
-  for i = 1, 40 do
-    local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HELPFUL")
-    if duration == 0 and expirationTime == 0 then
-      expirationTime = GetTime() + 1 -- normal expirationTime = 0
-    end
-    local spellCategory = spellIds[spellId] or spellIds[name]
-    local Priority = priority[spellCategory]
-    if spellCategory == "Silence" then
-      if expirationTime > maxExpirationTime then
-        maxExpirationTime = expirationTime
-        Duration = duration
-        Icon = icon
-      end
-    end
-  end
-  playerSilence:SetWidth(frame:GetWidth()*.9)
-  playerSilence:SetHeight(frame:GetHeight()*.9)
-  playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-  playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.25, "OUTLINE")
-  --playerSilence.Ltext:SetText("Silence")
-  if maxExpirationTime == 0 then
-    playerSilence.maxExpirationTime = 0
-    playerSilence:Hide()
-  elseif maxExpirationTime then
-  	playerSilence.maxExpirationTime = maxExpirationTime
-    if LoseControlDB.DrawSwipeSetting > 0 then
-      playerSilence.cooldown:SetDrawSwipe(true)
-    else
-      playerSilence.cooldown:SetDrawSwipe(false)
-    end
-    playerSilence.texture:SetTexture(Icon)
-    playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-    if Duration > 0 then
-      if (maxExpirationTime - GetTime()) > (9*60+59) then
-        playerSilence.cooldown:SetCooldown(GetTime(), 0)
-        playerSilence.cooldown:SetCooldown(GetTime(), 0)
-      else
-  	     playerSilence.cooldown:SetCooldown( maxExpirationTime - Duration, Duration )
-      end
-  	else
-  		if playerSilence.cooldown:GetDrawSwipe() then
-  			if LoseControlDB.DrawSwipeSetting > 0 then
-  			playerSilence.cooldown:SetDrawSwipe(true)
-  			else
-  			playerSilence.cooldown:SetDrawSwipe(false)
-  			end
-  		end
-  		playerSilence.cooldown:SetCooldown(GetTime(), 0)
-  		playerSilence.cooldown:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
+		end
   	end
-    local inInstance, instanceType = IsInInstance()
-    playerSilence:Show()
-  end
+	for i = 1, 40 do
+		local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HELPFUL")
+		if duration == 0 and expirationTime == 0 then
+			expirationTime = GetTime() + 1 -- normal expirationTime = 0
+		end
+		local spellCategory = spellIds[spellId] or spellIds[name]
+		local Priority = priority[spellCategory]
+		if spellCategory == "Silence" then
+			if expirationTime > maxExpirationTime then
+				maxExpirationTime = expirationTime
+				Duration = duration
+				Icon = icon
+			end
+		end
+	end
+	playerSilence:SetWidth(frame:GetWidth()*.9)
+	playerSilence:SetHeight(frame:GetHeight()*.9)
+	playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+	playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.25, "OUTLINE")
+	--playerSilence.Ltext:SetText("Silence")
+	if maxExpirationTime == 0 then
+		playerSilence.maxExpirationTime = 0
+		playerSilence:Hide()
+	elseif maxExpirationTime then
+		playerSilence.maxExpirationTime = maxExpirationTime
+		if LoseControlDB.DrawSwipeSetting > 0 then
+			playerSilence.cooldown:SetDrawSwipe(true)
+		else
+			playerSilence.cooldown:SetDrawSwipe(false)
+		end
+			playerSilence.texture:SetTexture(Icon)
+			playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+		if Duration > 0 then
+			if (maxExpirationTime - GetTime()) > (9*60+59) then
+				playerSilence.cooldown:SetCooldown(GetTime(), 0)
+				playerSilence.cooldown:SetCooldown(GetTime(), 0)
+			else
+				playerSilence.cooldown:SetCooldown( maxExpirationTime - Duration, Duration )
+			end
+		else
+			if playerSilence.cooldown:GetDrawSwipe() then
+				if LoseControlDB.DrawSwipeSetting > 0 then
+					playerSilence.cooldown:SetDrawSwipe(true)
+				else
+					playerSilence.cooldown:SetDrawSwipe(false)
+				end
+			end
+			playerSilence.cooldown:SetCooldown(GetTime(), 0)
+			playerSilence.cooldown:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
+		end
+		local inInstance, instanceType = IsInInstance()
+		playerSilence:Show()
+	end
 end
-
-
 
 
 function LoseControl:PLAYER_FOCUS_CHANGED()
@@ -10399,7 +10374,7 @@ end
 -- Handle mouse dragging
 function LoseControl:StopMoving()
 	local frame = LoseControlDB.frames[self.unitId]
-  local anchor =  frame.anchor
+  	local anchor =  frame.anchor
 	frame.point, frame.anchor, frame.relativePoint, frame.x, frame.y = self:GetPoint()
 	if not frame.anchor then
 		frame.anchor = anchor
@@ -10452,40 +10427,40 @@ function LoseControl:new(unitId)
 	o:SetParent(op)
 	o.parent = op
 
-  if unitId == "player" then
-    o.Ltext = o:CreateFontString(nil, "ARTWORK")
-    o.Ltext:SetParent(o)
-    o.Ltext:SetJustifyH("CENTER")
-    o.Ltext:SetTextColor(1, 1, 1, 1)
-    o.Ltext:SetPoint("TOP", o, "BOTTOM", 0, -1)
-    o.dispelTypeframe  = CreateFrame("Frame", addonName .. "dispelTypeframe" .. unitId, o)
-    o.dispelTypeframe:ClearAllPoints()
-    o.dispelTypeframe:SetAlpha(1)
-    o.dispelTypeframe:SetFrameLevel(3)
-    o.dispelTypeframe:SetFrameStrata("MEDIUM")
-    o.dispelTypeframe:EnableMouse(false)
-    o.dispelTypeframe.tex = o.dispelTypeframe:CreateTexture()
-    o.dispelTypeframe.tex:SetAllPoints(o.dispelTypeframe)
-    SetPortraitToTexture(o.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
-    o.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-    o.playerSilence = CreateFrame("Frame", "playerSilence", frame)
-    o.playerSilence:SetPoint("BOTTOMLEFT", o, "BOTTOMRIGHT", 1, 0)
-    o.playerSilence:SetParent(o)
-    o.playerSilence.texture = o.playerSilence:CreateTexture(nil, "BACKGROUND")
-    o.playerSilence.texture:SetAllPoints(true)
-    o.playerSilence.cooldown = CreateFrame("Cooldown", nil,   o.playerSilence, 'CooldownFrameTemplate')
-    o.playerSilence.cooldown:SetAllPoints(o.playerSilence)
-    o.playerSilence.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")    --("Interface\\Cooldown\\edge-LoC") Blizz LC CD
-    o.playerSilence.cooldown:SetDrawSwipe(true)
-    o.playerSilence.cooldown:SetDrawEdge(false)
-    o.playerSilence.cooldown:SetReverse(true) --will reverse the swipe if actionbars or debuff, by default bliz sets the swipe to actionbars if this = true it will be set to debuffs
-    o.playerSilence.cooldown:SetDrawBling(false)
-    o.playerSilence.Ltext = o.playerSilence:CreateFontString(nil, "ARTWORK")
-    o.playerSilence.Ltext:SetParent(o.playerSilence)
-    o.playerSilence.Ltext:SetJustifyH("CENTER")
-    o.playerSilence.Ltext:SetTextColor(1, 1, 1, 1)
-    o.playerSilence.Ltext:SetPoint("TOP", o.playerSilence, "BOTTOM")
-  end
+	if unitId == "player" then
+		o.Ltext = o:CreateFontString(nil, "ARTWORK")
+		o.Ltext:SetParent(o)
+		o.Ltext:SetJustifyH("CENTER")
+		o.Ltext:SetTextColor(1, 1, 1, 1)
+		o.Ltext:SetPoint("TOP", o, "BOTTOM", 0, -1)
+		o.dispelTypeframe  = CreateFrame("Frame", addonName .. "dispelTypeframe" .. unitId, o)
+		o.dispelTypeframe:ClearAllPoints()
+		o.dispelTypeframe:SetAlpha(1)
+		o.dispelTypeframe:SetFrameLevel(3)
+		o.dispelTypeframe:SetFrameStrata("MEDIUM")
+		o.dispelTypeframe:EnableMouse(false)
+		o.dispelTypeframe.tex = o.dispelTypeframe:CreateTexture()
+		o.dispelTypeframe.tex:SetAllPoints(o.dispelTypeframe)
+		SetPortraitToTexture(o.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+		o.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+		o.playerSilence = CreateFrame("Frame", "playerSilence", frame)
+		o.playerSilence:SetPoint("BOTTOMLEFT", o, "BOTTOMRIGHT", 1, 0)
+		o.playerSilence:SetParent(o)
+		o.playerSilence.texture = o.playerSilence:CreateTexture(nil, "BACKGROUND")
+		o.playerSilence.texture:SetAllPoints(true)
+		o.playerSilence.cooldown = CreateFrame("Cooldown", nil,   o.playerSilence, 'CooldownFrameTemplate')
+		o.playerSilence.cooldown:SetAllPoints(o.playerSilence)
+		o.playerSilence.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")    --("Interface\\Cooldown\\edge-LoC") Blizz LC CD
+		o.playerSilence.cooldown:SetDrawSwipe(true)
+		o.playerSilence.cooldown:SetDrawEdge(false)
+		o.playerSilence.cooldown:SetReverse(true) --will reverse the swipe if actionbars or debuff, by default bliz sets the swipe to actionbars if this = true it will be set to debuffs
+		o.playerSilence.cooldown:SetDrawBling(false)
+		o.playerSilence.Ltext = o.playerSilence:CreateFontString(nil, "ARTWORK")
+		o.playerSilence.Ltext:SetParent(o.playerSilence)
+		o.playerSilence.Ltext:SetJustifyH("CENTER")
+		o.playerSilence.Ltext:SetTextColor(1, 1, 1, 1)
+		o.playerSilence.Ltext:SetPoint("TOP", o.playerSilence, "BOTTOM")
+	end
 
 	o:SetDrawEdge(false)
 
@@ -10507,8 +10482,8 @@ function LoseControl:new(unitId)
 	o.text:SetPoint("BOTTOM", o, "BOTTOM")
 	o.text:Hide()
 
-  o.count = o:CreateFontString(nil, "OVERLAY", "GameFontWhite");
-  o.count:Hide()
+	o.count = o:CreateFontString(nil, "OVERLAY", "GameFontWhite");
+	o.count:Hide()
 
 
 -----------------------------------------------------------------------------------
