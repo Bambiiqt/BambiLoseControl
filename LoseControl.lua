@@ -8433,6 +8433,9 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			end
 		end
 
+		------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		----CLEU Deuff Timer
+		------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		-----------------------------------------------------------------------------------------------------------------
 		--SmokeBomb Check
 		-----------------------------------------------------------------------------------------------------------------
@@ -8446,6 +8449,60 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 			SmokeBombAuras[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
 				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
 					SmokeBombAuras[sourceGUID] = nil
+				end)
+			end
+		end
+
+		------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		----CLEU Buff Timer
+		------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		-----------------------------------------------------------------------------------------------------------------
+		--Solar Beam Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 78675)) then
+			if (sourceGUID ~= nil) then
+				local duration = 8
+				local expirationTime = GetTime() + duration
+				if (BeamAura[sourceGUID] == nil) then
+					BeamAura[sourceGUID] = {}
+				end
+				BeamAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
+					BeamAura[sourceGUID] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--Barrier Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 62618)) then
+			if (sourceGUID ~= nil) then
+				local duration = 10
+				local expirationTime = GetTime() + duration
+				if (Barrier[sourceGUID] == nil) then
+					Barrier[sourceGUID] = {}
+				end
+				Barrier[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
+					Barrier[sourceGUID] = nil
+				end)
+			end
+		end
+
+		-----------------------------------------------------------------------------------------------------------------
+		--SGrounds Check
+		-----------------------------------------------------------------------------------------------------------------
+		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 34861)) then
+			if (sourceGUID ~= nil) then
+				local duration = 5
+				local expirationTime = GetTime() + duration
+				if (SGrounds[sourceGUID] == nil) then
+					SGrounds[sourceGUID] = {}
+				end
+				SGrounds[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
+					SGrounds[sourceGUID] = nil
 				end)
 			end
 		end
@@ -8617,57 +8674,6 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				end)
 				C_Timer.After(duration +.2, function()	-- execute in some close next frame to accurate use of UnitAura function
 					WarBanner[spawnTime] = nil
-				end)
-			end
-		end
-
-		-----------------------------------------------------------------------------------------------------------------
-		--Barrier Check
-		-----------------------------------------------------------------------------------------------------------------
-		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 62618)) then
-			if (sourceGUID ~= nil) then
-				local duration = 10
-				local expirationTime = GetTime() + duration
-				if (Barrier[sourceGUID] == nil) then
-					Barrier[sourceGUID] = {}
-				end
-				Barrier[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
-					Barrier[sourceGUID] = nil
-				end)
-			end
-		end
-
-		-----------------------------------------------------------------------------------------------------------------
-		--SGrounds Check
-		-----------------------------------------------------------------------------------------------------------------
-		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 34861)) then
-			if (sourceGUID ~= nil) then
-				local duration = 5
-				local expirationTime = GetTime() + duration
-				if (SGrounds[sourceGUID] == nil) then
-					SGrounds[sourceGUID] = {}
-				end
-				SGrounds[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-				Ctimer(duration + 1, function()	-- execute iKn some close next frame to accurate use of UnitAura function
-					SGrounds[sourceGUID] = nil
-				end)
-			end
-		end
-
-		-----------------------------------------------------------------------------------------------------------------
-		--Solar Beam Check
-		-----------------------------------------------------------------------------------------------------------------
-		if ((event == "SPELL_CAST_SUCCESS") and (spellId == 78675)) then
-			if (sourceGUID ~= nil) then
-				local duration = 8
-				local expirationTime = GetTime() + duration
-				if (BeamAura[sourceGUID] == nil) then
-					BeamAura[sourceGUID] = {}
-				end
-				BeamAura[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
-				Ctimer(duration + 1, function()	-- execute in some close next frame to accurate use of UnitAura function
-					BeamAura[sourceGUID] = nil
 				end)
 			end
 		end
@@ -9019,14 +9025,15 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			if spellId == 317589 then --Mirros of Toremnt, Tormenting Backlash (Venthyr Mage) to Frost Jaw
 				icon = 538562
 			end
+			
+			if spellId == 199845 then --Psyflay
+				icon = 537021
+			end
 
 			if spellId == 115196 then --Shiv
 				icon = 135428
 			end
 
-			if spellId == 199845 then --Psyflay
-				icon = 537021
-			end
 
 			if spellId == 285515 then --Frost Shock to Frost Nove
 				icon = 135848
@@ -9205,6 +9212,26 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				localForceEventUnitAuraAtEnd = (self.unitId == "targettarget")
 			end
 
+			-----------------------------------------------------------------------------------------------------------------
+			--Barrier Add Timer Check For Arena
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 81782 then -- Barrier
+				if source and Barrier[UnitGUID(source)] then
+					duration = Barrier[UnitGUID(source)].duration
+					expirationTime = Barrier[UnitGUID(source)].expirationTime
+				end
+			end
+
+			-----------------------------------------------------------------------------------------------------------------
+			--SGrounds Add Timer Check For Arena
+			-----------------------------------------------------------------------------------------------------------------
+			if spellId == 289655 then -- SGrounds
+				if source and SGrounds[UnitGUID(source)] then
+					duration = SGrounds[UnitGUID(source)].duration
+					expirationTime = SGrounds[UnitGUID(source)].expirationTime
+				end
+			end
+
 
 			-----------------------------------------------------------------------------------------------------------------
 			--Totems Add Timer Check For Arena
@@ -9288,26 +9315,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			end
 
 			-----------------------------------------------------------------------------------------------------------------
-			--Barrier Add Timer Check For Arena
-			-----------------------------------------------------------------------------------------------------------------
-			if spellId == 81782 then -- Barrier
-				if source and Barrier[UnitGUID(source)] then
-					duration = Barrier[UnitGUID(source)].duration
-					expirationTime = Barrier[UnitGUID(source)].expirationTime
-				end
-			end
-
-			-----------------------------------------------------------------------------------------------------------------
-			--SGrounds Add Timer Check For Arena
-			-----------------------------------------------------------------------------------------------------------------
-			if spellId == 289655 then -- SGrounds
-				if source and SGrounds[UnitGUID(source)] then
-					duration = SGrounds[UnitGUID(source)].duration
-					expirationTime = SGrounds[UnitGUID(source)].expirationTime
-				end
-			end
-
-			-----------------------------------------------------------------------------------------------------------------
 			--Two Buff conidtions Icy Veins Stacks
 			-----------------------------------------------------------------------------------------------------------------
 			if spellId == 12472 then
@@ -9379,20 +9386,21 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			-----------------------------------------------------------------------------------------------------------------
 			--Icon Changes
 			-----------------------------------------------------------------------------------------------------------------
-			if spellId == 317929 then --Aura Mastery Cast Immune Pally
-				icon = 135863
-			end
-
-			if spellId == 199545 then --Steed of Glory Hack
-					icon = 135890
-				end
-
+			
 			if spellId == 329543 then --Divine Ascension
 				icon = 2103871 --618976 -- or 590341
 			end
 
 			if spellId == 328530 then --Divine Ascension
 				icon = 2103871 --618976 -- or 590341
+			end
+
+			if spellId == 317929 then --Aura Mastery Cast Immune Pally
+				icon = 135863
+			end
+
+			if spellId == 199545 then --Steed of Glory Hack
+					icon = 135890
 			end
 
 			if spellId == 387636 then --Soulburn Healthstone
@@ -9477,12 +9485,12 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				expirationTime = GetTime() + 1
 			end
 
-			if spellId == 334320 then -- Lock Drain LIfe Stacks, Removes Timer  247676
+			if spellId == 247676 then -- Reckoning Ret Stacks, Removes Timer
 				duration = 0
 				expirationTime = GetTime() + 1
 			end
 
-			if spellId == 247676 then -- Reckoning Ret Stacks, Removes Timer
+			if spellId == 334320 then -- Lock Drain LIfe Stacks, Removes Timer  247676
 				duration = 0
 				expirationTime = GetTime() + 1
 			end
