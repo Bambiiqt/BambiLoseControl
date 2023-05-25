@@ -294,7 +294,9 @@ local spellsArenaTable = {
 	{81261 , "Silence_Arena"}, --Solar Beam
 	{5215 , "Special_High"}, --Prowl
 	{194223, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
+	{383410, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
 	{102560 , "Ranged_Major_OffenisiveCDs"}, --Incarnation: Chosen of Elune
+	{390414 , "Ranged_Major_OffenisiveCDs"}, --Incarnation: Chosen of Elune (Orbital Strike)
 	{339 , "Roots_90_Snares"}, --Entangling Roots
 	{170855 , "Roots_90_Snares"}, --Entangling Roots (Nature's Grasp)
 	{102359 , "Roots_90_Snares"}, --Mass Entanglement
@@ -10002,7 +10004,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			if ((unitId == "player" and LoseControlDB.CountTextplayer) or ((unitId == "party1" or unitId == "party2" or unitId == "party3" or unitId == "party4") and  LoseControlDB.CountTextparty)) and not (self.frame.anchor == "Blizzard") then
 				if ( Count > 1 ) then
 					local countText = Count
-					if ( Count >= 100 ) then
+					if ( Count > 100 ) then
 						countText = BUFF_STACKS_OVERFLOW
 					end
 					self.count:ClearAllPoints()
@@ -10024,7 +10026,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			elseif (unitId == "arena1" or unitId == "arena2" or unitId == "arena3" or unitId == "arena4" or unitId == "arena5") and LoseControlDB.CountTextarena and not (self.frame.anchor == "Blizzard") then
 				if ( Count > 1 ) then
 					local countText = Count
-					if ( Count >= 100 ) then
+					if ( Count > 100 ) then
 						countText = BUFF_STACKS_OVERFLOW
 					end
 					self.count:ClearAllPoints()
