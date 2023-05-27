@@ -186,7 +186,7 @@ local interrupts = {
 	{187707 , 3},		-- Muzzle (Hunter)
 	{351338 , 4},		-- Quell (Evoker)
 	{97547  , 5},		-- Solar Beam (Druid Balance)
-	{93985  , 4},		-- Skull Bash (Druid Feral)
+	{93985  , 3},		-- Skull Bash 
 	{183752 , 3},		-- Disrupt (Demon Hunter)
 	{91807 ,  2},   	-- Shambling Rush
 	{91802  , 2},		-- Shambling Rush (Death Knight)
@@ -292,6 +292,7 @@ local spellsArenaTable = {
 	{99 , "CC_Arena"}, --Incapacitating Roar
 	{2637 , "CC_Arena"}, --Hibernate
 	{81261 , "Silence_Arena"}, --Solar Beam
+	{410065  , "Silence_Arena"}, --Reactive Resin
 	{5215 , "Special_High"}, --Prowl
 	{194223, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
 	{383410, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
@@ -327,6 +328,7 @@ local spellsArenaTable = {
 	{22842 , "Small_Defensive_CDs"}, --Frenzied Regenerationw+
 	{192081 , "Small_Defensive_CDs"}, --Ironfur
 	{200947 , "Small_Defensive_CDs"}, --High Winds
+	{201664 , "Small_Defensive_CDs"}, --High Winds
 
 	{305497 , "Small_Defensive_CDs"}, --Thorns
 	{1850 , "Freedoms_Speed"}, --Dash
@@ -334,6 +336,7 @@ local spellsArenaTable = {
 	{106898 , "Freedoms_Speed"}, --Stampeding Roar
 	{252216 , "Freedoms_Speed"}, --Tiger's Dash
 	--{201940, "Special_Low"}, --Protector of the Pack
+
 	{768 , "Special_Low"}, --Cat Form
 	{5487 , "Special_Low"}, --Bear Form
 	{783 , "Special_Low"}, --Travel Form
@@ -974,6 +977,7 @@ local spellsArenaTable = {
 	{47476  , "Silence"},			-- Strangulate
 	{317589 , "Silence"},			-- Tormenting Backlash (Venthyr Mage)
 	{81261  , "Silence"},			-- Solar Beam
+	{410065  , "Silence"},			-- Reactive Resin
 	{217824 , "Silence"},			-- Shield of Virtue (pvp honor talent)
 	{15487  , "Silence"},			-- Silence
 	{1330   , "Silence"},			-- Garrote - Silence
@@ -1298,6 +1302,7 @@ local spellsArenaTable = {
 	{328506, "SnarePhysical30"},		-- Blessing of Winter
 
 	{58180, "SnareMagic30"}, 		-- Infected Wounds
+	{410063, "SnareMagic30"}, 		-- Reactive Resin
 	{206760, "SnareMagic30"}, 		-- Shadow Grasp
 	{370898, "SnareMagic30"}, 		-- Blaze of Light
 	{333526, "SnareMagic30"}, 		-- Spiked Burrs (NightFae)
