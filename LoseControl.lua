@@ -195,6 +195,21 @@ local interrupts = {
 
 }
 
+local StealthTable = {
+	[5215] = true, --prowl
+	[199483] = true, --camouflage
+	[5384] = true, --feign death
+	[66] = true, --Invisibility
+	[32612] = true, --Invisibility
+	[110960] = true, --Greater Invisibility
+	[198158] = true, --Mass Invisibility
+	[207736] = true, --Shadowy Duel
+	[11327] = true, --Vanish
+	[115191] = true, --Stealth
+	[1784] = true, --Stealth
+	[58984] = true, -- Shadowmeld
+}
+
 local spellsArenaTable = {
 
 	----------------
@@ -553,7 +568,7 @@ local spellsArenaTable = {
 	{47585 , "Immune_Arena"}, --Dispersion
 	{215769 , "Immune_Arena"}, --Spirit of Redemption
 	{27827 , "Immune_Arena"}, --Spirit of Redemption
-	{213602 , "Immune_Arena"}, --Greater Fade
+	{408558 , "Immune_Arena"}, --Phase Shift
 	{358861 , "CC_Arena"}, --Void Volley: Horrify
 	{64044 , "CC_Arena"}, --Psychic Horror
 	{200200 , "CC_Arena"}, --Holy Word: Chastise
@@ -571,7 +586,6 @@ local spellsArenaTable = {
 	{319952, "Ranged_Major_OffenisiveCDs"}, --Voidform
 	{33206 , "Big_Defensive_CDs"}, --Pain Suprresion
 	{81782 , "Big_Defensive_CDs"}, --Power Word: Barrier
-	{213602 , "Big_Defensive_CDs"}, --Greater Fade
 	{329543 , "Big_Defensive_CDs"}, --Divine Ascension Up
 	{328530 , "Big_Defensive_CDs"}, --Divine Ascension Down
 	{47788 , "Big_Defensive_CDs"}, --Guardian Spirit
@@ -1030,7 +1044,7 @@ local spellsArenaTable = {
 	{27827  , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption
 	{290114 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
 	{215769 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
-	{213602 , "ImmunePlayer"},			-- Greater Fade (pvp honor talent - protects vs spells. melee}, ranged attacks + 50% speed)
+	{408558 , "ImmunePlayer", "Phase".."\n".."Shift"},			-- Phase Shift (pvp honor talent)
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
@@ -9139,11 +9153,11 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 								Arenastealth[unitId] = {}
 							end
 							--print(unitId, "Debuff Stealth Table Information Captured", name)
-							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
+							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 						end
 					end
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration debuffs
+					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration debuffs
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
 						if Priority == maxPriority and expirationTime-duration > newExpirationTime then
@@ -9545,11 +9559,11 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 								Arenastealth[unitId] = {}
 							end
 							--print(unitId, "Buff Stealth Table Information Captured", name)
-							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
+							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 						end
 					end
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
+					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
 					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
 						if Priority == maxPriority and expirationTime-duration > newExpirationTime then
@@ -9650,7 +9664,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					else
 						if Priority then
 							-----------------------------------------------------------------------------------------------------------------
-							--Unseen Table Debuffs
+							--Unseen Table CLEU
 							-----------------------------------------------------------------------------------------------------------------
 							if strmatch(unitId, "arena") then
 								if typeUpdate == -200 and UnitExists(unitId) then
@@ -9659,12 +9673,12 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 									end
 									--print(unitId, "cleu Stealth Table Information Captured", name)
 									local localForceEventUnitAuraAtEnd = false
-									tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
+									tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 								end
 							end
 							---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 							local localForceEventUnitAuraAtEnd = false
-							tblinsert(buffs,  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue }}) -- this will create a table to show the highest duration cleu
+							tblinsert(buffs,  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue }}) -- this will create a table to show the highest duration cleu
 							---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 							if spellSchool then -- Stop Interrupt Check when Trees Prio or SPELL_CAST_SUCCESS event
 								for schoolIntId, _ in pairs(spellSchoolInteruptsTable) do
@@ -9851,7 +9865,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 	----------------------------------------------------------------------
 	if Arenastealth[unitId] and (not UnitExists(unitId)) then
 		for i = 1, #Arenastealth[unitId] do
-			buffs[i] =  {["col1"] = Arenastealth[unitId][i].col1 , ["col2"]  = Arenastealth[unitId][i].col2 , ["col3"] = { ["name"] = Arenastealth[unitId][i].col3.name, ["duration"] = Arenastealth[unitId][i].col3.duration, ["expirationTime"] = Arenastealth[unitId][i].col3.expirationTime,  ["icon"] = Arenastealth[unitId][i].col3.icon, ["localForceEventUnitAuraAtEnd"] = Arenastealth[unitId][i].col3.localForceEventUnitAuraAtEnd, ["hue"] = Arenastealth[unitId][i].col3.hue }}
+			buffs[i] =  {["col1"] = Arenastealth[unitId][i].col1 , ["col2"]  = Arenastealth[unitId][i].col2 , ["col3"] = { ["name"] = Arenastealth[unitId][i].col3.name, ["spellId"] = Arenastealth[unitId][i].col3.spellId, ["duration"] = Arenastealth[unitId][i].col3.duration, ["expirationTime"] = Arenastealth[unitId][i].col3.expirationTime,  ["icon"] = Arenastealth[unitId][i].col3.icon, ["localForceEventUnitAuraAtEnd"] = Arenastealth[unitId][i].col3.localForceEventUnitAuraAtEnd, ["hue"] = Arenastealth[unitId][i].col3.hue }}
 		end
 		tblsort(buffs, cmp_col1)
 		tblsort(buffs, cmp_col1_col2)
@@ -9882,7 +9896,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						foundbuff = 1
 						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
-					elseif ((buffs[i].col1 == priority.Special_High) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
+					elseif ((buffs[i].col1 == priority.Special_High and StealthTable[buffs[i].col3.spellId]) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
 						maxExpirationTime = GetTime() + 1
 						Duration = 0
 						Icon = buffs[i].col3.icon
@@ -9891,6 +9905,23 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						Name = buffs[i].col3.name
 						foundbuff = 1
 						print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
+						break
+					elseif ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 <= priority.Special_High and not StealthTable[buffs[i].col3.spellId])) then
+						maxExpirationTime = buffs[i].col3.expirationTime
+						Duration = buffs[i].col3.duration
+						Icon = buffs[i].col3.icon
+						forceEventUnitAuraAtEnd = false
+						Hue = buffs[i].col3.hue
+						Name = buffs[i].col3.name
+						local nextTimerUpdate = (buffs[i].col3.expirationTime - GetTime()) + 0.05
+						if nextTimerUpdate < 0.05 then
+							nextTimerUpdate = 0.05
+						end
+						Ctimer(nextTimerUpdate, function()
+								self:UNIT_AURA(unitId, updatedAuras, -5)
+						end)
+						foundbuff = 1
+						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
 					end
 				end
@@ -9933,6 +9964,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				if buffs[i].col3.expirationTime > GetTime() then
 					if LoseControlDB.RedSmokeBomb then
 						LayeredHue = true
+						self.LayeredHue = true
 						Hue = "Red"
 					end
 				local remaining = buffs[i].col3.expirationTime - GetTime() -- refires on layer exit, to reset the icons
@@ -9941,6 +9973,13 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				end
 				Ctimer(remaining + .05, function() self:UNIT_AURA(unitId, updatedAuras, -55) end)
 			end
+		end
+	end
+
+	if self.LayeredHue then -- refires the icon to remove the hue for LayeredHUe if the BUff is Removed that trigeers Layered Hue and there Higher Prio Buff Above it w/ Same Expiration
+		if not LayeredHue then
+			self.LayeredHue = nil
+			LayeredHue = true
 		end
 	end
 
