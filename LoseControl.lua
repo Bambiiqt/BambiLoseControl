@@ -553,7 +553,7 @@ local spellsArenaTable = {
 	{47585 , "Immune_Arena"}, --Dispersion
 	{215769 , "Immune_Arena"}, --Spirit of Redemption
 	{27827 , "Immune_Arena"}, --Spirit of Redemption
-	{213602 , "Immune_Arena"}, --Greater Fade
+	{408558 , "Immune_Arena"}, --Phase Shift
 	{358861 , "CC_Arena"}, --Void Volley: Horrify
 	{64044 , "CC_Arena"}, --Psychic Horror
 	{200200 , "CC_Arena"}, --Holy Word: Chastise
@@ -1030,7 +1030,7 @@ local spellsArenaTable = {
 	{27827  , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption
 	{290114 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
 	{215769 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
-	{213602 , "ImmunePlayer"},			-- Greater Fade (pvp honor talent - protects vs spells. melee}, ranged attacks + 50% speed)
+	{408558 , "ImmunePlayer", "Pahse".."\n".."Shift"},			-- Phase Shift (pvp honor talent - protects vs spells. melee}, ranged attacks + 50% speed)
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
