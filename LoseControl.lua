@@ -8,7 +8,7 @@
 --Selected Priorities Show Highest Duration Remaining Aura Added
 --Target/Focus/ToT/ToF Will Obey/Show Icons for Arena 123 Priorities if Arena 123 Added
 --Arena Priorities vs Player, Party Priorities  Added
---Interupts Penance or Channel Casts Added
+--Interupts Penance or Channel Casts Addedd
 --Stealth Module  Added
 --Mass Invis (Hack) Added
 --Add stealth check and aura filters
@@ -1044,7 +1044,11 @@ local spellsArenaTable = {
 	{27827  , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption
 	{290114 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
 	{215769 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
+<<<<<<< HEAD
 	{408558 , "ImmunePlayer", "Phase".."\n".."Shift"},			-- Phase Shift (pvp honor talent)
+=======
+	{408558 , "ImmunePlayer", "Pahse".."\n".."Shift"},			-- Phase Shift (pvp honor talent - protects vs spells. melee}, ranged attacks + 50% speed)
+>>>>>>> 7fb2bb17791dec393aa3a00c7936df69288777bf
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
