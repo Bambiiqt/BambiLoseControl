@@ -1209,7 +1209,7 @@ local spellsArenaTable = {
 
 	--"Other", --
 	--"PvE", --PVE only
-
+	{410063, "SnareSpecial"}, 		-- Reactive Resin
 	{201787, "SnareSpecial"},		-- Heavy-Handed Strikes
 	{199845, "SnareSpecial"},		-- Psyflay (pvp honor talent)
 	{198222, "SnareSpecial"},		-- System Shock (pvp honor talent) (90% slow)
@@ -1316,7 +1316,6 @@ local spellsArenaTable = {
 	{328506, "SnarePhysical30"},		-- Blessing of Winter
 
 	{58180, "SnareMagic30"}, 		-- Infected Wounds
-	{410063, "SnareMagic30"}, 		-- Reactive Resin
 	{206760, "SnareMagic30"}, 		-- Shadow Grasp
 	{370898, "SnareMagic30"}, 		-- Blaze of Light
 	{333526, "SnareMagic30"}, 		-- Spiked Burrs (NightFae)
