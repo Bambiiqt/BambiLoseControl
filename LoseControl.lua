@@ -755,6 +755,7 @@ local spellsArenaTable = {
 	{111400 , "Freedoms_Speed"}, --Burning Rush
 	{384069 , "Snares_WithCDs"}, --Shadowflame
 	{702 , "Special_Low"}, --Curse of Weakness
+	{410598 , "Special_Low"}, --Soul Rip
 	{334275 , "Snares_Ranged_Spamable"}, --Curse of Exhaustion
 	{196099, "Snares_Casted_Melee"}, --Grimoire of Sacrifice
 	{285933, "Snares_Casted_Melee"}, --Demon Armor
