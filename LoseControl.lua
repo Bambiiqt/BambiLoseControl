@@ -8751,7 +8751,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 							if v.destGUID and v.spell ~= 394243 and v.spell ~= 387979 and v.spell ~= 394235 then --Dimensional Rift Hack
 								if substring(v.destGUID, -5) == substring(guid, -5) then --string.sub is to help witj Mirror Images bug
 									if ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName) then
-										print(v.sourceName.." "..ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
+										--print(v.sourceName.." "..ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
 										InterruptAuras[sourceGUID][k] = nil
 										UpdateUnitAuraByUnitGUID(sourceGUID, -20)
 									break
@@ -9894,7 +9894,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 								self:UNIT_AURA(unitId, updatedAuras, -5)
 						end)
 						foundbuff = 1
-						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+						--print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
 					elseif ((buffs[i].col1 == priority.Special_High and StealthTable[buffs[i].col3.spellId]) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
 						maxExpirationTime = GetTime() + 1
@@ -9904,7 +9904,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						Hue = buffs[i].col3.hue
 						Name = buffs[i].col3.name
 						foundbuff = 1
-						print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
+						--print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
 						break
 					elseif ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 <= priority.Special_High and not StealthTable[buffs[i].col3.spellId])) then
 						maxExpirationTime = buffs[i].col3.expirationTime
@@ -9921,7 +9921,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 								self:UNIT_AURA(unitId, updatedAuras, -5)
 						end)
 						foundbuff = 1
-						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+						--print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
 					end
 				end
@@ -9932,7 +9932,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
 					Hue = Hue
 					Name = Name
-					print(unitId, "No Stealth Buff Found")
+					--print(unitId, "No Stealth Buff Found")
 					if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
 						GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
 						if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
