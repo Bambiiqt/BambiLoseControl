@@ -366,10 +366,10 @@ local spellsArenaTable = {
 	{370960 , "Immune_Arena"}, --Emerald Communion
 	{372245 , "CC_Arena"}, --Terror of the Skies
 	{360806 , "CC_Arena"}, --Sleep Walk
+	{383005 , "Special_High"}, -- Chrono Loop
 	{359816 , "Special_High"}, --Dream Flight
 	{383870 , "Special_High"}, --Swoop Up (Target)
 	{375087 , "Ranged_Major_OffenisiveCDs"}, --Dragonrage
-	{383005 , "Roots_90_Snares"}, -- Chrono Loop
 	{355689 , "Roots_90_Snares"}, -- Landslide
 	{363534 , "Big_Defensive_CDs"}, --Rewind
 	{363916 , "Big_Defensive_CDs"}, --Obsidian Scales
