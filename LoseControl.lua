@@ -9373,7 +9373,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					end
 				end
 
-				if (spellId == 213610) then --Hide Holy Ward
+				--[[if (spellId == 213610) then --Hide Holy Ward
 					if unitId == "player" then
 						spellIds[spellId] = "None"
 					elseif strmatch(unitId, "arena") then
@@ -9381,7 +9381,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 					else
 						spellIds[spellId] = "CC_Reduction"
 					end
-				end
+				end]]
 
 				if (spellId == 332505) then --Soulsteel Clamps Hack player Only
 					if unitId ~= "player" then
