@@ -832,6 +832,8 @@ local spellsArenaTable = {
 	{291944 , "Big_Defensive_CDs"}, -- Regeneratin'
 	{358259, "Player_Party_OffensiveCDs"}, -- Gladiator's Maledict S2 Slands
 	{59543, "Small_Defensive_CDs"}, -- Gift of the Naaru
+	{65116, "Small_Defensive_CDs"}, -- Stoneform
+	{273104, "Small_Defensive_CDs"}, -- Fireblood
 	{277187, "Small_Defensive_CDs"}, -- Gladiator's Emblem
 	{"Gladiator's Emblem", "Small_Defensive_CDs"}, -- Gladiator's Emblem
 	{363522, "Small_Defensive_CDs"}, -- Gladiator's Eternal Aegis
@@ -9443,6 +9445,31 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				--print("Aura Info: ", tooltipData.lines[2].leftText)
 				if strfind(tooltipData.lines[2].leftText, "Immune") then
 					icon = 1526594
+				end
+			end
+
+			if spellId == 358267 then --Hover/Unburdened Flight
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HELPFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
+		
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+			   --print("Unit Aura: ", tooltipData.lines[1].leftText)
+			   --print("Aura Info: ", tooltipData.lines[2].leftText)
+				if strfind(tooltipData.lines[2].leftText, "Immune") then
+					icon = 1029587
+					if strmatch(unitId, "arena") then
+						spellIds[spellId] = "Freedoms_Speed"
+					else
+						spellIds[spellId] = "Speed_Freedoms"
+					end
+				else
+					if strmatch(unitId, "arena") then
+						spellIds[spellId] = "Special_Low"
+					else
+						spellIds[spellId] = "Movable_Cast_Aura"
+					end
 				end
 			end
 
