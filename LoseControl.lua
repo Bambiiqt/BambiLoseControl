@@ -128,7 +128,6 @@ local colorTypes = {
 -- Thanks to all the people on the Curse.com and WoWInterface forums who help keep this list up to date :)
 local cleuSpells = { -- nil = Do Not Show
 --Spell Summon Sucess
-	{288853, 25, nil,  "Special_Low", "Abomination", "Abomination"}, --Dk Raise Abomination
 	{49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
 
 	{248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
@@ -8191,63 +8190,25 @@ ArenaSeen:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
-local function Split(s, delimiter)
-    result = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-        table.insert(result, match);
-    end
-    return result;
+local function ObjectDNE(guid) --Used for Infrnals and Ele
+	local tooltipData =  C_TooltipInfo.GetHyperlink('unit:' .. guid or '')
+	TooltipUtil.SurfaceArgs(tooltipData)
+
+	for _, line in ipairs(tooltipData.lines) do
+		TooltipUtil.SurfaceArgs(line)
+	end
+
+	for i = 1, #tooltipData.lines do 
+ 		local text = tooltipData.lines[i].leftText
+		 if text and (type(text == "string")) then
+			--print(i.." "..text)
+			if strfind(text, "Level ??") or strfind(text, "Corpse") then 
+				return "Despawned"
+			end
+		end
+	end
 end
 
-local tip = CreateFrame('GameTooltip', 'ObjectExistsTooltip', nil, 'GameTooltipTemplate')
-local function ObjectExists(guid, ticker, name, sourceName) --Used for Infrnals and Ele
-  tip:SetOwner(WorldFrame, 'ANCHOR_NONE')
-  tip:SetHyperlink('unit:' .. guid or '')
-	local text1 = ObjectExistsTooltipTextLeft1
-	local text2 = ObjectExistsTooltipTextLeft2
-	local text3 = ObjectExistsTooltipTextLeft3
-	if strfind(tostring(sourceName), "-") then
-		local sourceNameTable = Split(sourceName, "-")
-		sourceName = sourceNameTable[1]
-	end
-	if (text1 and (type(text1:GetText()) == "string")) then
-		if strmatch(text1:GetText(), "Corpse") then
-			--print(text1:GetText().." text1")
-			return "Corpse"
-		end
-	end
-	if (text2 and (type(text2:GetText()) == "string")) then
-		if strmatch(text2:GetText(), "Corpse") then
-			--print(text2:GetText().." text 2")
-			return "Corpse"
-		end
-	end
-	if (text3 and (type(text3:GetText()) == "string")) then
-		if strmatch(text3:GetText(), "Corpse") then
-			--print(text3:GetText().." text3")
-			return "Corpse"
-		end
-	end
-	if (text1 and (type(text1:GetText()) == "string")) then
-		if strfind(text1:GetText(), tostring(sourceName)) then
-			--print(text1:GetText().." text1")
-			return false
-		end
-	end
-	if (text2 and (type(text2:GetText()) == "string")) then
-		if strfind(text2:GetText(), tostring(sourceName)) then
-			--print(text2:GetText().." text 2")
-			return false
-		end
-	end
-	if (text3 and (type(text3:GetText()) == "string")) then
-		if strfind(text3:GetText(), tostring(sourceName)) then
-			--print(text3:GetText().." text3")
-			return false
-		end
-	end
-	return "Despawned"
-end
 
 -- Function to check if pvp talents are active for the player
 local function ArePvpTalentsActive()
@@ -8534,13 +8495,25 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 		--Earthen Check (Totems Need a Spawn Time Check)
 		-----------------------------------------------------------------------------------------------------------------
 		if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 198838) then
+			local duration = 18 --Totemic Focus Makes it 18
+			local guid = destGUID
+			local spawnTime
+			local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+			if unitType == "Creature" or unitType == "Vehicle" then
+				local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+				local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+				spawnTime = spawnEpoch + spawnEpochOffset
+				--print("Earthen Totem Spawned at: "..spawnTime)
+			end
+			local expirationTime = GetTime() + duration
+			if (Earthen[spawnTime] == nil) then --source becomes the totem ><
+				Earthen[spawnTime] = {}
+			end
+			Earthen[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+			C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+				Earthen[sourceGUID] = nil
+			end)
 			if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-				local duration = 18 --Totemic Focus Makes it 18
-				local expirationTime = GetTime() + duration
-				if (Earthen[sourceGUID] == nil) then  --source is friendly unit party12345 raid1...
-					Earthen[sourceGUID] = {}
-				end
-				Earthen[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
 				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
 					if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
 					if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
@@ -8548,34 +8521,13 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 					if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
 					if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
 				end)
-				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-					Earthen[sourceGUID] = nil
-				end)
 			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-				local duration = 18 --Totemic Focus Makes it 18
-				local guid = destGUID
-				local spawnTime
-				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-				if unitType == "Creature" or unitType == "Vehicle" then
-					local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-					local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-					spawnTime = spawnEpoch + spawnEpochOffset
-					--print("Earthen Totem Spawned at: "..spawnTime)
-				end
-				local expirationTime = GetTime() + duration
-				if (Earthen[spawnTime] == nil) then --source becomes the totem ><
-					Earthen[spawnTime] = {}
-				end
-				Earthen[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
 				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
 					if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
 					if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
 					if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
 					if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
 					if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-				end)
-				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-					Earthen[spawnTime] = nil
 				end)
 			end
         end
@@ -8584,13 +8536,25 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
         --Grounding Check (Totems Need a Spawn Time Check)
         -----------------------------------------------------------------------------------------------------------------
 		if ((event == "SPELL_SUMMON") or (event == "SPELL_CREATE")) and (spellId == 204336) then
+			local duration = 3
+			local guid = destGUID
+			local spawnTime
+			local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
+			if unitType == "Creature" or unitType == "Vehicle" then
+			local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
+			local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
+			spawnTime = spawnEpoch + spawnEpochOffset
+			--print("Grounding Totem Spawned at: "..spawnTime)
+			end
+			local expirationTime = GetTime() + duration
+			if (Grounding[spawnTime] == nil) then --source becomes the totem ><
+				Grounding[spawnTime] = {}
+			end
+			Grounding[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
+			C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
+				Grounding[spawnTime] = nil
+			end)
 			if sourceGUID and not (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-				local duration = 3
-				local expirationTime = GetTime() + duration
-				if (Grounding[sourceGUID] == nil) then --source is friendly unit party12345 raid1...
-					Grounding[sourceGUID] = {}
-				end
-				Grounding[sourceGUID] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
 				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
 					if UnitExists("player") then UpdateUnitAuraByUnitGUID(UnitGUID("player"), -20) end
 					if UnitExists("party1") then UpdateUnitAuraByUnitGUID(UnitGUID("party1"), -20) end
@@ -8598,34 +8562,13 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 					if UnitExists("party3") then UpdateUnitAuraByUnitGUID(UnitGUID("party3"), -20) end
 					if UnitExists("party4") then UpdateUnitAuraByUnitGUID(UnitGUID("party4"), -20) end
 				end)
-				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-					Grounding[sourceGUID] = nil
-				end)
 			elseif sourceGUID and (bit_band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
-				local duration = 3
-				local guid = destGUID
-				local spawnTime
-				local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
-				if unitType == "Creature" or unitType == "Vehicle" then
-				local spawnEpoch = GetServerTime() - (GetServerTime() % 2^23)
-				local spawnEpochOffset = bit_band(tonumber(substring(spawnUID, 5), 16), 0x7fffff)
-				spawnTime = spawnEpoch + spawnEpochOffset
-				--print("Grounding Totem Spawned at: "..spawnTime)
-				end
-				local expirationTime = GetTime() + duration
-				if (Grounding[spawnTime] == nil) then --source becomes the totem ><
-					Grounding[spawnTime] = {}
-				end
-				Grounding[spawnTime] = { ["duration"] = duration, ["expirationTime"] = expirationTime }
 				C_Timer.After(.2, function()	-- execute a second timer to ensure it catches
 					if UnitExists("arena1") then UpdateUnitAuraByUnitGUID(UnitGUID("arena1"), -20) end
 					if UnitExists("arena2") then UpdateUnitAuraByUnitGUID(UnitGUID("arena2"), -20) end
 					if UnitExists("arena3") then UpdateUnitAuraByUnitGUID(UnitGUID("arena3"), -20) end
 					if UnitExists("arena4") then UpdateUnitAuraByUnitGUID(UnitGUID("arena4"), -20) end
 					if UnitExists("arena5") then UpdateUnitAuraByUnitGUID(UnitGUID("arena5"), -20) end
-				end)
-				C_Timer.After(duration + .2, function()	-- execute in some close next frame to accurate use of UnitAura function
-					Grounding[spawnTime] = nil
 				end)
 			end
 		end
@@ -8747,13 +8690,13 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint, ["spell"] = spellId})
 				UpdateUnitAuraByUnitGUID(sourceGUID, -20)
 				local ticker = 1
-				self.ticker = C_Timer.NewTicker(.25, function()
+				self.ticker = C_Timer.NewTicker(.1, function()
 					if InterruptAuras[sourceGUID] then
 						for k, v in pairs(InterruptAuras[sourceGUID]) do
 							if v.destGUID and v.spell ~= 394243 and v.spell ~= 387979 and v.spell ~= 394235 then --Dimensional Rift Hack
 								if substring(v.destGUID, -5) == substring(guid, -5) then --string.sub is to help witj Mirror Images bug
-									if ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName) then
-										--print(v.sourceName.." "..ObjectExists(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
+									if ObjectDNE(v.destGUID, ticker, v.namePrint, v.sourceName) then
+										--print(v.sourceName.." "..ObjectDNE(v.destGUID, ticker, v.namePrint, v.sourceName).." "..v.namePrint.." "..substring(v.destGUID, -7).." left w/ "..strformat("%.2f", v.expirationTime-GetTime()).." LC C_Ticker")
 										InterruptAuras[sourceGUID][k] = nil
 										UpdateUnitAuraByUnitGUID(sourceGUID, -20)
 									break
@@ -8763,7 +8706,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 						end
 					end
 					ticker = ticker + 1
-				end, duration * 4 + 5)
+				end, duration * 10 + 5)
 			end
 		end
 
@@ -9261,12 +9204,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			-----------------------------------------------------------------------------------------------------------------
 
 			if spellId == 201633 then -- Earthen Totem (Totems Need a Spawn Time Check)
-				if source and not UnitIsEnemy("player", source) then
-					if Earthen[UnitGUID(source)] then
-						duration = Earthen[UnitGUID(source)].duration
-						expirationTime = Earthen[UnitGUID(source)].expirationTime
-					end
-				elseif source and UnitIsEnemy("player", source) then
+				if source then
 					local guid = UnitGUID(source)
 					local spawnTime
 					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
@@ -9284,12 +9222,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			end
 
 			if spellId == 8178 then -- Grounding (Totems Need a Spawn Time Check)
-				if source and not UnitIsEnemy("player", source) then
-					if Grounding[UnitGUID(source)] then
-						duration = Grounding[UnitGUID(source)].duration
-						expirationTime = Grounding[UnitGUID(source)].expirationTime
-					end
-				elseif source and UnitIsEnemy("player", source) then
+				if source then
 					local guid = UnitGUID(source)
 					local spawnTime
 					local unitType, _, _, _, _, _, spawnUID = strsplit("-", guid)
