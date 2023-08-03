@@ -1054,6 +1054,7 @@ local spellsArenaTable = {
 	{378441 , "ImmunePlayer", "Time".."\n".."Stop"},			-- Time Stop
 	{320224 , "ImmunePlayer"},			--Podtender (NightFae: Dreamweaver Tree)
 	{323524 , "ImmunePlayer"},			--Ultimate Form (Necrolord)
+	{377362 , "ImmunePlayer", "Precognition"},			-- Precognition
 
 	{77606  , "Disarm_Warning"},   -- Dark Simulacrum
 	{314793 , "Disarm_Warning"},   -- Mirrors of Torment
@@ -1094,7 +1095,6 @@ local spellsArenaTable = {
 
 	{289655 , "AuraMastery_Cast_Auras", "Holy Word".."\n".."Concentration"},			-- Holy Word: Concentration
 	{317929 , "AuraMastery_Cast_Auras", "Aura".."\n".."Mastery"},			-- Aura Mastery
-	{377362 , "AuraMastery_Cast_Auras", "Precognition"},			-- Precognition
 
 	{127797 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
 	{102793 , "ROP_Vortex", "Ursol's".."\n".."Vortex"},				-- Ursol's Vortex
@@ -8198,6 +8198,10 @@ local function ObjectDNE(guid) --Used for Infrnals and Ele
 		TooltipUtil.SurfaceArgs(line)
 	end
 
+	if #tooltipData.lines == 1 then -- Fel Obelisk
+		return "Despawned"
+	end
+
 	for i = 1, #tooltipData.lines do 
  		local text = tooltipData.lines[i].leftText
 		 if text and (type(text == "string")) then
@@ -8209,6 +8213,38 @@ local function ObjectDNE(guid) --Used for Infrnals and Ele
 	end
 end
 
+
+local function ActionButton_SetupOverlayGlow(button)
+	-- If we already have a SpellActivationAlert then just early return. We should already be setup
+	if button.SpellActivationAlert then
+		return;
+	end
+
+	button.SpellActivationAlert = CreateFrame("Frame", nil, button, "ActionBarButtonSpellActivationAlert");
+
+	--Make the height/width available before the next frame:
+	local frameWidth, frameHeight = button:GetSize();
+	button.SpellActivationAlert:SetSize(frameWidth * 1.6, frameHeight * 1.6);
+	button.SpellActivationAlert:SetPoint("CENTER", button, "CENTER", 0, 0);
+	button.SpellActivationAlert:Hide();
+end
+
+local function ActionButton_ShowOverlayGlow(button)
+	ActionButton_SetupOverlayGlow(button);
+
+	button.SpellActivationAlert:Show();
+	button.SpellActivationAlert.ProcLoop:Play();
+	button.SpellActivationAlert.ProcStartFlipbook:Hide()
+end
+
+local function ActionButton_HideOverlayGlow(button)
+	if not button.SpellActivationAlert then
+		return;
+	end
+
+ 	button.SpellActivationAlert:Hide();
+
+end
 
 -- Function to check if pvp talents are active for the player
 local function ArePvpTalentsActive()
@@ -10188,7 +10224,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				end
 			end)
 		end
-		if Spell and Spell == 199448 then --Ultimate Sac Glow
+		if self.frame.anchor ~= "Blizzard" and Spell and (Spell == 199448 or Spell == 377362) then --Ultimate Sac Glow and Precog
 			ActionButton_ShowOverlayGlow(self)
 		else
 			ActionButton_HideOverlayGlow(self)
