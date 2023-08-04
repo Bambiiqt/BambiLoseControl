@@ -10224,7 +10224,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				end
 			end)
 		end
-		if self.frame.anchor ~= "Blizzard" and Spell and (Spell == 199448 or Spell == 377362) then --Ultimate Sac Glow and Precog
+		if self.frame.anchor ~= "Blizzard" and Spell and (Spell == 199448 or (Spell == 377362 and self.unitId == "player")) then --Ultimate Sac Glow and Precog
 			ActionButton_ShowOverlayGlow(self)
 		else
 			ActionButton_HideOverlayGlow(self)
