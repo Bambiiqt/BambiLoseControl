@@ -202,6 +202,7 @@ local StealthTable = {
 	[32612] = true, --Invisibility
 	[110960] = true, --Greater Invisibility
 	[198158] = true, --Mass Invisibility
+	[414664] = true, --Mass Invisibility
 	[207736] = true, --Shadowy Duel
 	[11327] = true, --Vanish
 	[115191] = true, --Stealth
@@ -454,6 +455,7 @@ local spellsArenaTable = {
 	{32612 , "Special_High"}, --Invisibility
 	{110960 , "Special_High"}, --Greater Invisibility
 	{198158 , "Special_High"}, --Mass Invisibility
+	{414664 , "Special_High"}, --Mass Invisibility
 	{190319, "Ranged_Major_OffenisiveCDs"}, --Combustion
 	{383874, "Ranged_Major_OffenisiveCDs"}, --Hyperthermia
 	{12042, "Ranged_Major_OffenisiveCDs"}, --Arcane Power
@@ -550,6 +552,7 @@ local spellsArenaTable = {
 	{210256 , "Big_Defensive_CDs"}, --Blessing of Sanctuary
 	{86659 , "Big_Defensive_CDs"}, --Guardian of Ancient Kings
 	{31850 , "Big_Defensive_CDs"}, --Ardent Defender
+	{415246 , "Big_Defensive_CDs"}, --Divine Plea
 	{152262 , "Small_Offenisive_CDs"}, --Seraphim
 	{105809 , "Small_Defensive_CDs"}, --Holy Avenger
 	{1044 , "Freedoms_Speed"}, --Blessing of Freedom (Not Purgeable)
@@ -1078,6 +1081,7 @@ local spellsArenaTable = {
 	{32612  , "Stealth"},     -- Invis
 	{110960 , "Stealth"},     -- Greater Invis
 	{198158 , "Stealth"},     -- Mass Invis
+	{414664 , "Stealth"},     -- Mass Invis
 	{1784   , "Stealth"},     -- Stealth
 	{115191 , "Stealth"},     -- Stealth
 	{11327  , "Stealth", "Vanish"}, -- Vanish
@@ -9322,14 +9326,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			-----------------------------------------------------------------------------
 			--Mass Invis
 			------------------------------------------------------------------------------
-			if (spellId == 198158) then --Mass Invis Hack
+			--[[if (spellId == 198158 or spellId == 414664) then --Mass Invis Hack
 				if source then
 					if (UnitGUID(source) ~= UnitGUID(unitId)) then
 						duration = 5
 				  		expirationTime = GetTime() + duration
 					end
 				end
-			end
+			end]]
 
 			-----------------------------------------------------------------------------
 			--Player Only Hacks to Disable on party12 or Target, Focus, Pet and Player Frame
