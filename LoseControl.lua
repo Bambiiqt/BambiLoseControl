@@ -435,7 +435,6 @@ local spellsArenaTable = {
 	{281195 , "Big_Defensive_CDs"}, --Survival of the Fittest
 	{264735 , "Big_Defensive_CDs"}, --Survival of the Fittest
 	{356730 , "Player_Party_OffensiveCDs"}, --Viper Venom
-	{203268 , "Small_Offenisive_CDs"}, --Sticky Tar (80% Attack Speed Reduction)
 	{54216 , "Freedoms_Speed"}, --Master's Call
 	{118922 , "Freedoms_Speed"}, --Posthaste
 	{186257 , "Freedoms_Speed"}, --Aspect of the Cheetah
@@ -1124,7 +1123,6 @@ local spellsArenaTable = {
 	{702    , "Dmg_Hit_Reduction", "Curse of".."\n".."Weakness"},   -- Curse of Weakness
 	{200947 , "Dmg_Hit_Reduction", "High".."\n".."Winds"},   -- High Winds
 	{356730 , "Dmg_Hit_Reduction", "Viper".."\n".."Venom"},   -- Viper Venom Healing/Damage Reduction
-	{203268 , "Dmg_Hit_Reduction", "Sticky".."\n".."Tar"},   -- Sticky Tar
 	{356824 , "Dmg_Hit_Reduction", "Water".."\n".."Unleashed"},   -- Water Unleashed
 	
 
