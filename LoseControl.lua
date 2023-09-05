@@ -297,7 +297,6 @@ local spellsArenaTable = {
 	-- Druid
 	----------------
 	{132158 , "Drink_Purge"}, --Nature's Swfitness
-	--{114108 , "Drink_Purge"}, --Soul of the Forest
 	{362486 , "Immune_Arena"}, --Keeper of the Grove
 	{5211 , "CC_Arena"}, --Mighty Bash
 	{163505 , "CC_Arena"}, --Rake
@@ -344,6 +343,8 @@ local spellsArenaTable = {
 	{192081 , "Small_Defensive_CDs"}, --Ironfur
 	{200947 , "Small_Defensive_CDs"}, --High Winds
 	{201664 , "Small_Defensive_CDs"}, --High Winds
+
+	{114108 , "Small_Defensive_CDs"}, --Soul of the Forest
 
 	{305497 , "Small_Defensive_CDs"}, --Thorns
 	{1850 , "Freedoms_Speed"}, --Dash
@@ -528,7 +529,6 @@ local spellsArenaTable = {
 	----------------
 	-- Palladin
 	----------------
-	{210294 , "Drink_Purge"}, --Divine Favor
 	{642 , "Immune_Arena"}, --Divine Shield
 	{228050 , "Immune_Arena"}, --Divine Shield (PvP Guardian of the Forgotten Queen)
 	{204018 , "Immune_Arena"}, --Blessing of Spellwarding
@@ -553,8 +553,8 @@ local spellsArenaTable = {
 	{86659 , "Big_Defensive_CDs"}, --Guardian of Ancient Kings
 	{31850 , "Big_Defensive_CDs"}, --Ardent Defender
 	{415246 , "Big_Defensive_CDs"}, --Divine Plea
-	{152262 , "Small_Offenisive_CDs"}, --Seraphim
 	{105809 , "Small_Defensive_CDs"}, --Holy Avenger
+	{210294 , "Small_Defensive_CDs"}, --Divine Favor
 	{1044 , "Freedoms_Speed"}, --Blessing of Freedom (Not Purgeable)
 	{305395 , "Freedoms_Speed"}, --Blessing of Freedom
 	{221886 , "Freedoms_Speed"}, --Divine Steed
@@ -673,6 +673,8 @@ local spellsArenaTable = {
 	----------------
 	-- Shaman
 	----------------
+	{378081 , "Drink_Purge"}, --Nature's Swfitness
+	{409293 ,  "Immune_Arena"}, --Burrow
 	{8178 ,  "Immune_Arena"}, --Grounding Totem Effect
 	{"Hex" , "CC_Arena"},
 	{305485 , "CC_Arena"}, --Lightning Lasso
@@ -695,7 +697,6 @@ local spellsArenaTable = {
 	{356738 , "Roots_90_Snares"},  -- Earth Unleashed
 	{207498 , "Big_Defensive_CDs"}, --Ancestral Protection
 	{108271 , "Big_Defensive_CDs"}, --Astral Shift
-	{210918 , "Big_Defensive_CDs"}, --Ethereal Form
 	{118337 , "Big_Defensive_CDs"}, --Harden Skin
 	{114052 , "Big_Defensive_CDs"}, --Ascendance
 	{201633 , "Big_Defensive_CDs"}, --Earthen Wall
@@ -1479,7 +1480,6 @@ local spellsArenaTable = {
 	{114050 , "Other"},				-- Ascendance (Elemental)
 	{114051 , "Other"},				-- Ascendance (Enhancement)
 	{114052 , "Other"},				-- Ascendance (Restoration)
-  {210918 , "Other"},	      -- Ethereal Form
 
 	----------------
 	-- Warlock
