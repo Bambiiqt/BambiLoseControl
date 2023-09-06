@@ -131,6 +131,7 @@ local cleuSpells = { -- nil = Do Not Show
 	{49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
 
 	{248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
+	{102693, 15,  nil, "Special_Low","Grove Guardians", "Grove Guardians"}, --Druid Grove Guardians
 
 	{321686, 40, "PvE",  "Special_Low", "Mirror Image", "Mirror Image"}, --Mirror Images
 
@@ -370,7 +371,10 @@ local spellsArenaTable = {
 	{383005 , "Special_High"}, -- Chrono Loop
 	{359816 , "Special_High"}, --Dream Flight
 	{383870 , "Special_High"}, --Swoop Up (Target)
+	{357210 , "Special_High"}, --Deep Breath (Immune to CC)
+	{403631 , "Special_High"}, --Breath of Eon (Immune to CC)
 	{375087 , "Ranged_Major_OffenisiveCDs"}, --Dragonrage
+	{404977 , "Ranged_Major_OffenisiveCDs"}, --Time Skip
 	{355689 , "Roots_90_Snares"}, -- Landslide
 	{363534 , "Big_Defensive_CDs"}, --Rewind
 	{363916 , "Big_Defensive_CDs"}, --Obsidian Scales
@@ -380,7 +384,7 @@ local spellsArenaTable = {
 	{370667 , "Small_Defensive_CDs"}, --Rescue (Target)
 	{374348 , "Small_Defensive_CDs"}, --Renewing Blaze
 	{378464 , "Small_Defensive_CDs"}, --Nullifying Shroud
-	{357210 , "Small_Defensive_CDs"}, --Deep Breath (Immune to CC)
+	{370537 , "Small_Defensive_CDs"}, --Stasis
 	{377509 , "Small_Defensive_CDs"}, --Dream projection
 	{375226 , "Small_Defensive_CDs"}, -- Time Spiral (Death Knight)
 	{375229 , "Small_Defensive_CDs"}, -- Time Spiral (Demon Hunter)
@@ -396,6 +400,7 @@ local spellsArenaTable = {
 	{375257 , "Small_Defensive_CDs"}, -- Time Spiral (Warlock)
 	{375258 , "Small_Defensive_CDs"}, -- Time Spiral (Warrior)
 	{358267 , "Special_Low"}, --Hover
+	{406732 , "Special_Low"}, --Spatial Paraodox
 	{357214, "Snares_WithCDs"}, -- Wing Buffet
 	{368970, "Snares_WithCDs"}, -- Tail Swipe
 	
@@ -1211,6 +1216,7 @@ local spellsArenaTable = {
 	{204362, "Movable_Cast_Auras", "Heroism"},	-- Heroism (Shamanism pvp talent
 	{208963, "Movable_Cast_Auras", "Skyfury".."\n".."Totem"},	-- Skyfury Totem (Shamanism pvp talent
 	--{358267, "Movable_Cast_Auras", "Hover"},		-- Hover
+	{406732 , "Movable_Cast_Auras", "Spatial".."\n".."Paradox"}, --Spatial Paraodox
 
 	--"Other", --
 	--"PvE", --PVE only
