@@ -367,6 +367,7 @@ local spellsArenaTable = {
 	{378441 , "Immune_Arena"}, --Time Stop (Evoker PvP)
 	{370960 , "Immune_Arena"}, --Emerald Communion
 	{372245 , "CC_Arena"}, --Terror of the Skies
+	{408544 , "CC_Arena"}, --Seismic Slam
 	{360806 , "CC_Arena"}, --Sleep Walk
 	{383005 , "Special_High"}, -- Chrono Loop
 	{359816 , "Special_High"}, --Dream Flight
@@ -382,6 +383,7 @@ local spellsArenaTable = {
 	{383869 , "Small_Offenisive_CDs"}, --Swoop Up (Evoker)
 	{370666 , "Small_Defensive_CDs"}, --Rescue (Evoker)
 	{370667 , "Small_Defensive_CDs"}, --Rescue (Target)
+	{374227 , "Small_Defensive_CDs"}, --Zephyr
 	{374348 , "Small_Defensive_CDs"}, --Renewing Blaze
 	{378464 , "Small_Defensive_CDs"}, --Nullifying Shroud
 	{370537 , "Small_Defensive_CDs"}, --Stasis
@@ -424,6 +426,8 @@ local spellsArenaTable = {
 	{186289 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Eagle
 	{260402 , "Ranged_Major_OffenisiveCDs"}, --Double Tap
 	{288613 , "Ranged_Major_OffenisiveCDs"}, --Trueshot
+	{407032 , "Disarms"}, --Sticky Tar Bomb Expoldes
+	{407031 , "Disarms"}, --Sticky Tar Bomb
 	{393456 , "Roots_90_Snares"}, --Entrapment
 	{117526 , "Roots_90_Snares"}, --Binding Shot
 	{117405 , "Roots_90_Snares"}, --Binding Shot
@@ -588,8 +592,8 @@ local spellsArenaTable = {
 	{15487 , "Silence_Arena"}, --Silence_Arena
 	{114404 , "Roots_90_Snares"}, --Void Tendrils
 	{289655 , "Special_High"}, --Holy Word: Concentration
-	{194249, "Ranged_Major_OffenisiveCDs"}, --Surrender to Madness (Both Party and Enemey)
-	{319952, "Ranged_Major_OffenisiveCDs"}, --Voidform
+	{194249, "Ranged_Major_OffenisiveCDs"}, --VoidformSurrender to Madness (Both Party and Enemey)
+	--{319952, "Ranged_Major_OffenisiveCDs"}, --Surrender to Madness (Both Party and Enemey)
 	{33206 , "Big_Defensive_CDs"}, --Pain Suprresion
 	{81782 , "Big_Defensive_CDs"}, --Power Word: Barrier
 	{329543 , "Big_Defensive_CDs"}, --Divine Ascension Up
@@ -904,6 +908,7 @@ local spellsArenaTable = {
 	{2637   , "CC"},				-- Hibernate
 
 	{372245   , "CC"},				-- Terror of the Skies
+	{408544   , "CC"},				-- Seismic Slam
 	{360806   , "CC"},				-- Sleep Walk
 
 	{"Polymorph"   , "CC"},			-- Polymorph
@@ -1078,6 +1083,7 @@ local spellsArenaTable = {
 
 	{117405 , "CC_Warning", "Binding Shot".."\n".."WARNING!!"},	    -- Binding Shot
 	{191241 , "CC_Warning", "Sticky".."\n".."Bomb"},	    -- Sticky Bomb
+	{407032 , "CC_Warning", "Disarmed".."\n".."Sticky Tar".."\n".."Bomb"}, --Sticky Tar Bomb Expoldes
 
 	{199483 , "Stealth"},     -- Camo
 	{5384   , "Stealth"},     -- Fiegn Death
@@ -1115,7 +1121,8 @@ local spellsArenaTable = {
 	{233759 , "Disarm"},			-- Grapple Weapon
 	{207777 , "Disarm"},			-- Dismantle
 	{236236 , "Disarm"},			-- Disarm (pvp honor talent - protection)
-	{236077 , "Disarm"},			-- Disarm (pvp honor talent)S
+	{236077 , "Disarm"},			-- Disarm (pvp honor talent)
+	{407031 , "Disarm"}, 			-- Sticky Tar Bomb
 
 	{320035 , "Haste_Reduction", "Mirrors of".."\n".."Torment"},			-- Mirrors of Torment
 	{247777 , "Haste_Reduction", "Mind".."\n".."Trauma"},			-- Mind Trauma
@@ -1196,7 +1203,6 @@ local spellsArenaTable = {
 	{234084, "CC_Reduction", "Moon".."\n".."& Stars"},		-- Moon and Stars
 
 	{200183, "Personal_Offensives", "Apotheosis"},		-- Apotheosis
-	{319952, "Personal_Offensives"},		-- Surrender to Madness
 	{117679, "Personal_Offensives", "Tree of".."\n".."Life"},		-- Incarnation
 
 	{22842, "Peronsal_Defensives", "Frenzied".."\n".."Regeneration"},		-- Frenzied Regeneration
@@ -1239,6 +1245,7 @@ local spellsArenaTable = {
 	{247121, "SnarePhysical70"},		-- Metamorphosis
 	{357214, "SnarePhysical70"},		-- Wing Buffet
 	{368970, "SnarePhysical70"},		-- Tail Swipe
+	{409560, "SnarePhysical70"},		-- Temporal Wound
 
 
 	{212792, "SnareMagic70"},		-- Cone of Cold
@@ -1249,6 +1256,7 @@ local spellsArenaTable = {
 	{183218, "SnareMagic70"},		-- Hand of Hindrance
 	{204263, "SnareMagic70"},		-- Shining Force
 	{390669, "SnareMagic70"},		-- Apathy
+	{378080, "SnareMagic70"},		-- Enfeeblement
 	{204843, "SnareMagic70"},		-- Sigil of Chains
 	{352448, "SnareMagic70"},		-- Viscous Coating
 	{384069, "SnareMagic70"},		-- Shadowflame
@@ -1294,6 +1302,7 @@ local spellsArenaTable = {
 	{196840, "SnareMagic50"},		-- Frostshock
 	{342240, "SnareMagic50"},		-- Ice Strike
 	{279303, "SnareMagic50"},		-- Frostwyrm's Fury
+	{410790, "SnareMagic50"},		-- Frostwyrm's Fury
 	{61391, "SnareMagic50"},		-- Typhoon
 	{81281, "SnareMagic50"},		-- Fungal Growth
 	{"Frostbolt", "SnareMagic50"},		-- Frostbolt
@@ -1302,6 +1311,7 @@ local spellsArenaTable = {
 	{31589, "SnareMagic50"},		-- Slow
 	{336887, "SnareMagic50"},		-- Lingering Numbness
 	{392983, "SnareMagic50"},		-- Strike of the Windlord
+	{403695, "SnareMagic50"},		-- Truth's Wake
 	{337956, "SnareMagic50"},		-- Mental Recovery
 	{356084, "SnareMagic50"}, 		-- Blaze of Light
 	{6360, "SnareMagic50"},			-- Whiplash
@@ -1311,7 +1321,6 @@ local spellsArenaTable = {
 
 	{162546, "SnarePhysical30"},		-- Frozen Ammo
 	{339654, "SnarePhysical30"},		-- Tactical Retreat
-	{197385, "SnarePhysical30"},		-- Fury of Air
 	{211793, "SnarePhysical30"},		-- Remorseless Winter
 	{283561, "SnarePhysical30"},		-- Remorseless Winter
 	{206930, "SnarePhysical30"},		-- Heart Strike
@@ -1329,10 +1338,11 @@ local spellsArenaTable = {
 	{58180, "SnareMagic30"}, 		-- Infected Wounds
 	{206760, "SnareMagic30"}, 		-- Shadow Grasp
 	{370898, "SnareMagic30"}, 		-- Blaze of Light
+	{408383, "SnareMagic30"}, 		-- Judgment of Justice
 	{333526, "SnareMagic30"}, 		-- Spiked Burrs (NightFae)
 
 	{116189, "Snare"},		-- Provoke
-	{386649, "Snare"},		-- Nightmare
+
 	{388012, "Snare"},		-- Blessing of Winter
 	{354050, "Snare"},		-- Nimble Steps
 
@@ -1371,6 +1381,12 @@ local spellsArenaTable = {
 	{102558 , "Other"},				-- Incarnation: Guardian of Ursoc
 	{102560 , "Other"},				-- Incarnation: Chosen of Elune
 	{102342 , "Other"},				-- Ironbark
+
+	----------------
+	-- Evoker
+	----------------
+
+	{415649 , "Other"},				-- Dreamwalker's Embrace
 
 	----------------
 	-- Hunter
@@ -3655,15 +3671,15 @@ local spellsArenaTable = {
 ---- PVE WOTLK
 ------------------------
 {"Vault of Archavon Raid",
--- -- Archavon the Stone Watcher
-{58965    , "CC"},				-- Choking Cloud (chance to hit with melee and ranged attacks reduced by 50%)
-{61672    , "CC"},				-- Choking Cloud (chance to hit with melee and ranged attacks reduced by 50%)
-{58663    , "CC"},				-- Stomp
-{60880    , "CC"},				-- Stomp
--- -- Emalon the Storm Watcher
-{63080    , "CC"},				-- Stoned (!)
--- -- Toravon the Ice Watcher
-{72090    , "Root"},				-- Freezing Ground
+	-- -- Archavon the Stone Watcher
+	{58965    , "CC"},				-- Choking Cloud (chance to hit with melee and ranged attacks reduced by 50%)
+	{61672    , "CC"},				-- Choking Cloud (chance to hit with melee and ranged attacks reduced by 50%)
+	{58663    , "CC"},				-- Stomp
+	{60880    , "CC"},				-- Stomp
+	-- -- Emalon the Storm Watcher
+	{63080    , "CC"},				-- Stoned (!)
+	-- -- Toravon the Ice Watcher
+	{72090    , "Root"},				-- Freezing Ground
 },
 ------------------------
 {"Naxxramas (WotLK) Raid",
@@ -9096,6 +9112,22 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				if strfind(tooltipData.lines[2].leftText, "100") then
 					spellIds[spellId] = "Dmg_Hit_Reduction"
 					count = 100
+				else
+					spellIds[spellId] = "None"
+				end
+			end
+
+			if spellId == 409560 then ---- Temporal Wound Snare
+				local tooltipData = C_TooltipInfo.GetUnitAura(unitId, i, "HARMFUL")
+				TooltipUtil.SurfaceArgs(tooltipData)
+		
+				for _, line in ipairs(tooltipData.lines) do
+					TooltipUtil.SurfaceArgs(line)
+				end
+				--print("Unit Aura: ", tooltipData.lines[1].leftText)
+				--print("Aura Info: ", tooltipData.lines[2].leftText)
+				if strfind(tooltipData.lines[2].leftText, "70") then
+					spellIds[spellId] = "SnarePhysical70"
 				else
 					spellIds[spellId] = "None"
 				end
