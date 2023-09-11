@@ -419,6 +419,7 @@ local spellsArenaTable = {
 	{191241 , "Special_High"}, --Sticky Bomb
 	{199483 , "Special_High"}, --Camouflage
 	{5384 , "Special_High"}, --Fiegn Death
+	{248519 , "Special_High"}, --Interlope
 	{19574 , "Ranged_Major_OffenisiveCDs"}, --Bestial Wrath
 	{212704 , "Ranged_Major_OffenisiveCDs"}, --The Beast Within (PvP)
 	{193530 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Wild
@@ -437,13 +438,15 @@ local spellsArenaTable = {
 	{212638 , "Roots_90_Snares"}, --Tracker's Net
 	{53148 , "Roots_90_Snares"}, --Charge (pet)
 	{356723 , "Roots_90_Snares"}, --Scorpid Venom  (Chimaeral Sting)
-	{248519 , "Big_Defensive_CDs"}, --Interlope
 	{53480 , "Big_Defensive_CDs"}, --Roar of Sacrifice
 	{202748 , "Big_Defensive_CDs"}, --Survival Tactics
-	{212640 , "Big_Defensive_CDs"}, --Mending Bandage
 	{281195 , "Big_Defensive_CDs"}, --Survival of the Fittest
 	{264735 , "Big_Defensive_CDs"}, --Survival of the Fittest
 	{356730 , "Player_Party_OffensiveCDs"}, --Viper Venom
+	{388045 , "Small_Offenisive_CDs"}, --Sentinel Owl
+	{393774 , "Small_Offenisive_CDs"}, --Sentinel Owl
+	{212640 , "Small_Defensive_CDs"}, --Mending Bandage
+	{388035 , "Small_Defensive_CDs"}, --Fortitude of the Bear
 	{54216 , "Freedoms_Speed"}, --Master's Call
 	{118922 , "Freedoms_Speed"}, --Posthaste
 	{186257 , "Freedoms_Speed"}, --Aspect of the Cheetah
@@ -1204,6 +1207,8 @@ local spellsArenaTable = {
 
 	{200183, "Personal_Offensives", "Apotheosis"},		-- Apotheosis
 	{117679, "Personal_Offensives", "Tree of".."\n".."Life"},		-- Incarnation
+	{388045, "Personal_Offensives", "Sentinal".."\n".."Owl"},		--Sentinal Owl (Hunter Only)
+	{393774, "Personal_Offensives", "Sentinal".."\n".."Perception"},		--Sentinal Perceoption (From Hunter)
 
 	{22842, "Peronsal_Defensives", "Frenzied".."\n".."Regeneration"},		-- Frenzied Regeneration
 	{22812, "Peronsal_Defensives", "Barkskin"},		-- Barkskin
@@ -1211,7 +1216,7 @@ local spellsArenaTable = {
 
 
 	{108839, "Movable_Cast_Auras", "Ice".."\n".."Floes"},		-- Ice Floes
-	{10060, "Movable_Cast_Auras", "Power".."\n".."Infusion"},		-- Power Infusion
+	{10060,  "Movable_Cast_Auras", "Power".."\n".."Infusion"},		-- Power Infusion
 	{331937, "Movable_Cast_Auras"},		-- Euphoria
 	{354054, "Movable_Cast_Auras"},		-- Fatal Flaw
 	{332506, "Movable_Cast_Auras"},		-- Soulsteel Clamps
