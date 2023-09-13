@@ -421,10 +421,11 @@ local spellsArenaTable = {
 	{19574 , "Ranged_Major_OffenisiveCDs"}, --Bestial Wrath
 	{212704 , "Ranged_Major_OffenisiveCDs"}, --The Beast Within (PvP)
 	{193530 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Wild
-	{266779 , "Ranged_Major_OffenisiveCDs"}, --Coordinated Assault
-	{186289 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Eagle
-	{260402 , "Ranged_Major_OffenisiveCDs"}, --Double Tap
 	{288613 , "Ranged_Major_OffenisiveCDs"}, --Trueshot
+	{260402 , "Ranged_Major_OffenisiveCDs"}, --Double Tap
+	{266779 , "Ranged_Major_OffenisiveCDs"}, --Coordinated Assault
+	{360966	, "Ranged_Major_OffenisiveCDs"}, --Spearhead
+	{186289 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Eagle
 	{407032 , "Disarms"}, --Sticky Tar Bomb Expoldes
 	{407031 , "Disarms"}, --Sticky Tar Bomb
 	{393456 , "Roots_90_Snares"}, --Entrapment
@@ -442,7 +443,7 @@ local spellsArenaTable = {
 	{264735 , "Big_Defensive_CDs"}, --Survival of the Fittest
 	{356730 , "Player_Party_OffensiveCDs"}, --Viper Venom
 	{388045 , "Small_Offenisive_CDs"}, --Sentinel Owl
-	{393774 , "Small_Offenisive_CDs"}, --Sentinel Owl
+	{393774 , "Small_Offenisive_CDs"}, --Sentinel Perception
 	{212640 , "Small_Defensive_CDs"}, --Mending Bandage
 	{388035 , "Small_Defensive_CDs"}, --Fortitude of the Bear
 	{54216 , "Freedoms_Speed"}, --Master's Call
@@ -466,11 +467,11 @@ local spellsArenaTable = {
 	{110960 , "Special_High"}, --Greater Invisibility
 	{198158 , "Special_High"}, --Mass Invisibility
 	{414664 , "Special_High"}, --Mass Invisibility
+	{414658 , "Special_High"}, --Ice Cold
 	{190319, "Ranged_Major_OffenisiveCDs"}, --Combustion
 	{383874, "Ranged_Major_OffenisiveCDs"}, --Hyperthermia
 	{12042, "Ranged_Major_OffenisiveCDs"}, --Arcane Power
 	{365362, "Ranged_Major_OffenisiveCDs"}, --Arcane Surge
-	{324220, "Ranged_Major_OffenisiveCDs"}, --Deathborne
 	{12472, "Ranged_Major_OffenisiveCDs"}, --Icy Veins
 	{198144, "Ranged_Major_OffenisiveCDs"}, --Ice Form
 	{342242, "Ranged_Major_OffenisiveCDs"}, --Time Warp
@@ -486,7 +487,6 @@ local spellsArenaTable = {
 	{198111 , "Big_Defensive_CDs"}, --Temporal Shield
 	{113862 , "Big_Defensive_CDs"}, --Greater Invisibility
 	{87023 , "Big_Defensive_CDs"}, --Cauterilze
-	{314793 , "Small_Offenisive_CDs"}, --Mirrors of Torment
 	{116014 , "Small_Offenisive_CDs"}, --Rune of Power
 	{205025 , "Small_Offenisive_CDs"}, --Presence of Mind
 	{382106 , "Small_Offenisive_CDs"}, --Freezing Winds
@@ -601,7 +601,6 @@ local spellsArenaTable = {
 	{328530 , "Big_Defensive_CDs"}, --Divine Ascension Down
 	{47788 , "Big_Defensive_CDs"}, --Guardian Spirit
 	{232707 , "Big_Defensive_CDs"}, --Ray of Hope
-	{327694,  "Big_Defensive_CDs"}, -- Benevolent Faerie (Night Fae Priest)
 	{10060, "Big_Defensive_CDs"}, --Power Infusion
 	{199845, "Player_Party_OffensiveCDs"}, --Psyflay (PvP Talent 50% MS)
 	{322442 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
@@ -625,7 +624,6 @@ local spellsArenaTable = {
 	{391109 , "Small_Offenisive_CDs"}, --Dark Ascension
 	{197871 , "Small_Offenisive_CDs"}, --Dark Archangel
 	{197874 , "Small_Offenisive_CDs"}, --Dark Archangel
-	{325013 , "Small_Offenisive_CDs"}, --Boon of the Ascended
 	{204263 , "Snares_WithCDs"}, --Shining FOrce
 	{391403 , "Snares_WithCDs"}, -- Mind Flay: Insanity
 	{322105, "Special_Low"}, --Shadow Covenant
@@ -780,8 +778,6 @@ local spellsArenaTable = {
 	{46924  , "Immune_Arena"}, -- Bladestorm (not immune to dmg}, only to LoC)
 	{227847 , "Immune_Arena"}, -- Bladestorm (not immune to dmg}, only to LoC)
 	{132169 , "CC_Arena"}, --Storm Bolt
-	{325886 , "CC_Arena"}, --Ancient Aftershock
-	{326062 , "CC_Arena"}, --Ancient Aftershock
 	{199085 , "CC_Arena"}, --Warpath
 	{132168 , "CC_Arena"}, --Shockwave
 	{5246 , "CC_Arena"}, --Intimidating Shout
@@ -828,19 +824,12 @@ local spellsArenaTable = {
 
 	{"Drink" , "Drink_Purge"},
 	{"Refreshment" , "Drink_Purge"},
-	{320224 , "Immune_Arena"}, --Podtender (NightFae Soulbind Tree)
-	{323524 , "Immune_Arena"}, --Ultimate Form (Necro Soulbind Tree)
-	{331866 , "CC_Arena"}, --Door of Shadows Fear (Venthyer)
-	{332423 , "CC_Arena"}, -- Sparkling Driftglobe Core 35% Stun (Kyrian)
-	{324263 , "CC_Arena"}, -- Sulfuric Emission (Necrolord)
 	{107079 , "CC_Arena"}, --Quaking Palm
 	{20549 , "CC_Arena"}, --War Stomp
 	{255654 , "CC_Arena"}, --Bull Rush
 	{287712 , "CC_Arena"}, --Haymaker
 	{58984, "Special_High"}, -- Shadowmeld
-	{377362, "Special_High"}, -- Precognition
-	{320267, "Roots_90_Snares"},		-- Soothing Voice (Nightfae)
-	{354051, "Roots_90_Snares"},		-- Nimble Steps (Venthyr)
+	{377362, "Special_High"}, -- Precognition (Dragonflight)
 	{291944 , "Big_Defensive_CDs"}, -- Regeneratin'
 	{358259, "Player_Party_OffensiveCDs"}, -- Gladiator's Maledict S2 Slands
 	{59543, "Small_Defensive_CDs"}, -- Gift of the Naaru
@@ -850,16 +839,7 @@ local spellsArenaTable = {
 	{"Gladiator's Emblem", "Small_Defensive_CDs"}, -- Gladiator's Emblem
 	{363522, "Small_Defensive_CDs"}, -- Gladiator's Eternal Aegis
 	{286342, "Small_Defensive_CDs"}, -- Gladiator's Safegaurd
-	{332505, "Small_Defensive_CDs"}, -- Soulsteel Clamps (Kyrian)
-	{332506, "Small_Defensive_CDs"}, -- Soulsteel Clamps (Kyrian)
-	{330752, "Small_Defensive_CDs"}, -- Ascendant Phial (Kyrian)
-	{330749, "Small_Defensive_CDs"}, -- Phial of Patience (Kyrian)
-	{352875, "Small_Defensive_CDs"}, -- Path of the Devoted (Kyrian)
-	{353192, "Small_Defensive_CDs"}, -- Hope Springs Eternal (Kyrian)
 	{68992, "Freedoms_Speed"}, -- Darkflight
-	{310143, "Freedoms_Speed"}, -- Soulshape (NightFae)
-	{324867, "Special_Low"}, --Flesh Craft (Necrolord)
-	{327140, "Special_Low"}, --Forgeborne Reveries (Necrolord)
 	{34709, "Special_Low"}, --Shadow Sight
 
 	}
@@ -980,8 +960,6 @@ local spellsArenaTable = {
 	{316593 , "CC"},				--Intimidating Shout
 	{316595 , "CC"}, 				--Intimidating Shout
 	{132169 , "CC"},				-- Storm Bolt
-	{325886 , "CC"},       			-- Ancient Aftershock
-	{326062 , "CC"},       			-- Ancient Aftershock
 	{132168 , "CC"},				-- Shockwave
 	{199085 , "CC"},				-- Warpath
 
@@ -995,9 +973,6 @@ local spellsArenaTable = {
 	{208618 , "CC"},				-- Illidan's Grasp (throw stun)
 	{213491 , "CC"},				-- Demonic Trample Stun
 
-	{331866 , "CC"},        		-- Door of Shadows Fear (Venthyr)
-	{332423 , "CC"},        		-- Sparkling Driftglobe Core 35% Stun (Kyrian)
-	{324263 , "CC"},        		-- Sulfuric Emission (Necrolord)
 	{20549  , "CC"},				-- War Stomp (tauren racial)
 	{107079 , "CC"},				-- Quaking Palm (pandaren racial)
 	{255723 , "CC"},				-- Bull Rush (highmountain tauren racial)
@@ -1005,7 +980,6 @@ local spellsArenaTable = {
 
 	{356727 , "Silence"},			-- Spider Venom  (Chimaeral Sting)
 	{47476  , "Silence"},			-- Strangulate
-	{317589 , "Silence"},			-- Tormenting Backlash (Venthyr Mage)
 	{81261  , "Silence"},			-- Solar Beam
 	{410065  , "Silence"},			-- Reactive Resin
 	{217824 , "Silence"},			-- Shield of Virtue (pvp honor talent)
@@ -1051,7 +1025,7 @@ local spellsArenaTable = {
 	{356356 , "Root"},				-- Warbringer
 	{323996 , "Root"},				-- The Hunt
 	{370970 , "Root"},				-- The Hunt
-	{354051 , "Root"},				-- Nimble Steps
+
 
 	{642    , "ImmunePlayer"},			-- Divine Shield
 	{228050 , "ImmunePlayer", "Guardian of the".."\n".."Forgotten Queen"},			-- Divine Shield (Guardian of the Forgotten Queen)
@@ -1066,12 +1040,9 @@ local spellsArenaTable = {
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
 	{410358 , "ImmunePlayer", "Anti-Magic".."\n".."Shell"}, --Anti-Magic Shell w/ Warden
 	{378441 , "ImmunePlayer", "Time".."\n".."Stop"},			-- Time Stop
-	{320224 , "ImmunePlayer"},			--Podtender (NightFae: Dreamweaver Tree)
-	{323524 , "ImmunePlayer"},			--Ultimate Form (Necrolord)
 	{377362 , "ImmunePlayer", "Precognition"},			-- Precognition
 
 	{77606  , "Disarm_Warning"},   -- Dark Simulacrum
-	{314793 , "Disarm_Warning"},   -- Mirrors of Torment
 	{322442 , "Disarm_Warning"}, --Thoughtstolen
 	{322464 , "Disarm_Warning"}, --Thoughtstolen
 	{322463 , "Disarm_Warning"}, --Thoughtstolen
@@ -1125,7 +1096,7 @@ local spellsArenaTable = {
 	{236077 , "Disarm"},			-- Disarm (pvp honor talent)
 	{407031 , "Disarm"}, 			-- Sticky Tar Bomb
 
-	{320035 , "Haste_Reduction", "Mirrors of".."\n".."Torment"},			-- Mirrors of Torment
+
 	{247777 , "Haste_Reduction", "Mind".."\n".."Trauma"},			-- Mind Trauma
 	{199890 , "Haste_Reduction", "Curse of".."\n".."Tongues"},			-- Curse of Tongues
 	{1714   , "Haste_Reduction", "Curse of".."\n".."Tongues"},			-- Curse of Tongues
@@ -1210,15 +1181,10 @@ local spellsArenaTable = {
 
 	{22842, "Peronsal_Defensives", "Frenzied".."\n".."Regeneration"},		-- Frenzied Regeneration
 	{22812, "Peronsal_Defensives", "Barkskin"},		-- Barkskin
-	{352875, "Peronsal_Defensives"},		-- Path of the Devoted (Kyrian)
 
 
 	{108839, "Movable_Cast_Auras", "Ice".."\n".."Floes"},		-- Ice Floes
 	{10060,  "Movable_Cast_Auras", "Power".."\n".."Infusion"},		-- Power Infusion
-	{331937, "Movable_Cast_Auras"},		-- Euphoria
-	{354054, "Movable_Cast_Auras"},		-- Fatal Flaw
-	{332506, "Movable_Cast_Auras"},		-- Soulsteel Clamps
-	{332505, "Movable_Cast_Auras"},		-- Soulsteel Clamps
 	{315443, "Movable_Cast_Auras"},		-- Abomination Limb
 	{383269, "Movable_Cast_Auras"},		-- Abomination Limb
 	{204361, "Movable_Cast_Auras", "Bloodlust"},	-- Bloodlust (Shamanism pvp talent)
@@ -1261,7 +1227,6 @@ local spellsArenaTable = {
 	{390669, "SnareMagic70"},		-- Apathy
 	{378080, "SnareMagic70"},		-- Enfeeblement
 	{204843, "SnareMagic70"},		-- Sigil of Chains
-	{352448, "SnareMagic70"},		-- Viscous Coating
 	{384069, "SnareMagic70"},		-- Shadowflame
 
 	{195645, "SnarePhysical50"},		-- Wing Clip
@@ -1290,8 +1255,7 @@ local spellsArenaTable = {
 	{185763, "SnarePhysical50"},		-- Pistol Shot
 	{1715, "SnarePhysical50"},			-- Hamstring
 	{213405, "SnarePhysical50"},		-- Master of the Glaive
-	{355138, "SnarePhysical50"},		-- Shackling (Maledict S2 Slands)
-	{353472, "SnarePhysical50"},		-- Cunning Dreams (Soulshape Snare)
+
 
 	{3409, "SnarePosion50"},		-- Crippling Poison (Poison)
 	{354896, "SnarePosion50"},		-- Creeping Venom (Poison)(PVP Stacking)
@@ -1320,10 +1284,10 @@ local spellsArenaTable = {
 	{6360, "SnareMagic50"},			-- Whiplash
 	{339051, "SnareMagic50"},		-- Demonic Parole
 	{260369, "SnareMagic50"},		-- Arcane Pulse
-	{321759, "SnareMagic50"},		-- Bearer's Pursuit
 
 	{162546, "SnarePhysical30"},		-- Frozen Ammo
 	{339654, "SnarePhysical30"},		-- Tactical Retreat
+	{201594, "SnarePhysical30"},		-- Stampede
 	{211793, "SnarePhysical30"},		-- Remorseless Winter
 	{283561, "SnarePhysical30"},		-- Remorseless Winter
 	{206930, "SnarePhysical30"},		-- Heart Strike
@@ -1342,12 +1306,10 @@ local spellsArenaTable = {
 	{206760, "SnareMagic30"}, 		-- Shadow Grasp
 	{370898, "SnareMagic30"}, 		-- Blaze of Light
 	{408383, "SnareMagic30"}, 		-- Judgment of Justice
-	{333526, "SnareMagic30"}, 		-- Spiked Burrs (NightFae)
 
 	{116189, "Snare"},		-- Provoke
 
 	{388012, "Snare"},		-- Blessing of Winter
-	{354050, "Snare"},		-- Nimble Steps
 
 	----------------
 	-- Demonhunter
