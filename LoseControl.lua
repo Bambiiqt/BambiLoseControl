@@ -475,6 +475,7 @@ local spellsArenaTable = {
 	{12472, "Ranged_Major_OffenisiveCDs"}, --Icy Veins
 	{198144, "Ranged_Major_OffenisiveCDs"}, --Ice Form
 	{342242, "Ranged_Major_OffenisiveCDs"}, --Time Warp
+	{389794, "Ranged_Major_OffenisiveCDs"}, --Snow Drift
 	{122 , "Roots_90_Snares"}, --Frost Nova
 	{386770, "Roots_90_Snares"}, --Freezing Cold
 	{378760 , "Roots_90_Snares"}, --Frost Bite
@@ -1203,6 +1204,7 @@ local spellsArenaTable = {
 	{308498, "SnareSpecial"},   	-- Resonating Arrow (Hunter Kyrain Special)
 	{320267, "SnareSpecial"},		-- Soothing Voice
 	{204206, "SnareSpecial"},		-- Chilled (Chill Streak)
+	{389823, "SnareSpecial"},		-- Snowdrift
 
 	{45524,  "SnarePhysical70"},		-- Chains of Ice
 	{273977, "SnarePhysical70"},		-- Grip of the Dead
