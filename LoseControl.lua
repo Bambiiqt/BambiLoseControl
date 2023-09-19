@@ -522,7 +522,7 @@ local spellsArenaTable = {
 	{152173 , "Melee_Major_OffenisiveCDs"}, --Serenity
 	{137639 , "Melee_Major_OffenisiveCDs"}, --Storm, Earth, and Fire
 	{310454 , "Melee_Major_OffenisiveCDs"}, --Weapons of Order
-	{388023 , "Melee_Major_OffenisiveCDs"}, --Ancient Teaching
+	{388026 , "Melee_Major_OffenisiveCDs"}, --Ancient Teaching
 	--{325216 , "Melee_Major_OffenisiveCDs"}, --Bonedust Brew (Necrolord)
 	{125174 , "Big_Defensive_CDs"}, --Touch of Karma
 	{116849 , "Big_Defensive_CDs"}, --Life Cacoon
