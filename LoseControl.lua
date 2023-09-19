@@ -522,7 +522,6 @@ local spellsArenaTable = {
 	{152173 , "Melee_Major_OffenisiveCDs"}, --Serenity
 	{137639 , "Melee_Major_OffenisiveCDs"}, --Storm, Earth, and Fire
 	{310454 , "Melee_Major_OffenisiveCDs"}, --Weapons of Order
-	{388026 , "Melee_Major_OffenisiveCDs"}, --Ancient Teaching
 	--{325216 , "Melee_Major_OffenisiveCDs"}, --Bonedust Brew (Necrolord)
 	{125174 , "Big_Defensive_CDs"}, --Touch of Karma
 	{116849 , "Big_Defensive_CDs"}, --Life Cacoon
@@ -531,9 +530,10 @@ local spellsArenaTable = {
 	{122278 , "Big_Defensive_CDs"}, --Damoen Harm
 	{115176 , "Big_Defensive_CDs"}, --Zen Meditation
 	{247483 , "Small_Offenisive_CDs"}, --Tigereye Brew
-	{389387 , "Small_Offenisive_CDs"}, --Awakened Feline
+	{389387 , "Small_Offenisive_CDs"}, --Awakened Feline (Fist Weaving)
 	{201447 , "Freedoms_Speed"}, --Ride the Wind
 	{116841 , "Freedoms_Speed"}, --Tiger's Lust
+	{388026 , "Special_Low"}, --Ancient Teaching (Fist Weaving)
 	{248646 , "Special_Low"}, --Tigereye Brew
 
 	----------------
