@@ -521,14 +521,11 @@ local spellsArenaTable = {
 	{233759 , "Disarms"}, --Grapple Weapon
 	{152173 , "Melee_Major_OffenisiveCDs"}, --Serenity
 	{137639 , "Melee_Major_OffenisiveCDs"}, --Storm, Earth, and Fire
-	{310454 , "Melee_Major_OffenisiveCDs"}, --Weapons of Order
-	--{325216 , "Melee_Major_OffenisiveCDs"}, --Bonedust Brew (Necrolord)
 	{125174 , "Big_Defensive_CDs"}, --Touch of Karma
 	{116849 , "Big_Defensive_CDs"}, --Life Cacoon
 	{122783 , "Big_Defensive_CDs"}, --Diffuse Magic
 	{243435 , "Big_Defensive_CDs"}, --Fortifying Brew
 	{122278 , "Big_Defensive_CDs"}, --Damoen Harm
-	{115176 , "Big_Defensive_CDs"}, --Zen Meditation
 	{247483 , "Small_Offenisive_CDs"}, --Tigereye Brew
 	{389387 , "Small_Offenisive_CDs"}, --Awakened Feline (Fist Weaving)
 	{201447 , "Freedoms_Speed"}, --Ride the Wind
@@ -1409,7 +1406,6 @@ local spellsArenaTable = {
 	{124280 , "Other"},       -- Touch of Karma Dot
 	{122470 , "Other"},       -- Touch of Karma
 	{122783 , "Other"},     	-- Diffuse Magic (not immune}, 60% magic damage reduction)
-	{115176 , "Other"},		  	-- Zen Meditation (60% damage reduction)
 	{202248 , "Other"},	      -- Guided Meditation (pvp honor talent) (redirect spells to monk)
 	{122278 , "Other"},				-- Dampen Harm
 	{243435 , "Other"},				-- Fortifying Brew
