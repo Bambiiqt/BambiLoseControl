@@ -549,6 +549,7 @@ local spellsArenaTable = {
 	{217824 , "Silence_Arena"}, --Shield of Virtue
 	{199545 , "Special_High"},			-- Steed of Glory
 	{317929 , "Special_High"},			-- Aura Mastery
+	{410201 , "Disarms"}, --Searing Glare
 	{31884, "Big_Defensive_CDs"}, --Avenging Wrath
 	{231895, "Big_Defensive_CDs"}, --Crusade
 	{1022 , "Big_Defensive_CDs"}, --Blessing of Protection
@@ -558,13 +559,12 @@ local spellsArenaTable = {
 	{403876 , "Big_Defensive_CDs"}, --Divine Protection
 	{216331 , "Big_Defensive_CDs"}, --Avenging Crusader
 	{184662 , "Big_Defensive_CDs"}, --Shield of Vengeance
-	{205191 , "Big_Defensive_CDs"}, --Eye for an Eye
 	{210256 , "Big_Defensive_CDs"}, --Blessing of Sanctuary
 	{86659 , "Big_Defensive_CDs"}, --Guardian of Ancient Kings
 	{31850 , "Big_Defensive_CDs"}, --Ardent Defender
 	{415246 , "Big_Defensive_CDs"}, --Divine Plea
-	{105809 , "Small_Defensive_CDs"}, --Holy Avenger
 	{210294 , "Small_Defensive_CDs"}, --Divine Favor
+	{199507 , "Small_Defensive_CDs"}, --Spreading The Word: Protection
 	{1044 , "Freedoms_Speed"}, --Blessing of Freedom (Not Purgeable)
 	{305395 , "Freedoms_Speed"}, --Blessing of Freedom
 	{221886 , "Freedoms_Speed"}, --Divine Steed
@@ -1092,6 +1092,7 @@ local spellsArenaTable = {
 
 	{209749 , "Disarm"},			-- Faerie Swarm (pvp honor talent)
 	{233759 , "Disarm"},			-- Grapple Weapon
+	{410201 , "Disarm"},  			-- Searing Glare
 	{207777 , "Disarm"},			-- Dismantle
 	{236236 , "Disarm"},			-- Disarm (pvp honor talent - protection)
 	{236077 , "Disarm"},			-- Disarm (pvp honor talent)
