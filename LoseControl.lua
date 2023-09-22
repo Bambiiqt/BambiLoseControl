@@ -74,7 +74,6 @@ local unpack = unpack
 local SetScript = SetScript
 local SetUnitDebuff = SetUnitDebuff
 local SetOwner = SetOwner
-local OnEvent = OnEvent
 local CreateFrame = CreateFrame
 local SetTexture = SetTexture
 local SetNormalTexture = SetNormalTexture
@@ -113,6 +112,8 @@ local spellIdsArena = { }
 local interruptsIds = { }
 local cleuPrioCastedSpells = { }
 
+local SecondaryIconData = { }
+
 local string = { }
 local colorTypes = {
   Magic 	= {0.20,0.60,1.00},
@@ -137,8 +138,8 @@ local cleuSpells = { -- nil = Do Not Show
 
 	{123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
 	
-	{34433, 15, nil,  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon
-	{123040, 12, nil,  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
+	{34433, 15, "Friendly_Smoke_Bomb",  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon --Enemy_Smoke_Bomb
+	{123040, 12, "Friendly_Smoke_Bomb",  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
 
 	{188616, 60, "PvE",  "Snares_Casted_Melee", "Earth Ele", "Earth Ele"}, --Shaman Earth Ele
 	{118323, 60, "PvE",  "Snares_Casted_Melee", "Primal Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
@@ -5465,6 +5466,7 @@ local DBdefaults = {
 	ArenaPlayerText = false,
 	displayTypeDot = true,
 	SilenceIcon = true,
+	SecondaryIcon = true,
 	CountTextplayer = true,
 	CountTextparty = true,
 	CountTextarena = true,
@@ -8851,8 +8853,9 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 	local Icon, Duration, Hue, Name, Spell, Count, Text, DispelType
 	local LayeredHue = nil
 	local forceEventUnitAuraAtEnd = false
-	local buffs= {}
+	local buffs= {} 
 	self.lastTimeUnitAuraEvent = GetTime()
+
 
 	if (self.anchor:IsVisible() or (self.frame.anchor ~= "None" and self.frame.anchor ~= "Blizzard")) and UnitExists(self.unitId) and ((self.unitId ~= "targettarget") or (not(LoseControlDB.disablePlayerTargetPlayerTargetTarget) or not(UnitIsUnit("player", "target")))) and ((self.unitId ~= "targettarget") or (not(LoseControlDB.disablePlayerTargetTarget) or not(UnitIsUnit("targettarget", "player")))) and ((self.unitId ~= "targettarget") or (not(LoseControlDB.disableTargetTargetTarget) or not(UnitIsUnit("targettarget", "target")))) and ((self.unitId ~= "targettarget") or (not(LoseControlDB.disableTargetDeadTargetTarget) or (UnitHealth("target") > 0))) and ((self.unitId ~= "focustarget") or (not(LoseControlDB.disablePlayerFocusPlayerFocusTarget) or not(UnitIsUnit("player", "focus") and UnitIsUnit("player", "focustarget")))) and ((self.unitId ~= "focustarget") or (not(LoseControlDB.disablePlayerFocusTarget) or not(UnitIsUnit("focustarget", "player")))) and ((self.unitId ~= "focustarget") or (not(LoseControlDB.disableFocusFocusTarget) or not(UnitIsUnit("focustarget", "focus")))) and ((self.unitId ~= "focustarget") or (not(LoseControlDB.disableFocusDeadFocusTarget) or (UnitHealth("focus") > 0))) then
 		local reactionToPlayer = ((self.unitId == "target" or self.unitId == "focus" or self.unitId == "targettarget" or self.unitId == "focustarget" or strfind(self.unitId, "arena")) and UnitCanAttack("player", unitId)) and "enemy" or "friendly"
@@ -9129,74 +9132,78 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 			if self.frame.categoriesEnabled.debuff[reactionToPlayer][spellCategory] then
 				if Priority then
-					-----------------------------------------------------------------------------------------------------------------
+
+					if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+
+					else
 					--Unseen Table Debuffs
-					-----------------------------------------------------------------------------------------------------------------
-					if strmatch(unitId, "arena") then
-						if typeUpdate == -200 and UnitExists(unitId) then
-							if not Arenastealth[unitId] then
-								Arenastealth[unitId] = {}
+						-----------------------------------------------------------------------------------------------------------------
+						if strmatch(unitId, "arena") then
+							if typeUpdate == -200 and UnitExists(unitId) then
+								if not Arenastealth[unitId] then
+									Arenastealth[unitId] = {}
+								end
+								--print(unitId, "Debuff Stealth Table Information Captured", name)
+								tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 							end
-							--print(unitId, "Debuff Stealth Table Information Captured", name)
-							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory],["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 						end
-					end
-					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration debuffs
-					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
-						if Priority == maxPriority and expirationTime-duration > newExpirationTime then
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							if dispelType then DispelType = dispelType else DispelType = "none" end
-							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						elseif Priority > maxPriority then
-							maxPriority = Priority
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							if dispelType then DispelType = dispelType else DispelType = "none" end
-							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						end
-					elseif durationType[spellCategory] then
-						if Priority == maxPriority and expirationTime > maxExpirationTime then
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							if dispelType then DispelType = dispelType else DispelType = "none" end
-							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						elseif Priority > maxPriority then
-							maxPriority = Priority
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							if dispelType then DispelType = dispelType else DispelType = "none" end
-							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+						---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"]=  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration debuffs
+						---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
+							if Priority == maxPriority and expirationTime-duration > newExpirationTime then
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								if dispelType then DispelType = dispelType else DispelType = "none" end
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							elseif Priority > maxPriority then
+								maxPriority = Priority
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								if dispelType then DispelType = dispelType else DispelType = "none" end
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							end
+						elseif durationType[spellCategory] then
+							if Priority == maxPriority and expirationTime > maxExpirationTime then
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								if dispelType then DispelType = dispelType else DispelType = "none" end
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							elseif Priority > maxPriority then
+								maxPriority = Priority
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								if dispelType then DispelType = dispelType else DispelType = "none" end
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							end
 						end
 					end
 				end
@@ -9550,74 +9557,78 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 			if self.frame.categoriesEnabled.buff[reactionToPlayer][spellCategory] then
 				if Priority then
-					-----------------------------------------------------------------------------------------------------------------
-					--Unseen Table Debuffs
-					-----------------------------------------------------------------------------------------------------------------
-					if strmatch(unitId, "arena") then
-						if typeUpdate == -200 and UnitExists(unitId) then
-							if not Arenastealth[unitId] then
-								Arenastealth[unitId] = {}
+					if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+
+					else
+						-----------------------------------------------------------------------------------------------------------------
+						--Unseen Table Debuffs
+						-----------------------------------------------------------------------------------------------------------------
+						if strmatch(unitId, "arena") then
+							if typeUpdate == -200 and UnitExists(unitId) then
+								if not Arenastealth[unitId] then
+									Arenastealth[unitId] = {}
+								end
+								--print(unitId, "Buff Stealth Table Information Captured", name)
+								tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 							end
-							--print(unitId, "Buff Stealth Table Information Captured", name)
-							tblinsert(Arenastealth[unitId],  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 						end
-					end
-					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
-					---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-					if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
-						if Priority == maxPriority and expirationTime-duration > newExpirationTime then
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							DispelType = "Buff"
-              				Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						elseif Priority > maxPriority then
-							maxPriority = Priority
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							DispelType = "Buff"
-              				Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						end
-					elseif durationType[spellCategory] then
-						if Priority == maxPriority and expirationTime > maxExpirationTime then
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							DispelType = "Buff"
-             				 Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-						elseif Priority > maxPriority then
-							maxPriority = Priority
-							maxExpirationTime = expirationTime
-							newExpirationTime = expirationTime - duration
-							Duration = duration
-							Icon = icon
-							forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
-							Hue = hue
-							Name = name
-							Count = count
-							Spell = spellId
-							DispelType = "Buff"
-							Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+						---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						tblinsert(buffs,  {["col1"] = priority[spellCategory] ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }}) -- this will create a table to show the highest duration buffs
+						---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						if not durationType[spellCategory] then     ----Something along these lines for highest duration vs newest table
+							if Priority == maxPriority and expirationTime-duration > newExpirationTime then
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								DispelType = "Buff"
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							elseif Priority > maxPriority then
+								maxPriority = Priority
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								DispelType = "Buff"
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							end
+						elseif durationType[spellCategory] then
+							if Priority == maxPriority and expirationTime > maxExpirationTime then
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								DispelType = "Buff"
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							elseif Priority > maxPriority then
+								maxPriority = Priority
+								maxExpirationTime = expirationTime
+								newExpirationTime = expirationTime - duration
+								Duration = duration
+								Icon = icon
+								forceEventUnitAuraAtEnd = localForceEventUnitAuraAtEnd
+								Hue = hue
+								Name = name
+								Count = count
+								Spell = spellId
+								DispelType = "Buff"
+								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+							end
 						end
 					end
 				end
@@ -9663,166 +9674,170 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						end
 					else
 						if Priority then
+							if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+
+							else
 							-----------------------------------------------------------------------------------------------------------------
 							--Unseen Table CLEU
 							-----------------------------------------------------------------------------------------------------------------
-							if strmatch(unitId, "arena") then
-								if typeUpdate == -200 and UnitExists(unitId) then
-									if not Arenastealth[unitId] then
-										Arenastealth[unitId] = {}
-									end
-									--print(unitId, "cleu Stealth Table Information Captured", name)
-									local localForceEventUnitAuraAtEnd = false
-									tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
-								end
-							end
-							---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-							local localForceEventUnitAuraAtEnd = false
-							tblinsert(buffs,  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue }}) -- this will create a table to show the highest duration cleu
-							---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-							if spellSchool then -- Stop Interrupt Check when Trees Prio or SPELL_CAST_SUCCESS event
-								for schoolIntId, _ in pairs(spellSchoolInteruptsTable) do
-									if (bit_band(spellSchool, schoolIntId) > 0) then
-										spellSchoolInteruptsTable[schoolIntId][1] = true
-										if expirationTime > spellSchoolInteruptsTable[schoolIntId][2] then
-											spellSchoolInteruptsTable[schoolIntId][2] = expirationTime
+								if strmatch(unitId, "arena") then
+									if typeUpdate == -200 and UnitExists(unitId) then
+										if not Arenastealth[unitId] then
+											Arenastealth[unitId] = {}
 										end
+										--print(unitId, "cleu Stealth Table Information Captured", name)
+										local localForceEventUnitAuraAtEnd = false
+										tblinsert(Arenastealth[unitId],  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue,  }})
 									end
 								end
-							end
-							if not durationType[spellCategory] then
-								if Priority == maxPriority and expirationTime-duration > newExpirationTime then
-									maxExpirationTime = expirationTime
-									newExpirationTime = expirationTime - duration
-									Duration = duration
-									Icon = icon
-									maxPriorityIsInterrupt = true
-									forceEventUnitAuraAtEnd = false
-									Hue = hue
-									Name = name
-									Count = count
-									Spell = spellId
-									DispelType = "CLEU"
-									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-									local nextTimerUpdate = expirationTime - GetTime() + 0.05
-									if nextTimerUpdate < 0.05 then
-										nextTimerUpdate = 0.05
+								---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+								local localForceEventUnitAuraAtEnd = false
+								tblinsert(buffs,  {["col1"] = Priority ,["col2"]  = expirationTime , ["col3"] =  {["name"] =  name, ["spellId"] = spellId, ["duration"] = duration, ["expirationTime"] = expirationTime,  ["icon"] = icon, ["localForceEventUnitAuraAtEnd"] = localForceEventUnitAuraAtEnd, ["hue"] = hue }}) -- this will create a table to show the highest duration cleu
+								---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+								if spellSchool then -- Stop Interrupt Check when Trees Prio or SPELL_CAST_SUCCESS event
+									for schoolIntId, _ in pairs(spellSchoolInteruptsTable) do
+										if (bit_band(spellSchool, schoolIntId) > 0) then
+											spellSchoolInteruptsTable[schoolIntId][1] = true
+											if expirationTime > spellSchoolInteruptsTable[schoolIntId][2] then
+												spellSchoolInteruptsTable[schoolIntId][2] = expirationTime
+											end
+										end
 									end
-									Ctimer(nextTimerUpdate, function()
-										if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
-											self:UNIT_AURA(unitId, updatedAuras, 20)
-										end
-										for e, f in pairs(InterruptAuras) do
-											for g, h in pairs(f) do
-												if (h.expirationTime < GetTime()) then
-													InterruptAuras[e][g] = nil
-												end
-											end
-											if (next(InterruptAuras[e]) == nil) then
-												InterruptAuras[e] = nil
-											end
-										end
-									end)
-								elseif Priority > maxPriority then
-									maxPriority = Priority
-									maxExpirationTime = expirationTime
-									newExpirationTime = expirationTime - duration
-									Duration = duration
-									Icon = icon
-									maxPriorityIsInterrupt = true
-									forceEventUnitAuraAtEnd = false
-									Hue = hue
-									Name = name
-									Count = count
-									Spell = spellId
-									DispelType = "CLEU"
-									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-									local nextTimerUpdate = expirationTime - GetTime() + 0.05
-									if nextTimerUpdate < 0.05 then
-										nextTimerUpdate = 0.05
-									end
-									Ctimer(nextTimerUpdate, function()
-										if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
-											self:UNIT_AURA(unitId, updatedAuras, 20)
-										end
-										for e, f in pairs(InterruptAuras) do
-											for g, h in pairs(f) do
-												if (h.expirationTime < GetTime()) then
-													InterruptAuras[e][g] = nil
-												end
-											end
-											if (next(InterruptAuras[e]) == nil) then
-												InterruptAuras[e] = nil
-											end
-										end
-									end)
 								end
-							elseif durationType[spellCategory] then
-								if Priority == maxPriority and expirationTime > maxExpirationTime then
-									maxExpirationTime = expirationTime
-									newExpirationTime = expirationTime - duration
-									Duration = duration
-									Icon = icon
-									maxPriorityIsInterrupt = true
-									forceEventUnitAuraAtEnd = false
-									Hue = hue
-									Name = name
-									Count = count
-									Spell = spellId
-									DispelType = "CLEU"
-									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-									local nextTimerUpdate = expirationTime - GetTime() + 0.05
-									if nextTimerUpdate < 0.05 then
-										nextTimerUpdate = 0.05
-									end
-									Ctimer(nextTimerUpdate, function()
-										if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
-											self:UNIT_AURA(unitId, updatedAuras, 20)
+								if not durationType[spellCategory] then
+									if Priority == maxPriority and expirationTime-duration > newExpirationTime then
+										maxExpirationTime = expirationTime
+										newExpirationTime = expirationTime - duration
+										Duration = duration
+										Icon = icon
+										maxPriorityIsInterrupt = true
+										forceEventUnitAuraAtEnd = false
+										Hue = hue
+										Name = name
+										Count = count
+										Spell = spellId
+										DispelType = "CLEU"
+										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+										local nextTimerUpdate = expirationTime - GetTime() + 0.05
+										if nextTimerUpdate < 0.05 then
+											nextTimerUpdate = 0.05
 										end
-										for e, f in pairs(InterruptAuras) do
-											for g, h in pairs(f) do
-												if (h.expirationTime < GetTime()) then
-													InterruptAuras[e][g] = nil
+										Ctimer(nextTimerUpdate, function()
+											if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
+												self:UNIT_AURA(unitId, updatedAuras, 20)
+											end
+											for e, f in pairs(InterruptAuras) do
+												for g, h in pairs(f) do
+													if (h.expirationTime < GetTime()) then
+														InterruptAuras[e][g] = nil
+													end
+												end
+												if (next(InterruptAuras[e]) == nil) then
+													InterruptAuras[e] = nil
 												end
 											end
-											if (next(InterruptAuras[e]) == nil) then
-												InterruptAuras[e] = nil
+										end)
+									elseif Priority > maxPriority then
+										maxPriority = Priority
+										maxExpirationTime = expirationTime
+										newExpirationTime = expirationTime - duration
+										Duration = duration
+										Icon = icon
+										maxPriorityIsInterrupt = true
+										forceEventUnitAuraAtEnd = false
+										Hue = hue
+										Name = name
+										Count = count
+										Spell = spellId
+										DispelType = "CLEU"
+										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+										local nextTimerUpdate = expirationTime - GetTime() + 0.05
+										if nextTimerUpdate < 0.05 then
+											nextTimerUpdate = 0.05
+										end
+										Ctimer(nextTimerUpdate, function()
+											if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
+												self:UNIT_AURA(unitId, updatedAuras, 20)
 											end
-										end
-									end)
-								elseif Priority > maxPriority then
-									maxPriority = Priority
-									maxExpirationTime = expirationTime
-									newExpirationTime = expirationTime - duration
-									Duration = duration
-									Icon = icon
-									maxPriorityIsInterrupt = true
-									forceEventUnitAuraAtEnd = false
-									Hue = hue
-									Name = name
-									Count = count
-									Spell = spellId
-									DispelType = "CLEU"
-									Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
-									local nextTimerUpdate = expirationTime - GetTime() + 0.05
-									if nextTimerUpdate < 0.05 then
-										nextTimerUpdate = 0.05
-									end
-									Ctimer(nextTimerUpdate, function()
-										if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
-											self:UNIT_AURA(unitId, updatedAuras, 20)
-										end
-										for e, f in pairs(InterruptAuras) do
-											for g, h in pairs(f) do
-												if (h.expirationTime < GetTime()) then
-													InterruptAuras[e][g] = nil
+											for e, f in pairs(InterruptAuras) do
+												for g, h in pairs(f) do
+													if (h.expirationTime < GetTime()) then
+														InterruptAuras[e][g] = nil
+													end
+												end
+												if (next(InterruptAuras[e]) == nil) then
+													InterruptAuras[e] = nil
 												end
 											end
-											if (next(InterruptAuras[e]) == nil) then
-												InterruptAuras[e] = nil
-											end
+										end)
+									end
+								elseif durationType[spellCategory] then
+									if Priority == maxPriority and expirationTime > maxExpirationTime then
+										maxExpirationTime = expirationTime
+										newExpirationTime = expirationTime - duration
+										Duration = duration
+										Icon = icon
+										maxPriorityIsInterrupt = true
+										forceEventUnitAuraAtEnd = false
+										Hue = hue
+										Name = name
+										Count = count
+										Spell = spellId
+										DispelType = "CLEU"
+										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+										local nextTimerUpdate = expirationTime - GetTime() + 0.05
+										if nextTimerUpdate < 0.05 then
+											nextTimerUpdate = 0.05
 										end
-									end)
+										Ctimer(nextTimerUpdate, function()
+											if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
+												self:UNIT_AURA(unitId, updatedAuras, 20)
+											end
+											for e, f in pairs(InterruptAuras) do
+												for g, h in pairs(f) do
+													if (h.expirationTime < GetTime()) then
+														InterruptAuras[e][g] = nil
+													end
+												end
+												if (next(InterruptAuras[e]) == nil) then
+													InterruptAuras[e] = nil
+												end
+											end
+										end)
+									elseif Priority > maxPriority then
+										maxPriority = Priority
+										maxExpirationTime = expirationTime
+										newExpirationTime = expirationTime - duration
+										Duration = duration
+										Icon = icon
+										maxPriorityIsInterrupt = true
+										forceEventUnitAuraAtEnd = false
+										Hue = hue
+										Name = name
+										Count = count
+										Spell = spellId
+										DispelType = "CLEU"
+										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
+										local nextTimerUpdate = expirationTime - GetTime() + 0.05
+										if nextTimerUpdate < 0.05 then
+											nextTimerUpdate = 0.05
+										end
+										Ctimer(nextTimerUpdate, function()
+											if ((not self.unlockMode) and (self.lastTimeUnitAuraEvent == nil or self.lastTimeUnitAuraEvent < (GetTime() - 0.04))) then
+												self:UNIT_AURA(unitId, updatedAuras, 20)
+											end
+											for e, f in pairs(InterruptAuras) do
+												for g, h in pairs(f) do
+													if (h.expirationTime < GetTime()) then
+														InterruptAuras[e][g] = nil
+													end
+												end
+												if (next(InterruptAuras[e]) == nil) then
+													InterruptAuras[e] = nil
+												end
+											end
+										end)
+									end
 								end
 							end
 						end
@@ -9974,6 +9989,13 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 				Ctimer(remaining + .05, function() self:UNIT_AURA(unitId, updatedAuras, -55) end)
 			end
 		end
+	end
+
+	if typeUpdate == -999 then 
+		SecondaryIconData = {["maxPriority"] = maxPriority, ["maxExpirationTime"] = maxExpirationTime, ["newExpirationTime"] = newExpirationTime, ["Duration"] = Duration, ["Icon"] = Icon, ["forceEventUnitAuraAtEnd"] = forceEventUnitAuraAtEnd, ["Hue"] = Hue, ["Name"] = Name, ["Count"] = Count, ["DispelType"] = DispelType, ["Text"] = Text, ["Spell"] = Spell, ["LayeredHue"] = LayeredHue}
+	end
+	if typeUpdate == -999 then 
+		return 
 	end
 
 	if self.LayeredHue then -- refires the icon to remove the hue for LayeredHUe if the BUff is Removed that trigeers Layered Hue and there Higher Prio Buff Above it w/ Same Expiration
@@ -10296,9 +10318,16 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 	end
 	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" then
 		if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
-			LoseControl:Silence(LoseControlplayer)
+			LoseControl:Silence(LoseControlplayer, LayeredHue)
 		else
 			if playerSilence then playerSilence:Hide() end
+		end
+	end
+	if unitId == "player" and LoseControlDB.SecondaryIcon and self.frame.anchor ~= "Blizzard" then
+		if self.spellCategory  and self.spellCategory ~= "CC" and (self.spellCategory == "Silence" or self.spellCategory == "RootPhyiscal_Special" or self.spellCategory == "RootMagic_Special" or self.spellCategory == "Root") then
+			LoseControl:SecondaryIcon(LoseControlplayer)
+		else
+			if playerSecondaryIcon then playerSecondaryIcon:Hide() end
 		end
 	end
 end
@@ -10306,14 +10335,14 @@ end
 
 
 
-function LoseControl:Silence(frame)
+function LoseControl:Silence(frame,  LayeredHue)
   	local playerSilence = frame.playerSilence
-  	local Icon, Duration, maxPriority, maxExpirationTime
+  	local Icon, Duration, maxPriority, maxExpirationTime, DispelType
 	local maxPriority = 1
 	local maxExpirationTime = 0
 	local priority = LoseControlDB.priority
 	for i = 1, 40 do
-		local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HARMFUL")
+		local name, icon, count, debuffType, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HARMFUL")
 		if duration == 0 and expirationTime == 0 then
 			expirationTime = GetTime() + 1 -- normal expirationTime = 0
 		end
@@ -10324,11 +10353,12 @@ function LoseControl:Silence(frame)
 				maxExpirationTime = expirationTime
 				Duration = duration
 				Icon = icon
+				DispelType = debuffType
 			end
 		end
   	end
 	for i = 1, 40 do
-		local name, icon, count, _, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HELPFUL")
+		local name, icon, count, debuffType, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HELPFUL")
 		if duration == 0 and expirationTime == 0 then
 			expirationTime = GetTime() + 1 -- normal expirationTime = 0
 		end
@@ -10339,14 +10369,15 @@ function LoseControl:Silence(frame)
 				maxExpirationTime = expirationTime
 				Duration = duration
 				Icon = icon
+				DispelType = debuffType
 			end
 		end
 	end
 	playerSilence:SetWidth(frame:GetWidth()*.9)
 	playerSilence:SetHeight(frame:GetHeight()*.9)
 	playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-	playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.25, "OUTLINE")
-	--playerSilence.Ltext:SetText("Silence")
+	playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
+	playerSilence.Ltext:SetText("Silence")
 	if maxExpirationTime == 0 then
 		playerSilence.maxExpirationTime = 0
 		playerSilence:Hide()
@@ -10357,8 +10388,33 @@ function LoseControl:Silence(frame)
 		else
 			playerSilence.cooldown:SetDrawSwipe(false)
 		end
+		if LoseControlDB.displayTypeDot and DispelType then
+			playerSilence.dispelTypeframe:SetHeight(frame:GetWidth()*.09)
+			playerSilence.dispelTypeframe:SetWidth(frame:GetWidth()*.09)
+			playerSilence.dispelTypeframe.tex:SetDesaturated(nil)
+			playerSilence.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
+			playerSilence.dispelTypeframe:ClearAllPoints()
+			if playerSilence.Ltext:IsShown() then
+				playerSilence.dispelTypeframe:SetPoint("LEFT", playerSilence.Ltext, "RIGHT", 1, -1.25)
+			else
+				playerSilence.dispelTypeframe:SetPoint("TOP", playerSilence, "BOTTOM", 0, -1)
+			end
+			playerSilence.dispelTypeframe:Show()
+		else
+			if playerSilence.dispelTypeframe:IsShown() then
+				playerSilence.dispelTypeframe:Hide()
+			end
+		end
+		if LayeredHue then
+			playerSilence.texture:SetTexture(Icon)   --Set Icon
+			playerSilence.texture:SetDesaturated(1) --Destaurate Icon
+			playerSilence.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
+		else
 			playerSilence.texture:SetTexture(Icon)
-			playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+			playerSilence.texture:SetDesaturated(nil) --Destaurate Icon
+			playerSilence.texture:SetVertexColor(1, 1, 1)
+		end
+		playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
 		if Duration > 0 then
 			if (maxExpirationTime - GetTime()) > (9*60+59) then
 				playerSilence.cooldown:SetCooldown(GetTime(), 0)
@@ -10379,6 +10435,138 @@ function LoseControl:Silence(frame)
 		end
 		local inInstance, instanceType = IsInInstance()
 		playerSilence:Show()
+	end
+end
+
+function LoseControl:SecondaryIcon(frame)
+	local playerSecondaryIcon = frame.playerSecondaryIcon
+	
+	frame:UNIT_AURA("player", true, -999)
+
+	local maxPriority = SecondaryIconData.maxPriority 
+	local maxExpirationTime = SecondaryIconData.maxExpirationTime
+	local newExpirationTime = SecondaryIconData.newExpirationTime
+	local Duration = SecondaryIconData.Duration
+	local Icon = SecondaryIconData.Icon
+	local forceEventUnitAuraAtEnd = SecondaryIconData.forceEventUnitAuraAtEnd
+	local Hue = SecondaryIconData.Hue 
+	local Name = SecondaryIconData.Name
+	local Count = SecondaryIconData.Count
+	local DispelType = SecondaryIconData.DispelType
+	local Text = SecondaryIconData.Text
+	local Spell = SecondaryIconData.Spell
+	local LayeredHue = SecondaryIconData.LayeredHue
+	
+	playerSecondaryIcon:SetWidth(frame:GetWidth()*.9)
+	playerSecondaryIcon:SetHeight(frame:GetHeight()*.9)
+	playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+	playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
+	--playerSecondaryIcon.Ltext:SetJustifyH("CENTER")
+	--playerSecondaryIcon.Ltext:SetPoint("TOPLEFT", o.playerSecondaryIcon, "BOTTOMLEFT",  0 , -1.25)
+	playerSecondaryIcon.Ltext:SetText(Text)
+	if maxExpirationTime == 0 then
+		playerSecondaryIcon.maxExpirationTime = 0
+		playerSecondaryIcon:Hide()
+	elseif maxExpirationTime then
+		playerSecondaryIcon.maxExpirationTime = maxExpirationTime
+		if Hue then
+			if Hue == "Red" then -- Changes Icon Hue to Red
+				playerSecondaryIcon.texture:SetTexture(Icon)   --Set Icon
+				playerSecondaryIcon.texture:SetDesaturated(1) --Destaurate Icon
+				playerSecondaryIcon.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
+			elseif Hue == "Red_No_Desaturate" then -- Changes Hue to Red and any Icon Greater
+				playerSecondaryIcon.texture:SetTexture(Icon)   --SetIcon
+				playerSecondaryIcon.texture:SetDesaturated(nil) --Destaurate Icon
+				playerSecondaryIcon.texture:SetVertexColor(1, 0, 0); --Red Hue Set For Icon
+			elseif Hue == "Yellow" then -- Changes Hue to Yellow and any Icon Greater
+				playerSecondaryIcon.texture:SetTexture(Icon)   --Set Icon
+				playerSecondaryIcon.texture:SetDesaturated(1) --Destaurate Icon
+				playerSecondaryIcon.texture:SetVertexColor(1, 1, 0); --Yellow Hue Set For Icon
+			elseif Hue == "Purple" then -- Changes Hue to Purple and any Icon Greater
+				playerSecondaryIcon.texture:SetTexture(Icon)   --Set Icon
+				playerSecondaryIcon.texture:SetDesaturated(1) --Destaurate Icon
+				playerSecondaryIcon.texture:SetVertexColor(1, 0, 1); --Purple Hue Set For Icon
+			elseif Hue == "GhostPurple" then -- Changes Hue to Purple and any Icon Greater
+				playerSecondaryIcon.texture:SetTexture(Icon)   --Set Icon
+				playerSecondaryIcon.texture:SetDesaturated(1) --Destaurate Icon
+				playerSecondaryIcon.texture:SetVertexColor(.65, .5, .9); --Purple Hue Set For Icon
+			end
+		else
+			playerSecondaryIcon.texture:SetTexture(Icon)
+			playerSecondaryIcon.texture:SetDesaturated(nil) --Destaurate Icon
+			playerSecondaryIcon.texture:SetVertexColor(1, 1, 1)
+		end
+		if Count then
+			if ( Count > 1 ) then
+				local countText = Count
+				if ( Count > 100 ) then
+					countText = BUFF_STACKS_OVERFLOW
+				end
+				playerSecondaryIcon.count:ClearAllPoints()
+				playerSecondaryIcon.count:SetParent(playerSecondaryIcon)
+				playerSecondaryIcon.count:SetFont(STANDARD_TEXT_FONT, (frame:GetWidth()*.9)*.415, "OUTLINE")
+				playerSecondaryIcon.count:SetPoint("TOPRIGHT", -1, (frame:GetWidth()*.9)*.415/2.5);
+				playerSecondaryIcon.count:SetJustifyH("RIGHT");
+				playerSecondaryIcon.count:SetText(countText)
+				playerSecondaryIcon.count:Show();
+			else
+				if playerSecondaryIcon.count:IsShown() then
+					playerSecondaryIcon.count:Hide()
+				end
+			end
+		else
+			if playerSecondaryIcon.count:IsShown() then
+				playerSecondaryIcon.count:Hide()
+			end
+		end
+		if LoseControlDB.displayTypeDot and DispelType then
+			playerSecondaryIcon.dispelTypeframe:SetHeight(frame:GetWidth()*.09)
+			playerSecondaryIcon.dispelTypeframe:SetWidth(frame:GetWidth()*.09)
+			playerSecondaryIcon.dispelTypeframe.tex:SetDesaturated(nil)
+			playerSecondaryIcon.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
+			playerSecondaryIcon.dispelTypeframe:ClearAllPoints()
+			if playerSecondaryIcon.Ltext:IsShown() then
+				playerSecondaryIcon.dispelTypeframe:SetPoint("LEFT", playerSecondaryIcon.Ltext, "RIGHT", 1, -1.25)
+			else
+				playerSecondaryIcon.dispelTypeframe:SetPoint("TOP", playerSecondaryIcon, "BOTTOM", 0, -1)
+			end
+			playerSecondaryIcon.dispelTypeframe:Show()
+		else
+			if playerSecondaryIcon.dispelTypeframe:IsShown() then
+				playerSecondaryIcon.dispelTypeframe:Hide()
+			end
+		end
+		if LoseControlDB.DrawSwipeSetting > 0 then
+			playerSecondaryIcon.cooldown:SetDrawSwipe(true)
+		else
+			playerSecondaryIcon.cooldown:SetDrawSwipe(false)
+		end
+			playerSecondaryIcon.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+		if Duration > 0 then
+			if (maxExpirationTime - GetTime()) > (9*60+59) then
+				playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)
+				playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)
+			else
+				playerSecondaryIcon.cooldown:SetCooldown( maxExpirationTime - Duration, Duration )
+			end
+		else
+			if playerSecondaryIcon.cooldown:GetDrawSwipe() then
+				if LoseControlDB.DrawSwipeSetting > 0 then
+					playerSecondaryIcon.cooldown:SetDrawSwipe(true)
+				else
+					playerSecondaryIcon.cooldown:SetDrawSwipe(false)
+				end
+			end
+			playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)
+			playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
+		end
+		if Spell and (Spell == 199448 or Spell == 377362 or Spell == 139) then --Ultimate Sac Glow and Precog
+			ActionButton_ShowOverlayGlow(playerSecondaryIcon)
+		else
+			ActionButton_HideOverlayGlow(playerSecondaryIcon)
+		end
+		local inInstance, instanceType = IsInInstance()
+		playerSecondaryIcon:Show()
 	end
 end
 
@@ -10482,9 +10670,13 @@ function LoseControl:new(unitId)
 	if unitId == "player" then
 		o.Ltext = o:CreateFontString(nil, "ARTWORK")
 		o.Ltext:SetParent(o)
-		o.Ltext:SetJustifyH("CENTER")
 		o.Ltext:SetTextColor(1, 1, 1, 1)
+
+		o.Ltext:SetJustifyH("CENTER")
 		o.Ltext:SetPoint("TOP", o, "BOTTOM", 0, -1)
+		--o.Ltext:SetJustifyH("RIGHT")
+		--o.Ltext:SetPoint("TOPRIGHT", o, "BOTTOMRIGHT", 0, -1)
+
 		o.dispelTypeframe  = CreateFrame("Frame", addonName .. "dispelTypeframe" .. unitId, o)
 		o.dispelTypeframe:ClearAllPoints()
 		o.dispelTypeframe:SetAlpha(1)
@@ -10511,7 +10703,50 @@ function LoseControl:new(unitId)
 		o.playerSilence.Ltext:SetParent(o.playerSilence)
 		o.playerSilence.Ltext:SetJustifyH("CENTER")
 		o.playerSilence.Ltext:SetTextColor(1, 1, 1, 1)
-		o.playerSilence.Ltext:SetPoint("TOP", o.playerSilence, "BOTTOM")
+		o.playerSilence.Ltext:SetPoint("TOP", o.playerSilence, "BOTTOM", 0 , -1.25)
+		o.playerSilence.dispelTypeframe  = CreateFrame("Frame", addonName .. "playerSilence.dispelTypeframe" .. unitId, o.playerSilence)
+		o.playerSilence.dispelTypeframe:ClearAllPoints()
+		o.playerSilence.dispelTypeframe:SetAlpha(1)
+		o.playerSilence.dispelTypeframe:SetFrameLevel(3)
+		o.playerSilence.dispelTypeframe:SetFrameStrata("MEDIUM")
+		o.playerSilence.dispelTypeframe:EnableMouse(false)
+		o.playerSilence.dispelTypeframe.tex = o.playerSilence.dispelTypeframe:CreateTexture()
+		o.playerSilence.dispelTypeframe.tex:SetAllPoints(o.playerSilence.dispelTypeframe)
+		SetPortraitToTexture(o.playerSilence.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+		o.playerSilence.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+
+		o.playerSecondaryIcon = CreateFrame("Frame", "playerSecondaryIcon", frame)
+		o.playerSecondaryIcon:SetPoint("BOTTOMLEFT", o, "BOTTOMRIGHT", 1, 0)
+		o.playerSecondaryIcon:SetParent(o)
+		o.playerSecondaryIcon.texture = o.playerSecondaryIcon:CreateTexture(nil, "BACKGROUND")
+		o.playerSecondaryIcon.texture:SetAllPoints(true)
+		o.playerSecondaryIcon.cooldown = CreateFrame("Cooldown", nil,   o.playerSecondaryIcon, 'CooldownFrameTemplate')
+		o.playerSecondaryIcon.cooldown:SetAllPoints(o.playerSecondaryIcon)
+		o.playerSecondaryIcon.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")    --("Interface\\Cooldown\\edge-LoC") Blizz LC CD
+		o.playerSecondaryIcon.cooldown:SetDrawSwipe(true)
+		o.playerSecondaryIcon.cooldown:SetDrawEdge(false)
+		o.playerSecondaryIcon.cooldown:SetReverse(true) --will reverse the swipe if actionbars or debuff, by default bliz sets the swipe to actionbars if this = true it will be set to debuffs
+		o.playerSecondaryIcon.cooldown:SetDrawBling(false)
+		o.playerSecondaryIcon.Ltext = o.playerSecondaryIcon:CreateFontString(nil, "ARTWORK")
+		o.playerSecondaryIcon.Ltext:SetParent(o.playerSecondaryIcon)
+		o.playerSecondaryIcon.Ltext:SetTextColor(1, 1, 1, 1)
+
+		o.playerSecondaryIcon.Ltext:SetJustifyH("CENTER")
+		o.playerSecondaryIcon.Ltext:SetPoint("TOP", o.playerSecondaryIcon, "BOTTOM",  0 , -1.25)
+		--o.playerSecondaryIcon.Ltext:SetJustifyH("CENTER")
+		--o.playerSecondaryIcon.Ltext:SetPoint("TOPLEFT", o.playerSecondaryIcon, "BOTTOMLEFT",  0 , -1.25)
+
+		o.playerSecondaryIcon.count = o.playerSecondaryIcon:CreateFontString(nil, "OVERLAY", "GameFontWhite");
+		o.playerSecondaryIcon.dispelTypeframe  = CreateFrame("Frame", addonName .. "playerSecondaryIcon.dispelTypeframe" .. unitId, o.playerSecondaryIcon)
+		o.playerSecondaryIcon.dispelTypeframe:ClearAllPoints()
+		o.playerSecondaryIcon.dispelTypeframe:SetAlpha(1)
+		o.playerSecondaryIcon.dispelTypeframe:SetFrameLevel(3)
+		o.playerSecondaryIcon.dispelTypeframe:SetFrameStrata("MEDIUM")
+		o.playerSecondaryIcon.dispelTypeframe:EnableMouse(false)
+		o.playerSecondaryIcon.dispelTypeframe.tex = o.playerSecondaryIcon.dispelTypeframe:CreateTexture()
+		o.playerSecondaryIcon.dispelTypeframe.tex:SetAllPoints(o.playerSecondaryIcon.dispelTypeframe)
+		SetPortraitToTexture(o.playerSecondaryIcon.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+		o.playerSecondaryIcon.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
 	end
 
 	o:SetDrawEdge(false)
@@ -12632,14 +12867,16 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
     SilenceIcon = CreateFrame("CheckButton", O..v.."SilenceIcon", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
     SilenceIcon:SetScale(1)
     SilenceIcon:SetHitRectInsets(0, 0, 0, 0)
-    _G[O..v.."SilenceIconText"]:SetText("Show Silence Frame Separate")
+    _G[O..v.."SilenceIconText"]:SetText("Show Silence & Secondary Prio Frame")
     SilenceIcon:SetScript("OnClick", function(self)
       LoseControlDB.SilenceIcon = self:GetChecked()
       OptionsFunctions:UpdateAll()
       if (self:GetChecked()) then
         LoseControlDB.SilenceIcon = true
+		LoseControlDB.SecondaryIcon = true
       else
         LoseControlDB.SilenceIcon = false
+		LoseControlDB.SecondaryIcon = false
       end
       if (Unlock:GetChecked()) then
         Unlock:SetChecked(false)
