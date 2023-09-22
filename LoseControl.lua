@@ -138,8 +138,8 @@ local cleuSpells = { -- nil = Do Not Show
 
 	{123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
 	
-	{34433, 15, "Friendly_Smoke_Bomb",  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon --Enemy_Smoke_Bomb
-	{123040, 12, "Friendly_Smoke_Bomb",  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
+	{34433, 15, nil,  "Special_Low", "Shadowfiend", "Shadowfiend"}, --Disc Pet Summmon --Enemy_Smoke_Bomb
+	{123040, 12, nil,  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
 
 	{188616, 60, "PvE",  "Snares_Casted_Melee", "Earth Ele", "Earth Ele"}, --Shaman Earth Ele
 	{118323, 60, "PvE",  "Snares_Casted_Melee", "Primal Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
@@ -1165,8 +1165,6 @@ local spellsArenaTable = {
 	--{201633 , "Friendly_Defensives"},		-- Earthen
 	--{81782 , "Friendly_Defensives"},		-- Barrier
 
-	{29166, "Mana_Regen", "Innervate"},		-- Innervate
-	{64901, "Mana_Regen", "Symbols".."\n".."of Hope"},		-- Symbol of Hope
 
 	{210256, "CC_Reduction", "Blessing of".."\n".."Sanctuary"},		-- Blessing of Sanctuary
 	{213610, "CC_Reduction", "Holy".."\n".."Ward"},		-- Holy Ward
@@ -1193,17 +1191,18 @@ local spellsArenaTable = {
 	--{358267, "Movable_Cast_Auras", "Hover"},		-- Hover
 	{406732 , "Movable_Cast_Auras", "Spatial".."\n".."Paradox"}, --Spatial Paraodox
 
+	{29166, "Mana_Regen", "Innervate"},		-- Innervate
+	{64901, "Mana_Regen", "Symbols".."\n".."of Hope"},		-- Symbol of Hope
 	--"Other", --
 	--"PvE", --PVE only
-	{410063, "SnareSpecial"}, 		-- Reactive Resin
-	{201787, "SnareSpecial"},		-- Heavy-Handed Strikes
-	{199845, "SnareSpecial"},		-- Psyflay (pvp honor talent)
-	{198222, "SnareSpecial"},		-- System Shock (pvp honor talent) (90% slow)
-	{200587, "SnareSpecial"},		-- Fel Fissure
-	{308498, "SnareSpecial"},   	-- Resonating Arrow (Hunter Kyrain Special)
-	{320267, "SnareSpecial"},		-- Soothing Voice
-	{204206, "SnareSpecial"},		-- Chilled (Chill Streak)
-	{389823, "SnareSpecial"},		-- Snowdrift
+
+	{410063, "SnareSpecial", "Reactive".."\n".."Resin"}, 		-- Reactive Resin
+	{201787, "SnareSpecial", "Heavy-Handed".."\n".."Strikes"}, 			-- Heavy-Handed Strikes
+	{199845, "SnareSpecial", "Psyflay"}, 		-- Psyflay (pvp honor talent)
+	{198222, "SnareSpecial", "System".."\n".."Shock"},			-- System Shock (pvp honor talent) (90% slow)
+	{200587, "SnareSpecial", "Fel".."\n".."Fissure"},		-- Fel Fissure
+	{204206, "SnareSpecial", "Chill".."\n".."Streak"},		-- Chilled (Chill Streak)
+	{389823, "SnareSpecial", "Snow".."\n".."Drift"},		-- Snowdrift
 
 	{45524,  "SnarePhysical70"},		-- Chains of Ice
 	{273977, "SnarePhysical70"},		-- Grip of the Dead
@@ -5500,13 +5499,13 @@ local DBdefaults = {
 			CC_Reduction = 18,
 			Personal_Offensives = 16,
 			Peronsal_Defensives = 14,
-      Mana_Regen = 10,
+      		Mana_Regen = 10,
 			Movable_Cast_Auras = 10,
 
 			Other = 10, --PVE only
 			PvE = 10, --PVE only
 
-			SnareSpecial = 12,
+			SnareSpecial = 9,
 			SnarePhysical70 = 8,
 			SnareMagic70 = 7,
 			SnarePhysical50 = 6,
@@ -8830,7 +8829,7 @@ end
 
 
 -- This is the main event. Check for (de)buffs and update the frame icon and cooldown.
-function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a (de)buff is gained/lost
+function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimaryspellCat) -- fired when a (de)buff is gained/lost
 	if (((typeUpdate ~= nil and typeUpdate > 0) or (typeUpdate == nil and self.unitId == "targettarget") or (typeUpdate == nil and self.unitId == "focustarget")) and (self.lastTimeUnitAuraEvent == GetTime())) then return end
 	if ((self.unitId == "targettarget" or self.unitId == "focustarget") and (not UnitIsUnit(unitId, self.unitId))) then return end
 	local priority = LoseControlDB.priority
@@ -9133,7 +9132,12 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 			if self.frame.categoriesEnabled.debuff[reactionToPlayer][spellCategory] then
 				if Priority then
 
-					if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+					--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+					if typeUpdate == -999 and 
+					(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
+					priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+					((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
+					Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
 
 					else
 					--Unseen Table Debuffs
@@ -9557,7 +9561,12 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 			if self.frame.categoriesEnabled.buff[reactionToPlayer][spellCategory] then
 				if Priority then
-					if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+					--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+					if typeUpdate == -999 and 
+					(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
+					priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+					((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
+					Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
 
 					else
 						-----------------------------------------------------------------------------------------------------------------
@@ -9674,7 +9683,12 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 						end
 					else
 						if Priority then
-							if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+							--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
+							if typeUpdate == -999 and 
+							(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
+							priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+							((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
+							Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
 
 							else
 							-----------------------------------------------------------------------------------------------------------------
@@ -9993,8 +10007,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 
 	if typeUpdate == -999 then 
 		SecondaryIconData = {["maxPriority"] = maxPriority, ["maxExpirationTime"] = maxExpirationTime, ["newExpirationTime"] = newExpirationTime, ["Duration"] = Duration, ["Icon"] = Icon, ["forceEventUnitAuraAtEnd"] = forceEventUnitAuraAtEnd, ["Hue"] = Hue, ["Name"] = Name, ["Count"] = Count, ["DispelType"] = DispelType, ["Text"] = Text, ["Spell"] = Spell, ["LayeredHue"] = LayeredHue}
-	end
-	if typeUpdate == -999 then 
 		return 
 	end
 
@@ -10318,14 +10330,15 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate) -- fired when a
 	end
 	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" then
 		if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
-			LoseControl:Silence(LoseControlplayer, LayeredHue)
+			LoseControl:Silence(LoseControlplayer, LayeredHue, self.spellCategory)
 		else
 			if playerSilence then playerSilence:Hide() end
 		end
 	end
 	if unitId == "player" and LoseControlDB.SecondaryIcon and self.frame.anchor ~= "Blizzard" then
-		if self.spellCategory  and self.spellCategory ~= "CC" and (self.spellCategory == "Silence" or self.spellCategory == "RootPhyiscal_Special" or self.spellCategory == "RootMagic_Special" or self.spellCategory == "Root") then
-			LoseControl:SecondaryIcon(LoseControlplayer)
+		--if self.spellCategory  and self.spellCategory ~= "CC" and (self.spellCategory == "Silence" or self.spellCategory == "RootPhyiscal_Special" or self.spellCategory == "RootMagic_Special" or self.spellCategory == "Root") then
+		if	self.spellCategory and self.spellCategory ~= "CC" then 
+			LoseControl:SecondaryIcon(LoseControlplayer, LayeredHue, self.spellCategory)
 		else
 			if playerSecondaryIcon then playerSecondaryIcon:Hide() end
 		end
@@ -10335,7 +10348,7 @@ end
 
 
 
-function LoseControl:Silence(frame,  LayeredHue)
+function LoseControl:Silence(frame,  LayeredHue, spellCategory)
   	local playerSilence = frame.playerSilence
   	local Icon, Duration, maxPriority, maxExpirationTime, DispelType
 	local maxPriority = 1
@@ -10438,10 +10451,10 @@ function LoseControl:Silence(frame,  LayeredHue)
 	end
 end
 
-function LoseControl:SecondaryIcon(frame)
+function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 	local playerSecondaryIcon = frame.playerSecondaryIcon
 	
-	frame:UNIT_AURA("player", true, -999)
+	frame:UNIT_AURA("player", true, -999, spellCategory)
 
 	local maxPriority = SecondaryIconData.maxPriority 
 	local maxExpirationTime = SecondaryIconData.maxExpirationTime
@@ -10560,7 +10573,7 @@ function LoseControl:SecondaryIcon(frame)
 			playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)
 			playerSecondaryIcon.cooldown:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
 		end
-		if Spell and (Spell == 199448 or Spell == 377362 or Spell == 139) then --Ultimate Sac Glow and Precog
+		if Spell and (Spell == 199448 or Spell == 377362) then --Ultimate Sac Glow and Precog
 			ActionButton_ShowOverlayGlow(playerSecondaryIcon)
 		else
 			ActionButton_HideOverlayGlow(playerSecondaryIcon)
