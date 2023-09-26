@@ -90,10 +90,10 @@ local Show = Show
 local IsShown = IsShown
 local IsVisible = IsVisible
 local playerGUID
-local print = print
 local debug = false -- type "/lc debug on" if you want to see UnitAura info logged to the console
 local LCframes = {}
 local LCframeplayer2
+local LCframeplayer3
 
 local InterruptAuras = { }
 local SmokeBombAuras = { }
@@ -5441,7 +5441,7 @@ local DBdefaults = {
 	customSpellIds = { },
 	customSpellIdsArena = { },
 
-	version = 9.13, -- This is the settings version, not necessarily the same as the LoseControl version
+	version = 9.14, -- This is the settings version, not necessarily the same as the LoseControl version
 	noCooldownCount = false,
 	noBlizzardCooldownCount = true,
 	noLossOfControlCooldown = false, --Chris Need to Test what is better
@@ -5767,6 +5767,89 @@ local DBdefaults = {
 			},
 				interrupt = {
 					friendly = true
+				}
+			}
+		},
+		player3 = {
+			enabled = true,
+			size = 62,
+			alpha = 1,
+			anchor = "Blizzard",
+			categoriesEnabled = {
+				buff = {
+					friendly = {
+						CC = false,
+						Silence = false,
+						RootPhyiscal_Special = false,
+						RootMagic_Special = false,
+						Root = false,
+						ImmunePlayer = false,
+						Disarm_Warning = false,
+						CC_Warning = false,
+						Enemy_Smoke_Bomb = false,
+						Stealth = false, Immune = false,
+						ImmuneSpell = false,
+						ImmunePhysical = false,
+						AuraMastery_Cast_Auras = false,
+						ROP_Vortex = false ,
+						Disarm = false,
+						Haste_Reduction = false,
+						Dmg_Hit_Reduction = false,
+						AOE_DMG_Modifiers = false,
+						Friendly_Smoke_Bomb = false,
+						AOE_Spell_Refections = false,
+						Trees = false,
+						Speed_Freedoms = false,
+						Freedoms = false,
+						Friendly_Defensives = false,
+						Mana_Regen = false,
+						CC_Reduction = true,
+						Personal_Offensives = false,
+						Peronsal_Defensives = false,
+						Movable_Cast_Auras = false,
+						SnareSpecial = false, SnarePhysical70 = false, SnareMagic70 = false, SnarePhysical50 = false, SnarePosion50 = false, SnareMagic50 = false, SnarePhysical30 = false, SnareMagic30  = false, Snare = false,
+						PvE = false,
+						Other = false,
+					 }
+				},
+				debuff = {
+					friendly = {
+						CC = false,
+						Silence = false,
+						RootPhyiscal_Special = false,
+						RootMagic_Special = false,
+						Root = false,
+						ImmunePlayer = false,
+						Disarm_Warning = false,
+						CC_Warning = false,
+						Enemy_Smoke_Bomb = false,
+						Stealth = false, Immune = false,
+						ImmuneSpell = false,
+						ImmunePhysical = false,
+						AuraMastery_Cast_Auras = false,
+						ROP_Vortex = false ,
+						Disarm = false,
+						Haste_Reduction = false,
+						Dmg_Hit_Reduction = false,
+						AOE_DMG_Modifiers = false,
+						Friendly_Smoke_Bomb = false,
+						AOE_Spell_Refections = false,
+						Trees = false,
+						Speed_Freedoms = false,
+						Freedoms = false,
+						Friendly_Defensives = false,
+						Mana_Regen = false,
+						CC_Reduction = true,
+						Personal_Offensives = false,
+						Peronsal_Defensives = false,
+						Movable_Cast_Auras = false,
+						SnareSpecial = false, SnarePhysical70 = false, SnareMagic70 = false, SnarePhysical50 = false, SnarePosion50 = false, SnareMagic50 = false, SnarePhysical30 = false, SnareMagic30  = false, Snare = false,
+						PvE = false,
+						Other = false,
+					 }
+			},
+				interrupt = {
+					friendly = false
 				}
 			}
 		},
@@ -7727,12 +7810,14 @@ function LoseControl:ADDON_LOADED(arg1)
 				v:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
 			end
 			LCframeplayer2:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
+			--LCframeplayer3:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
 		else
 			self:SetHideCountdownNumbers(true)
 			for _, v in pairs(LCframes) do
 				v:SetHideCountdownNumbers(true)
 			end
 			LCframeplayer2:SetHideCountdownNumbers(true)
+			--LCframeplayer3:SetHideCountdownNumbers(true)
 		end
 		playerGUID = UnitGUID("player")
 		self:CompileSpells(1)
@@ -9133,11 +9218,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 				if Priority then
 
 					--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
-					if typeUpdate == -999 and 
-					(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
-					priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+					if typeUpdate == -999 and (
+					(Priority == priority[playerPrimaryspellCat]) or -- Stops the Same Priority 
+					(priority[playerPrimaryspellCat] <= priority["SnareSpecial"]) or  -- Stops Never Show Two Snares
 					((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
-					Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
+					(Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) or   -- Stops Two Roots
+					((priority[playerPrimaryspellCat] == priority["CC"] or priority[playerPrimaryspellCat] == priority["Silence"] or priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and
+					(Priority <= priority["SnarePhysical70"])) -- Stops Snares From Shwoing with CC, Silence, Roots
+					) then
 
 					else
 					--Unseen Table Debuffs
@@ -9562,11 +9650,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			if self.frame.categoriesEnabled.buff[reactionToPlayer][spellCategory] then
 				if Priority then
 					--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
-					if typeUpdate == -999 and 
-					(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
-					priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+					if typeUpdate == -999 and (
+					(Priority == priority[playerPrimaryspellCat]) or -- Stops the Same Priority 
+					(priority[playerPrimaryspellCat] <= priority["SnareSpecial"]) or  -- Stops Never Show Two Snares
 					((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
-					Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
+					(Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) or   -- Stops Two Roots
+					((priority[playerPrimaryspellCat] == priority["CC"] or priority[playerPrimaryspellCat] == priority["Silence"] or priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and
+					(Priority <= priority["SnarePhysical70"])) -- Stops Snares From Shwoing with CC, Silence, Roots
+					) then
 
 					else
 						-----------------------------------------------------------------------------------------------------------------
@@ -9684,11 +9775,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 					else
 						if Priority then
 							--if typeUpdate == -999 and (Priority >= priority["Root"] or Priority <= priority["SnarePhysical70"]) then 
-							if typeUpdate == -999 and 
-							(Priority == priority[playerPrimaryspellCat] or -- Stops the Same Priority 
-							priority[playerPrimaryspellCat] <= priority["SnareSpecial"] or 
+							if typeUpdate == -999 and (
+							(Priority == priority[playerPrimaryspellCat]) or -- Stops the Same Priority 
+							(priority[playerPrimaryspellCat] <= priority["SnareSpecial"]) or  -- Stops Never Show Two Snares
 							((priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and 
-							Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) then -- Stops Two Snares
+							(Priority == priority["RootPhyiscal_Special"] or Priority == priority["RootMagic_Special"] or Priority == priority["Root"])) or   -- Stops Two Roots
+							((priority[playerPrimaryspellCat] == priority["CC"] or priority[playerPrimaryspellCat] == priority["Silence"] or priority[playerPrimaryspellCat] == priority["RootPhyiscal_Special"] or priority[playerPrimaryspellCat] == priority["RootMagic_Special"] or priority[playerPrimaryspellCat] == priority["Root"]) and
+							(Priority <= priority["SnarePhysical70"])) -- Stops Snares From Shwoing with CC, Silence, Roots
+							) then
 
 							else
 							-----------------------------------------------------------------------------------------------------------------
@@ -10328,16 +10422,17 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			self:GetParent():SetAlpha(self.frame.alpha) -- hack to apply transparency to the cooldown timer
 		end
 	end
-	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" then
+	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" and not self.fakeUnitId then
 		if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
-			LoseControl:Silence(LoseControlplayer, LayeredHue, self.spellCategory)
+		--	LoseControl:Silence(LoseControlplayer, LayeredHue, self.spellCategory)
 		else
 			if playerSilence then playerSilence:Hide() end
 		end
 	end
-	if unitId == "player" and LoseControlDB.SecondaryIcon and self.frame.anchor ~= "Blizzard" then
+
+	if unitId == "player" and LoseControlDB.SecondaryIcon and self.frame.anchor ~= "Blizzard" and not self.fakeUnitId then
 		--if self.spellCategory  and self.spellCategory ~= "CC" and (self.spellCategory == "Silence" or self.spellCategory == "RootPhyiscal_Special" or self.spellCategory == "RootMagic_Special" or self.spellCategory == "Root") then
-		if	self.spellCategory and self.spellCategory ~= "CC" then 
+		if self.spellCategory then 
 			LoseControl:SecondaryIcon(LoseControlplayer, LayeredHue, self.spellCategory)
 		else
 			if playerSecondaryIcon then playerSecondaryIcon:Hide() end
@@ -10627,6 +10722,9 @@ end
 -- Handle mouse dragging
 function LoseControl:StopMoving()
 	local frame = LoseControlDB.frames[self.unitId]
+	if self.fakeUnitId == "player3" then 
+		frame = LoseControlDB.frames["player3"]
+	end
   	local anchor =  frame.anchor
 	frame.point, frame.anchor, frame.relativePoint, frame.x, frame.y = self:GetPoint()
 	if not frame.anchor then
@@ -10680,7 +10778,7 @@ function LoseControl:new(unitId)
 	o:SetParent(op)
 	o.parent = op
 
-	if unitId == "player" then
+	if unitId == "player" or unitId == "player3" then
 		o.Ltext = o:CreateFontString(nil, "ARTWORK")
 		o.Ltext:SetParent(o)
 		o.Ltext:SetTextColor(1, 1, 1, 1)
@@ -10768,6 +10866,9 @@ function LoseControl:new(unitId)
 	if unitId == "player2" then
 		o.unitId = "player" -- ties the object to a unit
 		o.fakeUnitId = unitId
+	elseif unitId == "player3" then
+		o.unitId = "player" -- ties the object to a unit
+		o.fakeUnitId = unitId
 	else
 		o.unitId = unitId -- ties the object to a unit
 	end
@@ -10850,11 +10951,13 @@ end
 
 -- Create new object instance for each frame
 for k in pairs(DBdefaults.frames) do
-	if (k ~= "player2") then
+	if (k ~= "player2") and (k ~= "player3") then
 		LCframes[k] = LoseControl:new(k)
 	end
 end
 LCframeplayer2 = LoseControl:new("player2")
+LCframeplayer3 = LoseControl:new("player3")
+LCframes["player3"] = LCframeplayer3
 
 
 
@@ -10872,6 +10975,9 @@ function OptionsFunctions:UpdateAll()
 			v:UNIT_AURA(v.unitId, nil, -55)
 			if (k == "player") and LCframeplayer2.frame.enabled and not LCframeplayer2.unlockMode then
 				LCframeplayer2:UNIT_AURA(LCframeplayer2.unitId, nil, -55)
+			end
+			if (k == "player") and LCframeplayer3.frame.enabled and not LCframeplayer3.unlockMode then
+				LCframeplayer3:UNIT_AURA(LCframeplayer3.unitId, nil, -55)
 			end
 		end
 	end
@@ -11187,7 +11293,7 @@ function Unlock:OnClick()
 					v.playerSilence:SetHeight(v.frame.size*.9)
 					v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
 					v.playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.9*.25, "OUTLINE")
-					v.playerSilence.Ltext:SetText("Silence")
+					v.playerSilence.Ltext:SetText("Second \nIcon")
 					if not newDuration or newDuration < 1 then
 						v.playerSilence.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
 						v.playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
@@ -11330,6 +11436,7 @@ function Unlock:OnClick()
 			end
 			LCframeplayer2:GetParent():SetAlpha(frame.alpha) -- hack to apply the alpha to the cooldown timer
 		end
+		
 	else
 		_G[O.."UnlockText"]:SetText(L["Unlock"])
 		for k, v in pairs(LCframes) do
@@ -11349,7 +11456,7 @@ function Unlock:OnClick()
 				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				end
 			end
-			v.unlockMode = falseI
+			v.unlockMode = false
 			v:EnableMouse(false)
 			v:RegisterForDrag()
 			v:SetMovable(false)
@@ -11374,6 +11481,7 @@ function DisableBlizzardCooldownCount:Check(value)
 		v:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
 	end
 	LCframeplayer2:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
+	LCframeplayer3:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
 end
 DisableBlizzardCooldownCount:SetScript("OnClick", function(self)
 	DisableBlizzardCooldownCount:Check(self:GetChecked())
@@ -11392,6 +11500,7 @@ DisableCooldownCount:SetScript("OnClick", function(self)
         v:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
       end
       LCframeplayer2:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
+	  LCframeplayer3:SetHideCountdownNumbers(LoseControlDB.noBlizzardCooldownCount)
       for k, v in pairs(LCframes) do
         if v._occ_display then
           v._occ_display:Hide()
@@ -11399,6 +11508,9 @@ DisableCooldownCount:SetScript("OnClick", function(self)
       end
       if LCframeplayer2._occ_display then
         LCframeplayer2._occ_display:Hide()
+      end
+	  if LCframeplayer3._occ_display then
+        LCframeplayer3._occ_display:Hide()
       end
   	else
       for k, v in pairs(LCframes) do
@@ -11417,9 +11529,13 @@ DisableCooldownCount:SetScript("OnClick", function(self)
         startTime, startDuration = LCframeplayer2:GetCooldownTimes()
         newDuration = (startDuration/1000 + startTime/1000) - GetTime()
         LCframeplayer2:SetCooldown( startTime/1000, 15 )
+		LCframeplayer3:SetCooldown( startTime/1000, 15 )
       end
       if LCframeplayer2._occ_display then
         LCframeplayer2._occ_display:Show()
+      end
+	  if LCframeplayer3._occ_display then
+        LCframeplayer3._occ_display:Show()
       end
   		DisableBlizzardCooldownCount:Disable()
   		_G[O.."DisableBlizzardCooldownCountText"]:SetTextColor(0.5,0.5,0.5)
@@ -11602,6 +11718,7 @@ DrawSwipeSlider.Func = function(self, value)
     end
   end
   LCframeplayer2:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+  LCframeplayer3:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
 end
 DrawSwipeSlider:SetScript("OnValueChanged", function(self, value, userInput)
   --self.editbox:SetText(format(value))
@@ -11921,17 +12038,17 @@ OptionsPanel.refresh = function() -- This method will run when the Interface Opt
 	DrawSwipeSlider:SetValue(LoseControlDB.DrawSwipeSetting)
 
 	for k in pairs(DBdefaults.priority) do
-	if LoseControlDB.durationType[k] == false then durationTypeCheckBoxNew[k]:SetChecked(true) else durationTypeCheckBoxNew[k]:SetChecked(false) end
+		if LoseControlDB.durationType[k] == false then durationTypeCheckBoxNew[k]:SetChecked(true) else durationTypeCheckBoxNew[k]:SetChecked(false) end
 	end
 	for k in pairs(DBdefaults.priority) do
-	if LoseControlDB.durationType[k] == true then durationTypeCheckBoxHigh[k]:SetChecked(true) else durationTypeCheckBoxHigh[k]:SetChecked(false) end
+		if LoseControlDB.durationType[k] == true then durationTypeCheckBoxHigh[k]:SetChecked(true) else durationTypeCheckBoxHigh[k]:SetChecked(false) end
 	end
 
 	for k in pairs(DBdefaults.priorityArena) do
-	if LoseControlDB.durationTypeArena[k] == false then durationTypeCheckBoxArenaNew[k]:SetChecked(true) else durationTypeCheckBoxArenaNew[k]:SetChecked(false) end
+		if LoseControlDB.durationTypeArena[k] == false then durationTypeCheckBoxArenaNew[k]:SetChecked(true) else durationTypeCheckBoxArenaNew[k]:SetChecked(false) end
 	end
 	for k in pairs(DBdefaults.priorityArena) do
-	if LoseControlDB.durationTypeArena[k] == true then durationTypeCheckBoxArenaHigh[k]:SetChecked(true) else durationTypeCheckBoxArenaHigh[k]:SetChecked(false) end
+		if LoseControlDB.durationTypeArena[k] == true then durationTypeCheckBoxArenaHigh[k]:SetChecked(true) else durationTypeCheckBoxArenaHigh[k]:SetChecked(false) end
 	end
 
 	if LoseControlDB.InterruptIcons == false then SetInterruptIcons:SetChecked(false) else SetInterruptIcons:SetChecked(true) end
@@ -11973,7 +12090,7 @@ end
 
 -------------------------------------------------------------------------------
 -- Create sub-option frames
-for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focustarget", "party", "arena" }) do
+for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focus", "focustarget", "party", "arena" }) do
 	local OptionsPanelFrame = CreateFrame("Frame", O..v)
 	OptionsPanelFrame.parent = addonName
 	OptionsPanelFrame.name = L[v]
@@ -12175,7 +12292,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 		["Special_Low"] = L.CategoryEnabledSpecial_LowLabel,
 		["Snares_Ranged_Spamable"] = L.CategoryEnabledSnares_Ranged_SpamableLabel,
 		["Snares_Casted_Melee"] = L.CategoryEnabledSnares_Casted_MeleeLabel,
-		}
+	}
 
 	local AnchorDropDown = CreateFrame("Frame", O..v.."AnchorDropDown", OptionsPanelFrame, "UIDropDownMenuTemplate")
 	function AnchorDropDown:OnClick()
@@ -12189,6 +12306,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 		for _, unitId in ipairs(frames) do
 			local frame = LoseControlDB.frames[unitId]
 			local icon = LCframes[unitId]
+
 			frame.anchor = self.value
 			icon.anchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
 			if self.value ~= "None"  then -- reset the frame position so it centers on the anchor frame
@@ -12197,7 +12315,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				frame.x = nil
 				frame.y = nil
 				if self.value == "Gladius" and strfind(unitId, "arena") then
-			     LCframes[unitId]:CheckGladiusUnitsAnchors(true)
+					LCframes[unitId]:CheckGladiusUnitsAnchors(true)
 					if GladiusClassIconFramearena1 then
 						local W = GladiusClassIconFramearena1:GetWidth()
 						local H = GladiusClassIconFramearena1:GetWidth()
@@ -12214,37 +12332,37 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					icon:GetParent():SetWidth(portrSizeValue)
 					icon:GetParent():SetHeight(portrSizeValue)
 					_G[OptionsPanelFrame:GetName() .. "IconSizeSlider"]:SetValue(portrSizeValue)
-          if (Unlock:GetChecked()) then
-            DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
-            ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-          end
+					if (Unlock:GetChecked()) then
+						DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
+						ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+					end
 				end
-        if self.value == "Gladdy" and strfind(unitId, "arena") then
-          if strfind(unitId, "arena") then
-          LCframes[unitId]:CheckGladdyUnitsAnchors(true)
-          end
-          if GladdyButtonFrame1.classIcon then
-            local W = GladdyButtonFrame1.classIcon:GetWidth()
-            local H = GladdyButtonFrame1.classIcon:GetWidth()
-            print("|cff00ccffLoseControl|r".." : "..unitId.." GladdyClassIconFrame Size "..mathfloor(H))
-            portrSizeValue = W
-          else
-            if (strfind(unitId, "arena")) then
-              portrSizeValue = 42
-            end
-          end
-          frame.size = portrSizeValue
-          icon:SetWidth(portrSizeValue)
-          icon:SetHeight(portrSizeValue)
-          icon:GetParent():SetWidth(portrSizeValue)
-          icon:GetParent():SetHeight(portrSizeValue)
-          _G[OptionsPanelFrame:GetName() .. "IconSizeSlider"]:SetValue(portrSizeValue)
-        end
+				if self.value == "Gladdy" and strfind(unitId, "arena") then
+					if strfind(unitId, "arena") then
+						LCframes[unitId]:CheckGladdyUnitsAnchors(true)
+					end
+					if GladdyButtonFrame1.classIcon then
+						local W = GladdyButtonFrame1.classIcon:GetWidth()
+						local H = GladdyButtonFrame1.classIcon:GetWidth()
+						print("|cff00ccffLoseControl|r".." : "..unitId.." GladdyClassIconFrame Size "..mathfloor(H))
+						portrSizeValue = W
+					else
+						if (strfind(unitId, "arena")) then
+						portrSizeValue = 42
+						end
+					end
+					frame.size = portrSizeValue
+					icon:SetWidth(portrSizeValue)
+					icon:SetHeight(portrSizeValue)
+					icon:GetParent():SetWidth(portrSizeValue)
+					icon:GetParent():SetHeight(portrSizeValue)
+					_G[OptionsPanelFrame:GetName() .. "IconSizeSlider"]:SetValue(portrSizeValue)
+				end
 				if self.value == "BambiUI" then
 					if (strfind(unitId, "party")) then
-            if not EditModeManagerFrame:UseRaidStylePartyFrames() then
-              print("Enable Use Raid Style Party Frames")
-            end
+						if not EditModeManagerFrame:UseRaidStylePartyFrames() then
+							print("Enable Use Raid Style Party Frames")
+						end
 						portrSizeValue = 62
 					end
 					if unitId == "player" then
@@ -12259,14 +12377,14 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				end
 				if self.value == "Blizzard" then
 					local portrSizeValue = 36
-					if (unitId == "player" or unitId == "target" or unitId == "focus") then
+					if (unitId == "player" or unitId == "target" or unitId == "focus" or unitId == "player3") then
 						portrSizeValue = 56
 					elseif (strfind(unitId, "arena")) then
 						portrSizeValue = 28
-            if (Unlock:GetChecked()) then
-              DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
-              ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-            end
+						if (Unlock:GetChecked()) then
+						DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
+						ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+						end
 					end
 					if (unitId == "player") and LoseControlDB.duplicatePlayerPortrait then
 						local DuplicatePlayerPortrait = _G['LoseControlOptionsPanel'..unitId..'DuplicatePlayerPortrait']
@@ -12280,20 +12398,20 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					icon:SetHeight(portrSizeValue)
 					icon:GetParent():SetWidth(portrSizeValue)
 					icon:GetParent():SetHeight(portrSizeValue)
-          SetPortraitToTexture(icon.texture, icon.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
-  				icon:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
-  				icon:SetSwipeColor(0, 0, 0, frame.swipeAlpha*0.75)
-  				icon.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
+					SetPortraitToTexture(icon.texture, icon.textureicon) -- Sets the texture to be displayed from a file applying a circular opacity mask making it look round like portraits
+					icon:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
+					--icon:SetSwipeColor(0, 0, 0, frame.swipeAlpha*0.75)
+					icon.iconInterruptBackground:SetTexture("Interface\\AddOns\\LoseControl\\Textures\\lc_interrupt_background_portrait.blp")
 					_G[OptionsPanelFrame:GetName() .. "IconSizeSlider"]:SetValue(portrSizeValue)
 				end
 			else
 			end
-      if (strfind(unitId, "arena")) then
-        if (Unlock:GetChecked()) then
-          DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
-          ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-        end
-      end
+			if (strfind(unitId, "arena")) then
+				if (Unlock:GetChecked()) then
+					DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
+					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+				end
+			end
 			SetInterruptIconsSize(icon, frame.size)
 			icon.parent:SetParent(icon.anchor:GetParent()) -- or LoseControl) -- If Hide() is called on the parent frame, its children are hidden too. This also sets the frame strata to be the same as the parent's.
 			icon:ClearAllPoints() -- if we don't do this then the frame won't always move
@@ -12315,18 +12433,19 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			if icon.anchor:GetParent() then
 				icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
 			end
-      if icon.frame.enabled and not icon.unlockMode then --this updates in realtime
-        icon.maxExpirationTime = 0
-        icon:UNIT_AURA(icon.unitId, nil, 0)
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if icon.frame.enabled and not icon.unlockMode then --this updates in realtime
+				icon.maxExpirationTime = 0
+				icon:UNIT_AURA(icon.unitId, nil, 0)
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end
+
 	end
 
 	local AnchorDropDown2
@@ -12370,32 +12489,34 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			if icon.anchor:GetParent() then
 				icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
 			end
-      if icon.frame.enabled and not icon.unlockMode then
-        icon.maxExpirationTime = 0
-        icon:UNIT_AURA(icon.unitId, nil, 0)
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if icon.frame.enabled and not icon.unlockMode then
+				icon.maxExpirationTime = 0
+				icon:UNIT_AURA(icon.unitId, nil, 0)
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end
 	end
 
+
 	local SizeSlider = CreateSlider(L["Icon Size"], OptionsPanelFrame, 16, 256, 1, OptionsPanelFrame:GetName() .. "IconSizeSlider", true)
-  SizeSlider.Func = function(self, value)
+	SizeSlider.Func = function(self, value)
 		if value == nil then value = self:GetValue() end
+
 		local frames = { v }
-    local count = .415
+		local count = .415
+
 		if v == "party" then
 			frames = { "party1", "party2", "party3", "party4" }
 		elseif v == "arena" then
 			frames = { "arena1", "arena2", "arena3", "arena4", "arena5" }
-      count = .333
+			count = .333
 		end
-
 
 		for _, frame in ipairs(frames) do
 			LoseControlDB.frames[frame].size = value
@@ -12403,34 +12524,35 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			LCframes[frame]:SetHeight(value)
 			LCframes[frame]:GetParent():SetWidth(value)
 			LCframes[frame]:GetParent():SetHeight(value)
-      LCframes[frame].count:SetFont(STANDARD_TEXT_FONT, value*count , "OUTLINE")
-      if strmatch(v, "party") then
-        LCframes[frame].count:SetPoint("TOPLEFT", 1,  value*.415/2.5);
-        LCframes[frame].count:SetJustifyH("RIGHT");
-      elseif strmatch(v, "player") then
-        LCframes[frame].count:SetPoint("TOPRIGHT", -1,  value*.415/2.5);
-        LCframes[frame].count:SetJustifyH("RIGHT");
-        LCframes[frame].dispelTypeframe:SetHeight(value*.105)
-        LCframes[frame].dispelTypeframe:SetWidth(value*.105)
-        LCframes[frame].Ltext:SetFont(STANDARD_TEXT_FONT, value*.25, "OUTLINE")
-        LCframes[frame].playerSilence:SetWidth(value*.9)
-        LCframes[frame].playerSilence:SetHeight(value*.9)
-        LCframes[frame].playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, value*.9*.25, "OUTLINE")
-      end
+			LCframes[frame].count:SetFont(STANDARD_TEXT_FONT, value*count , "OUTLINE")
+			if strmatch(v, "party") then
+				LCframes[frame].count:SetPoint("TOPLEFT", 1,  value*.415/2.5);
+				LCframes[frame].count:SetJustifyH("RIGHT");
+			elseif strmatch(v, "player") then
+				LCframes[frame].count:SetPoint("TOPRIGHT", -1,  value*.415/2.5);
+				LCframes[frame].count:SetJustifyH("RIGHT");
+				LCframes[frame].dispelTypeframe:SetHeight(value*.105)
+				LCframes[frame].dispelTypeframe:SetWidth(value*.105)
+				LCframes[frame].Ltext:SetFont(STANDARD_TEXT_FONT, value*.25, "OUTLINE")
+				LCframes[frame].playerSilence:SetWidth(value*.9)
+				LCframes[frame].playerSilence:SetHeight(value*.9)
+				LCframes[frame].playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, value*.9*.25, "OUTLINE")
+			end
 			SetInterruptIconsSize(LCframes[frame], value)
 		end
-  end
-  SizeSlider:SetScript("OnValueChanged", function(self, value, userInput)
-    value = mathfloor(value+0.5)
-    _G[self:GetName() .. "Text"]:SetText(L["Icon Size"] .. " (" .. value .. "px)")
-    self.editbox:SetText(value)
-    if userInput and self.Func then
-      self:Func(value)
-    end
+	end
+
+	SizeSlider:SetScript("OnValueChanged", function(self, value, userInput)
+		value = mathfloor(value+0.5)
+		_G[self:GetName() .. "Text"]:SetText(L["Icon Size"] .. " (" .. value .. "px)")
+		self.editbox:SetText(value)
+		if userInput and self.Func then
+			self:Func(value)
+		end
 	end)
 
 	local AlphaSlider = CreateSlider(L["Opacity"], OptionsPanelFrame, 0, 100, 1, OptionsPanelFrame:GetName() .. "OpacitySlider", true) -- I was going to use a range of 0 to 1 but Blizzard's slider chokes on decimal values
-  AlphaSlider.Func = function(self, value)
+	AlphaSlider.Func = function(self, value)
 		if value == nil then value = self:GetValue() end
 		local frames = { v }
 		if v == "party" then
@@ -12443,20 +12565,20 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			LCframes[frame]:GetParent():SetAlpha(value / 100)
 		end
 	end
-  AlphaSlider:SetScript("OnValueChanged", function(self, value, userInput)
-    value = mathfloor(value+0.5)
-    _G[self:GetName() .. "Text"]:SetText(L["Opacity"] .. " (" .. value .. "%)")
-    self.editbox:SetText(value)
-    if userInput and self.Func then
-      self:Func(value)
-    end
-  end)
+  	AlphaSlider:SetScript("OnValueChanged", function(self, value, userInput)
+		value = mathfloor(value+0.5)
+		_G[self:GetName() .. "Text"]:SetText(L["Opacity"] .. " (" .. value .. "%)")
+		self.editbox:SetText(value)
+		if userInput and self.Func then
+			self:Func(value)
+		end
+  	end)
 
 	local AlphaSlider2
 	if v == "player" then
 		AlphaSlider2 = CreateSlider(L["Opacity"], OptionsPanelFrame, 0, 100, 2, OptionsPanelFrame:GetName() .. "Opacity2Slider", true) -- I was going to use a range of 0 to 1 but Blizzard's slider chokes on decimal values
-    AlphaSlider2.Func = function(self, value)
-			if value == nil then value = self:GetValue() end
+		AlphaSlider2.Func = function(self, value)
+		if value == nil then value = self:GetValue() end
 			if v == "player" then
 				LoseControlDB.frames.player2.alpha = value / 100 -- the real alpha value
 				LCframeplayer2:GetParent():SetAlpha(value / 100)
@@ -12484,7 +12606,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					LCframes[v .. i]:PLAYER_ENTERING_WORLD()
 				end
 			end
-      OptionsFunctions:UpdateAll()
+			OptionsFunctions:UpdateAll()
 		end)
 	elseif v == "arena" then
 		DisableInBG = CreateFrame("CheckButton", O..v.."DisableInBG", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
@@ -12497,13 +12619,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					LCframes[v .. i]:PLAYER_ENTERING_WORLD()
 				end
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+     		 OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12519,13 +12641,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 					LCframes[v .. i]:PLAYER_ENTERING_WORLD()
 				end
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12546,14 +12668,14 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			if not Unlock:GetChecked() then -- prevents the icon from disappearing if the frame is currently hidden
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
+					end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12571,13 +12693,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12591,13 +12713,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12611,13 +12733,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12631,13 +12753,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12651,13 +12773,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12671,13 +12793,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12691,13 +12813,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 				LCframes[v].maxExpirationTime = 0
 				LCframes[v]:PLAYER_ENTERING_WORLD()
 			end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12707,13 +12829,13 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 		_G[O..v.."EnableGladiusGlossText"]:SetText(L["EnableGladiusGloss"])
 		EnableGladiusGloss:SetScript("OnClick", function(self)
 			LoseControlDB.EnableGladiusGloss = self:GetChecked()
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -12721,8 +12843,8 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 	if  v == "player" then
 		lossOfControlInterrupt = CreateSlider(L["lossOfControlInterrupt"], OptionsPanelFrame, 0, 2, 1, "lossOfControlInterrupt")
 		lossOfControlInterrupt:SetScript("OnValueChanged", function(self, value)
-		lossOfControlInterrupt:SetScale(.82)
-		lossOfControlInterrupt:SetWidth(200)
+			lossOfControlInterrupt:SetScale(.82)
+			lossOfControlInterrupt:SetWidth(200)
 			_G[self:GetName() .. "Text"]:SetText(L["lossOfControlInterrupt"] .. " (" .. ("%.0f"):format(value) .. ")")
 			LoseControlDB.lossOfControlInterrupt = ("%.0f"):format(value)-- the real alpha value
 			SetCVar("lossOfControlInterrupt", ("%.0f"):format(value))
@@ -12733,8 +12855,8 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 	if  v == "player" then
 		lossOfControlFull = CreateSlider(L["lossOfControlFull"], OptionsPanelFrame, 0, 2, 1, "lossOfControlFull")
 		lossOfControlFull:SetScript("OnValueChanged", function(self, value)
-		lossOfControlFull:SetScale(.82)
-		lossOfControlFull:SetWidth(200)
+			lossOfControlFull:SetScale(.82)
+			lossOfControlFull:SetWidth(200)
 			_G[self:GetName() .. "Text"]:SetText(L["lossOfControlFull"] .. " (" .. ("%.0f"):format(value) .. ")")
 			LoseControlDB.lossOfControlFull = ("%.0f"):format(value)-- the real alpha value
 			SetCVar("lossOfControlFull", ("%.0f"):format(value))
@@ -12745,8 +12867,8 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 	if  v == "player" then
 		lossOfControlSilence = CreateSlider(L["lossOfControlSilence"], OptionsPanelFrame, 0, 2, 1, "lossOfControlSilence")
 		lossOfControlSilence:SetScript("OnValueChanged", function(self, value)
-		lossOfControlSilence:SetScale(.82)
-		lossOfControlSilence:SetWidth(200)
+			lossOfControlSilence:SetScale(.82)
+			lossOfControlSilence:SetWidth(200)
 			_G[self:GetName() .. "Text"]:SetText(L["lossOfControlSilence"] .. " (" .. ("%.0f"):format(value) .. ")")
 			LoseControlDB.lossOfControlSilence = ("%.0f"):format(value)-- the real alpha value
 			SetCVar("lossOfControlSilence", ("%.0f"):format(value))
@@ -12757,8 +12879,8 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 	if  v == "player" then
 		lossOfControlDisarm = CreateSlider(L["lossOfControlDisarm"], OptionsPanelFrame, 0, 2, 1, "lossOfControlDisarm")
 		lossOfControlDisarm:SetScript("OnValueChanged", function(self, value)
-		lossOfControlDisarm:SetScale(.82)
-		lossOfControlDisarm:SetWidth(200)
+			lossOfControlDisarm:SetScale(.82)
+			lossOfControlDisarm:SetWidth(200)
 			_G[self:GetName() .. "Text"]:SetText(L["lossOfControlDisarm"] .. " (" .. ("%.0f"):format(value) .. ")")
 			LoseControlDB.lossOfControlDisarm = ("%.0f"):format(value)-- the real alpha value
 			SetCVar("lossOfControlDisarm", ("%.0f"):format(value))
@@ -12769,8 +12891,8 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 	if  v == "player" then
 		lossOfControlRoot = CreateSlider(L["lossOfControlRoot"], OptionsPanelFrame, 0, 2, 1, "lossOfControlRoot")
 		lossOfControlRoot:SetScript("OnValueChanged", function(self, value)
-		lossOfControlRoot:SetScale(.82)
-		lossOfControlRoot:SetWidth(200)
+			lossOfControlRoot:SetScale(.82)
+			lossOfControlRoot:SetWidth(200)
 			_G[self:GetName() .. "Text"]:SetText(L["lossOfControlRoot"] .. " (" .. ("%.0f"):format(value) .. ")")
 			LoseControlDB.lossOfControlRoot = ("%.0f"):format(value)-- the real alpha value
 			SetCVar("lossOfControlRoot", ("%.0f"):format(value))
@@ -12803,154 +12925,154 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 		end)
 	end
 
-  local PlayerText
-  if  v == "player" then
-    PlayerText = CreateFrame("CheckButton", O..v.."PlayerText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    PlayerText:SetScale(1)
-    PlayerText:SetHitRectInsets(0, 0, 0, 0)
-    _G[O..v.."PlayerTextText"]:SetText("Show Category Text on Frame")
-    PlayerText:SetScript("OnClick", function(self)
-      LoseControlDB.PlayerText = self:GetChecked()
-        OptionsFunctions:UpdateAll()
-      if (self:GetChecked()) then
-        LoseControlDB.PlayerText = true
-      else
-        LoseControlDB.PlayerText = false
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  end
+	local PlayerText
+	if  v == "player" then
+		PlayerText = CreateFrame("CheckButton", O..v.."PlayerText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		PlayerText:SetScale(1)
+		PlayerText:SetHitRectInsets(0, 0, 0, 0)
+		_G[O..v.."PlayerTextText"]:SetText("Show Category Text on Frame")
+		PlayerText:SetScript("OnClick", function(self)
+			LoseControlDB.PlayerText = self:GetChecked()
+			OptionsFunctions:UpdateAll()
+			if (self:GetChecked()) then
+				LoseControlDB.PlayerText = true
+			else
+				LoseControlDB.PlayerText = false
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	end
 
-  local ArenaPlayerText
-  if  v == "player" then
-    ArenaPlayerText = CreateFrame("CheckButton", O..v.."ArenaPlayerText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    ArenaPlayerText:SetScale(1)
-    ArenaPlayerText:SetHitRectInsets(0, 0, 0, 0)
-    _G[O..v.."ArenaPlayerTextText"]:SetText("Disable Player Text in PvP")
-    ArenaPlayerText:SetScript("OnClick", function(self)
-      LoseControlDB.ArenaPlayerText = self:GetChecked()
-      OptionsFunctions:UpdateAll()
-      if (self:GetChecked()) then
-        LoseControlDB.ArenaPlayerText = true
-      else
-        LoseControlDB.ArenaPlayerText = false
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  end
+	local ArenaPlayerText
+	if  v == "player" then
+		ArenaPlayerText = CreateFrame("CheckButton", O..v.."ArenaPlayerText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		ArenaPlayerText:SetScale(1)
+		ArenaPlayerText:SetHitRectInsets(0, 0, 0, 0)
+		_G[O..v.."ArenaPlayerTextText"]:SetText("Disable Player Text in PvP")
+		ArenaPlayerText:SetScript("OnClick", function(self)
+			LoseControlDB.ArenaPlayerText = self:GetChecked()
+			OptionsFunctions:UpdateAll()
+			if (self:GetChecked()) then
+				LoseControlDB.ArenaPlayerText = true
+			else
+				LoseControlDB.ArenaPlayerText = false
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	end
 
-  local displayTypeDot
-  if  v == "player" then
-    displayTypeDot = CreateFrame("CheckButton", O..v.."displayTypeDot", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    displayTypeDot:SetScale(1)
-    displayTypeDot:SetHitRectInsets(0, 0, 0, 0)
-    _G[O..v.."displayTypeDotText"]:SetText("Icon Type Color Next to Text")
-    displayTypeDot:SetScript("OnClick", function(self)
-      LoseControlDB.displayTypeDot = self:GetChecked()
-      OptionsFunctions:UpdateAll()
-      if (self:GetChecked()) then
-        LoseControlDB.displayTypeDot = true
-      else
-        LoseControlDB.displayTypeDot = false
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  end
+	local displayTypeDot
+	if  v == "player" then
+		displayTypeDot = CreateFrame("CheckButton", O..v.."displayTypeDot", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		displayTypeDot:SetScale(1)
+		displayTypeDot:SetHitRectInsets(0, 0, 0, 0)
+		_G[O..v.."displayTypeDotText"]:SetText("Icon Type Color Next to Text")
+		displayTypeDot:SetScript("OnClick", function(self)
+			LoseControlDB.displayTypeDot = self:GetChecked()
+			OptionsFunctions:UpdateAll()
+			if (self:GetChecked()) then
+				LoseControlDB.displayTypeDot = true
+			else
+				LoseControlDB.displayTypeDot = false
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	end
 
-  local SilenceIcon
-  if  v == "player" then
-    SilenceIcon = CreateFrame("CheckButton", O..v.."SilenceIcon", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    SilenceIcon:SetScale(1)
-    SilenceIcon:SetHitRectInsets(0, 0, 0, 0)
-    _G[O..v.."SilenceIconText"]:SetText("Show Silence & Secondary Prio Frame")
-    SilenceIcon:SetScript("OnClick", function(self)
-      LoseControlDB.SilenceIcon = self:GetChecked()
-      OptionsFunctions:UpdateAll()
-      if (self:GetChecked()) then
-        LoseControlDB.SilenceIcon = true
-		LoseControlDB.SecondaryIcon = true
-      else
-        LoseControlDB.SilenceIcon = false
-		LoseControlDB.SecondaryIcon = false
-      end
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  end
+	local SilenceIcon
+	if  v == "player" then
+		SilenceIcon = CreateFrame("CheckButton", O..v.."SilenceIcon", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		SilenceIcon:SetScale(1)
+		SilenceIcon:SetHitRectInsets(0, 0, 0, 0)
+		_G[O..v.."SilenceIconText"]:SetText("Shows Secondary Priority Icon")
+		SilenceIcon:SetScript("OnClick", function(self)
+			LoseControlDB.SilenceIcon = self:GetChecked()
+			OptionsFunctions:UpdateAll()
+			if (self:GetChecked()) then
+				LoseControlDB.SilenceIcon = true
+				LoseControlDB.SecondaryIcon = true
+			else
+				LoseControlDB.SilenceIcon = false
+				LoseControlDB.SecondaryIcon = false
+			end
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	end
 
-  local CountText
-  if v == "party" then
-    CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    _G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
-    CountText:SetScript("OnClick", function(self)
-      LoseControlDB.CountTextparty = self:GetChecked()
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  elseif v == "arena" then
-    CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    _G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
-    CountText:SetScript("OnClick", function(self)
-      LoseControlDB.CountTextarena = self:GetChecked()
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  elseif v == "player" then
-    CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-    _G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
-    CountText:SetScript("OnClick", function(self)
-      LoseControlDB.CountTextplayer = self:GetChecked()
-      if (Unlock:GetChecked()) then
-        Unlock:SetChecked(false)
-        Unlock:OnClick()
-        Unlock:SetChecked(true)
-        Unlock:OnClick()
-      end
-      OptionsFunctions:UpdateAll()
-    end)
-  end
+	local CountText
+	if v == "party" then
+		CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		_G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
+		CountText:SetScript("OnClick", function(self)
+			LoseControlDB.CountTextparty = self:GetChecked()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	elseif v == "arena" then
+		CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		_G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
+		CountText:SetScript("OnClick", function(self)
+			LoseControlDB.CountTextarena = self:GetChecked()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	elseif v == "player" then
+		CountText = CreateFrame("CheckButton", O..v.."CountText", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+		_G[O..v.."CountTextText"]:SetText("Show Count and Stacks Text")
+		CountText:SetScript("OnClick", function(self)
+			LoseControlDB.CountTextplayer = self:GetChecked()
+			if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+			end
+			OptionsFunctions:UpdateAll()
+		end)
+	end
 
 	local catListEnChecksButtons = {
-																	"CC","Silence","RootPhyiscal_Special","RootMagic_Special","Root","ImmunePlayer","Disarm_Warning","CC_Warning","Enemy_Smoke_Bomb","Stealth",
-																	"Immune","ImmuneSpell","ImmunePhysical","AuraMastery_Cast_Auras","ROP_Vortex","Disarm","Haste_Reduction","Dmg_Hit_Reduction",
-																	"AOE_DMG_Modifiers","Friendly_Smoke_Bomb","AOE_Spell_Refections","Trees","Speed_Freedoms","Freedoms","Friendly_Defensives",
-																	"CC_Reduction","Personal_Offensives","Peronsal_Defensives","Mana_Regen","Movable_Cast_Auras","Other","PvE","SnareSpecial","SnarePhysical70","SnareMagic70",
-																	"SnarePhysical50","SnarePosion50","SnareMagic50","SnarePhysical30","SnareMagic30","Snare",
-																	}
---Interrupts
+		"CC","Silence","RootPhyiscal_Special","RootMagic_Special","Root","ImmunePlayer","Disarm_Warning","CC_Warning","Enemy_Smoke_Bomb","Stealth",
+		"Immune","ImmuneSpell","ImmunePhysical","AuraMastery_Cast_Auras","ROP_Vortex","Disarm","Haste_Reduction","Dmg_Hit_Reduction",
+		"AOE_DMG_Modifiers","Friendly_Smoke_Bomb","AOE_Spell_Refections","Trees","Speed_Freedoms","Freedoms","Friendly_Defensives",
+		"CC_Reduction","Personal_Offensives","Peronsal_Defensives","Mana_Regen","Movable_Cast_Auras","Other","PvE","SnareSpecial","SnarePhysical70","SnareMagic70",
+		"SnarePhysical50","SnarePosion50","SnareMagic50","SnarePhysical30","SnareMagic30","Snare",
+	}
+	--Interrupts
 	local CategoriesCheckButtons = { }
 	local FriendlyInterrupt = CreateFrame("CheckButton", O..v.."FriendlyInterrupt", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
 	FriendlyInterrupt:SetScale(.82)
@@ -12994,7 +13116,7 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 		tblinsert(CategoriesCheckButtons, { frame = EnemyInterrupt, auraType = "interrupt", reaction = "enemy", categoryType = "Interrupt", anchorPos = L.CategoryEnabledInterruptLabel, xPos = 250, yPos = 5 })
 	end
 
---Spells
+	--Spells
 	for _, cat in pairs(catListEnChecksButtons) do
 		if not strfind(v, "arena") then
 			local FriendlyBuff = CreateFrame("CheckButton", O..v.."Friendly"..cat.."Buff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
@@ -13038,61 +13160,61 @@ for _, v in ipairs({ "player", "pet", "target", "targettarget", "focus", "focust
 			tblinsert(CategoriesCheckButtons, { frame = FriendlyDebuff, auraType = "debuff", reaction = "friendly", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 185, yPos = 5 })
 		end
 
-			if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget"  then
-				local EnemyBuff = CreateFrame("CheckButton", O..v.."Enemy"..cat.."Buff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-				EnemyBuff:SetScale(.82)
-				EnemyBuff:SetHitRectInsets(0, -36, 0, 0)
-				_G[O..v.."Enemy"..cat.."BuffText"]:SetText(L["CatEnemyBuff"])
-				EnemyBuff:SetScript("OnClick", function(self)
-					LoseControlDB.frames[v].categoriesEnabled.buff.enemy[cat] = self:GetChecked()
-					LCframes[v].maxExpirationTime = 0
-					if LoseControlDB.frames[v].enabled and not LCframes[v].unlockMode then
-						LCframes[v]:UNIT_AURA(v, updatedAuras, 0)
-					end
-				end)
-				tblinsert(CategoriesCheckButtons, { frame = EnemyBuff, auraType = "buff", reaction = "enemy", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 250, yPos = 5 })
-			end
+		if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget"  then
+			local EnemyBuff = CreateFrame("CheckButton", O..v.."Enemy"..cat.."Buff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+			EnemyBuff:SetScale(.82)
+			EnemyBuff:SetHitRectInsets(0, -36, 0, 0)
+			_G[O..v.."Enemy"..cat.."BuffText"]:SetText(L["CatEnemyBuff"])
+			EnemyBuff:SetScript("OnClick", function(self)
+				LoseControlDB.frames[v].categoriesEnabled.buff.enemy[cat] = self:GetChecked()
+				LCframes[v].maxExpirationTime = 0
+				if LoseControlDB.frames[v].enabled and not LCframes[v].unlockMode then
+					LCframes[v]:UNIT_AURA(v, updatedAuras, 0)
+				end
+			end)
+			tblinsert(CategoriesCheckButtons, { frame = EnemyBuff, auraType = "buff", reaction = "enemy", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 250, yPos = 5 })
+		end
 
-			if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget"  then
-				local EnemyDebuff = CreateFrame("CheckButton", O..v.."Enemy"..cat.."Debuff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
-				EnemyDebuff:SetScale(.82)
-				EnemyDebuff:SetHitRectInsets(0, -36, 0, 0)
-				_G[O..v.."Enemy"..cat.."DebuffText"]:SetText(L["CatEnemyDebuff"])
-				EnemyDebuff:SetScript("OnClick", function(self)
-					LoseControlDB.frames[v].categoriesEnabled.debuff.enemy[cat] = self:GetChecked()
-					LCframes[v].maxExpirationTime = 0
-					if LoseControlDB.frames[v].enabled and not LCframes[v].unlockMode then
-						LCframes[v]:UNIT_AURA(v, updatedAuras, 0)
-					end
-				end)
-				tblinsert(CategoriesCheckButtons, { frame = EnemyDebuff, auraType = "debuff", reaction = "enemy", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 305, yPos = 5 })
-			end
+		if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget"  then
+			local EnemyDebuff = CreateFrame("CheckButton", O..v.."Enemy"..cat.."Debuff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
+			EnemyDebuff:SetScale(.82)
+			EnemyDebuff:SetHitRectInsets(0, -36, 0, 0)
+			_G[O..v.."Enemy"..cat.."DebuffText"]:SetText(L["CatEnemyDebuff"])
+			EnemyDebuff:SetScript("OnClick", function(self)
+				LoseControlDB.frames[v].categoriesEnabled.debuff.enemy[cat] = self:GetChecked()
+				LCframes[v].maxExpirationTime = 0
+				if LoseControlDB.frames[v].enabled and not LCframes[v].unlockMode then
+					LCframes[v]:UNIT_AURA(v, updatedAuras, 0)
+				end
+			end)
+			tblinsert(CategoriesCheckButtons, { frame = EnemyDebuff, auraType = "debuff", reaction = "enemy", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 305, yPos = 5 })
+		end
 	end
 
 
 
 
----Spells Arena
-local catListEnChecksButtonsArena = {
-		"Drink_Purge",
-		"Immune_Arena",
-		"CC_Arena",
-		"Silence_Arena",
-		"Special_High",
-		"Ranged_Major_OffenisiveCDs",
-		"Roots_90_Snares",
-		"Disarms",
-		"Melee_Major_OffenisiveCDs",
-		"Big_Defensive_CDs",
-		"Player_Party_OffensiveCDs",
-		"Small_Offenisive_CDs",
-		"Small_Defensive_CDs",
-		"Freedoms_Speed",
-		"Snares_WithCDs",
-		"Special_Low",
-		"Snares_Ranged_Spamable",
-		"Snares_Casted_Melee",
-}
+	---Spells Arena
+	local catListEnChecksButtonsArena = {
+			"Drink_Purge",
+			"Immune_Arena",
+			"CC_Arena",
+			"Silence_Arena",
+			"Special_High",
+			"Ranged_Major_OffenisiveCDs",
+			"Roots_90_Snares",
+			"Disarms",
+			"Melee_Major_OffenisiveCDs",
+			"Big_Defensive_CDs",
+			"Player_Party_OffensiveCDs",
+			"Small_Offenisive_CDs",
+			"Small_Defensive_CDs",
+			"Freedoms_Speed",
+			"Snares_WithCDs",
+			"Special_Low",
+			"Snares_Ranged_Spamable",
+			"Snares_Casted_Melee",
+	}
 	for _, cat in pairs(catListEnChecksButtonsArena) do
 		if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget" or strfind(v, "arena") then
 			local FriendlyBuff = CreateFrame("CheckButton", O..v.."Friendly"..cat.."Buff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
@@ -13115,7 +13237,7 @@ local catListEnChecksButtonsArena = {
 			tblinsert(CategoriesCheckButtons, { frame = FriendlyBuff, auraType = "buff", reaction = "friendly", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 120, yPos = 5 })
 		end
 
-			if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget" or strfind(v, "arena") then
+		if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget" or strfind(v, "arena") then
 			local FriendlyDebuff = CreateFrame("CheckButton", O..v.."Friendly"..cat.."Debuff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
 			FriendlyDebuff:SetScale(.82)
 			FriendlyDebuff:SetHitRectInsets(0, -36, 0, 0)
@@ -13136,7 +13258,7 @@ local catListEnChecksButtonsArena = {
 			tblinsert(CategoriesCheckButtons, { frame = FriendlyDebuff, auraType = "debuff", reaction = "friendly", categoryType = cat, anchorPos = CategoriesLabels[cat], xPos = 185, yPos = 5 })
 		end
 
-			if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget" or strfind(v, "arena") then
+		if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget" or strfind(v, "arena") then
 			local EnemyBuff = CreateFrame("CheckButton", O..v.."Enemy"..cat.."Buff", OptionsPanelFrame, "OptionsBaseCheckButtonTemplate")
 			EnemyBuff:SetScale(.82)
 			EnemyBuff:SetHitRectInsets(0, -36, 0, 0)
@@ -13291,15 +13413,15 @@ local catListEnChecksButtonsArena = {
 		end
 		DuplicatePlayerPortrait:SetScript("OnClick", function(self)
 			DuplicatePlayerPortrait:Check(self:GetChecked())
-      if LCframeplayer2.unlockMode then --This updates in unlock mode
-        if (Unlock:GetChecked()) then
-          Unlock:SetChecked(false)
-          Unlock:OnClick()
-          Unlock:SetChecked(true)
-          Unlock:OnClick()
-        end
-      end
-      OptionsFunctions:UpdateAll()
+			if LCframeplayer2.unlockMode then --This updates in unlock mode
+				if (Unlock:GetChecked()) then
+				Unlock:SetChecked(false)
+				Unlock:OnClick()
+				Unlock:SetChecked(true)
+				Unlock:OnClick()
+				end
+			end
+			OptionsFunctions:UpdateAll()
 		end)
 	end
 
@@ -13311,11 +13433,11 @@ local catListEnChecksButtonsArena = {
 			if DisableInBG then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisableInBG) end
 			if EnableGladiusGloss then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(EnableGladiusGloss) end
 			if lossOfControl then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(lossOfControl) end
-    	if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(PlayerText) end
-    	if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ArenaPlayerText) end
-    	if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(displayTypeDot) end
-    	if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(SilenceIcon) end
-    	if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(CountText) end
+			if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(PlayerText) end
+			if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ArenaPlayerText) end
+			if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(displayTypeDot) end
+			if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(SilenceIcon) end
+			if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(CountText) end
 			if DisableInRaid then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisableInRaid) end
 			if ShowNPCInterrupts then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ShowNPCInterrupts) end
 			if DisablePlayerTargetTarget then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisablePlayerTargetTarget) end
@@ -13343,18 +13465,20 @@ local catListEnChecksButtonsArena = {
 			CategoriesEnabledLabel:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
 
 			for k, catColor in ipairs(CategoriesLabels) do
-			catColor:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
+				catColor:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
 			end
-      if v == "arena" then LoseControlDB.EnableGladiusGloss = true; EnableGladiusGloss:SetChecked(LoseControlDB.EnableGladiusGloss) end
+			if v == "arena" then LoseControlDB.EnableGladiusGloss = true; 
+				EnableGladiusGloss:SetChecked(LoseControlDB.EnableGladiusGloss) 
+			end
 			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(SizeSlider)
-    	LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(AlphaSlider)
-      if v =="player" then
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlInterrupt)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlFull)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlSilence)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlDisarm)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlRoot)
-      end
+			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(AlphaSlider)
+			if v =="player" then
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlInterrupt)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlFull)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlSilence)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlDisarm)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlRoot)
+			end
 			UIDropDownMenu_EnableDropDown(AnchorDropDown)
 			if LoseControlDB.duplicatePlayerPortrait then
 				if AlphaSlider2 then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(AlphaSlider2) end
@@ -13367,11 +13491,11 @@ local catListEnChecksButtonsArena = {
 			if DisableInBG then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisableInBG) end
 			if EnableGladiusGloss then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(EnableGladiusGloss) end
 			if lossOfControl then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(lossOfControl) end
-      if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(PlayerText) end
-      if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ArenaPlayerText) end
-      if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(displayTypeDot) end
-      if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(SilenceIcon) end
-      if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(CountText) end
+			if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(PlayerText) end
+			if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ArenaPlayerText) end
+			if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(displayTypeDot) end
+			if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(SilenceIcon) end
+			if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(CountText) end
 			if DisableInRaid then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisableInRaid) end
 			if ShowNPCInterrupts then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ShowNPCInterrupts) end
 			if DisablePlayerTargetTarget then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisablePlayerTargetTarget) end
@@ -13392,37 +13516,37 @@ local catListEnChecksButtonsArena = {
 			end
 			CategoriesEnabledLabel:SetVertexColor(GRAY_FONT_COLOR:GetRGB())
 
-      if v == "arena" then
-        LoseControlDB.EnableGladiusGloss = false
-        EnableGladiusGloss:SetChecked(LoseControlDB.EnableGladiusGloss)
-        if (Unlock:GetChecked()) then
-          DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
-          ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-          for k, v in pairs(LCframes) do
-            if strfind(k, "arena") then
-              if v.gloss:IsShown() then
-                v.gloss:Hide()
-              end
-            end
-          end
-        end
-      end
+			if v == "arena" then
+				LoseControlDB.EnableGladiusGloss = false
+				EnableGladiusGloss:SetChecked(LoseControlDB.EnableGladiusGloss)
+				if (Unlock:GetChecked()) then
+					DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
+					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+					for k, v in pairs(LCframes) do
+						if strfind(k, "arena") then
+							if v.gloss:IsShown() then
+								v.gloss:Hide()
+							end
+						end
+					end
+				end
+			end
 
 			for k, catGrey in ipairs(CategoriesLabels) do
-			catGrey:SetVertexColor(GRAY_FONT_COLOR:GetRGB())
+				catGrey:SetVertexColor(GRAY_FONT_COLOR:GetRGB())
 			end
-			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(SizeSlider)
-			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(AlphaSlider)
-      if v =="player" then
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlInterrupt)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlFull)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlSilence)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlDisarm)
-  			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlRoot)
-      end
-			UIDropDownMenu_DisableDropDown(AnchorDropDown)
-			if AlphaSlider2 then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(AlphaSlider2) end
-			if AnchorDropDown2 then UIDropDownMenu_DisableDropDown(AnchorDropDown2) end
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(SizeSlider)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(AlphaSlider)
+			if v =="player" then
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlInterrupt)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlFull)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlSilence)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlDisarm)
+				LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(lossOfControlRoot)
+			end
+				UIDropDownMenu_DisableDropDown(AnchorDropDown)
+				if AlphaSlider2 then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(AlphaSlider2) end
+				if AnchorDropDown2 then UIDropDownMenu_DisableDropDown(AnchorDropDown2) end
 		end
 		local frames = { v }
 		if v == "party" then
@@ -13455,21 +13579,21 @@ local catListEnChecksButtonsArena = {
 				end
 			end
 		end
-    if (Unlock:GetChecked()) then
-      Unlock:SetChecked(false)
-      Unlock:OnClick()
-      Unlock:SetChecked(true)
-      Unlock:OnClick()
-    end
-    OptionsFunctions:UpdateAll()
+		if (Unlock:GetChecked()) then
+			Unlock:SetChecked(false)
+			Unlock:OnClick()
+			Unlock:SetChecked(true)
+			Unlock:OnClick()
+		end
+    	OptionsFunctions:UpdateAll()
 	end)
 
 	Enabled:SetPoint("TOPLEFT", 8, -4)
 	if DisableInBG then DisableInBG:SetPoint("TOPLEFT", Enabled, 275, 0) end
-  if v == "party" or v == "arena" then
-   if CountText then CountText:SetPoint("TOPLEFT", DisableInBG, "TOPRIGHT", 150, 0) end
-  end
-  if EnableGladiusGloss then EnableGladiusGloss:SetPoint("TOPLEFT", Enabled, 275, -25)end
+	if v == "party" or v == "arena" then
+   		if CountText then CountText:SetPoint("TOPLEFT", DisableInBG, "TOPRIGHT", 150, 0) end
+ 	 end
+ 	if EnableGladiusGloss then EnableGladiusGloss:SetPoint("TOPLEFT", Enabled, 275, -25)end
 	if DisableInRaid then DisableInRaid:SetPoint("TOPLEFT", Enabled, 275, -25) end
 	if ShowNPCInterrupts then ShowNPCInterrupts:SetPoint("TOPLEFT", Enabled, 450, 2);ShowNPCInterrupts:SetScale(.8) end
 	if DisablePlayerTargetTarget then DisablePlayerTargetTarget:SetPoint("TOPLEFT", Enabled, 450, -13);DisablePlayerTargetTarget:SetScale(.8) end
@@ -13493,39 +13617,41 @@ local catListEnChecksButtonsArena = {
 
 	if v ~= "arena" then
 		local labels ={
-		  L.CategoryEnabledCCLabel,L.CategoryEnabledSilenceLabel,L.CategoryEnabledRootPhyiscal_SpecialLabel,L.CategoryEnabledRootMagic_SpecialLabel,L.CategoryEnabledRootLabel,L.CategoryEnabledImmunePlayerLabel,L.CategoryEnabledDisarm_WarningLabel,L.CategoryEnabledCC_WarningLabel,L.CategoryEnabledEnemy_Smoke_BombLabel,L.CategoryEnabledStealthLabel,L.CategoryEnabledImmuneLabel,L.CategoryEnabledImmuneSpellLabel,L.CategoryEnabledImmunePhysicalLabel,L.CategoryEnabledAuraMastery_Cast_AurasLabel,L.CategoryEnabledROP_VortexLabel,L.CategoryEnabledDisarmLabel,L.CategoryEnabledHaste_ReductionLabel,L.CategoryEnabledDmg_Hit_ReductionLabel,L.CategoryEnabledAOE_DMG_ModifiersLabel,L.CategoryEnabledFriendly_Smoke_BombLabel,L.CategoryEnabledAOE_Spell_RefectionsLabel,L.CategoryEnabledTreesLabel,L.CategoryEnabledSpeed_FreedomsLabel,L.CategoryEnabledFreedomsLabel,L.CategoryEnabledFriendly_DefensivesLabel,L.CategoryEnabledCC_ReductionLabel,L.CategoryEnabledPersonal_OffensivesLabel,L.CategoryEnabledPeronsal_DefensivesLabel,L.CategoryEnabledMana_RegenLabel,L.CategoryEnabledMovable_Cast_AurasLabel,L.CategoryEnabledOtherLabel,L.CategoryEnabledPvELabel,L.CategoryEnabledSnareSpecialLabel,L.CategoryEnabledSnarePhysical70Label,L.CategoryEnabledSnareMagic70Label,L.CategoryEnabledSnarePhysical50Label,L.CategoryEnabledSnarePosion50Label,L.CategoryEnabledSnareMagic50Label,L.CategoryEnabledSnarePhysical30Label,L.CategoryEnabledSnareMagic30Label,L.CategoryEnabledSnareLabel
-		  }
-	  for k, catEn in ipairs(labels) do
-	    if k == 1 then
-	      if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledInterruptLabel, "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
-	    else
-	      if catEn then catEn:SetPoint("TOPLEFT", labels[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
-	    end
-	  end
+			L.CategoryEnabledCCLabel,L.CategoryEnabledSilenceLabel,L.CategoryEnabledRootPhyiscal_SpecialLabel,L.CategoryEnabledRootMagic_SpecialLabel,L.CategoryEnabledRootLabel,L.CategoryEnabledImmunePlayerLabel,L.CategoryEnabledDisarm_WarningLabel,L.CategoryEnabledCC_WarningLabel,L.CategoryEnabledEnemy_Smoke_BombLabel,L.CategoryEnabledStealthLabel,L.CategoryEnabledImmuneLabel,L.CategoryEnabledImmuneSpellLabel,L.CategoryEnabledImmunePhysicalLabel,L.CategoryEnabledAuraMastery_Cast_AurasLabel,L.CategoryEnabledROP_VortexLabel,L.CategoryEnabledDisarmLabel,L.CategoryEnabledHaste_ReductionLabel,L.CategoryEnabledDmg_Hit_ReductionLabel,L.CategoryEnabledAOE_DMG_ModifiersLabel,L.CategoryEnabledFriendly_Smoke_BombLabel,L.CategoryEnabledAOE_Spell_RefectionsLabel,L.CategoryEnabledTreesLabel,L.CategoryEnabledSpeed_FreedomsLabel,L.CategoryEnabledFreedomsLabel,L.CategoryEnabledFriendly_DefensivesLabel,L.CategoryEnabledCC_ReductionLabel,L.CategoryEnabledPersonal_OffensivesLabel,L.CategoryEnabledPeronsal_DefensivesLabel,L.CategoryEnabledMana_RegenLabel,L.CategoryEnabledMovable_Cast_AurasLabel,L.CategoryEnabledOtherLabel,L.CategoryEnabledPvELabel,L.CategoryEnabledSnareSpecialLabel,L.CategoryEnabledSnarePhysical70Label,L.CategoryEnabledSnareMagic70Label,L.CategoryEnabledSnarePhysical50Label,L.CategoryEnabledSnarePosion50Label,L.CategoryEnabledSnareMagic50Label,L.CategoryEnabledSnarePhysical30Label,L.CategoryEnabledSnareMagic30Label,L.CategoryEnabledSnareLabel
+		}
+		for k, catEn in ipairs(labels) do
+			if k == 1 then
+				if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledInterruptLabel, "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
+			else
+				if catEn then catEn:SetPoint("TOPLEFT", labels[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
+			end
+		end
 	end
 
 	if v == "arena" then
-		local labelsArena ={									L.CategoryEnabledDrink_PurgeLabel,L.CategoryEnabledImmune_ArenaLabel,L.CategoryEnabledCC_ArenaLabel,L.CategoryEnabledSilence_ArenaLabel,L.CategoryEnabledSpecial_HighLabel,L.CategoryEnabledRanged_Major_OffenisiveCDsLabel,L.CategoryEnabledRoots_90_SnaresLabel,L.CategoryEnabledDisarmsLabel,L.CategoryEnabledMelee_Major_OffenisiveCDsLabel,L.CategoryEnabledBig_Defensive_CDsLabel,L.CategoryEnabledPlayer_Party_OffensiveCDsLabel,L.CategoryEnabledSmall_Offenisive_CDsLabel,L.CategoryEnabledSmall_Defensive_CDsLabel,L.CategoryEnabledFreedoms_SpeedLabel,L.CategoryEnabledSnares_WithCDsLabel,L.CategoryEnabledSpecial_LowLabel,L.CategoryEnabledSnares_Ranged_SpamableLabel,L.CategoryEnabledSnares_Casted_MeleeLabel,
-		              }
-	  for k, catEn in ipairs(labelsArena) do
-	    if k == 1 then
-	      if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledInterruptLabel, "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
-	    else
-	      if catEn then catEn:SetPoint("TOPLEFT", labelsArena[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
-	    end
-	  end
+		local labelsArena ={						
+			L.CategoryEnabledDrink_PurgeLabel,L.CategoryEnabledImmune_ArenaLabel,L.CategoryEnabledCC_ArenaLabel,L.CategoryEnabledSilence_ArenaLabel,L.CategoryEnabledSpecial_HighLabel,L.CategoryEnabledRanged_Major_OffenisiveCDsLabel,L.CategoryEnabledRoots_90_SnaresLabel,L.CategoryEnabledDisarmsLabel,L.CategoryEnabledMelee_Major_OffenisiveCDsLabel,L.CategoryEnabledBig_Defensive_CDsLabel,L.CategoryEnabledPlayer_Party_OffensiveCDsLabel,L.CategoryEnabledSmall_Offenisive_CDsLabel,L.CategoryEnabledSmall_Defensive_CDsLabel,L.CategoryEnabledFreedoms_SpeedLabel,L.CategoryEnabledSnares_WithCDsLabel,L.CategoryEnabledSpecial_LowLabel,L.CategoryEnabledSnares_Ranged_SpamableLabel,L.CategoryEnabledSnares_Casted_MeleeLabel,
+		}
+		for k, catEn in ipairs(labelsArena) do
+			if k == 1 then
+				if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledInterruptLabel, "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
+			else
+				if catEn then catEn:SetPoint("TOPLEFT", labelsArena[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
+			end
+		end
 	end
 
 	if v == "target" or v == "targettarget" or v == "focus" or v == "focustarget"  then
-		local labelsArena ={									L.CategoryEnabledDrink_PurgeLabel,L.CategoryEnabledImmune_ArenaLabel,L.CategoryEnabledCC_ArenaLabel,L.CategoryEnabledSilence_ArenaLabel,L.CategoryEnabledSpecial_HighLabel,L.CategoryEnabledRanged_Major_OffenisiveCDsLabel,L.CategoryEnabledRoots_90_SnaresLabel,L.CategoryEnabledDisarmsLabel,L.CategoryEnabledMelee_Major_OffenisiveCDsLabel,L.CategoryEnabledBig_Defensive_CDsLabel,L.CategoryEnabledPlayer_Party_OffensiveCDsLabel,L.CategoryEnabledSmall_Offenisive_CDsLabel,L.CategoryEnabledSmall_Defensive_CDsLabel,L.CategoryEnabledFreedoms_SpeedLabel,L.CategoryEnabledSnares_WithCDsLabel,L.CategoryEnabledSpecial_LowLabel,L.CategoryEnabledSnares_Ranged_SpamableLabel,L.CategoryEnabledSnares_Casted_MeleeLabel,
-		              }
-	  for k, catEn in ipairs(labelsArena) do
-	    if k == 1 then
-	      if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledCCLabel, "TOPRIGHT", 381, 0); catEn:SetScale(.75) end
-	    else
-	      if catEn then catEn:SetPoint("TOPLEFT", labelsArena[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
-	    end
-	  end
+		local labelsArena ={					
+			L.CategoryEnabledDrink_PurgeLabel,L.CategoryEnabledImmune_ArenaLabel,L.CategoryEnabledCC_ArenaLabel,L.CategoryEnabledSilence_ArenaLabel,L.CategoryEnabledSpecial_HighLabel,L.CategoryEnabledRanged_Major_OffenisiveCDsLabel,L.CategoryEnabledRoots_90_SnaresLabel,L.CategoryEnabledDisarmsLabel,L.CategoryEnabledMelee_Major_OffenisiveCDsLabel,L.CategoryEnabledBig_Defensive_CDsLabel,L.CategoryEnabledPlayer_Party_OffensiveCDsLabel,L.CategoryEnabledSmall_Offenisive_CDsLabel,L.CategoryEnabledSmall_Defensive_CDsLabel,L.CategoryEnabledFreedoms_SpeedLabel,L.CategoryEnabledSnares_WithCDsLabel,L.CategoryEnabledSpecial_LowLabel,L.CategoryEnabledSnares_Ranged_SpamableLabel,L.CategoryEnabledSnares_Casted_MeleeLabel,
+			}
+		for k, catEn in ipairs(labelsArena) do
+			if k == 1 then
+				if catEn then catEn:SetPoint("TOPLEFT", L.CategoryEnabledCCLabel, "TOPRIGHT", 381, 0); catEn:SetScale(.75) end
+			else
+				if catEn then catEn:SetPoint("TOPLEFT", labelsArena[k-1], "BOTTOMLEFT", 0, -3); catEn:SetScale(.75) end
+			end
+		end
 	end
 
 	if lossOfControl then lossOfControl:SetPoint("TOPLEFT", L.CategoryEnabledCCLabel, "TOPRIGHT", 390, 7) end
@@ -13544,46 +13670,46 @@ local catListEnChecksButtonsArena = {
 
 	if PlayerText then PlayerText:SetPoint("TOPLEFT", lossOfControlRoot, "BOTTOMLEFT", -18, -85) end
 
-  if v == "player" then
-    local LoCOptions1 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    LoCOptions1:SetFont("Fonts\\FRIZQT__.TTF", 11 )
-    LoCOptions1:SetText("Shows text Type of the Spell")
-    LoCOptions1:SetJustifyH("LEFT")
-    LoCOptions1:SetPoint("TOPLEFT", PlayerText, "BOTTOMLEFT", 25, 7)
-  end
+	if v == "player" then
+		local LoCOptions1 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		LoCOptions1:SetFont("Fonts\\FRIZQT__.TTF", 11 )
+		LoCOptions1:SetText("Shows text Type of the Spell")
+		LoCOptions1:SetJustifyH("LEFT")
+		LoCOptions1:SetPoint("TOPLEFT", PlayerText, "BOTTOMLEFT", 25, 7)
+	end
 
 	if ArenaPlayerText then ArenaPlayerText:SetPoint("TOPLEFT", lossOfControlRoot, "BOTTOMLEFT", -18, -115) end
 
-  if v == "player" then
-    local LoCOptions2 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    LoCOptions2:SetFont("Fonts\\FRIZQT__.TTF", 11 )
-    LoCOptions2:SetText("Disable Player text in Arena")
-    LoCOptions2:SetJustifyH("LEFT")
-    LoCOptions2:SetPoint("TOPLEFT", ArenaPlayerText, "BOTTOMLEFT", 25, 7)
-  end
+	if v == "player" then
+		local LoCOptions2 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		LoCOptions2:SetFont("Fonts\\FRIZQT__.TTF", 11 )
+		LoCOptions2:SetText("Disable Player text in Arena")
+		LoCOptions2:SetJustifyH("LEFT")
+		LoCOptions2:SetPoint("TOPLEFT", ArenaPlayerText, "BOTTOMLEFT", 25, 7)
+	end
 
 	if displayTypeDot then displayTypeDot:SetPoint("TOPLEFT", lossOfControlRoot, "BOTTOMLEFT", -18, -145) end
 
-  if v == "player" then
-    local LoCOptions3 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    LoCOptions3:SetFont("Fonts\\FRIZQT__.TTF", 11 )
-    LoCOptions3:SetText("Curse/Disease/Magic/Etc..")
-    LoCOptions3:SetJustifyH("LEFT")
-    LoCOptions3:SetPoint("TOPLEFT", displayTypeDot, "BOTTOMLEFT", 25, 7)
-  end
+	if v == "player" then
+		local LoCOptions3 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		LoCOptions3:SetFont("Fonts\\FRIZQT__.TTF", 11 )
+		LoCOptions3:SetText("Curse/Disease/Magic/Etc..")
+		LoCOptions3:SetJustifyH("LEFT")
+		LoCOptions3:SetPoint("TOPLEFT", displayTypeDot, "BOTTOMLEFT", 25, 7)
+	end
 
-  if SilenceIcon then SilenceIcon:SetPoint("TOPLEFT", lossOfControlRoot, "BOTTOMLEFT", -18, -200) end
-  if v == "player" then
-   if CountText then CountText:SetPoint("TOPLEFT", SilenceIcon, "BOTTOMLEFT", 0, -35) end
-  end
+	if SilenceIcon then SilenceIcon:SetPoint("TOPLEFT", lossOfControlRoot, "BOTTOMLEFT", -18, -200) end
+	if v == "player" then
+		if CountText then CountText:SetPoint("TOPLEFT", SilenceIcon, "BOTTOMLEFT", 0, -35) end
+	end
 
-  if v == "player" then
-    local LoCOptions4 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    LoCOptions4:SetFont("Fonts\\FRIZQT__.TTF", 11 )
-    LoCOptions4:SetText("Shows Silence Icon Left of Frame \nWhen CC'd")
-    LoCOptions4:SetJustifyH("LEFT")
-    LoCOptions4:SetPoint("TOPLEFT", SilenceIcon, "BOTTOMLEFT", 25, 7)
-  end
+	if v == "player" then
+		local LoCOptions4 = OptionsPanelFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		LoCOptions4:SetFont("Fonts\\FRIZQT__.TTF", 11 )
+		LoCOptions4:SetText("Shows the Next Priority Icon \nGroups Certain Icons for Effciency")
+		LoCOptions4:SetJustifyH("LEFT")
+		LoCOptions4:SetPoint("TOPLEFT", SilenceIcon, "BOTTOMLEFT", 25, 7)
+	end
 
 	for _, checkbuttonframe in pairs(CategoriesCheckButtons) do
 		checkbuttonframe.frame:SetPoint("TOPLEFT", checkbuttonframe.anchorPos, checkbuttonframe.xPos, checkbuttonframe.yPos)
@@ -13604,21 +13730,21 @@ local catListEnChecksButtonsArena = {
 		if unitId == "party" then
 			DisableInBG:SetChecked(LoseControlDB.disablePartyInBG)
 			DisableInRaid:SetChecked(LoseControlDB.disablePartyInRaid)
-      CountText:SetChecked(LoseControlDB.CountTextparty)
+			CountText:SetChecked(LoseControlDB.CountTextparty)
 			unitId = "party1"
 		elseif unitId == "arena" then
 			DisableInBG:SetChecked(LoseControlDB.disableArenaInBG)
 			EnableGladiusGloss:SetChecked(LoseControlDB.EnableGladiusGloss)
-      CountText:SetChecked(LoseControlDB.CountTextarena)
+			CountText:SetChecked(LoseControlDB.CountTextarena)
 			unitId = "arena1"
 		elseif unitId == "player" then
 			DuplicatePlayerPortrait:SetChecked(LoseControlDB.duplicatePlayerPortrait)
 			AlphaSlider2:SetValue(LoseControlDB.frames.player2.alpha * 100)
-      PlayerText:SetChecked(LoseControlDB.PlayerText)
-      ArenaPlayerText:SetChecked(LoseControlDB.ArenaPlayerText)
-      displayTypeDot:SetChecked(LoseControlDB.displayTypeDot)
-      SilenceIcon:SetChecked(LoseControlDB.SilenceIcon)
-      CountText:SetChecked(LoseControlDB.CountTextplayer)
+			PlayerText:SetChecked(LoseControlDB.PlayerText)
+			ArenaPlayerText:SetChecked(LoseControlDB.ArenaPlayerText)
+			displayTypeDot:SetChecked(LoseControlDB.displayTypeDot)
+			SilenceIcon:SetChecked(LoseControlDB.SilenceIcon)
+			CountText:SetChecked(LoseControlDB.CountTextplayer)
 			lossOfControl:SetChecked(LoseControlDB.lossOfControl)
 			SetCVar("lossOfControl", LoseControlDB.lossOfControl)
 			lossOfControlInterrupt:SetValue(LoseControlDB.lossOfControlInterrupt)
@@ -13652,9 +13778,11 @@ local catListEnChecksButtonsArena = {
 			DisablePlayerFocusPlayerFocusTarget:SetChecked(LoseControlDB.disablePlayerFocusPlayerFocusTarget)
 			DisableFocusDeadFocusTarget:SetChecked(LoseControlDB.disableFocusDeadFocusTarget)
 		end
-		LCframes[unitId]:CheckGladiusUnitsAnchors(true)
-    LCframes[unitId]:CheckGladdyUnitsAnchors(true)
-		LCframes[unitId]:CheckSUFUnitsAnchors(true)
+		if unitId ~= "player3" then
+			LCframes[unitId]:CheckGladiusUnitsAnchors(true)
+			LCframes[unitId]:CheckGladdyUnitsAnchors(true)
+			LCframes[unitId]:CheckSUFUnitsAnchors(true)
+		end
 		for _, checkbuttonframe in pairs(CategoriesCheckButtons) do
 			if checkbuttonframe.auraType ~= "interrupt" then
 				checkbuttonframe.frame:SetChecked(LoseControlDB.frames[unitId].categoriesEnabled[checkbuttonframe.auraType][checkbuttonframe.reaction][checkbuttonframe.categoryType])
@@ -13677,11 +13805,11 @@ local catListEnChecksButtonsArena = {
 			if DisableInBG then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisableInBG) end
 			if EnableGladiusGloss then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(EnableGladiusGloss) end
 			if lossOfControl then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(lossOfControl) end
-      if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(PlayerText) end
-      if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ArenaPlayerText) end
-      if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(displayTypeDot) end
-      if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(SilenceIcon) end
-      if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(CountText) end
+			if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(PlayerText) end
+			if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ArenaPlayerText) end
+			if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(displayTypeDot) end
+			if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(SilenceIcon) end
+			if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(CountText) end
 			if DisableInRaid then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisableInRaid) end
 			if ShowNPCInterrupts then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(ShowNPCInterrupts) end
 			if DisablePlayerTargetTarget then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Enable(DisablePlayerTargetTarget) end
@@ -13716,7 +13844,7 @@ local catListEnChecksButtonsArena = {
 			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(AlphaSlider)
 			UIDropDownMenu_EnableDropDown(AnchorDropDown)
 			if LoseControlDB.lossOfControl then
-			 	if lossOfControlInterrupt then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlInterrupt) end
+				if lossOfControlInterrupt then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlInterrupt) end
 				if lossOfControlFull then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlFull) end
 				if lossOfControlSilence then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlSilence) end
 				if lossOfControlDisarm then LCOptionsPanelFuncs.LCOptionsPanel_Slider_Enable(lossOfControlDisarm) end
@@ -13740,11 +13868,11 @@ local catListEnChecksButtonsArena = {
 			if DisableInBG then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisableInBG) end
 			if EnableGladiusGloss then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(EnableGladiusGloss) end
 			if lossOfControl then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(lossOfControl) end
-      if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(PlayerText) end
-      if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ArenaPlayerText) end
-      if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(displayTypeDot) end
-      if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(SilenceIcon) end
-      if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(CountText) end
+			if PlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(PlayerText) end
+			if ArenaPlayerText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ArenaPlayerText) end
+			if displayTypeDot then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(displayTypeDot) end
+			if SilenceIcon then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(SilenceIcon) end
+			if CountText then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(CountText) end
 			if DisableInRaid then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisableInRaid) end
 			if ShowNPCInterrupts then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(ShowNPCInterrupts) end
 			if DisablePlayerTargetTarget then LCOptionsPanelFuncs.LCOptionsPanel_CheckButton_Disable(DisablePlayerTargetTarget) end
@@ -13766,7 +13894,7 @@ local catListEnChecksButtonsArena = {
 			CategoriesEnabledLabel:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
 
 			for k, catColor in ipairs(CategoriesLabels) do
-			catColor:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
+				catColor:SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
 			end
 
 			LCOptionsPanelFuncs.LCOptionsPanel_Slider_Disable(SizeSlider)
@@ -13787,7 +13915,7 @@ local catListEnChecksButtonsArena = {
 			AddItem(AnchorDropDown, "Blizzard", "Blizzard")
 			if PartyAnchor5 then AddItem(AnchorDropDown, "Bambi's UI", "BambiUI") end
 			if Gladius then AddItem(AnchorDropDown, "Gladius", "Gladius") end
-      if IsAddOnLoaded("Gladdy") then AddItem(AnchorDropDown, "Gladdy", "Gladdy") end
+			if IsAddOnLoaded("Gladdy") then AddItem(AnchorDropDown, "Gladdy", "Gladdy") end
 			if _G[anchors["Perl"][unitId]] or (type(anchors["Perl"][unitId])=="table" and anchors["Perl"][unitId]) then AddItem(AnchorDropDown, "Perl", "Perl") end
 			if _G[anchors["XPerl"][unitId]] or (type(anchors["XPerl"][unitId])=="table" and anchors["XPerl"][unitId]) then AddItem(AnchorDropDown, "XPerl", "XPerl") end
 			if _G[anchors["LUI"][unitId]] or (type(anchors["LUI"][unitId])=="table" and anchors["LUI"][unitId]) then AddItem(AnchorDropDown, "LUI", "LUI") end
