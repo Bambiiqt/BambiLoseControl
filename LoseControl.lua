@@ -148,7 +148,7 @@ local cleuSpells = { -- nil = Do Not Show
 	{157299, 30, nil,  "Special_Low", "Storm Ele", "Storm Ele"}, --Shaman Strom Ele
 	{157319, 30, nil,  "Special_Low", "Primal Storm Ele", "Prima Storm Ele"}, --Shaman Primal Strom Ele **********
 	--Totems
-	{8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)
+	{8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)  **HAS TEXT ADD IN LOOP**
 	
 	{111685, 30, nil,  "Ranged_Major_OffenisiveCDs", "Infernals", "Infernals"}, --Warlock Infernals
 	{205180, 20, nil,  "Small_Offenisive_CDs", "Darkglare", "Darkglare"}, --Warlock Darkglare
@@ -1171,6 +1171,19 @@ local spellsArenaTable = {
 	{236321, "CC_Reduction", "War".."\n".."Banner"},		-- War Banner
 	{383020, "CC_Reduction", "Tranquil".."\n".."Totem"},		-- Tranquil Totem
 	{234084, "CC_Reduction", "Moon".."\n".."& Stars"},		-- Moon and Stars
+	{375226, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375229, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375230, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375234, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375238, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375240, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375252, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375253, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375254, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375255, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375256, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375257, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
+	{375258, "CC_Reduction", "Time".."\n".."Spiral"},		-- Time Spiral
 
 	{200183, "Personal_Offensives", "Apotheosis"},		-- Apotheosis
 	{117679, "Personal_Offensives", "Tree of".."\n".."Life"},		-- Incarnation
@@ -8171,7 +8184,8 @@ local function UpdateUnitAuraByUnitGUID(unitGUID, typeUpdate)
 		)
 		if enabled and not v.unlockMode then
 			if v.unitGUID == unitGUID then
-				v:UNIT_AURA(k, updatedAuras, typeUpdate)
+				if k == "player3" then k = "player" end
+				v:UNIT_AURA(k, updatedAuras, typeUpdate)	
 				if (k == "player") and LCframeplayer2.frame.enabled and not LCframeplayer2.unlockMode then
 					LCframeplayer2:UNIT_AURA(k, updatedAuras, typeUpdate)
 				end
@@ -8797,7 +8811,7 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 				end
 				local guid = destGUID
 				--print(sourceName.." Summoned "..namePrint.." "..substring(destGUID, -7).." for "..duration.." LC")
-				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = nil, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint, ["spell"] = spellId})
+				tblinsert(InterruptAuras[sourceGUID], { ["spellId"] = spellId, ["name"] = name, ["duration"] = duration, ["expirationTime"] = expirationTime, ["priority"] = priority, ["spellCategory"] = spellCategory, ["icon"] = icon, ["spellSchool"] = spellSchool, ["hue"] = hue, ["destGUID"] = destGUID, ["sourceName"] = sourceName, ["namePrint"] = namePrint, ["spell"] = spellId})
 				UpdateUnitAuraByUnitGUID(sourceGUID, -20)
 				local ticker = 1
 				self.ticker = C_Timer.NewTicker(.1, function()
@@ -10220,6 +10234,9 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 		end
 
 		local inInstance, instanceType = IsInInstance()
+
+		if Spell == 8143 then Text = "Tremmor".."\n".."Totem" end ---------------ADDING TEXT TO TREMMOR TOTEM--------------------------------
+
 		if (instanceType == "arena" or instanceType == "pvp") and LoseControlDB.ArenaPlayerText then
 			--Do Nothing
 		else
@@ -10571,6 +10588,15 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 	playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
 	--playerSecondaryIcon.Ltext:SetJustifyH("CENTER")
 	--playerSecondaryIcon.Ltext:SetPoint("TOPLEFT", o.playerSecondaryIcon, "BOTTOMLEFT",  0 , -1.25)
+	if Text and LoseControlDB.PlayerText then
+		playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
+		playerSecondaryIcon.Ltext:SetText(Text)
+		playerSecondaryIcon:Show()
+	else
+		if playerSecondaryIcon.Ltext:IsShown() then
+			playerSecondaryIcon.Ltext:Hide()
+		end
+	end
 	playerSecondaryIcon.Ltext:SetText(Text)
 	if maxExpirationTime == 0 then
 		playerSecondaryIcon.maxExpirationTime = 0
@@ -10604,7 +10630,7 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 			playerSecondaryIcon.texture:SetDesaturated(nil) --Destaurate Icon
 			playerSecondaryIcon.texture:SetVertexColor(1, 1, 1)
 		end
-		if Count then
+		if Count and LoseControlDB.CountTextplayer then
 			if ( Count > 1 ) then
 				local countText = Count
 				if ( Count > 100 ) then
@@ -10879,7 +10905,13 @@ function LoseControl:new(unitId)
 	o:SetReverse(true) -- makes the cooldown shade from light to dark instead of dark to light
 
 	o.text = o:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	o.text:SetText(L[o.unitId])
+	if unitId == "player" then
+		o.text:SetText(L["playerIcon"])
+	elseif unitId == "player3" then
+		o.text:SetText(L["player3Icon"])
+	else
+		o.text:SetText(L[o.unitId])
+	end
 	o.text:SetPoint("BOTTOM", o, "BOTTOM")
 	o.text:Hide()
 
@@ -11207,9 +11239,10 @@ function Unlock:OnClick()
 
 
 				local Count = tonumber(strmatch(k, "%d"))
-				if k == "player" then Count = 3 end
+				if k == "player" then Count = 1 end
+				if k == "player3" then Count = 2 end
 				if Count then
-					if ((k == "player" and LoseControlDB.CountTextplayer) or ((k == "party1" or k == "party2" or k == "party3" or k == "party4") and  LoseControlDB.CountTextparty)) and not (v.frame.anchor == "Blizzard") then
+					if (((k == "player" or k == "player3") and LoseControlDB.CountTextplayer) or ((k == "party1" or k == "party2" or k == "party3" or k == "party4") and  LoseControlDB.CountTextparty)) and not (v.frame.anchor == "Blizzard") then
 						if ( Count >= 1 ) then
 							local countText = Count
 							if ( Count >= 100 ) then
@@ -11256,18 +11289,18 @@ function Unlock:OnClick()
 				end
 
 				local Types = { "Magic", "Curse", "Disease", "Poison", "none", "Buff", "CLEU" }
-				local Text = "Player Text".."\n".."For Spell Type"
-				if Text and k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
+				local Text = "Text For".."\n".."Spell Type"
+				if Text and (k == "player" or k == "player3") and v.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
 					v.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.25, "OUTLINE")
 					v.Ltext:SetText(Text)
 					v.Ltext:Show()
-				elseif k == "player" then
+				elseif (k == "player" or k == "player3") then
 					if v.Ltext:IsShown() then
 						v.Ltext:Hide()
 					end
 				end
 				local DispelType = Types[math.random(1,7)]
-				if  k == "player" and LoseControlDB.displayTypeDot and DispelType then
+				if  (k == "player" or k == "player3") and LoseControlDB.displayTypeDot and DispelType then
 					v.dispelTypeframe:SetHeight(v.frame.size*.105)
 					v.dispelTypeframe:SetWidth(v.frame.size*.105)
 					v.dispelTypeframe.tex:SetDesaturated(nil)
@@ -11279,7 +11312,7 @@ function Unlock:OnClick()
 						v.dispelTypeframe:SetPoint("TOP", v, "BOTTOM", 0, -1)
 					end
 						v.dispelTypeframe:Show()
-				elseif k == "player" then
+				elseif (k == "player" or k == "player3") then
 					if v.dispelTypeframe:IsShown() then
 						v.dispelTypeframe:Hide()
 					end
@@ -11288,7 +11321,7 @@ function Unlock:OnClick()
 				v:Show()
 				v:GetParent():Show()
 				v:SetDrawSwipe(true)
-				if k == "player" and v.frame.anchor ~= "Blizzard" then
+				if (k == "player") and v.frame.anchor ~= "Blizzard" then
 					v.playerSilence:SetWidth(v.frame.size*.9)
 					v.playerSilence:SetHeight(v.frame.size*.9)
 					v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
@@ -11300,9 +11333,9 @@ function Unlock:OnClick()
 						v.playerSilence.cooldown:SetCooldown( GetTime(), 15 )
 					end
 				end
-				if k == "player" and v.frame.anchor ~= "Blizzard" and LoseControlDB.SilenceIcon then
+				if (k == "player") and v.frame.anchor ~= "Blizzard" and LoseControlDB.SilenceIcon then
 					v.playerSilence:Show()
-				elseif not LoseControlDB.SilenceIcon and k == "player" then
+				elseif not LoseControlDB.SilenceIcon and (k == "player" or k == "player3") then
 					if v.playerSilence:IsShown() then
 						v.playerSilence:Hide()
 					end
@@ -11714,6 +11747,8 @@ DrawSwipeSlider.Func = function(self, value)
       if k == "player" then
         v.playerSilence.cooldown:SetSwipeTexture("Interface\Cooldown\edge")
         v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+		v.playerSecondaryIcon.cooldown:SetSwipeTexture("Interface\Cooldown\edge")
+        v.playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
       end
     end
   end
@@ -13912,16 +13947,23 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 		AlphaSlider:SetValue(frame.alpha * 100)
 		UIDropDownMenu_Initialize(AnchorDropDown, function() -- called on refresh and also every time the drop down menu is opened
 			AddItem(AnchorDropDown, L["None"], "None")
-			AddItem(AnchorDropDown, "Blizzard", "Blizzard")
-			if PartyAnchor5 then AddItem(AnchorDropDown, "Bambi's UI", "BambiUI") end
-			if Gladius then AddItem(AnchorDropDown, "Gladius", "Gladius") end
-			if IsAddOnLoaded("Gladdy") then AddItem(AnchorDropDown, "Gladdy", "Gladdy") end
-			if _G[anchors["Perl"][unitId]] or (type(anchors["Perl"][unitId])=="table" and anchors["Perl"][unitId]) then AddItem(AnchorDropDown, "Perl", "Perl") end
-			if _G[anchors["XPerl"][unitId]] or (type(anchors["XPerl"][unitId])=="table" and anchors["XPerl"][unitId]) then AddItem(AnchorDropDown, "XPerl", "XPerl") end
-			if _G[anchors["LUI"][unitId]] or (type(anchors["LUI"][unitId])=="table" and anchors["LUI"][unitId]) then AddItem(AnchorDropDown, "LUI", "LUI") end
-			if _G[anchors["SUF"][unitId]] or (type(anchors["SUF"][unitId])=="table" and anchors["SUF"][unitId]) then AddItem(AnchorDropDown, "SUF", "SUF") end
-			if _G[anchors["SyncFrames"][unitId]] or (type(anchors["SyncFrames"][unitId])=="table" and anchors["SyncFrames"][unitId]) then AddItem(AnchorDropDown, "SyncFrames", "SyncFrames") end
-
+			if v ~= "player3" then 
+				AddItem(AnchorDropDown, "Blizzard", "Blizzard")
+			end
+			if v == "player" or v == "party" then 
+				if PartyAnchor5 then AddItem(AnchorDropDown, "Bambi's UI", "BambiUI") end
+			end
+			if v == "arena" then 
+				if Gladius then AddItem(AnchorDropDown, "Gladius", "Gladius") end
+			end
+			if v ~= "player3" then 
+				if IsAddOnLoaded("Gladdy") then AddItem(AnchorDropDown, "Gladdy", "Gladdy") end
+				if _G[anchors["Perl"][unitId]] or (type(anchors["Perl"][unitId])=="table" and anchors["Perl"][unitId]) then AddItem(AnchorDropDown, "Perl", "Perl") end
+				if _G[anchors["XPerl"][unitId]] or (type(anchors["XPerl"][unitId])=="table" and anchors["XPerl"][unitId]) then AddItem(AnchorDropDown, "XPerl", "XPerl") end
+				if _G[anchors["LUI"][unitId]] or (type(anchors["LUI"][unitId])=="table" and anchors["LUI"][unitId]) then AddItem(AnchorDropDown, "LUI", "LUI") end
+				if _G[anchors["SUF"][unitId]] or (type(anchors["SUF"][unitId])=="table" and anchors["SUF"][unitId]) then AddItem(AnchorDropDown, "SUF", "SUF") end
+				if _G[anchors["SyncFrames"][unitId]] or (type(anchors["SyncFrames"][unitId])=="table" and anchors["SyncFrames"][unitId]) then AddItem(AnchorDropDown, "SyncFrames", "SyncFrames") end
+			end
 		end)
 		UIDropDownMenu_SetSelectedValue(AnchorDropDown, frame.anchor)
 		if AnchorDropDown2 then
