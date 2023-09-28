@@ -10591,7 +10591,7 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 	if Text and LoseControlDB.PlayerText then
 		playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
 		playerSecondaryIcon.Ltext:SetText(Text)
-		playerSecondaryIcon:Show()
+		playerSecondaryIcon.Ltext:Show()
 	else
 		if playerSecondaryIcon.Ltext:IsShown() then
 			playerSecondaryIcon.Ltext:Hide()
