@@ -129,12 +129,12 @@ local colorTypes = {
 -- Thanks to all the people on the Curse.com and WoWInterface forums who help keep this list up to date :)
 local cleuSpells = { -- nil = Do Not Show
 --Spell Summon Sucess
-	{49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon Gargoyle", "Ebon Gargoyle"}, --Ebon Gargoyle
+	{49206,  25, nil,  "Melee_Major_OffenisiveCDs", "Ebon".."\n".."Gargoyle", "Ebon Gargoyle", "DEATHKNIGHT"}, --Ebon Gargoyle
 
 	{248280, 10, "PvE",  nil, "Trees", "Trees"}, --Druid Trees
-	{102693, 15,  nil, "Special_Low","Grove Guardians", "Grove Guardians"}, --Druid Grove Guardians
+	{102693, 15,  nil, "Special_Low","Grove".."\n".."Guardians", "Grove Guardians"}, --Druid Grove Guardians
 
-	{321686, 40, "PvE",  "Special_Low", "Mirror Image", "Mirror Image"}, --Mirror Images
+	{321686, 40, "PvE",  "Special_Low", "Mirror".."\n".."Image", "Mirror Image"}, --Mirror Images
 
 	{123904, 24, nil,  "Special_Low", "Xuen", "Xuen"}, --WW Xuen Pet Summmon
 	
@@ -142,21 +142,21 @@ local cleuSpells = { -- nil = Do Not Show
 	{123040, 12, nil,  "Special_Low", "Mindbender", "Mindbender"}, --Disc Pet Summmon
 
 	{188616, 60, "PvE",  "Snares_Casted_Melee", "Earth Ele", "Earth Ele"}, --Shaman Earth Ele
-	{118323, 60, "PvE",  "Snares_Casted_Melee", "Primal Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
+	{118323, 60, "PvE",  "Snares_Casted_Melee", "Primal".."\n".."Earth Ele", "Primal Earth Ele"}, --Shaman Primal Earth Ele
 	{188592, 30, nil,  "Special_Low", "Fire Ele", "Fire Ele"}, --Shaman Fire Ele
-	{118291, 30, nil,  "Special_Low", "Primal Fire Ele", "Primal Fire Ele"}, --Shaman Primal Fire Ele
+	{118291, 30, nil,  "Special_Low", "Primal".."\n".."Fire Ele", "Primal Fire Ele"}, --Shaman Primal Fire Ele
 	{157299, 30, nil,  "Special_Low", "Storm Ele", "Storm Ele"}, --Shaman Strom Ele
-	{157319, 30, nil,  "Special_Low", "Primal Storm Ele", "Prima Storm Ele"}, --Shaman Primal Strom Ele **********
+	{157319, 30, nil,  "Special_Low", "Primal".."\n".."Storm Ele", "Prima Storm Ele"}, --Shaman Primal Strom Ele **********
 	--Totems
-	{8143, 13, "CC_Reduction",  "Special_High", "Tremor", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)  **HAS TEXT ADD IN LOOP**
+	{8143, 13, "CC_Reduction",  "Special_High", "Tremor".."\n".."Totem", "Tremor"}, --Shaman Tremor Totem ***ONLY WORKS FOR THE CASTER (Totemic Focus: Makes it 13)  **HAS TEXT ADD IN LOOP**
 	
 	{111685, 30, nil,  "Ranged_Major_OffenisiveCDs", "Infernals", "Infernals"}, --Warlock Infernals
 	{205180, 20, nil,  "Small_Offenisive_CDs", "Darkglare", "Darkglare"}, --Warlock Darkglare
-	{265187, 15, nil,  "Small_Offenisive_CDs", "Demonic Tyrant", "Demonic Tyrant"}, --Warlock Tyrant
-	{353601, 15, nil,  "Small_Offenisive_CDs", "Fel Obelisk", "Fel Obelisk"}, --Fel Obelisk
-	{387979, 6, nil,  "Small_Offenisive_CDs", "Unstable Tear", "Unstable Tear"}, --Unstable Tear
-	{394235, 14, nil,  "Small_Offenisive_CDs", "Shadowy Tear", "Shadowy Tear"}, --Shadowy Tear
-	{394243, 2, nil,  "Small_Offenisive_CDs", "Choas Tear", "Choas Tear"}, --Choas Tear
+	{265187, 15, nil,  "Small_Offenisive_CDs", "Demonic".."\n".."Tyrant", "Demonic Tyrant"}, --Warlock Tyrant
+	{353601, 15, nil,  "Small_Offenisive_CDs", "Fel".."\n".."Obelisk", "Fel Obelisk"}, --Fel Obelisk
+	{387979, 6, nil,  "Small_Offenisive_CDs", "Unstable".."\n".."Tear", "Unstable Tear"}, --Unstable Tear
+	{394235, 14, nil,  "Small_Offenisive_CDs", "Shadowy".."\n".."Tear", "Shadowy Tear"}, --Shadowy Tear
+	{394243, 2, nil,  "Small_Offenisive_CDs", "Choas".."\n".."Tear", "Choas Tear"}, --Choas Tear
 
 
 --Spell Cast Sucess
@@ -187,9 +187,9 @@ local interrupts = {
 	{97547  , 5},		-- Solar Beam (Druid Balance)
 	{93985  , 3},		-- Skull Bash 
 	{183752 , 3},		-- Disrupt (Demon Hunter)
-	{91807 ,  2},   	-- Shambling Rush
-	{91802  , 2},		-- Shambling Rush (Death Knight)
-	{47528  , 3},		-- Mind Freeze (Death Knight)
+	{91807 ,  2, "DEATHKNIGHT"},	-- Shambling Rush
+	{91802  , 2, "DEATHKNIGHT"},		-- Shambling Rush (Death Knight)
+	{47528  , 3, "DEATHKNIGHT"},		-- Mind Freeze (Death Knight)
 
 
 }
@@ -215,631 +215,631 @@ local spellsArenaTable = {
 	----------------
 	-- Death Knight
 	----------------
-	{48707 , "Immune_Arena"}, --Anti-Magic Shell
-	{410358 , "Immune_Arena"}, --Anti-Magic Shell w/ Warden
-	{221562 , "CC_Arena"}, --Asphyxiate
-	{108194 , "CC_Arena"}, --Asphyxiate
-	{91800 , "CC_Arena"}, --Gnaw
-	{210141 , "CC_Arena"}, --Zombie Explosion
-	{91797 , "CC_Arena"}, --Monstrous Blow
-	{287254 , "CC_Arena"}, --Dead of Winter
-	{207167 , "CC_Arena"}, --Blinding Sleet
-	{334693 , "CC_Arena"}, -- Absolute Zero (Shadowlands Legendary Stun)
-	{377048 , "CC_Arena"}, -- Absolute Zero
-	{47476 , "Silence_Arena"}, --Strangulate
-	{77606 , "Special_High"}, --Dark Simulacrum
-	{315443 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb
-	{383269 , "Ranged_Major_OffenisiveCDs"}, --Abomination Limb 
-	{91807 , "Roots_90_Snares"}, --Shambling Rush
-	{204085 , "Roots_90_Snares"}, --Deathchill
-	{233395 , "Roots_90_Snares"}, --Deathchill
-	{47568 , "Melee_Major_OffenisiveCDs"}, --Empower Rune Weapon
-	{207256 , "Melee_Major_OffenisiveCDs"}, --Obliteration
-	{51271 , "Melee_Major_OffenisiveCDs"}, --Pillar of Frost
-	{152279 , "Melee_Major_OffenisiveCDs"}, --Breath of Sindragosa
-	{81256 , "Melee_Major_OffenisiveCDs"}, --Dancing Rune Weapon
-	--{215711 , "Melee_Major_OffenisiveCDs"}, --Soul Reaper
-	--{207289 , "Melee_Major_OffenisiveCDs"}, --Unholy Frenzy
-	{207289 , "Melee_Major_OffenisiveCDs"}, --Unholy Assault
-	{48792 , "Big_Defensive_CDs"}, --Icebound Fortitude
-	{49039 , "Big_Defensive_CDs"}, --Lichborne
-	{145629 , "Big_Defensive_CDs"}, --Anti-Magic Zone
-	{55233 , "Big_Defensive_CDs"}, --Vampiric Blood
-	{194844 , "Big_Defensive_CDs"}, --Bonestorm
-	{114556 , "Big_Defensive_CDs"}, --Purgatory
-	{204206, "Small_Offenisive_CDs"}, --Chill Streak
-	{77616 , "Small_Offenisive_CDs"}, --Dark Simulacrum
-	{288977 , "Small_Defensive_CDs"}, --Transfusion
-	{48743 , "Small_Defensive_CDs"}, --Death Pact
-	{48265 , "Freedoms_Speed"}, -- Death's Advance
-	{212552 , "Freedoms_Speed"}, -- Wraith Walk
-	{45524 , "Snares_Ranged_Spamable"}, --Chains of Ice
-	--{356337 , "Snares_Casted_Melee"}, --Rune of Spellwarding
-	--{326867 , "Snares_Casted_Melee"}, --Rune of Spellwarding Shield
-	--{228579 , "Snares_Casted_Melee"}, --Shroud of Winter
+	{48707 , "Immune_Arena", "DEATHKNIGHT"}, --Anti-Magic Shell
+	{410358 , "Immune_Arena", "DEATHKNIGHT"}, --Anti-Magic Shell w/ Warden
+	{221562 , "CC_Arena", "DEATHKNIGHT"}, --Asphyxiate
+	{108194 , "CC_Arena", "DEATHKNIGHT"}, --Asphyxiate
+	{91800 , "CC_Arena", "DEATHKNIGHT"}, --Gnaw
+	{210141 , "CC_Arena", "DEATHKNIGHT"}, --Zombie Explosion
+	{91797 , "CC_Arena", "DEATHKNIGHT"}, --Monstrous Blow
+	{287254 , "CC_Arena", "DEATHKNIGHT"}, --Dead of Winter
+	{207167 , "CC_Arena", "DEATHKNIGHT"}, --Blinding Sleet
+	{334693 , "CC_Arena", "DEATHKNIGHT"}, -- Absolute Zero (Shadowlands Legendary Stun)
+	{377048 , "CC_Arena", "DEATHKNIGHT"}, -- Absolute Zero
+	{47476 , "Silence_Arena", "DEATHKNIGHT"}, --Strangulate
+	{77606 , "Special_High", "DEATHKNIGHT"}, --Dark Simulacrum
+	{315443 , "Ranged_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Abomination Limb
+	{383269 , "Ranged_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Abomination Limb 
+	{91807 , "Roots_90_Snares", "DEATHKNIGHT"}, --Shambling Rush
+	{204085 , "Roots_90_Snares", "DEATHKNIGHT"}, --Deathchill
+	{233395 , "Roots_90_Snares", "DEATHKNIGHT"}, --Deathchill
+	{47568 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Empower Rune Weapon
+	{207256 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Obliteration
+	{51271 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Pillar of Frost
+	{152279 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Breath of Sindragosa
+	{81256 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Dancing Rune Weapon
+	--{215711 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Soul Reaper
+	--{207289 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Unholy Frenzy
+	{207289 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Unholy Assault
+	{48792 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Icebound Fortitude
+	{49039 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Lichborne
+	{145629 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Anti-Magic Zone
+	{55233 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Vampiric Blood
+	{194844 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Bonestorm
+	{114556 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Purgatory
+	{204206, "Small_Offenisive_CDs", "DEATHKNIGHT"}, --Chill Streak
+	{77616 , "Small_Offenisive_CDs", "DEATHKNIGHT"}, --Dark Simulacrum
+	{288977 , "Small_Defensive_CDs", "DEATHKNIGHT"}, --Transfusion
+	{48743 , "Small_Defensive_CDs", "DEATHKNIGHT"}, --Death Pact
+	{48265 , "Freedoms_Speed", "DEATHKNIGHT"}, -- Death's Advance
+	{212552 , "Freedoms_Speed", "DEATHKNIGHT"}, -- Wraith Walk
+	{45524 , "Snares_Ranged_Spamable", "DEATHKNIGHT"}, --Chains of Ice
+	--{356337 , "Snares_Casted_Melee", "DEATHKNIGHT"}, --Rune of Spellwarding
+	--{326867 , "Snares_Casted_Melee", "DEATHKNIGHT"}, --Rune of Spellwarding Shield
+	--{228579 , "Snares_Casted_Melee", "DEATHKNIGHT"}, --Shroud of Winter
 
 	----------------
 	-- Demon Hunter
 	----------------
-	{196555 , "Immune_Arena"}, -- Netherwalk
-	{211881 , "CC_Arena"}, --Fel Eruption
-	{179057 , "CC_Arena"}, --Choas Nova
-	{200166 , "CC_Arena"}, --Metamorfosis stun
-	{205630 , "CC_Arena"}, --Illidan's Grasp
-	{208618 , "CC_Arena"}, --Illidan's Grasp
-	{221527 , "CC_Arena"}, --Imprison
-	{217832 , "CC_Arena"}, --Imprison
-	{207685 , "CC_Arena"}, --Sigil of Misery
-	{213491 , "CC_Arena"}, --Demonic Trample
-	{204490 , "Silence_Arena"}, --Sigil of Silence_Arena
-	{188501, "Special_High"}, -- Spectral Sight
-	{354610, "Special_High"}, -- Glimpse
-	{323996 , "Roots_90_Snares"}, --The Hunt NightFae Root
-	{370970 , "Roots_90_Snares"}, --The Hunt 
-	{162264 , "Melee_Major_OffenisiveCDs"}, -- Metamorphosis
-	{187827 , "Melee_Major_OffenisiveCDs"}, -- Metamorphosis
-	{208195, "Melee_Major_OffenisiveCDs"}, -- Demon Soul
-	{347765, "Melee_Major_OffenisiveCDs"}, -- Demon Soul
-	{198589, "Big_Defensive_CDs"}, -- Blur
-	{212800, "Big_Defensive_CDs"}, -- Blur
-	{209426 , "Big_Defensive_CDs"}, -- Darkness
-	{206804 , "Big_Defensive_CDs"}, -- Rain From Above
-	{206803 , "Big_Defensive_CDs"}, -- Rain From Above
-	{370966 , "Player_Party_OffensiveCDs"}, --The Hunt
-	{323802 , "Player_Party_OffensiveCDs"}, --The Hunt
-	{203819, "Small_Defensive_CDs"}, -- Demon Spikes
-	{208796, "Small_Defensive_CDs"}, -- Jagged Spikes
-	{205629, "Freedoms_Speed"}, -- Demonic Trample
-	{328605 , "Special_Low"}, --Unstoppable Conflict
-	{213405 , "Snares_Ranged_Spamable"}, --Master of the Glaive
+	{196555 , "Immune_Arena", "DEMONHUNTER"}, -- Netherwalk
+	{211881 , "CC_Arena", "DEMONHUNTER"}, --Fel Eruption
+	{179057 , "CC_Arena", "DEMONHUNTER"}, --Choas Nova
+	{200166 , "CC_Arena", "DEMONHUNTER"}, --Metamorfosis stun
+	{205630 , "CC_Arena", "DEMONHUNTER"}, --Illidan's Grasp
+	{208618 , "CC_Arena", "DEMONHUNTER"}, --Illidan's Grasp
+	{221527 , "CC_Arena", "DEMONHUNTER"}, --Imprison
+	{217832 , "CC_Arena", "DEMONHUNTER"}, --Imprison
+	{207685 , "CC_Arena", "DEMONHUNTER"}, --Sigil of Misery
+	{213491 , "CC_Arena", "DEMONHUNTER"}, --Demonic Trample
+	{204490 , "Silence_Arena", "DEMONHUNTER"}, --Sigil of Silence_Arena
+	{188501, "Special_High", "DEMONHUNTER"}, -- Spectral Sight
+	{354610, "Special_High", "DEMONHUNTER"}, -- Glimpse
+	{323996 , "Roots_90_Snares", "DEMONHUNTER"}, --The Hunt NightFae Root
+	{370970 , "Roots_90_Snares", "DEMONHUNTER"}, --The Hunt 
+	{162264 , "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Metamorphosis
+	{187827 , "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Metamorphosis
+	{208195, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul
+	{347765, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul
+	{198589, "Big_Defensive_CDs", "DEMONHUNTER"}, -- Blur
+	{212800, "Big_Defensive_CDs", "DEMONHUNTER"}, -- Blur
+	{209426 , "Big_Defensive_CDs", "DEMONHUNTER"}, -- Darkness
+	{206804 , "Big_Defensive_CDs", "DEMONHUNTER"}, -- Rain From Above
+	{206803 , "Big_Defensive_CDs", "DEMONHUNTER"}, -- Rain From Above
+	{370966 , "Player_Party_OffensiveCDs", "DEMONHUNTER"}, --The Hunt
+	{323802 , "Player_Party_OffensiveCDs", "DEMONHUNTER"}, --The Hunt
+	{203819, "Small_Defensive_CDs", "DEMONHUNTER"}, -- Demon Spikes
+	{208796, "Small_Defensive_CDs", "DEMONHUNTER"}, -- Jagged Spikes
+	{205629, "Freedoms_Speed", "DEMONHUNTER"}, -- Demonic Trample
+	{328605 , "Special_Low", "DEMONHUNTER"}, --Unstoppable Conflict
+	{213405 , "Snares_Ranged_Spamable", "DEMONHUNTER"}, --Master of the Glaive
 
 	----------------
 	-- Druid
 	----------------
-	{132158 , "Drink_Purge"}, --Nature's Swfitness
-	{362486 , "Immune_Arena"}, --Keeper of the Grove
-	{5211 , "CC_Arena"}, --Mighty Bash
-	{163505 , "CC_Arena"}, --Rake
-	{203123 , "CC_Arena"}, --Maim
-	{202244 , "CC_Arena"}, --Overrun
-	{33786 , "CC_Arena"}, --Cyclone
-	{99 , "CC_Arena"}, --Incapacitating Roar
-	{2637 , "CC_Arena"}, --Hibernate
-	{81261 , "Silence_Arena"}, --Solar Beam
-	{410065  , "Silence_Arena"}, --Reactive Resin
-	{5215 , "Special_High"}, --Prowl
-	{194223, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
-	{383410, "Ranged_Major_OffenisiveCDs"}, --Celestial Alignment
-	{102560 , "Ranged_Major_OffenisiveCDs"}, --Incarnation: Chosen of Elune
-	{390414 , "Ranged_Major_OffenisiveCDs"}, --Incarnation: Chosen of Elune (Orbital Strike)
-	{339 , "Roots_90_Snares"}, --Entangling Roots
-	{170855 , "Roots_90_Snares"}, --Entangling Roots (Nature's Grasp)
-	{102359 , "Roots_90_Snares"}, --Mass Entanglement
-	{45334 , "Roots_90_Snares"}, --Immobilized
-	{127797 , "Roots_90_Snares"}, --Ursol's Vortex
-	{102793 , "Roots_90_Snares"}, --Ursol's Vortex
-	{209749 , "Disarms"}, --Faerie Swarm
-	{50334 , "Melee_Major_OffenisiveCDs"}, --Berserk (Guardian)
-	{102558 , "Melee_Major_OffenisiveCDs"}, --Incarnation: Guardian of Ursoc
-	{106951, "Melee_Major_OffenisiveCDs"}, --Berserk (Feral)
-	{102543 , "Melee_Major_OffenisiveCDs"}, --Avatar of Ashamane
-	{22812 , "Big_Defensive_CDs"}, --Barkskin
-	{102342 , "Big_Defensive_CDs"}, --IronBark
-	{247563 , "Big_Defensive_CDs"}, --Nature's Grasp
-	{29166 , "Big_Defensive_CDs"}, --Innervate
-	{117679 , "Big_Defensive_CDs"}, --Incarnation: Tree of Life
-	--{33891 , "Big_Defensive_CDs"}, --Tree of life
-	{61336 , "Big_Defensive_CDs"}, --Survival Instincts
-	{202461 , "Small_Offenisive_CDs"}, --Stellar Drift
-	{234084 , "Small_Offenisive_CDs"}, --Moon and Stars
-	{124974 , "Small_Offenisive_CDs"}, --Nature's Vigel
-	{319454 , "Small_Offenisive_CDs"}, --Heart of the Wild
-	{108292 , "Small_Offenisive_CDs"}, --Heart of the Wild (Feral)
-	{108293 , "Small_Offenisive_CDs"}, --Heart of the Wild (Guardian)
-	{108294 , "Small_Offenisive_CDs"}, --Heart of the Wild (Resto)
-	{5217 , "Small_Offenisive_CDs"}, --Tiger's Fury
-	{202425 , "Small_Offenisive_CDs"}, --Warrior of Elune
-	{22842 , "Small_Defensive_CDs"}, --Frenzied Regenerationw+
-	{192081 , "Small_Defensive_CDs"}, --Ironfur
-	{200947 , "Small_Defensive_CDs"}, --High Winds
-	{201664 , "Small_Defensive_CDs"}, --High Winds
+	{132158 , "Drink_Purge", "DRUID"}, --Nature's Swfitness
+	{362486 , "Immune_Arena", "DRUID"}, --Keeper of the Grove
+	{5211 , "CC_Arena", "DRUID"}, --Mighty Bash
+	{163505 , "CC_Arena", "DRUID"}, --Rake
+	{203123 , "CC_Arena", "DRUID"}, --Maim
+	{202244 , "CC_Arena", "DRUID"}, --Overrun
+	{33786 , "CC_Arena", "DRUID"}, --Cyclone
+	{99 , "CC_Arena", "DRUID"}, --Incapacitating Roar
+	{2637 , "CC_Arena", "DRUID"}, --Hibernate
+	{81261 , "Silence_Arena", "DRUID"}, --Solar Beam
+	{410065  , "Silence_Arena", "DRUID"}, --Reactive Resin
+	{5215 , "Special_High", "DRUID"}, --Prowl
+	{194223, "Ranged_Major_OffenisiveCDs", "DRUID"}, --Celestial Alignment
+	{383410, "Ranged_Major_OffenisiveCDs", "DRUID"}, --Celestial Alignment
+	{102560 , "Ranged_Major_OffenisiveCDs", "DRUID"}, --Incarnation: Chosen of Elune
+	{390414 , "Ranged_Major_OffenisiveCDs", "DRUID"}, --Incarnation: Chosen of Elune (Orbital Strike)
+	{339 , "Roots_90_Snares", "DRUID"}, --Entangling Roots
+	{170855 , "Roots_90_Snares", "DRUID"}, --Entangling Roots (Nature's Grasp)
+	{102359 , "Roots_90_Snares", "DRUID"}, --Mass Entanglement
+	{45334 , "Roots_90_Snares", "DRUID"}, --Immobilized
+	{127797 , "Roots_90_Snares", "DRUID"}, --Ursol's Vortex
+	{102793 , "Roots_90_Snares", "DRUID"}, --Ursol's Vortex
+	{209749 , "Disarms", "DRUID"}, --Faerie Swarm
+	{50334 , "Melee_Major_OffenisiveCDs", "DRUID"}, --Berserk (Guardian)
+	{102558 , "Melee_Major_OffenisiveCDs", "DRUID"}, --Incarnation: Guardian of Ursoc
+	{106951, "Melee_Major_OffenisiveCDs", "DRUID"}, --Berserk (Feral)
+	{102543 , "Melee_Major_OffenisiveCDs", "DRUID"}, --Avatar of Ashamane
+	{22812 , "Big_Defensive_CDs", "DRUID"}, --Barkskin
+	{102342 , "Big_Defensive_CDs", "DRUID"}, --IronBark
+	{247563 , "Big_Defensive_CDs", "DRUID"}, --Nature's Grasp
+	{29166 , "Big_Defensive_CDs", "DRUID"}, --Innervate
+	{117679 , "Big_Defensive_CDs", "DRUID"}, --Incarnation: Tree of Life
+	--{33891 , "Big_Defensive_CDs", "DRUID"}, --Tree of life
+	{61336 , "Big_Defensive_CDs", "DRUID"}, --Survival Instincts
+	{202461 , "Small_Offenisive_CDs", "DRUID"}, --Stellar Drift
+	{234084 , "Small_Offenisive_CDs", "DRUID"}, --Moon and Stars
+	{124974 , "Small_Offenisive_CDs", "DRUID"}, --Nature's Vigel
+	{319454 , "Small_Offenisive_CDs", "DRUID"}, --Heart of the Wild
+	{108292 , "Small_Offenisive_CDs", "DRUID"}, --Heart of the Wild (Feral)
+	{108293 , "Small_Offenisive_CDs", "DRUID"}, --Heart of the Wild (Guardian)
+	{108294 , "Small_Offenisive_CDs", "DRUID"}, --Heart of the Wild (Resto)
+	{5217 , "Small_Offenisive_CDs", "DRUID"}, --Tiger's Fury
+	{202425 , "Small_Offenisive_CDs", "DRUID"}, --Warrior of Elune
+	{22842 , "Small_Defensive_CDs", "DRUID"}, --Frenzied Regenerationw+
+	{192081 , "Small_Defensive_CDs", "DRUID"}, --Ironfur
+	{200947 , "Small_Defensive_CDs", "DRUID"}, --High Winds
+	{201664 , "Small_Defensive_CDs", "DRUID"}, --High Winds
 
-	{114108 , "Small_Defensive_CDs"}, --Soul of the Forest
+	{114108 , "Small_Defensive_CDs", "DRUID"}, --Soul of the Forest
 
-	{305497 , "Small_Defensive_CDs"}, --Thorns
-	{1850 , "Freedoms_Speed"}, --Dash
-	{77764 , "Freedoms_Speed"}, --Stampeding Roar
-	{106898 , "Freedoms_Speed"}, --Stampeding Roar
-	{252216 , "Freedoms_Speed"}, --Tiger's Dash
-	--{201940, "Special_Low"}, --Protector of the Pack
+	{305497 , "Small_Defensive_CDs", "DRUID"}, --Thorns
+	{1850 , "Freedoms_Speed", "DRUID"}, --Dash
+	{77764 , "Freedoms_Speed", "DRUID"}, --Stampeding Roar
+	{106898 , "Freedoms_Speed", "DRUID"}, --Stampeding Roar
+	{252216 , "Freedoms_Speed", "DRUID"}, --Tiger's Dash
+	--{201940, "Special_Low", "DRUID"}, --Protector of the Pack
 
-	{768 , "Special_Low"}, --Cat Form
-	{5487 , "Special_Low"}, --Bear Form
-	{783 , "Special_Low"}, --Travel Form
-	{197625 , "Special_Low"}, --Moonkin Form
-	{24858 , "Special_Low"}, --Moonkin Form
+	{768 , "Special_Low", "DRUID"}, --Cat Form
+	{5487 , "Special_Low", "DRUID"}, --Bear Form
+	{783 , "Special_Low", "DRUID"}, --Travel Form
+	{197625 , "Special_Low", "DRUID"}, --Moonkin Form
+	{24858 , "Special_Low", "DRUID"}, --Moonkin Form
 
 	----------------
 	-- Evoker
 	----------------
-	{370553 , "Drink_Purge"}, --Tip the Scales
-	{378441 , "Immune_Arena"}, --Time Stop (Evoker PvP)
-	{370960 , "Immune_Arena"}, --Emerald Communion
-	{372245 , "CC_Arena"}, --Terror of the Skies
-	{408544 , "CC_Arena"}, --Seismic Slam
-	{360806 , "CC_Arena"}, --Sleep Walk
-	{383005 , "Special_High"}, -- Chrono Loop
-	{359816 , "Special_High"}, --Dream Flight
-	{383870 , "Special_High"}, --Swoop Up (Target)
-	{357210 , "Special_High"}, --Deep Breath (Immune to CC)
-	{403631 , "Special_High"}, --Breath of Eon (Immune to CC)
-	{375087 , "Ranged_Major_OffenisiveCDs"}, --Dragonrage
-	{404977 , "Ranged_Major_OffenisiveCDs"}, --Time Skip
-	{355689 , "Roots_90_Snares"}, -- Landslide
-	{363534 , "Big_Defensive_CDs"}, --Rewind
-	{363916 , "Big_Defensive_CDs"}, --Obsidian Scales
-	{357170 , "Big_Defensive_CDs"}, --Time Dilation
-	{383869 , "Small_Offenisive_CDs"}, --Swoop Up (Evoker)
-	{370666 , "Small_Defensive_CDs"}, --Rescue (Evoker)
-	{370667 , "Small_Defensive_CDs"}, --Rescue (Target)
-	{374227 , "Small_Defensive_CDs"}, --Zephyr
-	{374348 , "Small_Defensive_CDs"}, --Renewing Blaze
-	{378464 , "Small_Defensive_CDs"}, --Nullifying Shroud
-	{370537 , "Small_Defensive_CDs"}, --Stasis
-	{377509 , "Small_Defensive_CDs"}, --Dream projection
-	{375226 , "Small_Defensive_CDs"}, -- Time Spiral (Death Knight)
-	{375229 , "Small_Defensive_CDs"}, -- Time Spiral (Demon Hunter)
-	{375230 , "Small_Defensive_CDs"}, -- Time Spiral (Druid)
-	{375234 , "Small_Defensive_CDs"}, -- Time Spiral (Evoker)
-	{375238 , "Small_Defensive_CDs"}, -- Time Spiral (Hunter)
-	{375240 , "Small_Defensive_CDs"}, -- Time Spiral (Mage)
-	{375252 , "Small_Defensive_CDs"}, -- Time Spiral (Monk)
-	{375253 , "Small_Defensive_CDs"}, -- Time Spiral (Paladin)
-	{375254 , "Small_Defensive_CDs"}, -- Time Spiral (Priest)
-	{375255 , "Small_Defensive_CDs"}, -- Time Spiral (Rogue)
-	{375256 , "Small_Defensive_CDs"}, -- Time Spiral (Shaman)
-	{375257 , "Small_Defensive_CDs"}, -- Time Spiral (Warlock)
-	{375258 , "Small_Defensive_CDs"}, -- Time Spiral (Warrior)
-	{358267 , "Special_Low"}, --Hover
-	{406732 , "Special_Low"}, --Spatial Paraodox
-	{357214, "Snares_WithCDs"}, -- Wing Buffet
-	{368970, "Snares_WithCDs"}, -- Tail Swipe
+	{370553 , "Drink_Purge", "EVOKER"}, --Tip the Scales
+	{378441 , "Immune_Arena", "EVOKER"}, --Time Stop (Evoker PvP)
+	{370960 , "Immune_Arena", "EVOKER"}, --Emerald Communion
+	{372245 , "CC_Arena", "EVOKER"}, --Terror of the Skies
+	{408544 , "CC_Arena", "EVOKER"}, --Seismic Slam
+	{360806 , "CC_Arena", "EVOKER"}, --Sleep Walk
+	{383005 , "Special_High", "EVOKER"}, -- Chrono Loop
+	{359816 , "Special_High", "EVOKER"}, --Dream Flight
+	{383870 , "Special_High", "EVOKER"}, --Swoop Up (Target)
+	{357210 , "Special_High", "EVOKER"}, --Deep Breath (Immune to CC)
+	{403631 , "Special_High", "EVOKER"}, --Breath of Eon (Immune to CC)
+	{375087 , "Ranged_Major_OffenisiveCDs", "EVOKER"}, --Dragonrage
+	{404977 , "Ranged_Major_OffenisiveCDs", "EVOKER"}, --Time Skip
+	{355689 , "Roots_90_Snares", "EVOKER"}, -- Landslide
+	{363534 , "Big_Defensive_CDs", "EVOKER"}, --Rewind
+	{363916 , "Big_Defensive_CDs", "EVOKER"}, --Obsidian Scales
+	{357170 , "Big_Defensive_CDs", "EVOKER"}, --Time Dilation
+	{383869 , "Small_Offenisive_CDs", "EVOKER"}, --Swoop Up (Evoker)
+	{370666 , "Small_Defensive_CDs", "EVOKER"}, --Rescue (Evoker)
+	{370667 , "Small_Defensive_CDs", "EVOKER"}, --Rescue (Target)
+	{374227 , "Small_Defensive_CDs", "EVOKER"}, --Zephyr
+	{374348 , "Small_Defensive_CDs", "EVOKER"}, --Renewing Blaze
+	{378464 , "Small_Defensive_CDs", "EVOKER"}, --Nullifying Shroud
+	{370537 , "Small_Defensive_CDs", "EVOKER"}, --Stasis
+	{377509 , "Small_Defensive_CDs", "EVOKER"}, --Dream projection
+	{375226 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Death Knight)
+	{375229 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Demon Hunter)
+	{375230 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Druid)
+	{375234 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Evoker)
+	{375238 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Hunter)
+	{375240 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Mage)
+	{375252 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Monk)
+	{375253 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Paladin)
+	{375254 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Priest)
+	{375255 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Rogue)
+	{375256 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Shaman)
+	{375257 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Warlock)
+	{375258 , "Small_Defensive_CDs", "EVOKER"}, -- Time Spiral (Warrior)
+	{358267 , "Special_Low", "EVOKER"}, --Hover
+	{406732 , "Special_Low", "EVOKER"}, --Spatial Paraodox
+	{357214, "Snares_WithCDs", "EVOKER"}, -- Wing Buffet
+	{368970, "Snares_WithCDs", "EVOKER"}, -- Tail Swipe
 	
 	----------------
 	-- Hunter
 	----------------
-	{186265 , "Immune_Arena"}, --Aspect of the Turtle
-	{3355 , "CC_Arena"}, --Freezing Trap
-	{203337 , "CC_Arena"}, --Freezing Trap
-	{24394 , "CC_Arena"}, --Intimidation
-	{213691 , "CC_Arena"}, --Scatter Shot
-	{1513 , "CC_Arena"}, --Scare Beast
-	{356727 , "Silence_Arena"}, --Spider Venom (Chimaeral Sting)
-	{191241 , "Special_High"}, --Sticky Bomb
-	{199483 , "Special_High"}, --Camouflage
-	{5384 , "Special_High"}, --Fiegn Death
-	{248519 , "Special_High"}, --Interlope
-	{19574 , "Ranged_Major_OffenisiveCDs"}, --Bestial Wrath
-	{212704 , "Ranged_Major_OffenisiveCDs"}, --The Beast Within (PvP)
-	{193530 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Wild
-	{288613 , "Ranged_Major_OffenisiveCDs"}, --Trueshot
-	{260402 , "Ranged_Major_OffenisiveCDs"}, --Double Tap
-	{266779 , "Ranged_Major_OffenisiveCDs"}, --Coordinated Assault
-	{360966	, "Ranged_Major_OffenisiveCDs"}, --Spearhead
-	{186289 , "Ranged_Major_OffenisiveCDs"}, --Aspect of the Eagle
-	{407032 , "Disarms"}, --Sticky Tar Bomb Expoldes
-	{407031 , "Disarms"}, --Sticky Tar Bomb
-	{393456 , "Roots_90_Snares"}, --Entrapment
-	{117526 , "Roots_90_Snares"}, --Binding Shot
-	{117405 , "Roots_90_Snares"}, --Binding Shot
-	{162480 , "Roots_90_Snares"}, --Steel Trap
-	{190927 , "Roots_90_Snares"}, --Harpoon
-	{190925 , "Roots_90_Snares"}, --Harpoon
-	{212638 , "Roots_90_Snares"}, --Tracker's Net
-	{53148 , "Roots_90_Snares"}, --Charge (pet)
-	{356723 , "Roots_90_Snares"}, --Scorpid Venom  (Chimaeral Sting)
-	{53480 , "Big_Defensive_CDs"}, --Roar of Sacrifice
-	{202748 , "Big_Defensive_CDs"}, --Survival Tactics
-	{281195 , "Big_Defensive_CDs"}, --Survival of the Fittest
-	{264735 , "Big_Defensive_CDs"}, --Survival of the Fittest
-	{356730 , "Player_Party_OffensiveCDs"}, --Viper Venom
-	{388045 , "Small_Offenisive_CDs"}, --Sentinel Owl
-	{393774 , "Small_Offenisive_CDs"}, --Sentinel Perception
-	{212640 , "Small_Defensive_CDs"}, --Mending Bandage
-	{388035 , "Small_Defensive_CDs"}, --Fortitude of the Bear
-	{54216 , "Freedoms_Speed"}, --Master's Call
-	{118922 , "Freedoms_Speed"}, --Posthaste
-	{186257 , "Freedoms_Speed"}, --Aspect of the Cheetah
-	{5116 , "Snares_WithCDs"}, --Concussive Shot
-	{135299 , "Snares_Ranged_Spamable"}, --Tar Trap
-	{204205 , "Snares_Casted_Melee"}, --Wild Protector
+	{186265 , "Immune_Arena", "HUNTER"}, --Aspect of the Turtle
+	{3355 , "CC_Arena", "HUNTER"}, --Freezing Trap
+	{203337 , "CC_Arena", "HUNTER"}, --Freezing Trap
+	{24394 , "CC_Arena", "HUNTER"}, --Intimidation
+	{213691 , "CC_Arena", "HUNTER"}, --Scatter Shot
+	{1513 , "CC_Arena", "HUNTER"}, --Scare Beast
+	{356727 , "Silence_Arena", "HUNTER"}, --Spider Venom (Chimaeral Sting)
+	{191241 , "Special_High", "HUNTER"}, --Sticky Bomb
+	{199483 , "Special_High", "HUNTER"}, --Camouflage
+	{5384 , "Special_High", "HUNTER"}, --Fiegn Death
+	{248519 , "Special_High", "HUNTER"}, --Interlope
+	{19574 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Bestial Wrath
+	{212704 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --The Beast Within (PvP)
+	{193530 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Aspect of the Wild
+	{288613 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Trueshot
+	{260402 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Double Tap
+	{266779 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Coordinated Assault
+	{360966	, "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Spearhead
+	{186289 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Aspect of the Eagle
+	{407032 , "Disarms", "HUNTER"}, --Sticky Tar Bomb Expoldes
+	{407031 , "Disarms", "HUNTER"}, --Sticky Tar Bomb
+	{393456 , "Roots_90_Snares", "HUNTER"}, --Entrapment
+	{117526 , "Roots_90_Snares", "HUNTER"}, --Binding Shot
+	{117405 , "Roots_90_Snares", "HUNTER"}, --Binding Shot
+	{162480 , "Roots_90_Snares", "HUNTER"}, --Steel Trap
+	{190927 , "Roots_90_Snares", "HUNTER"}, --Harpoon
+	{190925 , "Roots_90_Snares", "HUNTER"}, --Harpoon
+	{212638 , "Roots_90_Snares", "HUNTER"}, --Tracker's Net
+	{53148 , "Roots_90_Snares", "HUNTER"}, --Charge (pet)
+	{356723 , "Roots_90_Snares", "HUNTER"}, --Scorpid Venom  (Chimaeral Sting)
+	{53480 , "Big_Defensive_CDs", "HUNTER"}, --Roar of Sacrifice
+	{202748 , "Big_Defensive_CDs", "HUNTER"}, --Survival Tactics
+	{281195 , "Big_Defensive_CDs", "HUNTER"}, --Survival of the Fittest
+	{264735 , "Big_Defensive_CDs", "HUNTER"}, --Survival of the Fittest
+	{356730 , "Player_Party_OffensiveCDs", "HUNTER"}, --Viper Venom
+	{388045 , "Small_Offenisive_CDs", "HUNTER"}, --Sentinel Owl
+	{393774 , "Small_Offenisive_CDs", "HUNTER"}, --Sentinel Perception
+	{212640 , "Small_Defensive_CDs", "HUNTER"}, --Mending Bandage
+	{388035 , "Small_Defensive_CDs", "HUNTER"}, --Fortitude of the Bear
+	{54216 , "Freedoms_Speed", "HUNTER"}, --Master's Call
+	{118922 , "Freedoms_Speed", "HUNTER"}, --Posthaste
+	{186257 , "Freedoms_Speed", "HUNTER"}, --Aspect of the Cheetah
+	{5116 , "Snares_WithCDs", "HUNTER"}, --Concussive Shot
+	{135299 , "Snares_Ranged_Spamable", "HUNTER"}, --Tar Trap
+	{204205 , "Snares_Casted_Melee", "HUNTER"}, --Wild Protector
 
 	----------------
 	-- Mage
 	----------------
-	{45438 , "Immune_Arena"}, --Ice Block
-	{"Polymorph" , "CC_Arena"},
-	{82691 , "CC_Arena"}, --Ring of Frost
-	{31661 , "CC_Arena"}, --Dragon's Breath
-	{389831 , "CC_Arena"}, --Snowdrift
-	{317589 , "Silence_Arena"}, --Tormenting Backlash (Venthyr Mage)
-	{66 , "Special_High"}, --Invisibility
-	{32612 , "Special_High"}, --Invisibility
-	{110960 , "Special_High"}, --Greater Invisibility
-	{198158 , "Special_High"}, --Mass Invisibility
-	{414664 , "Special_High"}, --Mass Invisibility
-	{414658 , "Special_High"}, --Ice Cold
-	{190319, "Ranged_Major_OffenisiveCDs"}, --Combustion
-	{383874, "Ranged_Major_OffenisiveCDs"}, --Hyperthermia
-	{12042, "Ranged_Major_OffenisiveCDs"}, --Arcane Power
-	{365362, "Ranged_Major_OffenisiveCDs"}, --Arcane Surge
-	{12472, "Ranged_Major_OffenisiveCDs"}, --Icy Veins
-	{198144, "Ranged_Major_OffenisiveCDs"}, --Ice Form
-	{342242, "Ranged_Major_OffenisiveCDs"}, --Time Warp
-	{389794, "Ranged_Major_OffenisiveCDs"}, --Snow Drift
-	{122 , "Roots_90_Snares"}, --Frost Nova
-	{386770, "Roots_90_Snares"}, --Freezing Cold
-	{378760 , "Roots_90_Snares"}, --Frost Bite
-	{198121 , "Roots_90_Snares"}, --Frost Bite
-	{33395 , "Roots_90_Snares"}, --Freeze
-	{157997 , "Roots_90_Snares"}, --Ice Nova
-	{228600 , "Roots_90_Snares"}, --Glacial Spike
-	{110909  , "Big_Defensive_CDs"}, --Alter Time
-	{342246 , "Big_Defensive_CDs"}, --Alter Time
-	{198111 , "Big_Defensive_CDs"}, --Temporal Shield
-	{113862 , "Big_Defensive_CDs"}, --Greater Invisibility
-	{87023 , "Big_Defensive_CDs"}, --Cauterilze
-	{116014 , "Small_Offenisive_CDs"}, --Rune of Power
-	{205025 , "Small_Offenisive_CDs"}, --Presence of Mind
-	{382106 , "Small_Offenisive_CDs"}, --Freezing Winds
-	{332928 , "Small_Offenisive_CDs"}, --Siphon Storm
-	{108839 , "Small_Offenisive_CDs"}, --Ice Floes
-	{198065 , "Small_Defensive_CDs"}, --Prismatic Cloak
-	{108843 , "Freedoms_Speed"}, --Blazing Speed
-	{382824 , "Freedoms_Speed"}, --40% Temporal Velocity
-	{384360 , "Freedoms_Speed"}, --20 %Temporal Velocity
-	{120 , "Snares_WithCDs"}, --Cone of Cold
-	{11426 , "Special_Low"}, --Ice Barrier
-	{235313 , "Special_Low"}, --Blazing Barrier
-	{235450 , "Special_Low"}, --Prismatic Barrier
-	{41425 , "Special_Low"}, --Hypothermia
-	{31589 , "Snares_Ranged_Spamable"}, --Slow
+	{45438 , "Immune_Arena", "MAGE"}, --Ice Block
+	{"Polymorph" , "CC_Arena", "MAGE"},
+	{82691 , "CC_Arena", "MAGE"}, --Ring of Frost
+	{31661 , "CC_Arena", "MAGE"}, --Dragon's Breath
+	{389831 , "CC_Arena", "MAGE"}, --Snowdrift
+	{317589 , "Silence_Arena", "MAGE"}, --Tormenting Backlash (Venthyr Mage)
+	{66 , "Special_High", "MAGE"}, --Invisibility
+	{32612 , "Special_High", "MAGE"}, --Invisibility
+	{110960 , "Special_High", "MAGE"}, --Greater Invisibility
+	{198158 , "Special_High", "MAGE"}, --Mass Invisibility
+	{414664 , "Special_High", "MAGE"}, --Mass Invisibility
+	{414658 , "Special_High", "MAGE"}, --Ice Cold
+	{190319, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Combustion
+	{383874, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Hyperthermia
+	{12042, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Arcane Power
+	{365362, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Arcane Surge
+	{12472, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Icy Veins
+	{198144, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Ice Form
+	{342242, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Time Warp
+	{389794, "Ranged_Major_OffenisiveCDs", "MAGE"}, --Snow Drift
+	{122 , "Roots_90_Snares", "MAGE"}, --Frost Nova
+	{386770, "Roots_90_Snares", "MAGE"}, --Freezing Cold
+	{378760 , "Roots_90_Snares", "MAGE"}, --Frost Bite
+	{198121 , "Roots_90_Snares", "MAGE"}, --Frost Bite
+	{33395 , "Roots_90_Snares", "MAGE"}, --Freeze
+	{157997 , "Roots_90_Snares", "MAGE"}, --Ice Nova
+	{228600 , "Roots_90_Snares", "MAGE"}, --Glacial Spike
+	{110909  , "Big_Defensive_CDs", "MAGE"}, --Alter Time
+	{342246 , "Big_Defensive_CDs", "MAGE"}, --Alter Time
+	{198111 , "Big_Defensive_CDs", "MAGE"}, --Temporal Shield
+	{113862 , "Big_Defensive_CDs", "MAGE"}, --Greater Invisibility
+	{87023 , "Big_Defensive_CDs", "MAGE"}, --Cauterilze
+	{116014 , "Small_Offenisive_CDs", "MAGE"}, --Rune of Power
+	{205025 , "Small_Offenisive_CDs", "MAGE"}, --Presence of Mind
+	{382106 , "Small_Offenisive_CDs", "MAGE"}, --Freezing Winds
+	{332928 , "Small_Offenisive_CDs", "MAGE"}, --Siphon Storm
+	{108839 , "Small_Offenisive_CDs", "MAGE"}, --Ice Floes
+	{198065 , "Small_Defensive_CDs", "MAGE"}, --Prismatic Cloak
+	{108843 , "Freedoms_Speed", "MAGE"}, --Blazing Speed
+	{382824 , "Freedoms_Speed", "MAGE"}, --40% Temporal Velocity
+	{384360 , "Freedoms_Speed", "MAGE"}, --20 %Temporal Velocity
+	{120 , "Snares_WithCDs", "MAGE"}, --Cone of Cold
+	{11426 , "Special_Low", "MAGE"}, --Ice Barrier
+	{235313 , "Special_Low", "MAGE"}, --Blazing Barrier
+	{235450 , "Special_Low", "MAGE"}, --Prismatic Barrier
+	{41425 , "Special_Low", "MAGE"}, --Hypothermia
+	{31589 , "Snares_Ranged_Spamable", "MAGE"}, --Slow
 
 
 	----------------
 	-- Monk
 	----------------
-	{353319 , "Immune_Arena"}, --Peaceweaver
-	{119381 , "CC_Arena"}, --Leg Sweep
-	{202346 , "CC_Arena"}, --Double Barrel
-	{202274 , "CC_Arena"}, --Incendiary Brew
-	{198909 , "CC_Arena"}, --Song of Chi-ji
-	{115078 , "CC_Arena"}, --Paralysis
-	{209584 , "Special_High"}, --Zen Focus Tea
-	{116706 , "Roots_90_Snares"}, --Disable
-	{324382 , "Roots_90_Snares"}, -- Clash
-	{201787 , "Roots_90_Snares"}, --Heavy-Handed Strike
-	{233759 , "Disarms"}, --Grapple Weapon
-	{152173 , "Melee_Major_OffenisiveCDs"}, --Serenity
-	{137639 , "Melee_Major_OffenisiveCDs"}, --Storm, Earth, and Fire
-	{125174 , "Big_Defensive_CDs"}, --Touch of Karma
-	{116849 , "Big_Defensive_CDs"}, --Life Cacoon
-	{122783 , "Big_Defensive_CDs"}, --Diffuse Magic
-	{243435 , "Big_Defensive_CDs"}, --Fortifying Brew
-	{122278 , "Big_Defensive_CDs"}, --Damoen Harm
-	{247483 , "Small_Offenisive_CDs"}, --Tigereye Brew
-	{389387 , "Small_Offenisive_CDs"}, --Awakened Feline (Fist Weaving)
-	{201447 , "Freedoms_Speed"}, --Ride the Wind
-	{116841 , "Freedoms_Speed"}, --Tiger's Lust
-	{388026 , "Special_Low"}, --Ancient Teaching (Fist Weaving)
-	{248646 , "Special_Low"}, --Tigereye Brew
+	{353319 , "Immune_Arena", "MONK"}, --Peaceweaver
+	{119381 , "CC_Arena", "MONK"}, --Leg Sweep
+	{202346 , "CC_Arena", "MONK"}, --Double Barrel
+	{202274 , "CC_Arena", "MONK"}, --Incendiary Brew
+	{198909 , "CC_Arena", "MONK"}, --Song of Chi-ji
+	{115078 , "CC_Arena", "MONK"}, --Paralysis
+	{209584 , "Special_High", "MONK"}, --Zen Focus Tea
+	{116706 , "Roots_90_Snares", "MONK"}, --Disable
+	{324382 , "Roots_90_Snares", "MONK"}, -- Clash
+	{201787 , "Roots_90_Snares", "MONK"}, --Heavy-Handed Strike
+	{233759 , "Disarms", "MONK"}, --Grapple Weapon
+	{152173 , "Melee_Major_OffenisiveCDs", "MONK"}, --Serenity
+	{137639 , "Melee_Major_OffenisiveCDs", "MONK"}, --Storm, Earth, and Fire
+	{125174 , "Big_Defensive_CDs", "MONK"}, --Touch of Karma
+	{116849 , "Big_Defensive_CDs", "MONK"}, --Life Cacoon
+	{122783 , "Big_Defensive_CDs", "MONK"}, --Diffuse Magic
+	{243435 , "Big_Defensive_CDs", "MONK"}, --Fortifying Brew
+	{122278 , "Big_Defensive_CDs", "MONK"}, --Damoen Harm
+	{247483 , "Small_Offenisive_CDs", "MONK"}, --Tigereye Brew
+	{389387 , "Small_Offenisive_CDs", "MONK"}, --Awakened Feline (Fist Weaving)
+	{201447 , "Freedoms_Speed", "MONK"}, --Ride the Wind
+	{116841 , "Freedoms_Speed", "MONK"}, --Tiger's Lust
+	{388026 , "Special_Low", "MONK"}, --Ancient Teaching (Fist Weaving)
+	{248646 , "Special_Low", "MONK"}, --Tigereye Brew
 
 	----------------
-	-- Palladin
+	-- Paladin
 	----------------
-	{642 , "Immune_Arena"}, --Divine Shield
-	{228050 , "Immune_Arena"}, --Divine Shield (PvP Guardian of the Forgotten Queen)
-	{204018 , "Immune_Arena"}, --Blessing of Spellwarding
-	{199448 , "Immune_Arena"}, --Ultimate  Sacrifice
-	{853 , "CC_Arena"}, --Hammer of Justice
-	{20066 , "CC_Arena"}, --Repentance
-	{105421 , "CC_Arena"}, --Blinding Light
-	{217824 , "Silence_Arena"}, --Shield of Virtue
-	{199545 , "Special_High"},			-- Steed of Glory
-	{317929 , "Special_High"},			-- Aura Mastery
-	{410201 , "Disarms"}, --Searing Glare
-	{31884, "Big_Defensive_CDs"}, --Avenging Wrath
-	{231895, "Big_Defensive_CDs"}, --Crusade
-	{1022 , "Big_Defensive_CDs"}, --Blessing of Protection
-	{6940 , "Big_Defensive_CDs"}, --Blessing of Sacrifice
-	{31821 , "Big_Defensive_CDs"}, --Aura Mastery
-	{498 , "Big_Defensive_CDs"}, --Divine Protection
-	{403876 , "Big_Defensive_CDs"}, --Divine Protection
-	{216331 , "Big_Defensive_CDs"}, --Avenging Crusader
-	{184662 , "Big_Defensive_CDs"}, --Shield of Vengeance
-	{210256 , "Big_Defensive_CDs"}, --Blessing of Sanctuary
-	{86659 , "Big_Defensive_CDs"}, --Guardian of Ancient Kings
-	{31850 , "Big_Defensive_CDs"}, --Ardent Defender
-	{415246 , "Big_Defensive_CDs"}, --Divine Plea
-	{210294 , "Small_Defensive_CDs"}, --Divine Favor
-	{199507 , "Small_Defensive_CDs"}, --Spreading The Word: Protection
-	{1044 , "Freedoms_Speed"}, --Blessing of Freedom (Not Purgeable)
-	{305395 , "Freedoms_Speed"}, --Blessing of Freedom
-	{221886 , "Freedoms_Speed"}, --Divine Steed
-	{183218 , "Snares_WithCDs"}, --Hand of Hinderance
-	{25771 , "Special_Low"}, --Forbearance
-	{393879 , "Special_Low"}, --Gift of the Golden Val'kyr
-	{387480 , "Special_Low"}, --Sanctified Grounds
-	{247676, "Snares_Casted_Melee"}, --Reckoning
+	{642 , "Immune_Arena", "PALADIN"}, --Divine Shield
+	{228050 , "Immune_Arena", "PALADIN"}, --Divine Shield (PvP Guardian of the Forgotten Queen)
+	{204018 , "Immune_Arena", "PALADIN"}, --Blessing of Spellwarding
+	{199448 , "Immune_Arena", "PALADIN"}, --Ultimate  Sacrifice
+	{853 , "CC_Arena", "PALADIN"}, --Hammer of Justice
+	{20066 , "CC_Arena", "PALADIN"}, --Repentance
+	{105421 , "CC_Arena", "PALADIN"}, --Blinding Light
+	{217824 , "Silence_Arena", "PALADIN"}, --Shield of Virtue
+	{199545 , "Special_High", "PALADIN"},			-- Steed of Glory
+	{317929 , "Special_High", "PALADIN"},			-- Aura Mastery
+	{410201 , "Disarms", "PALADIN"}, --Searing Glare
+	{31884, "Big_Defensive_CDs", "PALADIN"}, --Avenging Wrath
+	{231895, "Big_Defensive_CDs", "PALADIN"}, --Crusade
+	{1022 , "Big_Defensive_CDs", "PALADIN"}, --Blessing of Protection
+	{6940 , "Big_Defensive_CDs", "PALADIN"}, --Blessing of Sacrifice
+	{31821 , "Big_Defensive_CDs", "PALADIN"}, --Aura Mastery
+	{498 , "Big_Defensive_CDs", "PALADIN"}, --Divine Protection
+	{403876 , "Big_Defensive_CDs", "PALADIN"}, --Divine Protection
+	{216331 , "Big_Defensive_CDs", "PALADIN"}, --Avenging Crusader
+	{184662 , "Big_Defensive_CDs", "PALADIN"}, --Shield of Vengeance
+	{210256 , "Big_Defensive_CDs", "PALADIN"}, --Blessing of Sanctuary
+	{86659 , "Big_Defensive_CDs", "PALADIN"}, --Guardian of Ancient Kings
+	{31850 , "Big_Defensive_CDs", "PALADIN"}, --Ardent Defender
+	{415246 , "Big_Defensive_CDs", "PALADIN"}, --Divine Plea
+	{210294 , "Small_Defensive_CDs", "PALADIN"}, --Divine Favor
+	{199507 , "Small_Defensive_CDs", "PALADIN"}, --Spreading The Word: Protection
+	{1044 , "Freedoms_Speed", "PALADIN"}, --Blessing of Freedom (Not Purgeable)
+	{305395 , "Freedoms_Speed", "PALADIN"}, --Blessing of Freedom
+	{221886 , "Freedoms_Speed", "PALADIN"}, --Divine Steed
+	{183218 , "Snares_WithCDs", "PALADIN"}, --Hand of Hinderance
+	{25771 , "Special_Low", "PALADIN"}, --Forbearance
+	{393879 , "Special_Low", "PALADIN"}, --Gift of the Golden Val'kyr
+	{387480 , "Special_Low", "PALADIN"}, --Sanctified Grounds
+	{247676, "Snares_Casted_Melee", "PALADIN"}, --Reckoning
 
 	----------------
 	-- Priest
 	----------------
-	{47585 , "Immune_Arena"}, --Dispersion
-	{215769 , "Immune_Arena"}, --Spirit of Redemption
-	{27827 , "Immune_Arena"}, --Spirit of Redemption
-	{408558 , "Immune_Arena"}, --Phase Shift
-	{358861 , "CC_Arena"}, --Void Volley: Horrify
-	{64044 , "CC_Arena"}, --Psychic Horror
-	{200200 , "CC_Arena"}, --Holy Word: Chastise
-	{200196 , "CC_Arena"}, --Holy Word: Chastise
-	{87204 , "CC_Arena"}, --Sin and Punishment
-	{9484 , "CC_Arena"}, --Shackle Undead
-	{8122 , "CC_Arena"}, --Psychic Scream
-	{605 , "CC_Arena"}, --Mind Control
-	{205369 , "CC_Arena"}, --Mind Bomb
-	{226943 , "CC_Arena"}, --Mind Bomb
-	{15487 , "Silence_Arena"}, --Silence_Arena
-	{114404 , "Roots_90_Snares"}, --Void Tendrils
-	{289655 , "Special_High"}, --Holy Word: Concentration
-	{194249, "Ranged_Major_OffenisiveCDs"}, --VoidformSurrender to Madness (Both Party and Enemey)
-	--{319952, "Ranged_Major_OffenisiveCDs"}, --Surrender to Madness (Both Party and Enemey)
-	{33206 , "Big_Defensive_CDs"}, --Pain Suprresion
-	{81782 , "Big_Defensive_CDs"}, --Power Word: Barrier
-	{329543 , "Big_Defensive_CDs"}, --Divine Ascension Up
-	{328530 , "Big_Defensive_CDs"}, --Divine Ascension Down
-	{47788 , "Big_Defensive_CDs"}, --Guardian Spirit
-	{232707 , "Big_Defensive_CDs"}, --Ray of Hope
-	{10060, "Big_Defensive_CDs"}, --Power Infusion
-	{199845, "Player_Party_OffensiveCDs"}, --Psyflay (PvP Talent 50% MS)
-	{322442 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322464 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322463 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322462 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322461 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322460 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322459 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322458 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	{322457 , "Player_Party_OffensiveCDs"}, --Thoughtstolen
-	--{323673 , "Player_Party_OffensiveCDs"}, --Mindgames(On Enemy)
-	--{319952 , "Player_Party_OffensiveCDs"}, --Surrender to Madness (Both Party and Enemey)
-	{47536 , "Small_Defensive_CDs"}, --Rapture
-	{197862 , "Small_Defensive_CDs"}, --Archangel
-	{200183 , "Small_Defensive_CDs"}, --Apotheosis
-	{213610 , "Small_Defensive_CDs"}, --Holy Ward
-	{64901 , "Small_Defensive_CDs"}, --Symbol of Hope
-	{15286 , "Small_Defensive_CDs"}, --Vampiric Embrace
-	{19236 , "Small_Defensive_CDs"}, --Desperate Prayer
-	{391109 , "Small_Offenisive_CDs"}, --Dark Ascension
-	{197871 , "Small_Offenisive_CDs"}, --Dark Archangel
-	{197874 , "Small_Offenisive_CDs"}, --Dark Archangel
-	{204263 , "Snares_WithCDs"}, --Shining FOrce
-	{391403 , "Snares_WithCDs"}, -- Mind Flay: Insanity
-	{322105, "Special_Low"}, --Shadow Covenant
-	{247776 , "Special_Low"}, --Mind Trauma
-	{193065, "Special_Low"}, --Masochism
-	{265258 , "Special_Low"}, --Twist of Fate
-	{123254 , "Special_Low"}, --Twist of Fate
-	{390978, "Special_Low"}, --Twist of Fate
-	{65081 , "Snares_Casted_Melee"}, --Body and Soul
-	{121557, "Snares_Casted_Melee"}, --Angelic Feather
+	{47585 , "Immune_Arena", "PRIEST"}, --Dispersion
+	{215769 , "Immune_Arena", "PRIEST"}, --Spirit of Redemption
+	{27827 , "Immune_Arena", "PRIEST"}, --Spirit of Redemption
+	{408558 , "Immune_Arena", "PRIEST"}, --Phase Shift
+	{358861 , "CC_Arena", "PRIEST"}, --Void Volley: Horrify
+	{64044 , "CC_Arena", "PRIEST"}, --Psychic Horror
+	{200200 , "CC_Arena", "PRIEST"}, --Holy Word: Chastise
+	{200196 , "CC_Arena", "PRIEST"}, --Holy Word: Chastise
+	{87204 , "CC_Arena", "PRIEST"}, --Sin and Punishment
+	{9484 , "CC_Arena", "PRIEST"}, --Shackle Undead
+	{8122 , "CC_Arena", "PRIEST"}, --Psychic Scream
+	{605 , "CC_Arena", "PRIEST"}, --Mind Control
+	{205369 , "CC_Arena", "PRIEST"}, --Mind Bomb
+	{226943 , "CC_Arena", "PRIEST"}, --Mind Bomb
+	{15487 , "Silence_Arena", "PRIEST"}, --Silence_Arena
+	{114404 , "Roots_90_Snares", "PRIEST"}, --Void Tendrils
+	{289655 , "Special_High", "PRIEST"}, --Holy Word: Concentration
+	{194249, "Ranged_Major_OffenisiveCDs", "PRIEST"}, --VoidformSurrender to Madness (Both Party and Enemey)
+	--{319952, "Ranged_Major_OffenisiveCDs", "PRIEST"}, --Surrender to Madness (Both Party and Enemey)
+	{33206 , "Big_Defensive_CDs", "PRIEST"}, --Pain Suprresion
+	{81782 , "Big_Defensive_CDs", "PRIEST"}, --Power Word: Barrier
+	{329543 , "Big_Defensive_CDs", "PRIEST"}, --Divine Ascension Up
+	{328530 , "Big_Defensive_CDs", "PRIEST"}, --Divine Ascension Down
+	{47788 , "Big_Defensive_CDs", "PRIEST"}, --Guardian Spirit
+	{232707 , "Big_Defensive_CDs", "PRIEST"}, --Ray of Hope
+	{10060, "Big_Defensive_CDs", "PRIEST"}, --Power Infusion
+	{199845, "Player_Party_OffensiveCDs", "PRIEST"}, --Psyflay (PvP Talent 50% MS)
+	{322442 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322464 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322463 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322462 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322461 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322460 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322459 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322458 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	{322457 , "Player_Party_OffensiveCDs", "PRIEST"}, --Thoughtstolen
+	--{323673 , "Player_Party_OffensiveCDs", "PRIEST"}, --Mindgames(On Enemy)
+	--{319952 , "Player_Party_OffensiveCDs", "PRIEST"}, --Surrender to Madness (Both Party and Enemey)
+	{47536 , "Small_Defensive_CDs", "PRIEST"}, --Rapture
+	{197862 , "Small_Defensive_CDs", "PRIEST"}, --Archangel
+	{200183 , "Small_Defensive_CDs", "PRIEST"}, --Apotheosis
+	{213610 , "Small_Defensive_CDs", "PRIEST"}, --Holy Ward
+	{64901 , "Small_Defensive_CDs", "PRIEST"}, --Symbol of Hope
+	{15286 , "Small_Defensive_CDs", "PRIEST"}, --Vampiric Embrace
+	{19236 , "Small_Defensive_CDs", "PRIEST"}, --Desperate Prayer
+	{391109 , "Small_Offenisive_CDs", "PRIEST"}, --Dark Ascension
+	{197871 , "Small_Offenisive_CDs", "PRIEST"}, --Dark Archangel
+	{197874 , "Small_Offenisive_CDs", "PRIEST"}, --Dark Archangel
+	{204263 , "Snares_WithCDs", "PRIEST"}, --Shining FOrce
+	{391403 , "Snares_WithCDs", "PRIEST"}, -- Mind Flay: Insanity
+	{322105, "Special_Low", "PRIEST"}, --Shadow Covenant
+	{247776 , "Special_Low", "PRIEST"}, --Mind Trauma
+	{193065, "Special_Low", "PRIEST"}, --Masochism
+	{265258 , "Special_Low", "PRIEST"}, --Twist of Fate
+	{123254 , "Special_Low", "PRIEST"}, --Twist of Fate
+	{390978, "Special_Low", "PRIEST"}, --Twist of Fate
+	{65081 , "Snares_Casted_Melee", "PRIEST"}, --Body and Soul
+	{121557, "Snares_Casted_Melee", "PRIEST"}, --Angelic Feather
 
 	----------------
 	-- Rogue
 	----------------
-	{45182 , "Immune_Arena"}, --Cheating Death
-	{1833 , "CC_Arena"}, --Cheap Shot
-	{408 , "CC_Arena"}, --Kidney Shot
-	--{199804 , "CC_Arena"}, --Between the Eyes
-	{2094 , "CC_Arena"}, --Blind
-	{6770 , "CC_Arena"}, --Sap
-	{1776 , "CC_Arena"}, --Gouge
-	{1330 , "Silence_Arena"}, --Garrote - Silence_Arena
-	{212183 , "Special_High"}, --Smoke Bomb
-	{207736 , "Special_High"}, --Shadowy Duel
-	{11327 , "Special_High"}, --Vanish
-	{115191 , "Special_High"}, --Stealth
-	{1784 , "Special_High"}, --Stealth
-	{198222 , "Roots_90_Snares"}, --System Shock
-	{207777 , "Disarms"}, --Dismantle
-	{13750 , "Melee_Major_OffenisiveCDs"}, --Adrenaline Rush
-	{121471 , "Melee_Major_OffenisiveCDs"}, --Shadow Blades
-	{185422 , "Melee_Major_OffenisiveCDs"}, --Shadow Dance
-	{360194, "Player_Party_OffensiveCDs"}, --DeathMark (Marks Enenmy)
-	{79140, "Player_Party_OffensiveCDs"}, --Vendetta (Marks Enenmy)
-	{31224 , "Big_Defensive_CDs"}, --Cloak of Shadows
-	{5277, "Big_Defensive_CDs"}, --Evasion
-	{199027, "Big_Defensive_CDs"}, --Veil of Midnight
-	{51690 , "Small_Offenisive_CDs"}, --Killing Spree
-	{221630 , "Small_Offenisive_CDs"}, --Tricks of the Trade (PvP)
-	{193359 , "Small_Offenisive_CDs"}, --True Bearing
-	{13877 , "Small_Offenisive_CDs"}, --Blade Flurry
-	{115192 , "Small_Offenisive_CDs"}, --Subterfuge
-	{212283 , "Small_Offenisive_CDs"}, --Symbols of Death
-	{185311, "Small_Defensive_CDs"}, --Crimson Vial
-	{1966, "Small_Defensive_CDs"}, --Fient
-	{197003 , "Freedoms_Speed"}, --Maneuverability
-	{2983 , "Freedoms_Speed"}, --Sprint
-	{36554 , "Freedoms_Speed"}, --Shadowstep
-	{269513 , "Freedoms_Speed"}, --Death from Above
-	{115196 , "Snares_WithCDs"}, -- Shiv
-	{185763 , "Snares_Ranged_Spamable"}, --Pistol Shot
-	{3409 , "Snares_Ranged_Spamable"}, --Crippling Poison
+	{45182 , "Immune_Arena", "ROGUE"}, --Cheating Death
+	{1833 , "CC_Arena", "ROGUE"}, --Cheap Shot
+	{408 , "CC_Arena", "ROGUE"}, --Kidney Shot
+	--{199804 , "CC_Arena", "ROGUE"}, --Between the Eyes
+	{2094 , "CC_Arena", "ROGUE"}, --Blind
+	{6770 , "CC_Arena", "ROGUE"}, --Sap
+	{1776 , "CC_Arena", "ROGUE"}, --Gouge
+	{1330 , "Silence_Arena", "ROGUE"}, --Garrote - Silence_Arena
+	{212183 , "Special_High", "ROGUE"}, --Smoke Bomb
+	{207736 , "Special_High", "ROGUE"}, --Shadowy Duel
+	{11327 , "Special_High", "ROGUE"}, --Vanish
+	{115191 , "Special_High", "ROGUE"}, --Stealth
+	{1784 , "Special_High", "ROGUE"}, --Stealth
+	{198222 , "Roots_90_Snares", "ROGUE"}, --System Shock
+	{207777 , "Disarms", "ROGUE"}, --Dismantle
+	{13750 , "Melee_Major_OffenisiveCDs", "ROGUE"}, --Adrenaline Rush
+	{121471 , "Melee_Major_OffenisiveCDs", "ROGUE"}, --Shadow Blades
+	{185422 , "Melee_Major_OffenisiveCDs", "ROGUE"}, --Shadow Dance
+	{360194, "Player_Party_OffensiveCDs", "ROGUE"}, --DeathMark (Marks Enenmy)
+	{79140, "Player_Party_OffensiveCDs", "ROGUE"}, --Vendetta (Marks Enenmy)
+	{31224 , "Big_Defensive_CDs", "ROGUE"}, --Cloak of Shadows
+	{5277, "Big_Defensive_CDs", "ROGUE"}, --Evasion
+	{199027, "Big_Defensive_CDs", "ROGUE"}, --Veil of Midnight
+	{51690 , "Small_Offenisive_CDs", "ROGUE"}, --Killing Spree
+	{221630 , "Small_Offenisive_CDs", "ROGUE"}, --Tricks of the Trade (PvP)
+	{193359 , "Small_Offenisive_CDs", "ROGUE"}, --True Bearing
+	{13877 , "Small_Offenisive_CDs", "ROGUE"}, --Blade Flurry
+	{115192 , "Small_Offenisive_CDs", "ROGUE"}, --Subterfuge
+	{212283 , "Small_Offenisive_CDs", "ROGUE"}, --Symbols of Death
+	{185311, "Small_Defensive_CDs", "ROGUE"}, --Crimson Vial
+	{1966, "Small_Defensive_CDs", "ROGUE"}, --Fient
+	{197003 , "Freedoms_Speed", "ROGUE"}, --Maneuverability
+	{2983 , "Freedoms_Speed", "ROGUE"}, --Sprint
+	{36554 , "Freedoms_Speed", "ROGUE"}, --Shadowstep
+	{269513 , "Freedoms_Speed", "ROGUE"}, --Death from Above
+	{115196 , "Snares_WithCDs", "ROGUE"}, -- Shiv
+	{185763 , "Snares_Ranged_Spamable", "ROGUE"}, --Pistol Shot
+	{3409 , "Snares_Ranged_Spamable", "ROGUE"}, --Crippling Poison
 
 	----------------
 	-- Shaman
 	----------------
-	{378081 , "Drink_Purge"}, --Nature's Swfitness
-	{409293 ,  "Immune_Arena"}, --Burrow
-	{8178 ,  "Immune_Arena"}, --Grounding Totem Effect
-	{"Hex" , "CC_Arena"},
-	{305485 , "CC_Arena"}, --Lightning Lasso
-	{118345 , "CC_Arena"}, --Pulverize
-	{77505 , "CC_Arena"}, --Earthquake
-	{197214 , "CC_Arena"}, --Sundering
-	{290641 , "Special_High"}, --Ancestral Gift
-	{378078 , "Special_High"}, --Spiritwalker's Aegis
-	{335903 , "Ranged_Major_OffenisiveCDs"}, --Doomwinds (Shadowlands Legendary)
-	{384352  , "Ranged_Major_OffenisiveCDs"}, --Doomwinds
-	{114051 , "Ranged_Major_OffenisiveCDs"}, --Ascendance Enhancement
-	{114050 , "Ranged_Major_OffenisiveCDs"}, --Ascendance
-	{191634 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper
-	{320137 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper
-	{383009 , "Ranged_Major_OffenisiveCDs"}, --Stormkeeper (Resto)
-	{204361 , "Ranged_Major_OffenisiveCDs"}, --Bloodlust
-	{204362 , "Ranged_Major_OffenisiveCDs"}, --Heroism
-	{64695 , "Roots_90_Snares"}, --Earthgrab
-	{285515 , "Roots_90_Snares"}, --Surge of Power
-	{356738 , "Roots_90_Snares"},  -- Earth Unleashed
-	{207498 , "Big_Defensive_CDs"}, --Ancestral Protection
-	{108271 , "Big_Defensive_CDs"}, --Astral Shift
-	{118337 , "Big_Defensive_CDs"}, --Harden Skin
-	{114052 , "Big_Defensive_CDs"}, --Ascendance
-	{201633 , "Big_Defensive_CDs"}, --Earthen Wall
-	{325174 , "Big_Defensive_CDs"}, --Spirit Link Totem
-	{356824 , "Player_Party_OffensiveCDs"}, --Water Unleashed
-	{201846 , "Small_Offenisive_CDs"}, --Stormbringer
-	{327164, "Small_Offenisive_CDs"}, --Primordial Wave
-	{375986, "Small_Offenisive_CDs"}, --Primordial Wave
-	{333957, "Small_Offenisive_CDs"}, --Feral Spirits
-	{320125 , "Small_Offenisive_CDs"}, --Echoing Shock
-	{210714 , "Small_Offenisive_CDs"}, --Ice Fury
-	{79206 , "Small_Defensive_CDs"}, --Spiritwalker's Grace
-	{58875 , "Freedoms_Speed"}, --Spirit Walk
-	{192082 , "Freedoms_Speed"}, -- Wind Rush
-	{2645 , "Freedoms_Speed"}, --Ghost Wolf
-	{51490 , "Snares_WithCDs"}, --Thunderstorm
-	--{260881 , "Freedoms_Speed"}, --Spirit Wolf
-	--{204262 , "Freedoms_Speed"}, --Spectral Recovery
-	{208963 , "Special_Low"}, --Skyfury Totem
-	{383020 , "Special_Low"}, --Tranquil Totem
-	{196840 , "Snares_Ranged_Spamable"}, --Frost Shock
-	{327942 , "Snares_Casted_Melee"}, --Windfury Totem
+	{378081 , "Drink_Purge", "SHAMAN"}, --Nature's Swfitness
+	{409293 ,  "Immune_Arena", "SHAMAN"}, --Burrow
+	{8178 ,  "Immune_Arena", "SHAMAN"}, --Grounding Totem Effect
+	{"Hex" , "CC_Arena", "SHAMAN"},
+	{305485 , "CC_Arena", "SHAMAN"}, --Lightning Lasso
+	{118345 , "CC_Arena", "SHAMAN"}, --Pulverize
+	{77505 , "CC_Arena", "SHAMAN"}, --Earthquake
+	{197214 , "CC_Arena", "SHAMAN"}, --Sundering
+	{290641 , "Special_High", "SHAMAN"}, --Ancestral Gift
+	{378078 , "Special_High", "SHAMAN"}, --Spiritwalker's Aegis
+	{335903 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Doomwinds (Shadowlands Legendary)
+	{384352  , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Doomwinds
+	{114051 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Ascendance Enhancement
+	{114050 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Ascendance
+	{191634 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Stormkeeper
+	{320137 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Stormkeeper
+	{383009 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Stormkeeper (Resto)
+	{204361 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Bloodlust
+	{204362 , "Ranged_Major_OffenisiveCDs", "SHAMAN"}, --Heroism
+	{64695 , "Roots_90_Snares", "SHAMAN"}, --Earthgrab
+	{285515 , "Roots_90_Snares", "SHAMAN"}, --Surge of Power
+	{356738 , "Roots_90_Snares", "SHAMAN"},  -- Earth Unleashed
+	{207498 , "Big_Defensive_CDs", "SHAMAN"}, --Ancestral Protection
+	{108271 , "Big_Defensive_CDs", "SHAMAN"}, --Astral Shift
+	{118337 , "Big_Defensive_CDs", "SHAMAN"}, --Harden Skin
+	{114052 , "Big_Defensive_CDs", "SHAMAN"}, --Ascendance
+	{201633 , "Big_Defensive_CDs", "SHAMAN"}, --Earthen Wall
+	{325174 , "Big_Defensive_CDs", "SHAMAN"}, --Spirit Link Totem
+	{356824 , "Player_Party_OffensiveCDs", "SHAMAN"}, --Water Unleashed
+	{201846 , "Small_Offenisive_CDs", "SHAMAN"}, --Stormbringer
+	{327164, "Small_Offenisive_CDs", "SHAMAN"}, --Primordial Wave
+	{375986, "Small_Offenisive_CDs", "SHAMAN"}, --Primordial Wave
+	{333957, "Small_Offenisive_CDs", "SHAMAN"}, --Feral Spirits
+	{320125 , "Small_Offenisive_CDs", "SHAMAN"}, --Echoing Shock
+	{210714 , "Small_Offenisive_CDs", "SHAMAN"}, --Ice Fury
+	{79206 , "Small_Defensive_CDs", "SHAMAN"}, --Spiritwalker's Grace
+	{58875 , "Freedoms_Speed", "SHAMAN"}, --Spirit Walk
+	{192082 , "Freedoms_Speed", "SHAMAN"}, -- Wind Rush
+	{2645 , "Freedoms_Speed", "SHAMAN"}, --Ghost Wolf
+	{51490 , "Snares_WithCDs", "SHAMAN"}, --Thunderstorm
+	--{260881 , "Freedoms_Speed", "SHAMAN"}, --Spirit Wolf
+	--{204262 , "Freedoms_Speed", "SHAMAN"}, --Spectral Recovery
+	{208963 , "Special_Low", "SHAMAN"}, --Skyfury Totem
+	{383020 , "Special_Low", "SHAMAN"}, --Tranquil Totem
+	{196840 , "Snares_Ranged_Spamable", "SHAMAN"}, --Frost Shock
+	{327942 , "Snares_Casted_Melee", "SHAMAN"}, --Windfury Totem
 
 	----------------
 	-- Warlock
 	----------------
-	{333889 , "Drink_Purge"}, --Fel Domination
-	{30283 , "CC_Arena"}, --Shadowfury
-	{22703 , "CC_Arena"}, --Infernal Awakening
-	{89766 , "CC_Arena"}, --Axe Toss
-	--{347008 , "CC_Arena"}, --Axe Toss
-	{213688 , "CC_Arena"}, --Fel Cleave
-	{118699 , "CC_Arena"}, --Fear
-	{5484 , "CC_Arena"}, --Howl of Terror
-	{6789 , "CC_Arena"}, --Mortal Coil
-	{6358 , "CC_Arena"}, --Seduction
-	{261589 , "CC_Arena"}, --Seduction
-	{115268 , "CC_Arena"}, --Mesmerize
-	{710 , "CC_Arena"}, --Bansih
-	{196364 , "Silence_Arena"}, --Unstable Affliction
-	{221705 , "Special_High"}, --Casting Circle
-	{104773, "Special_High"}, --Unending Resolve
-	{353293, "Roots_90_Snares"}, --Shadow Rift
-	{113860, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Instability
-	{113858, "Ranged_Major_OffenisiveCDs"}, --Dark Soul: Misery
-	--{265273, "Ranged_Major_OffenisiveCDs"}, --Demonic Power
-	{267218, "Ranged_Major_OffenisiveCDs"}, --Nether Portal
-	{212295 , "Big_Defensive_CDs"}, --Nether Ward
-	{200587, "Player_Party_OffensiveCDs"}, --Fel Fissure (PvP Talent 50% MS)
-	{1714 , "Player_Party_OffensiveCDs"}, --Curse of Tongues
-	{199954 , "Player_Party_OffensiveCDs"}, --Curse of Fragility
-	{344566 , "Small_Offenisive_CDs"}, --Rapid Contagion
-	{328774 , "Small_Offenisive_CDs"}, --Amplify Curse
-	{80240 , "Small_Offenisive_CDs"}, --Havoc
-	{337170 , "Small_Offenisive_CDs"}, --Madness of the Azj'Aqir (Legendary)
-	{108416 , "Small_Defensive_CDs"}, --Dark Pact
-	{387636 , "Small_Defensive_CDs"}, --Soulburn: Healthstone
-	{387633 , "Freedoms_Speed"}, --Soulburn: Demonic Circle
-	{111400 , "Freedoms_Speed"}, --Burning Rush
-	{384069 , "Snares_WithCDs"}, --Shadowflame
-	{702 , "Special_Low"}, --Curse of Weakness
-	{410598 , "Special_Low"}, --Soul Rip
-	{334275 , "Snares_Ranged_Spamable"}, --Curse of Exhaustion
-	{196099, "Snares_Casted_Melee"}, --Grimoire of Sacrifice
-	{285933, "Snares_Casted_Melee"}, --Demon Armor
-	{334320, "Snares_Casted_Melee"}, --Inevitable Demise
+	{333889 , "Drink_Purge", "WARLOCK"}, --Fel Domination
+	{30283 , "CC_Arena", "WARLOCK"}, --Shadowfury
+	{22703 , "CC_Arena", "WARLOCK"}, --Infernal Awakening
+	{89766 , "CC_Arena", "WARLOCK"}, --Axe Toss
+	--{347008 , "CC_Arena", "WARLOCK"}, --Axe Toss
+	{213688 , "CC_Arena", "WARLOCK"}, --Fel Cleave
+	{118699 , "CC_Arena", "WARLOCK"}, --Fear
+	{5484 , "CC_Arena", "WARLOCK"}, --Howl of Terror
+	{6789 , "CC_Arena", "WARLOCK"}, --Mortal Coil
+	{6358 , "CC_Arena", "WARLOCK"}, --Seduction
+	{261589 , "CC_Arena", "WARLOCK"}, --Seduction
+	{115268 , "CC_Arena", "WARLOCK"}, --Mesmerize
+	{710 , "CC_Arena", "WARLOCK"}, --Bansih
+	{196364 , "Silence_Arena", "WARLOCK"}, --Unstable Affliction
+	{221705 , "Special_High", "WARLOCK"}, --Casting Circle
+	{104773, "Special_High", "WARLOCK"}, --Unending Resolve
+	{353293, "Roots_90_Snares", "WARLOCK"}, --Shadow Rift
+	{113860, "Ranged_Major_OffenisiveCDs", "WARLOCK"}, --Dark Soul: Instability
+	{113858, "Ranged_Major_OffenisiveCDs", "WARLOCK"}, --Dark Soul: Misery
+	--{265273, "Ranged_Major_OffenisiveCDs", "WARLOCK"}, --Demonic Power
+	{267218, "Ranged_Major_OffenisiveCDs", "WARLOCK"}, --Nether Portal
+	{212295 , "Big_Defensive_CDs", "WARLOCK"}, --Nether Ward
+	{200587, "Player_Party_OffensiveCDs", "WARLOCK"}, --Fel Fissure (PvP Talent 50% MS)
+	{1714 , "Player_Party_OffensiveCDs", "WARLOCK"}, --Curse of Tongues
+	{199954 , "Player_Party_OffensiveCDs", "WARLOCK"}, --Curse of Fragility
+	{344566 , "Small_Offenisive_CDs", "WARLOCK"}, --Rapid Contagion
+	{328774 , "Small_Offenisive_CDs", "WARLOCK"}, --Amplify Curse
+	{80240 , "Small_Offenisive_CDs", "WARLOCK"}, --Havoc
+	{337170 , "Small_Offenisive_CDs", "WARLOCK"}, --Madness of the Azj'Aqir (Legendary)
+	{108416 , "Small_Defensive_CDs", "WARLOCK"}, --Dark Pact
+	{387636 , "Small_Defensive_CDs", "WARLOCK"}, --Soulburn: Healthstone
+	{387633 , "Freedoms_Speed", "WARLOCK"}, --Soulburn: Demonic Circle
+	{111400 , "Freedoms_Speed", "WARLOCK"}, --Burning Rush
+	{384069 , "Snares_WithCDs", "WARLOCK"}, --Shadowflame
+	{702 , "Special_Low", "WARLOCK"}, --Curse of Weakness
+	{410598 , "Special_Low", "WARLOCK"}, --Soul Rip
+	{334275 , "Snares_Ranged_Spamable", "WARLOCK"}, --Curse of Exhaustion
+	{196099, "Snares_Casted_Melee", "WARLOCK"}, --Grimoire of Sacrifice
+	{285933, "Snares_Casted_Melee", "WARLOCK"}, --Demon Armor
+	{334320, "Snares_Casted_Melee", "WARLOCK"}, --Inevitable Demise
 
 
 	----------------
 	-- Warrior
 	----------------
-	{46924  , "Immune_Arena"}, -- Bladestorm (not immune to dmg}, only to LoC)
-	{227847 , "Immune_Arena"}, -- Bladestorm (not immune to dmg}, only to LoC)
-	{132169 , "CC_Arena"}, --Storm Bolt
-	{199085 , "CC_Arena"}, --Warpath
-	{132168 , "CC_Arena"}, --Shockwave
-	{5246 , "CC_Arena"}, --Intimidating Shout
-	{316593 , "CC_Arena"}, --Intimidating Shout
-	{316595 , "CC_Arena"}, --Intimidating Shout
-	{236273 , "Special_High"}, -- Duel
-	{23920 , "Special_High"}, -- Spell Reflection
-	{147833 , "Special_High"}, -- Intervene
-	{335255 , "Special_High"}, -- Mass Spell Reflection Legendary
-	{105771 , "Roots_90_Snares"}, --Charge
-	{199042 , "Roots_90_Snares"}, --Thunderstruck
-	{307871, "Roots_90_Snares"}, --Spear of Bastion
-	{376080, "Roots_90_Snares"}, --Spear of Bastion
-	{356356, "Roots_90_Snares"}, --Warbringer
-	{236236 , "Disarms"}, --Disarm
-	{236077 , "Disarms"}, --Disarm
-	{107574 , "Melee_Major_OffenisiveCDs"}, -- Avatar
-	{1719 , "Melee_Major_OffenisiveCDs"}, -- Recklessness
-	{324143 , "Melee_Major_OffenisiveCDs"}, -- Conqueror's Banner
-	{325862 , "Melee_Major_OffenisiveCDs"}, -- Conqueror's Banner
-	{18499 , "Big_Defensive_CDs"}, -- Berserker Rage
-	{118038 , "Big_Defensive_CDs"}, -- Die by the Sword
-	{184364 , "Big_Defensive_CDs"}, -- Enraged Regeneration
-	{236321 , "Big_Defensive_CDs"}, -- War Banner
-	{12975 , "Big_Defensive_CDs"}, -- Last Stand
-	{871 , "Big_Defensive_CDs"}, -- Shield Wall
-	{213871 , "Big_Defensive_CDs"}, -- Bodyguard
-	{223658 , "Big_Defensive_CDs"}, -- Safeguard
-	{198819, "Player_Party_OffensiveCDs"}, -- Mortal Strike
-	{227744 , "Small_Offenisive_CDs"}, -- Ravager
-	{260708 , "Small_Offenisive_CDs"}, -- Sweeping Strikes
-	{46924 , "Small_Offenisive_CDs"}, -- Bladestorm
-	{132404 , "Small_Defensive_CDs"}, -- Shield Block
-	{97463 , "Small_Defensive_CDs"}, -- Rallying Cry
-	{385391 , "Small_Defensive_CDs"}, -- Spell Reflection 20% Magic 
-	{12323 , "Snares_WithCDs"}, -- Piercing Howl
-	{197690 , "Special_Low"}, -- Defensive Stance
-	{386208 , "Special_Low"}, -- Defensive Stance
-	{199261, "Special_Low"}, -- Death Wish
+	{46924  , "Immune_Arena", "WARRIOR"}, -- Bladestorm (not immune to dmg}, only to LoC)
+	{227847 , "Immune_Arena", "WARRIOR"}, -- Bladestorm (not immune to dmg, "WARRIOR"}, only to LoC)
+	{132169 , "CC_Arena", "WARRIOR"}, --Storm Bolt
+	{199085 , "CC_Arena", "WARRIOR"}, --Warpath
+	{132168 , "CC_Arena", "WARRIOR"}, --Shockwave
+	{5246 , "CC_Arena", "WARRIOR"}, --Intimidating Shout
+	{316593 , "CC_Arena", "WARRIOR"}, --Intimidating Shout
+	{316595 , "CC_Arena", "WARRIOR"}, --Intimidating Shout
+	{236273 , "Special_High", "WARRIOR"}, -- Duel
+	{23920 , "Special_High", "WARRIOR"}, -- Spell Reflection
+	{147833 , "Special_High", "WARRIOR"}, -- Intervene
+	{335255 , "Special_High", "WARRIOR"}, -- Mass Spell Reflection Legendary
+	{105771 , "Roots_90_Snares", "WARRIOR"}, --Charge
+	{199042 , "Roots_90_Snares", "WARRIOR"}, --Thunderstruck
+	{307871, "Roots_90_Snares", "WARRIOR"}, --Spear of Bastion
+	{376080, "Roots_90_Snares", "WARRIOR"}, --Spear of Bastion
+	{356356, "Roots_90_Snares", "WARRIOR"}, --Warbringer
+	{236236 , "Disarms", "WARRIOR"}, --Disarm
+	{236077 , "Disarms", "WARRIOR"}, --Disarm
+	{107574 , "Melee_Major_OffenisiveCDs", "WARRIOR"}, -- Avatar
+	{1719 , "Melee_Major_OffenisiveCDs", "WARRIOR"}, -- Recklessness
+	{324143 , "Melee_Major_OffenisiveCDs", "WARRIOR"}, -- Conqueror's Banner
+	{325862 , "Melee_Major_OffenisiveCDs", "WARRIOR"}, -- Conqueror's Banner
+	{18499 , "Big_Defensive_CDs", "WARRIOR"}, -- Berserker Rage
+	{118038 , "Big_Defensive_CDs", "WARRIOR"}, -- Die by the Sword
+	{184364 , "Big_Defensive_CDs", "WARRIOR"}, -- Enraged Regeneration
+	{236321 , "Big_Defensive_CDs", "WARRIOR"}, -- War Banner
+	{12975 , "Big_Defensive_CDs", "WARRIOR"}, -- Last Stand
+	{871 , "Big_Defensive_CDs", "WARRIOR"}, -- Shield Wall
+	{213871 , "Big_Defensive_CDs", "WARRIOR"}, -- Bodyguard
+	{223658 , "Big_Defensive_CDs", "WARRIOR"}, -- Safeguard
+	{198819, "Player_Party_OffensiveCDs", "WARRIOR"}, -- Mortal Strike
+	{227744 , "Small_Offenisive_CDs", "WARRIOR"}, -- Ravager
+	{260708 , "Small_Offenisive_CDs", "WARRIOR"}, -- Sweeping Strikes
+	{46924 , "Small_Offenisive_CDs", "WARRIOR"}, -- Bladestorm
+	{132404 , "Small_Defensive_CDs", "WARRIOR"}, -- Shield Block
+	{97463 , "Small_Defensive_CDs", "WARRIOR"}, -- Rallying Cry
+	{385391 , "Small_Defensive_CDs", "WARRIOR"}, -- Spell Reflection 20% Magic 
+	{12323 , "Snares_WithCDs", "WARRIOR"}, -- Piercing Howl
+	{197690 , "Special_Low", "WARRIOR"}, -- Defensive Stance
+	{386208 , "Special_Low", "WARRIOR"}, -- Defensive Stance
+	{199261, "Special_Low", "WARRIOR"}, -- Death Wish
 
 	----------------
 	-- Misc.
 	----------------
 
-	{"Drink" , "Drink_Purge"},
-	{"Refreshment" , "Drink_Purge"},
-	{107079 , "CC_Arena"}, --Quaking Palm
-	{20549 , "CC_Arena"}, --War Stomp
-	{255654 , "CC_Arena"}, --Bull Rush
-	{287712 , "CC_Arena"}, --Haymaker
-	{58984, "Special_High"}, -- Shadowmeld
-	{377362, "Special_High"}, -- Precognition (Dragonflight)
-	{291944 , "Big_Defensive_CDs"}, -- Regeneratin'
-	{358259, "Player_Party_OffensiveCDs"}, -- Gladiator's Maledict S2 Slands
-	{59543, "Small_Defensive_CDs"}, -- Gift of the Naaru
-	{65116, "Small_Defensive_CDs"}, -- Stoneform
-	{273104, "Small_Defensive_CDs"}, -- Fireblood
-	{277187, "Small_Defensive_CDs"}, -- Gladiator's Emblem
-	{"Gladiator's Emblem", "Small_Defensive_CDs"}, -- Gladiator's Emblem
-	{363522, "Small_Defensive_CDs"}, -- Gladiator's Eternal Aegis
-	{286342, "Small_Defensive_CDs"}, -- Gladiator's Safegaurd
-	{68992, "Freedoms_Speed"}, -- Darkflight
-	{34709, "Special_Low"}, --Shadow Sight
+	{"Drink" , "Drink_Purge", "PvP"},
+	{"Refreshment" , "Drink_Purge", "PvP"},
+	{107079 , "CC_Arena", "Racials"}, --Quaking Palm
+	{20549 , "CC_Arena", "Racials"}, --War Stomp
+	{255654 , "CC_Arena", "Racials"}, --Bull Rush
+	{287712 , "CC_Arena", "Racials"}, --Haymaker
+	{58984, "Special_High", "Racials"}, -- Shadowmeld
+	{377362, "Special_High", "PvP"}, -- Precognition (Dragonflight)
+	{291944 , "Big_Defensive_CDs", "Racials"}, -- Regeneratin'
+	{358259, "Player_Party_OffensiveCDs", "PvP"}, -- Gladiator's Maledict S2 Slands
+	{59543, "Small_Defensive_CDs", "Racials"},-- Gift of the Naaru
+	{65116, "Small_Defensive_CDs", "Racials"}, -- Stoneform
+	{273104, "Small_Defensive_CDs", "Racials"}, -- Fireblood
+	{277187, "Small_Defensive_CDs", "PvP"}, -- Gladiator's Emblem
+	{"Gladiator's Emblem", "Small_Defensive_CDs", "PvP"}, -- Gladiator's Emblem
+	{363522, "Small_Defensive_CDs", "PvP"}, -- Gladiator's Eternal Aegis
+	{286342, "Small_Defensive_CDs", "PvP"}, -- Gladiator's Safegaurd
+	{68992, "Freedoms_Speed", "Racials"}, -- Darkflight
+	{34709, "Special_Low", "PvP"}, --Shadow Sight
 
 	}
 
@@ -847,7 +847,7 @@ local spellsArenaTable = {
 
 	{"PVP", --TAB
 
-	{3355   , "CC"},				-- Freezing Trap
+	{3355   , "CC", nil, "HUNTER"},				-- Freezing Trap
 	{203337 , "CC"},				-- Freezing Trap (Diamond Ice - pvp honor talent)
 	{24394  , "CC"},				-- Intimidation
 	{213691 , "CC"},				-- Scatter Shot (pvp honor talent)
@@ -1025,7 +1025,6 @@ local spellsArenaTable = {
 	{323996 , "Root"},				-- The Hunt
 	{370970 , "Root"},				-- The Hunt
 
-
 	{642    , "ImmunePlayer"},			-- Divine Shield
 	{228050 , "ImmunePlayer", "Guardian of the".."\n".."Forgotten Queen"},			-- Divine Shield (Guardian of the Forgotten Queen)
 	{353319 , "ImmunePlayer"},			-- Peaceweaver
@@ -1033,7 +1032,7 @@ local spellsArenaTable = {
 	{27827  , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption
 	{290114 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
 	{215769 , "ImmunePlayer", "Spirit of".."\n".."Redemption"},			-- Spirit of Redemption	(pvp honor talent)
-	{408558 , "ImmunePlayer", "Phase".."\n".."Shift"},			-- Phase Shift (pvp honor talent)
+	{408558 , "ImmunePlayer", "Phase".."\n".."Shift", "PRIEST"},			-- Phase Shift (pvp honor talent)
 	{328530 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Up
 	{329543 , "ImmunePlayer", "Divine".."\n".."Ascension"},			-- Divine Ascension Down
 	{362486 , "ImmunePlayer", "Keeper of the".."\n".."Groove"},			-- Keepr of the Groove
@@ -7603,8 +7602,9 @@ function LoseControl:CompileSpells(typeUpdate)
 	spellIds = {}
 	interruptsIds = {}
 	cleuPrioCastedSpells = {}
+	classIds = {}
 
-	local	spells = {}
+	local spells = {}
 	local spellsLua = {}
 	local hash = {}
 	local customSpells = {}
@@ -7642,6 +7642,59 @@ function LoseControl:CompileSpells(typeUpdate)
 			end
 		end
     end
+
+	for i = 1, #cleuSpells do 	
+		local spellID, duration, prio, arena, string = unpack(cleuSpells[i])
+		if string then
+			_G.LoseControlDB.customString[spellID] = string
+		end
+	end
+
+
+
+	for i = 1, #cleuSpells do 
+		local spellID, _,_,_,_,_, class = unpack(cleuSpells[i])
+		if class then 
+			classIds[spellID] = class
+			local name = GetSpellInfo(spellID)
+			if name and not classIds[name] then
+				classIds[name] = class
+			end
+		end
+	end
+	for i = 1, #interrupts do 
+		local spellID, _, class = unpack(interrupts[i])
+		if class then 
+			classIds[spellID] = class
+			local name = GetSpellInfo(spellID)
+			if name and not classIds[name] then
+				classIds[name] = class
+			end
+		end
+	end
+	for i = 2, #spellsTable[1] do 
+		local spellID, prio, string, class = unpack(spellsTable[1][i])
+		if class then 
+			classIds[spellID] = class
+			local name = GetSpellInfo(spellID)
+			if name and not classIds[name] then
+				classIds[name] = class
+			end
+		end
+	end
+	for i = 1, #spellsArenaTable do 
+		local spellID, prio, class = unpack(spellsArenaTable[i])
+		if class then 
+			classIds[spellID] = class
+			local name = GetSpellInfo(spellID)
+			if name and not classIds[name] then
+				classIds[name] = class
+			end
+		end
+	end
+
+	
+	L.classIds = classIds
 
 	L.spellsLua = spellsLua
 	--Clean up Spell List, Remove all Duplicates and Custom Spells (Will ReADD Custom Spells Later)

@@ -136,6 +136,26 @@ local function GetThemeColor()
 	return c.r, c.g, c.b, c.hex;
 end
 
+local hexFontColors = {
+	["Racials"] = "FF666666",
+    ["PvP"] = "FFB9B9B9",
+    ["PvE"] = "FF00FE44",
+    ["logo"] = "ffff7a00",
+}
+
+for class, val in pairs(RAID_CLASS_COLORS) do
+	hexFontColors[class] = val.colorStr
+end
+
+local function Colorize(text, color)
+    if not text then return end
+    local hexColor = hexFontColors[color] or hexFontColors["blizzardFont"]
+	if hexColor then
+    	return "|c" .. hexColor .. text .. "|r"
+	end
+end
+
+
 local function ScrollFrame_OnMouseWheel(self, delta)
 	local newValue = self:GetVerticalScroll() - (delta * 20);
 
@@ -700,11 +720,13 @@ function SpellsArenaConfig:UpdateSpellList(i)
 				end
 				local cutString = substring(aString, 0, 23);
 				if customname then
-					spellCheck.text:SetText(cutString.."\n".."("..customname..")");
-				else
-					spellCheck.text:SetText(cutString);
+					cutString = cutString.."\n".."("..customname..")"
 				end
-
+				local name = GetSpellInfo(spellID)
+				if L.classIds[spellID] or L.classIds[name] then 
+					cutString = Colorize(cutString, L.classIds[spellID]) or Colorize(cutString, L.classIds[name]) or cutString
+				end
+				spellCheck.text:SetText(cutString);
 				if cleuEvent then spellID = customname end
 				spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);   --Error on 1st ADDON_LOADED
 				spellCheck.spellID = spellID

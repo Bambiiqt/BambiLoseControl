@@ -161,6 +161,26 @@ local function GetThemeColor()
 	return c.r, c.g, c.b, c.hex;
 end
 
+local hexFontColors = {
+	["Racials"] = "FF666666",
+    ["PvP"] = "FFB9B9B9",
+    ["PvE"] = "FF00FE44",
+    ["logo"] = "ffff7a00",
+}
+
+for class, val in pairs(RAID_CLASS_COLORS) do
+	hexFontColors[class] = val.colorStr
+end
+
+local function Colorize(text, color)
+    if not text then return end
+    local hexColor = hexFontColors[color] or hexFontColors["blizzardFont"]
+	if hexColor then
+    	return "|c" .. hexColor .. text .. "|r"
+	end
+end
+
+
 local function ScrollFrame_OnMouseWheel(self, delta)
 	local newValue = self:GetVerticalScroll() - (delta * 20);
 
@@ -341,6 +361,9 @@ local function CustomPVPDropDownCompileSpells(spell , newPrio, oldPrio, c, durat
 				_G.LoseControlDB.spellEnabled[spell]= nil
 				if L.spellsLua[spell] then
 				tblinsert(_G.LoseControlDB.customSpellIds, {spell, newPrio, nil, nil, nil, customname, 1})  --v[7]: Category Tab to enter spell
+				end
+				if _G.LoseControlDB.customString[spell] then 
+					_G.LoseControlDB.customString[spell] = nil
 				end
 				DeleteSpellFrame(spell, duration, c)
 				SpellsConfig:UpdateSpellList(tabsIndex[oldPrio])
@@ -719,21 +742,23 @@ function SpellsConfig:UpdateSpellList(i)
 				local aString = spellID
 				if type(spellID) == "number" then
 					if duration then
-					aString = GetSpellInfo(spellID)..": "..duration or "SPELL REMOVED: "..spellID
+						aString = GetSpellInfo(spellID)..": "..duration or "SPELL REMOVED: "..spellID
 					else
-					aString = GetSpellInfo(spellID) or "SPELL REMOVED: "..spellID
+						aString = GetSpellInfo(spellID) or "SPELL REMOVED: "..spellID
 					end
 					spellCheck.icon:SetNormalTexture(GetSpellTexture(spellID) or 1)
 				else
-				spellCheck.icon:SetNormalTexture(1008124)
+					spellCheck.icon:SetNormalTexture(1008124)
 				end
 				local cutString = substring(aString, 0, 23);
 				if customname then
-					spellCheck.text:SetText(cutString.."\n".."("..customname..")");
-				else
-					spellCheck.text:SetText(cutString);
+					cutString = cutString.."\n".."("..customname..")"
 				end
-
+				local name = GetSpellInfo(spellID)
+				if L.classIds[spellID] or L.classIds[name] then 
+					cutString = Colorize(cutString, L.classIds[spellID]) or Colorize(cutString, L.classIds[name]) or cutString
+				end
+				spellCheck.text:SetText(cutString);
 				if cleuEvent then spellID = customname end
 				spellCheck:SetChecked(_G.LoseControlDB.spellEnabled[spellID] or false);   --Error on 1st ADDON_LOADED
 				spellCheck.spellID = spellID

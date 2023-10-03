@@ -347,7 +347,10 @@ local function CustomPVEDropDownCompileSpells(spell, prio, tab, c, duration)
 					tblremove(L.spells[tab+1][l], k)
 					SpellsPVEConfig:UpdateSpellList(tab)
 					if L.spellsLua[spell] then
-					tblinsert(_G.LoseControlDB.customSpellIds, {spell, prio, nil, nil, nil, customname, tab+1})  --v[7]: Category Tab to enter spell
+						tblinsert(_G.LoseControlDB.customSpellIds, {spell, prio, nil, nil, nil, customname, tab+1})  --v[7]: Category Tab to enter spell
+					end
+					if _G.LoseControlDB.customString[spell] then 
+						_G.LoseControlDB.customString[spell] = nil
 					end
 					print("|cff00ccffLoseControl|r : ".."|cff009900Removed |r"..spellID.." |cff009900from : |r"..tabs[tab].." (PVE)")
 					L.OptionsFunctions:UpdateAll()
