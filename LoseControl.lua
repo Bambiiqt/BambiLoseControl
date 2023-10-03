@@ -10223,7 +10223,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			if self.frame.anchor == "Gladdy" then
 				self.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
 			else
-				self.gloss.normalTexture:SetScale(.9) --.88 Gladius 
+				self.gloss.normalTexture:SetScale(.89) --.88 Gladius 
 			end
 			self.gloss.normalTexture:ClearAllPoints()
 			self.gloss.normalTexture:SetPoint("CENTER", self, "CENTER")
@@ -11446,7 +11446,7 @@ function Unlock:OnClick()
 					if frame.anchor == "Gladdy" then
 						v.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
 					else
-						v.gloss.normalTexture:SetScale(.88) --.81 for Gladdy
+						v.gloss.normalTexture:SetScale(.89) --.81 for Gladius
 					end
 				
 					if (not v.gloss:IsShown()) then
