@@ -278,8 +278,8 @@ local spellsArenaTable = {
 	{370970 , "Roots_90_Snares", "DEMONHUNTER"}, --The Hunt 
 	{162264 , "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Metamorphosis
 	{187827 , "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Metamorphosis
-	{208195, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul
-	{347765, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul
+	--{208195, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul (Removed 10.2)
+	--{347765, "Melee_Major_OffenisiveCDs", "DEMONHUNTER"}, -- Demon Soul (Removed 10.2)
 	{198589, "Big_Defensive_CDs", "DEMONHUNTER"}, -- Blur
 	{212800, "Big_Defensive_CDs", "DEMONHUNTER"}, -- Blur
 	{209426 , "Big_Defensive_CDs", "DEMONHUNTER"}, -- Darkness
@@ -287,6 +287,7 @@ local spellsArenaTable = {
 	{206803 , "Big_Defensive_CDs", "DEMONHUNTER"}, -- Rain From Above
 	{370966 , "Player_Party_OffensiveCDs", "DEMONHUNTER"}, --The Hunt
 	{323802 , "Player_Party_OffensiveCDs", "DEMONHUNTER"}, --The Hunt
+	{258925, "Small_Offenisive_CDs", "DEMONHUNTER"}, --Fel Barrage
 	{203819, "Small_Defensive_CDs", "DEMONHUNTER"}, -- Demon Spikes
 	{208796, "Small_Defensive_CDs", "DEMONHUNTER"}, -- Jagged Spikes
 	{205629, "Freedoms_Speed", "DEMONHUNTER"}, -- Demonic Trample
@@ -421,7 +422,7 @@ local spellsArenaTable = {
 	{248519 , "Special_High", "HUNTER"}, --Interlope
 	{19574 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Bestial Wrath
 	{212704 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --The Beast Within (PvP)
-	{193530 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Aspect of the Wild
+	{359844 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Call of the Wild
 	{288613 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Trueshot
 	{260402 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Double Tap
 	{266779 , "Ranged_Major_OffenisiveCDs", "HUNTER"}, --Coordinated Assault
@@ -459,6 +460,8 @@ local spellsArenaTable = {
 	----------------
 	{45438 , "Immune_Arena", "MAGE"}, --Ice Block
 	{"Polymorph" , "CC_Arena", "MAGE"},
+	{383121 , "CC_Arena", "MAGE"},
+	{413094, "CC_Arena", "MAGE"},
 	{82691 , "CC_Arena", "MAGE"}, --Ring of Frost
 	{31661 , "CC_Arena", "MAGE"}, --Dragon's Breath
 	{389831 , "CC_Arena", "MAGE"}, --Snowdrift
@@ -499,6 +502,7 @@ local spellsArenaTable = {
 	{382824 , "Freedoms_Speed", "MAGE"}, --40% Temporal Velocity
 	{384360 , "Freedoms_Speed", "MAGE"}, --20 %Temporal Velocity
 	{120 , "Snares_WithCDs", "MAGE"}, --Cone of Cold
+	{157981, "Snares_WithCDs", "MAGE"},		-- Blast Wave
 	{11426 , "Special_Low", "MAGE"}, --Ice Barrier
 	{235313 , "Special_Low", "MAGE"}, --Blazing Barrier
 	{235450 , "Special_Low", "MAGE"}, --Prismatic Barrier
@@ -847,28 +851,6 @@ local spellsArenaTable = {
 
 	{"PVP", --TAB
 
-	{3355   , "CC", nil, "HUNTER"},				-- Freezing Trap
-	{203337 , "CC"},				-- Freezing Trap (Diamond Ice - pvp honor talent)
-	{24394  , "CC"},				-- Intimidation
-	{213691 , "CC"},				-- Scatter Shot (pvp honor talent)
-	{1513   , "CC"},        		-- Scare Beast
-
-	{"Hex"  , "CC"},				-- Hex
-	{51514  , "CC"},				-- Hex
-	{210873 , "CC"},				-- Hex (compy)
-	{211010 , "CC"},				-- Hex (snake)
-	{211015 , "CC"},				-- Hex (cockroach)
-	{211004 , "CC"},				-- Hex (spider)
-	{196942 , "CC"},				-- Hex (Voodoo Totem)
-	{269352 , "CC"},				-- Hex (skeletal hatchling)
-	{277778 , "CC"},				-- Hex (zandalari Tendonripper)
-	{277784 , "CC"},				-- Hex (wicker mongrel)
-	{77505  , "CC"},				-- Earthquake
-	{118905 , "CC"},				-- Static Charge (Capacitor Totem)
-	{305485 , "CC"},				-- Lightning Lasso
-	{197214 , "CC"},				-- Sundering
-	{118345 , "CC"},				-- Pulverize (Shaman Primal Earth Elemental)
-
 	{108194 , "CC"},				-- Asphyxiate
 	{221562 , "CC"},				-- Asphyxiate
 	{207167 , "CC"},				-- Blinding Sleet
@@ -879,6 +861,16 @@ local spellsArenaTable = {
 	{334693 , "CC"},       			-- Absolute Zero (Shadowlands Legendary Stun)
 	{377048 , "CC"},       			-- Absolute Zero
 
+	{179057 , "CC"},				-- Chaos Nova
+	{211881 , "CC"},				-- Fel Eruption
+	{217832 , "CC"},				-- Imprison
+	{221527 , "CC"},				-- Imprison (pvp talent)
+	{200166 , "CC"},				-- Metamorfosis stun
+	{207685 , "CC"},				-- Sigil of Misery
+	{205630 , "CC"},				-- Illidan's Grasp
+	{208618 , "CC"},				-- Illidan's Grasp (throw stun)
+	{213491 , "CC"},				-- Demonic Trample Stun
+
 	{33786  , "CC"},				-- Cyclone
 	{5211   , "CC"},				-- Mighty Bash
 	{163505 , "CC"},				-- Rake
@@ -887,11 +879,20 @@ local spellsArenaTable = {
 	{99     , "CC"},				-- Incapacitating Roar
 	{2637   , "CC"},				-- Hibernate
 
+	{3355   , "CC", nil, "HUNTER"},				-- Freezing Trap
+	{203337 , "CC"},				-- Freezing Trap (Diamond Ice - pvp honor talent)
+	{24394  , "CC"},				-- Intimidation
+	{213691 , "CC"},				-- Scatter Shot (pvp honor talent)
+	{1513   , "CC"},        		-- Scare Beast
+
+
 	{372245   , "CC"},				-- Terror of the Skies
 	{408544   , "CC"},				-- Seismic Slam
 	{360806   , "CC"},				-- Sleep Walk
 
 	{"Polymorph"   , "CC"},			-- Polymorph
+	{383121 , "CC"},
+	{413094 , "CC"},
 	{118    , "CC"},				-- Polymorph
 	{61305  , "CC"},				-- Polymorph: Black Cat
 	{28272  , "CC"},				-- Polymorph: Pig
@@ -940,6 +941,22 @@ local spellsArenaTable = {
 	{6770   , "CC"},				-- Sap
 	--{199804 , "CC"},				-- Between the eyes
 
+	{"Hex"  , "CC"},				-- Hex
+	{51514  , "CC"},				-- Hex
+	{210873 , "CC"},				-- Hex (compy)
+	{211010 , "CC"},				-- Hex (snake)
+	{211015 , "CC"},				-- Hex (cockroach)
+	{211004 , "CC"},				-- Hex (spider)
+	{196942 , "CC"},				-- Hex (Voodoo Totem)
+	{269352 , "CC"},				-- Hex (skeletal hatchling)
+	{277778 , "CC"},				-- Hex (zandalari Tendonripper)
+	{277784 , "CC"},				-- Hex (wicker mongrel)
+	{77505  , "CC"},				-- Earthquake
+	{118905 , "CC"},				-- Static Charge (Capacitor Totem)
+	{305485 , "CC"},				-- Lightning Lasso
+	{197214 , "CC"},				-- Sundering
+	{118345 , "CC"},				-- Pulverize (Shaman Primal Earth Elemental)
+
 	{118699 , "CC"},				-- Fear
 	{5484   , "CC"},		    	-- Howl of Terror
 	{6789   , "CC"},				-- Mortal Coil
@@ -962,36 +979,27 @@ local spellsArenaTable = {
 	{132168 , "CC"},				-- Shockwave
 	{199085 , "CC"},				-- Warpath
 
-	{179057 , "CC"},				-- Chaos Nova
-	{211881 , "CC"},				-- Fel Eruption
-	{217832 , "CC"},				-- Imprison
-	{221527 , "CC"},				-- Imprison (pvp talent)
-	{200166 , "CC"},				-- Metamorfosis stun
-	{207685 , "CC"},				-- Sigil of Misery
-	{205630 , "CC"},				-- Illidan's Grasp
-	{208618 , "CC"},				-- Illidan's Grasp (throw stun)
-	{213491 , "CC"},				-- Demonic Trample Stun
 
 	{20549  , "CC"},				-- War Stomp (tauren racial)
 	{107079 , "CC"},				-- Quaking Palm (pandaren racial)
 	{255723 , "CC"},				-- Bull Rush (highmountain tauren racial)
 	{287712 , "CC"},				-- Haymaker (kul tiran racial)
 
-	{356727 , "Silence"},			-- Spider Venom  (Chimaeral Sting)
 	{47476  , "Silence"},			-- Strangulate
+	{204490 , "Silence"},			-- Sigil of Silence
 	{81261  , "Silence"},			-- Solar Beam
 	{410065  , "Silence"},			-- Reactive Resin
+	{356727 , "Silence"},			-- Spider Venom  (Chimaeral Sting)
 	{217824 , "Silence"},			-- Shield of Virtue (pvp honor talent)
 	{15487  , "Silence"},			-- Silence
 	{1330   , "Silence"},			-- Garrote - Silence
 	{196364 , "Silence"},			-- Unstable Affliction
-	{204490 , "Silence"},			-- Sigil of Silence
 
 	{212638 , "RootPhyiscal_Special"},				-- Tracker's Net (pvp honor talent) -- Also -80% hit chance melee & range physical (CC and Root category)
 	{356723 , "RootPhyiscal_Special"},				-- Scorpid Venom (Chimaeral Sting)
+	{114404 , "RootPhyiscal_Special"}, 				-- Void Tendrils
 	{307871 , "RootPhyiscal_Special"},				-- Spear of Bastion
 	{376080 , "RootPhyiscal_Special"},				-- Spear of Bastion
-	{114404 , "RootPhyiscal_Special"}, 				-- Void Tendrils
 
 	{117526 , "Root"},				-- Binding Shot
 	{190927 , "Root"},				-- Harpoon
@@ -1218,7 +1226,6 @@ local spellsArenaTable = {
 
 	{45524,  "SnarePhysical70"},		-- Chains of Ice
 	{273977, "SnarePhysical70"},		-- Grip of the Dead
-	{157981, "SnarePhysical70"},		-- Blast Wave
 	{391403, "SnarePhysical70"},		-- Mind Flay: Insanity
 	{115196, "SnarePhysical70"},		-- Crippling Posion
 	{12323 , "SnarePhysical70"},		-- Piercing Howl
@@ -1233,6 +1240,7 @@ local spellsArenaTable = {
 	{228354, "SnareMagic70"},		-- Flurry
 	{321329, "SnareMagic70"},		-- Ring of Frost
 	{394255, "SnareMagic70"},		-- Freezing Cold
+	{390614, "SnareMagic70"},		-- Frost Bomb
 	{123586, "SnareMagic70"},		-- Flying Serpent Kick
 	{183218, "SnareMagic70"},		-- Hand of Hindrance
 	{204263, "SnareMagic70"},		-- Shining Force
@@ -1257,6 +1265,7 @@ local spellsArenaTable = {
 	{205021, "SnarePhysical50"},		-- Ray of Frost
 	{236299, "SnarePhysical50"},		-- Chrono Shift
 	{317792, "SnarePhysical50"},		-- Frostbolt
+	{157981, "SnarePhysical50"},		-- Blast Wave
 	{116095, "SnarePhysical50"},		-- Disable
 	{196733, "SnarePhysical50"},		-- Special Delivery
 	{204242, "SnarePhysical50"},		-- Consecration
@@ -1372,7 +1381,7 @@ local spellsArenaTable = {
 	{186265 , "Other"},			  -- Deterrence (aspect of the turtle)
 	{19574  , "Other"},		    -- Bestial Wrath (only if The Beast Within (212704) it's active) (immune to some CC's)
 	{266779 , "Other"},				-- Coordinated Assault
-	{193530 , "Other"},				-- Aspect of the Wild
+	{359844 , "Other"},				-- Call of the Wild
 	{186289 , "Other"},				-- Aspect of the Eagle
 	{288613 , "Other"},				-- Trueshot
 	{202748 , "Other"},			  -- Survival Tactics (pvp honor talent) (not immune}, 99% damage reduction)
@@ -9618,7 +9627,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			if (spellId == 31884) then --Avenging Wrath
 				local i, specID
 				if strmatch(unitId, "arena") then
-					i = strfind(unitId, "%d")
+					i = strmatch(unitId, "%d") 
 							specID = GetArenaOpponentSpec(i);
 					if specID then
 						if (specID == 70) or (specID == 66) then
@@ -9635,7 +9644,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			if (spellId == 310454) then --Weapons of Order
 				local i, specID
 				if strmatch(unitId, "arena") then
-					i = strfind(unitId, "%d")
+					i = strmatch(unitId, "%d") 
 							specID = GetArenaOpponentSpec(i);
 					if specID then
 						if (specID == 269) or (specID == 268) then
