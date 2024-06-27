@@ -7463,6 +7463,7 @@ function LoseControl:DisableLossOfControlUI()
 					start, duration, enable, modRate = GetActionCooldown(self.action);
 					charges, maxCharges, chargeStart, chargeDuration, chargeModRate = GetActionCharges(self.action);
 				end
+
 				self.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge");
 				self.cooldown:SetSwipeColor(0, 0, 0);
 				self.cooldown:SetHideCountdownNumbers(false);
