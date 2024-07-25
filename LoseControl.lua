@@ -1,5 +1,4 @@
 
-
 --Anchor to Gladius and Stealth/Alpha w/Gloss Option  Added
 --Player LOCBliz Add All New CC  Added
 ----Add CC/Silence/Disarm/Root/Interrupt/Other Added
@@ -28,10 +27,7 @@ L.OptionsFunctions = {}; -- adds LoseControl table to addon namespace
 
 local OptionsFunctions = L.OptionsFunctions;
 local UIParent = UIParent -- it's faster to keep local references to frequently used global vars
-local UnitAura = UnitAura
-local UnitBuff = UnitBuff
 local UnitCanAttack = UnitCanAttack
-local UnitClass = UnitClass
 local UnitExists = UnitExists
 local UnitIsPlayer = UnitIsPlayer
 local UnitIsUnit = UnitIsUnit
@@ -46,7 +42,6 @@ local GetPlayerInfoByGUID = GetPlayerInfoByGUID
 local GetInspectSpecialization = GetInspectSpecialization
 local GetSpellInfo = GetSpellInfo
 local GetTime = GetTime
-local GetName = GetName
 local GetNumGroupMembers = GetNumGroupMembers
 local GetNumArenaOpponents = GetNumArenaOpponents
 local GetInstanceInfo = GetInstanceInfo
@@ -124,6 +119,46 @@ local colorTypes = {
   Buff 	= {0.00,1.00,0},
   CLEU 	= {0.60,0.60,0.60},
 }
+
+local UnitAura = UnitAura
+if UnitAura == nil then
+  --- Deprecated in 10.2.5
+  UnitAura = function(unitToken, index, filter)
+		local aura = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter)
+		if not aura then
+			return nil;
+		end
+
+		return aura.name, aura.icon, aura.applications, aura.dispelName, aura.duration, aura.expirationTime, aura.sourceUnit, aura.isStealable, nil, aura.spellId
+	end
+end
+
+local UnitBuff = UnitBuff
+if UnitBuff == nil then
+  --- Deprecated in 10.2.5
+  UnitBuff = function(unitToken, index, filter)
+		local aura = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter)
+		if not aura then
+			return nil;
+		end
+
+		return aura.name, aura.icon, aura.applications, aura.dispelName, aura.duration, aura.expirationTime, aura.sourceUnit, aura.isStealable, nil, aura.spellId
+	end
+end
+
+local UnitDebuff = UnitDebuff
+if UnitDebuff == nil then
+  --- Deprecated in 10.2.5
+  UnitDebuff = function(unitToken, index, filter)
+		if not filter then filter = "HARMFUL"end
+		local aura = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter)
+		if not aura then
+			return nil;
+		end
+
+		return aura.name, aura.icon, aura.applications, aura.dispelName, aura.duration, aura.expirationTime, aura.sourceUnit, aura.isStealable, nil, aura.spellId
+	end
+end
 
 -------------------------------------------------------------------------------
 -- Thanks to all the people on the Curse.com and WoWInterface forums who help keep this list up to date :)
@@ -227,10 +262,12 @@ local spellsArenaTable = {
 	{334693 , "CC_Arena", "DEATHKNIGHT"}, -- Absolute Zero (Shadowlands Legendary Stun)
 	{377048 , "CC_Arena", "DEATHKNIGHT"}, -- Absolute Zero
 	{47476 , "Silence_Arena", "DEATHKNIGHT"}, --Strangulate
+	{374776 , "Silence_Arena", "DEATHKNIGHT"}, --Tightening Grasp
 	{77606 , "Special_High", "DEATHKNIGHT"}, --Dark Simulacrum
 	{315443 , "Ranged_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Abomination Limb
 	{383269 , "Ranged_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Abomination Limb 
 	{91807 , "Roots_90_Snares", "DEATHKNIGHT"}, --Shambling Rush
+	{454787 , "Roots_90_Snares", "DEATHKNIGHT"}, --Ice Prison w/ Chains 
 	{204085 , "Roots_90_Snares", "DEATHKNIGHT"}, --Deathchill
 	{233395 , "Roots_90_Snares", "DEATHKNIGHT"}, --Deathchill
 	{47568 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Empower Rune Weapon
@@ -241,6 +278,7 @@ local spellsArenaTable = {
 	--{215711 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Soul Reaper
 	--{207289 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Unholy Frenzy
 	{207289 , "Melee_Major_OffenisiveCDs", "DEATHKNIGHT"}, --Unholy Assault
+	{454863 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Lesser Anti-Magic Shell
 	{48792 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Icebound Fortitude
 	{49039 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Lichborne
 	{145629 , "Big_Defensive_CDs", "DEATHKNIGHT"}, --Anti-Magic Zone
@@ -251,6 +289,7 @@ local spellsArenaTable = {
 	{77616 , "Small_Offenisive_CDs", "DEATHKNIGHT"}, --Dark Simulacrum
 	{288977 , "Small_Defensive_CDs", "DEATHKNIGHT"}, --Transfusion
 	{48743 , "Small_Defensive_CDs", "DEATHKNIGHT"}, --Death Pact
+	{454871 , "Small_Defensive_CDs", "DEATHKNIGHT"}, --Blood Draw
 	{48265 , "Freedoms_Speed", "DEATHKNIGHT"}, -- Death's Advance
 	{212552 , "Freedoms_Speed", "DEATHKNIGHT"}, -- Wraith Walk
 	{45524 , "Snares_Ranged_Spamable", "DEATHKNIGHT"}, --Chains of Ice
@@ -986,6 +1025,7 @@ local spellsArenaTable = {
 	{287712 , "CC"},				-- Haymaker (kul tiran racial)
 
 	{47476  , "Silence"},			-- Strangulate
+	{374776 , "Silence"}, 			-- Tightening Grasp
 	{204490 , "Silence"},			-- Sigil of Silence
 	{81261  , "Silence"},			-- Solar Beam
 	{410065  , "Silence"},			-- Reactive Resin
@@ -1001,6 +1041,10 @@ local spellsArenaTable = {
 	{307871 , "RootPhyiscal_Special"},				-- Spear of Bastion
 	{376080 , "RootPhyiscal_Special"},				-- Spear of Bastion
 
+	{454787 , "Root"},				-- Ice Prison (Talent)
+	{233395 , "Root"},				-- Deathchill (pvp talent)
+	{204085 , "Root"},				-- Deathchill (pvp talent)
+	{91807  , "Root"},				-- Shambling Rush (Dark Transformation)
 	{117526 , "Root"},				-- Binding Shot
 	{190927 , "Root"},				-- Harpoon
 	{190925 , "Root"},				-- Harpoon
@@ -1010,9 +1054,6 @@ local spellsArenaTable = {
 	{64695  , "Root"},				-- Earthgrab (Earthgrab Totem)
 	{285515 , "Root"},	    		-- Surge of Power
 	{356738 , "Root"},	     		-- Earth Unleashed
-	{233395 , "Root"},				-- Deathchill (pvp talent)
-	{204085 , "Root"},				-- Deathchill (pvp talent)
-	{91807  , "Root"},				-- Shambling Rush (Dark Transformation)
 	{339    , "Root"},				-- Entangling Roots
 	{170855 , "Root"},				-- Entangling Roots (Nature's Grasp)
 	{45334  , "Root"},				-- Immobilized (Wild Charge - Bear)
@@ -1346,7 +1387,8 @@ local spellsArenaTable = {
 	----------------
 
 	{115018 , "Other"},				-- Desecrated Ground (Immune to CC)
-	{48707  , "Other"},	     	-- Anti-Magic Shell
+	{48707  , "Other"},	     		-- Anti-Magic Shell
+	{454863 , "Other"}, 			--Lesser Anti-Magic Shell
 	{51271  , "Other"},				-- Pillar of Frost
 	{48792  , "Other"},				-- Icebound Fortitude
 	{287081 , "Other"},				-- Lichborne
@@ -5350,13 +5392,6 @@ local anchors = {
 		arena4      = GladiusClassIconFramearena4 or nil,
 		arena5      = GladiusClassIconFramearena5 or nil,
 	},
-  Gladdy = {
-  arena1       = GladdyButtonFrame1 and GladdyButtonFrame1.classIcon or nil,
-  arena2       = GladdyButtonFrame2 and GladdyButtonFrame2.classIcon or nil,
-  arena3       = GladdyButtonFrame3 and GladdyButtonFrame3.classIcon or nil,
-  arena4       = GladdyButtonFrame4 and GladdyButtonFrame4.classIcon or nil,
-  arena5       = GladdyButtonFrame5 and GladdyButtonFrame5.classIcon or nil,
-  },
 	Blizzard = {
     player       = PlayerFrame.PlayerFrameContainer.PlayerPortrait,
     player2      = PlayerFrame.PlayerFrameContainer.PlayerPortrait,
@@ -5418,23 +5453,6 @@ local anchors = {
 		arena3 = "SyncFrame3Class",
 		arena4 = "SyncFrame4Class",
 		arena5 = "SyncFrame5Class",
-	},
-	SUF = {
-		player       = SUFUnitplayer and SUFUnitplayer.portrait or nil,
-		pet          = SUFUnitpet and SUFUnitpet.portrait or nil,
-		target       = SUFUnittarget and SUFUnittarget.portrait or nil,
-		targettarget = SUFUnittargettarget and SUFUnittargettarget.portrait or nil,
-		focus        = SUFUnitfocus and SUFUnitfocus.portrait or nil,
-		focustarget  = SUFUnitfocustarget and SUFUnitfocustarget.portrait or nil,
-		party1       = SUFHeaderpartyUnitButton1 and SUFHeaderpartyUnitButton1.portrait or nil,
-		party2       = SUFHeaderpartyUnitButton2 and SUFHeaderpartyUnitButton2.portrait or nil,
-		party3       = SUFHeaderpartyUnitButton3 and SUFHeaderpartyUnitButton3.portrait or nil,
-		party4       = SUFHeaderpartyUnitButton4 and SUFHeaderpartyUnitButton4.portrait or nil,
-		arena1       = SUFHeaderarenaUnitButton1 and SUFHeaderarenaUnitButton1.portrait or nil,
-		arena2       = SUFHeaderarenaUnitButton2 and SUFHeaderarenaUnitButton2.portrait or nil,
-		arena3       = SUFHeaderarenaUnitButton3 and SUFHeaderarenaUnitButton3.portrait or nil,
-		arena4       = SUFHeaderarenaUnitButton4 and SUFHeaderarenaUnitButton4.portrait or nil,
-		arena5       = SUFHeaderarenaUnitButton5 and SUFHeaderarenaUnitButton5.portrait or nil,
 	},
 	-- more to come here?
 }
@@ -6629,7 +6647,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6666,7 +6684,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6714,7 +6732,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6751,7 +6769,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6799,7 +6817,7 @@ local DBdefaults = {
 						Freedoms = true,
 						Friendly_Defensives = false,
 						Mana_Regen = false,
-						CC_Reduction = true,
+						CC_Reduction = false,
 						Personal_Offensives = false,
 						Peronsal_Defensives = false,
 						Movable_Cast_Auras = true,
@@ -6836,7 +6854,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6884,7 +6902,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -6921,7 +6939,7 @@ local DBdefaults = {
 							Freedoms = true,
 							Friendly_Defensives = false,
 							Mana_Regen = false,
-							CC_Reduction = true,
+							CC_Reduction = false,
 							Personal_Offensives = false,
 							Peronsal_Defensives = false,
 							Movable_Cast_Auras = true,
@@ -7112,69 +7130,6 @@ local function cmp_col1_col2(lhs, rhs)
 	if lhs.col1 < rhs.col1 then return false end
 	return lhs.col2 > rhs.col2
 end
-
-local locBliz = CreateFrame("Frame")
-locBliz:RegisterEvent("LOSS_OF_CONTROL_ADDED")
-locBliz:SetScript("OnEvent", function(self, event, ...)
-	if (event == "LOSS_OF_CONTROL_ADDED") then
-		for i = 1, 40 do
-			local data = CLocData(i);
-			if not data then break end
-
-			local customString = LoseControlDB.customString
-
-			local locType = data.locType;
-			local spellID = data.spellID;
-			local text = data.displayText;
-			local iconTexture = data.iconTexture;
-			local startTime = data.startTime;
-			local timeRemaining = data.timeRemaining;
-			local duration = data.duration;
-			local lockoutSchool = data.lockoutSchool;
-			local priority = data.priority;
-			local displayType = data.displayType;
-			local name, instanceType, _, _, _, _, _, instanceID, _, _ = GetInstanceInfo()
-			local ZoneName = GetZoneText()
-			local Type
-
-			if locType == "SCHOOL_INTERRUPT" then text = strformat("%s Locked", GetSchoolString(lockoutSchool)) end
-
-			string[spellID] = customString[spellID] or text
-
-			if not spellIds[spellID] and  (lockoutSchool == 0 or nil or false) then
-				if (locType == "STUN_MECHANIC") or (locType =="PACIFY") or (locType =="STUN") or (locType =="FEAR") or (locType =="CHARM") or (locType =="CONFUSE") or (locType =="POSSESS") or (locType =="FEAR_MECHANIC") or (locType =="FEAR") then
-					print("Found New CC",locType,"", spellID)
-					Type = "CC"
-				elseif locType == "DISARM" then
-					print("Found New Disarm",locType,"", spellID)
-					Type = "Disarm"
-				elseif (locType == "PACIFYSILENCE") or (locType =="SILENCE") then
-					print("Found New Silence",locType,"", spellID)
-					Type = "Silence"
-				elseif locType == "ROOT" then
-					print("Found New Root",locType,"", spellID)
-					Type = "Root"
-				else
-					print("Found New Other",locType,"", spellID)
-					Type = "Other"
-				end
-				spellIds[spellID] = Type
-				LoseControlDB.spellEnabled[spellID]= true
-				tblinsert(LoseControlDB.customSpellIds, {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
-				tblinsert(L.spells[#L.spells][tabsIndex[Type]], {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
-				L.SpellsPVEConfig:UpdateTab(#L.spells-1)
-			elseif (not interruptsIds[spellID]) and lockoutSchool > 0 then
-				print("Found New Interrupt",locType,"", spellID)
-				interruptsIds[spellID] = duration
-				LoseControlDB.spellEnabled[spellID]= true
-				tblinsert(LoseControlDB.customSpellIds, {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
-				tblinsert(L.spells[#L.spells][tabsIndex["Interrupt"]], {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
-				L.SpellsPVEConfig:UpdateTab(#L.spells-1)
-			else
-			end
-		end
-	end
-end)
 
 
 local tooltip = CreateFrame("GameTooltip", "DebuffTextDebuffScanTooltip", UIParent, "GameTooltipTemplate")
@@ -7463,7 +7418,6 @@ function LoseControl:DisableLossOfControlUI()
 					start, duration, enable, modRate = GetActionCooldown(self.action);
 					charges, maxCharges, chargeStart, chargeDuration, chargeModRate = GetActionCharges(self.action);
 				end
-
 				self.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge");
 				self.cooldown:SetSwipeColor(0, 0, 0);
 				self.cooldown:SetHideCountdownNumbers(false);
@@ -7640,7 +7594,9 @@ function LoseControl:CompileSpells(typeUpdate)
 		for l = 2, #spellsTable[i] do
 			local spellID, prio = unpack(spellsTable[i][l])
 			tblinsert(spells[i][tabsIndex[prio]], ({spellID, prio}))
-			spellsLua[spellID] = true
+			if spellID then 
+				spellsLua[spellID] = true
+			end
 		end
 	end
 
@@ -7648,7 +7604,9 @@ function LoseControl:CompileSpells(typeUpdate)
 		for l = 2, #spellsTable[i] do
 			local spellID, prio, string = unpack(spellsTable[i][l])
 			if string then
-				_G.LoseControlDB.customString[spellID] = string
+				if spellID then 
+					_G.LoseControlDB.customString[spellID] = string
+				end
 			end
 		end
     end
@@ -7656,7 +7614,9 @@ function LoseControl:CompileSpells(typeUpdate)
 	for i = 1, #cleuSpells do 	
 		local spellID, duration, prio, arena, string = unpack(cleuSpells[i])
 		if string then
-			_G.LoseControlDB.customString[spellID] = string
+			if spellID then
+				_G.LoseControlDB.customString[spellID] = string
+			end
 		end
 	end
 
@@ -7684,7 +7644,7 @@ function LoseControl:CompileSpells(typeUpdate)
 	end
 	for i = 2, #spellsTable[1] do 
 		local spellID, prio, string, class = unpack(spellsTable[1][i])
-		if class then 
+		if class and spellID then 
 			classIds[spellID] = class
 			local name = GetSpellInfo(spellID)
 			if name and not classIds[name] then
@@ -7694,7 +7654,7 @@ function LoseControl:CompileSpells(typeUpdate)
 	end
 	for i = 1, #spellsArenaTable do 
 		local spellID, prio, class = unpack(spellsArenaTable[i])
-		if class then 
+		if class and spellID then
 			classIds[spellID] = class
 			local name = GetSpellInfo(spellID)
 			if name and not classIds[name] then
@@ -7713,7 +7673,7 @@ function LoseControl:CompileSpells(typeUpdate)
 			local removed = 0
 			for x = 1, (#spells[i][l]) do
 				local spellID, prio = unpack(spells[i][l][x])
-				if (not hash[spellID]) and (not customSpells[spellID]) then
+				if (not hash[spellID]) and (not customSpells[spellID]) and spellID then
 					hash[spellID] = {spellID, prio}
 				else
 					if customSpells[spellID] then
@@ -7728,7 +7688,11 @@ function LoseControl:CompileSpells(typeUpdate)
 							if type(spellID) == "number" then
 								if GetSpellInfo(spellID) then
 									local name = GetSpellInfo(spellID)
-									print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..name..") Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+									if name then 
+										print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..spellID..") Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+									else
+										print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." ("..name..") Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+									end
 								end
 							else
 								print("|cff00ccffLoseControl|r : "..CspellID.." : "..Cprio.." (not spellId) Modified Spell ".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
@@ -7737,15 +7701,21 @@ function LoseControl:CompileSpells(typeUpdate)
 							removed = removed + 1
 						end
 					else
-						local HspellID, Hprio = unpack(hash[spellID])
-						if type(spellID) == "number" then
-							local name = GetSpellInfo(spellID)
-							print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
-						else
-							print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+						if spellID then
+							local HspellID, Hprio = unpack(hash[spellID])
+							if type(spellID) == "number" then
+								local name = GetSpellInfo(spellID)
+								if name then 
+									print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..name..") ".."|cffff0000Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+								else
+									print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." ("..spellID..") ".."|cffff0000Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+								end
+							else
+								print("|cff00ccffLoseControl|r : "..HspellID.." : "..Hprio.." (not spellId) ".."|cff009900Duplicate Spell in Lua |r".."|cff009900Removed |r"  ..spellID.." |cff009900: |r"..prio)
+							end
+							tblinsert(toremove, {i , l, x, removed, spellID})
+							removed = removed + 1
 						end
-						tblinsert(toremove, {i , l, x, removed, spellID})
-						removed = removed + 1
 					end
 				end
 			end
@@ -7775,7 +7745,9 @@ function LoseControl:CompileSpells(typeUpdate)
 	for i = 1, #spells do
 		for l = 1, #spells[i] do
 			for x = 1, #spells[i][l] do
-				spellIds[spells[i][l][x][1]] = spells[i][l][x][2]
+				if spells[i][l][x][1] then
+					spellIds[spells[i][l][x][1]] = spells[i][l][x][2]
+				end
 			end
 		end
 	end
@@ -7907,97 +7879,41 @@ end
 LoseControl:RegisterEvent("ADDON_LOADED")
 
 
-function LoseControl:CheckSUFUnitsAnchors(updateFrame)
-	if not(ShadowUF and (SUFUnitplayer or SUFUnitpet or SUFUnittarget or SUFUnittargettarget or SUFHeaderpartyUnitButton1 or SUFHeaderpartyUnitButton2 or SUFHeaderpartyUnitButton3 or SUFHeaderpartyUnitButton4)) then return false end
-	local frames = { self.unitId }
-	if strfind(self.unitId, "party") then
-		frames = { "party1", "party2", "party3", "party4" }
-	elseif strfind(self.unitId, "arena") then
-		frames = { "arena1", "arena2", "arena3", "arena4", "arena5" }
-	end
-	for _, unitId in ipairs(frames) do
-		if anchors.SUF.player == nil then anchors.SUF.player = SUFUnitplayer and SUFUnitplayer.portrait or nil end
-		if anchors.SUF.pet == nil then anchors.SUF.pet    = SUFUnitpet and SUFUnitpet.portrait or nil end
-		if anchors.SUF.target == nil then anchors.SUF.target = SUFUnittarget and SUFUnittarget.portrait or nil end
-		if anchors.SUF.targettarget == nil then anchors.SUF.targettarget = SUFUnittargettarget and SUFUnittargettarget.portrait or nil end
-		if anchors.SUF.focus == nil then anchors.SUF.focus = SUFUnitfocus and SUFUnitfocus.portrait or nil end
-		if anchors.SUF.focustarget == nil then anchors.SUF.focustarget = SUFUnitfocustarget and SUFUnitfocustarget.portrait or nil end
-		if anchors.SUF.party1 == nil then anchors.SUF.party1 = SUFHeaderpartyUnitButton1 and SUFHeaderpartyUnitButton1.portrait or nil end
-		if anchors.SUF.party2 == nil then anchors.SUF.party2 = SUFHeaderpartyUnitButton2 and SUFHeaderpartyUnitButton2.portrait or nil end
-		if anchors.SUF.party3 == nil then anchors.SUF.party3 = SUFHeaderpartyUnitButton3 and SUFHeaderpartyUnitButton3.portrait or nil end
-		if anchors.SUF.party4 == nil then anchors.SUF.party4 = SUFHeaderpartyUnitButton4 and SUFHeaderpartyUnitButton4.portrait or nil end
-		if anchors.SUF.arena1 == nil then anchors.SUF.arena1 = SUFHeaderarenaUnitButton1 and SUFHeaderarenaUnitButton1.portrait or nil end
-		if anchors.SUF.arena2 == nil then anchors.SUF.arena2 = SUFHeaderarenaUnitButton2 and SUFHeaderarenaUnitButton2.portrait or nil end
-		if anchors.SUF.arena3 == nil then anchors.SUF.arena3 = SUFHeaderarenaUnitButton3 and SUFHeaderarenaUnitButton3.portrait or nil end
-		if anchors.SUF.arena4 == nil then anchors.SUF.arena4 = SUFHeaderarenaUnitButton4 and SUFHeaderarenaUnitButton4.portrait or nil end
-		if anchors.SUF.arena5 == nil then anchors.SUF.arena5 = SUFHeaderarenaUnitButton5 and SUFHeaderarenaUnitButton5.portrait or nil end
-		if updateFrame and anchors.SUF[unitId] ~= nil then
-			local frame = LoseControlDB.frames[self.fakeUnitId or unitId]
-			local icon = LCframes[unitId]
-			if self.fakeUnitId == "player2" then
-				icon = LCframeplayer2
-			end
-			local newAnchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
-			if newAnchor ~= nil and icon.anchor ~= newAnchor then
-				icon.anchor = newAnchor
-				icon:SetPoint(
-					frame.point or "CENTER",
-					icon.anchor,
-					frame.relativePoint or "CENTER",
-					frame.x or 0,
-					frame.y or 0
-				)
-				icon:GetParent():SetPoint(
-					frame.point or "CENTER",
-					icon.anchor,
-					frame.relativePoint or "CENTER",
-					frame.x or 0,
-					frame.y or 0
-				)
-				if icon.anchor:GetParent() then
-					icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
+function LoseControl:CheckGladiusUnitsAnchors(updateFrame)
+
+  	if (strfind(self.unitId, "arena")) and LoseControlDB.frames[self.unitId].anchor == "Gladius" then
+		local inInstance, instanceType = IsInInstance();  local gladiusFrame;  local frames = {}
+		if Gladius and (not anchors.Gladius[self.unitId]) then
+			if not GladiusClassIconFramearena1 then
+				gladiusFrame = "on"
+				frames = { "arena1", "arena2", "arena3", "arena4", "arena5" }
+				if DEFAULT_CHAT_FRAME.editBox:IsVisible() then
+					DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
+					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+				else
+					DEFAULT_CHAT_FRAME.editBox:Show()
+					DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
+					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+					DEFAULT_CHAT_FRAME.editBox:Hide()
 				end
 			end
-		end
-	end
-	if self.fakeUnitId ~= "player2" and self.unitId == "player" then
-		LCframeplayer2:CheckSUFUnitsAnchors(updateFrame)
-	end
-	return true
-end
-
-function LoseControl:CheckGladiusUnitsAnchors(updateFrame)
-  if (strfind(self.unitId, "arena")) and LoseControlDB.frames[self.unitId].anchor == "Gladius" then
-    local inInstance, instanceType = IsInInstance();  local gladiusFrame;  local frames = {}
-  	if Gladius and (not anchors.Gladius[self.unitId]) then
-  		if not GladiusClassIconFramearena1 and instanceType ~= "arena" then
-  			gladiusFrame = "on"
-  			frames = { "arena1", "arena2", "arena3", "arena4", "arena5" }
-  			if DEFAULT_CHAT_FRAME.editBox:IsVisible() then
-  				DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
-  				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-  			else
-  				DEFAULT_CHAT_FRAME.editBox:Show()
-  				DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
-  				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-  				DEFAULT_CHAT_FRAME.editBox:Hide()
-  			end
-    	end
-  		if GladiusClassIconFramearena1 then frames[1] = "arena1" end
-    	if GladiusClassIconFramearena2 then frames[2] = "arena2" end
-  		if GladiusClassIconFramearena3 then frames[3] = "arena3" end
-  		if GladiusClassIconFramearena4 then frames[4] = "arena4" end
-  		if GladiusClassIconFramearena5 then frames[5] = "arena5" end
+			if _G["GladiusClassIconFramearena1"] then frames[1] = "arena1" end
+			if _G["GladiusClassIconFramearena2"] then frames[2] = "arena2" end
+			if _G["GladiusClassIconFramearena3"] then frames[3] = "arena3" end
+			if _G["GladiusClassIconFramearena4"] then frames[4] = "arena4" end
+			if _G["GladiusClassIconFramearena5"] then frames[5] = "arena5" end
+			local counter = 1
   			for _, unitId in pairs(frames) do
-  				if (unitId == "arena1") and anchors.Gladius.arena1 == nil then anchors.Gladius.arena1 = GladiusClassIconFramearena1 or nil end
-  				if (unitId == "arena2") and anchors.Gladius.arena2 == nil then anchors.Gladius.arena2 = GladiusClassIconFramearena2 or nil end
-  				if (unitId == "arena3") and anchors.Gladius.arena3 == nil then anchors.Gladius.arena3 = GladiusClassIconFramearena3 or nil end
-  				if (unitId == "arena4") and anchors.Gladius.arena4 == nil then anchors.Gladius.arena4 = GladiusClassIconFramearena4 or nil end
-  				if (unitId == "arena5") and anchors.Gladius.arena5 == nil then anchors.Gladius.arena5 = GladiusClassIconFramearena5 or nil end
+  				if (unitId == "arena1") and anchors.Gladius.arena1 == nil then anchors.Gladius.arena1 = _G["GladiusClassIconFramearena1"] or nil end
+  				if (unitId == "arena2") and anchors.Gladius.arena2 == nil then anchors.Gladius.arena2 = _G["GladiusClassIconFramearena2"] or nil end
+  				if (unitId == "arena3") and anchors.Gladius.arena3 == nil then anchors.Gladius.arena3 = _G["GladiusClassIconFramearena3"] or nil end
+  				if (unitId == "arena4") and anchors.Gladius.arena4 == nil then anchors.Gladius.arena4 = _G["GladiusClassIconFramearena4"] or nil end
+  				if (unitId == "arena5") and anchors.Gladius.arena5 == nil then anchors.Gladius.arena5 = _G["GladiusClassIconFramearena5"] or nil end
   				if updateFrame and anchors.Gladius[unitId] ~= nil then
 					local frame = LoseControlDB.frames[self.fakeUnitId or unitId]
 					local icon = LCframes[unitId]
-					local newAnchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
+					local exit = _G["GladiusClassIconFramearena"..counter]
+					local newAnchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or exit)
 					if newAnchor ~= nil and icon.anchor ~= newAnchor then
 						icon.anchor = newAnchor
 						icon.parent:SetParent(icon.anchor:GetParent()) -- or LoseControl) -- If Hide() is called on the parent frame, its children are hidden too. This also sets the frame strata to be the same as the parent's.
@@ -8047,86 +7963,7 @@ function LoseControl:CheckGladiusUnitsAnchors(updateFrame)
 	end
 end
 
-function LoseControl:CheckGladdyUnitsAnchors(updateFrame)
-  if (strfind(self.unitId, "arena")) and LoseControlDB.frames[self.unitId].anchor == "Gladdy" then
-    local inInstance, instanceType = IsInInstance();  local gladdyFrame;  local frames = {}
-  	if IsAddOnLoaded("Gladdy") and (not anchors.Gladdy[self.unitId]) then
-  		if not GladdyButtonFrame1 and instanceType ~= "arena" then
-  			gladdyFrame = "on"
-  			frames = { "arena1", "arena2", "arena3", "arena4", "arena5" }
-  			if DEFAULT_CHAT_FRAME.editBox:IsVisible() then
-  				DEFAULT_CHAT_FRAME.editBox:SetText("/gladdy test5")
-  				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-  			else
-  				DEFAULT_CHAT_FRAME.editBox:Show()
-  				DEFAULT_CHAT_FRAME.editBox:SetText("/gladdy test5")
-  				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-  				DEFAULT_CHAT_FRAME.editBox:Hide()
-  			end
-    	end
-  		if GladdyButtonFrame1 then frames[1] = "arena1" end
-    	if GladdyButtonFrame2 then frames[2] = "arena2" end
-  		if GladdyButtonFrame3 then frames[3] = "arena3" end
-  		if GladdyButtonFrame4 then frames[4] = "arena4" end
-  		if GladdyButtonFrame5 then frames[5] = "arena5" end
-  			for _, unitId in pairs(frames) do
-  				if (unitId == "arena1") and anchors.Gladdy.arena1 == nil then anchors.Gladdy.arena1 = GladdyButtonFrame1.classIcon or nil end
-  				if (unitId == "arena2") and anchors.Gladdy.arena2 == nil then anchors.Gladdy.arena2 = GladdyButtonFrame2.classIcon or nil end
-  				if (unitId == "arena3") and anchors.Gladdy.arena3 == nil then anchors.Gladdy.arena3 = GladdyButtonFrame3.classIcon or nil end
-  				if (unitId == "arena4") and anchors.Gladdy.arena4 == nil then anchors.Gladdy.arena4 = GladdyButtonFrame4.classIcon or nil end
-  				if (unitId == "arena5") and anchors.Gladdy.arena5 == nil then anchors.Gladdy.arena5 = GladdyButtonFrame5.classIcon or nil end
-  				if updateFrame and anchors.Gladdy[unitId] ~= nil then
-					local frame = LoseControlDB.frames[self.fakeUnitId or unitId]
-					local icon = LCframes[unitId]
-					local newAnchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
-					if newAnchor ~= nil and icon.anchor ~= newAnchor then
-						icon.anchor = newAnchor
-						icon.parent:SetParent(icon.anchor:GetParent()) -- or LoseControl) -- If Hide() is called on the parent frame, its children are hidden too. This also sets the frame strata to be the same as the parent's.
-						icon:ClearAllPoints() -- if we don't do this then the frame won't always move
-						icon:GetParent():ClearAllPoints()
-						icon:SetWidth(frame.size)
-						icon:SetHeight(frame.size)
-						icon:GetParent():SetWidth(frame.size)
-						icon:SetPoint(
-							frame.point or "CENTER",
-							icon.anchor,
-							frame.relativePoint or "CENTER",
-							frame.x or 0,
-							frame.y or 0
-						)
-						icon:GetParent():SetPoint(
-							frame.point or "CENTER",
-							icon.anchor,
-							frame.relativePoint or "CENTER",
-							frame.x or 0,
-							frame.y or 0
-						)
-						if icon.anchor:GetParent() then
-							icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
-						end
-						if #frames < 5 then
-						print("|cff00ccffLoseControl|r : Successfully Anchored "..unitId.." frame to Gladdy")
-					  end
-					end
-				end
-			end
-			if #frames == 5 then
-			print("|cff00ccffLoseControl|r : Successfully Anchored All Arena Frames")
-			end
-			if gladdyFrame == "on" then
-				if DEFAULT_CHAT_FRAME.editBox:IsVisible() then
-					DEFAULT_CHAT_FRAME.editBox:SetText("/gladdy hide")
-					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-				else
-					DEFAULT_CHAT_FRAME.editBox:Show()
-					DEFAULT_CHAT_FRAME.editBox:SetText("/gladdy hide")
-					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-					DEFAULT_CHAT_FRAME.editBox:Hide()
-				end
-			end
-		end
-	end
-end
+
 
 -- Initialize a frame's position and register for events
 function LoseControl:PLAYER_ENTERING_WORLD() -- this correctly anchors enemy arena frames that aren't created until you zone into an arena
@@ -8143,12 +7980,7 @@ function LoseControl:PLAYER_ENTERING_WORLD() -- this correctly anchors enemy are
 	) and not (
 		IsInRaid() and LoseControlDB.disablePartyInRaid and strfind(unitId, "party") and not (inInstance and (instanceType=="arena" or instanceType=="pvp" or instanceType=="party"))
 	)
-	if (ShadowUF ~= nil) and not(self:CheckSUFUnitsAnchors(false)) and (self.SUFDelayedSearch == nil) then
-		self.SUFDelayedSearch = GetTime()
-		Ctimer(8, function()	-- delay checking to make sure all variables of the other addons are loaded
-			self:CheckSUFUnitsAnchors(true)
-		end)
-	end
+
 	if strfind(unitId, "arena") then
 		if (Gladius ~= nil) and (self.GladiusDelayedSearch == nil) then
 			self.GladiusDelayedSearch = GetTime()
@@ -8156,12 +7988,7 @@ function LoseControl:PLAYER_ENTERING_WORLD() -- this correctly anchors enemy are
 				self:CheckGladiusUnitsAnchors(true)
 			end)
 		end
-		if IsAddOnLoaded("Gladdy") and (self.GladdyDelayedSearch == nil) then
-			self.GladdyDelayedSearch = GetTime()
-			Ctimer(3, function()	-- delay checking to make sure all variables of the other addons are loaded
-			self:CheckGladdyUnitsAnchors(true)
-			end)
-		end
+
 	end
 	self.anchor = _G[anchors[frame.anchor][unitId]] or (type(anchors[frame.anchor][unitId])=="table" and anchors[frame.anchor][unitId] or UIParent)
 	self.unitGUID = UnitGUID(self.unitId)
@@ -8216,10 +8043,9 @@ function LoseControl:GROUP_ROSTER_UPDATE()
 	)
 	self:RegisterUnitEvents(enabled)
 	self.unitGUID = UnitGUID(unitId)
-	self:CheckSUFUnitsAnchors(true)
+
 	if (frame == nil) or (unitId == nil) and (strfind(unitId, "arena")) then
 		self:CheckGladiusUnitsAnchors(true)
-  		self:CheckGladdyUnitsAnchors(true)
 	end
 	if enabled and not self.unlockMode then
 		self:UNIT_AURA(unitId, updatedAuras, 0)
@@ -8258,88 +8084,149 @@ local function UpdateUnitAuraByUnitGUID(unitGUID, typeUpdate)
 end
 
 
-function LoseControl:ARENA_OPPONENT_UPDATE()
+function LoseControl:LOSS_OF_CONTROL_ADDED()
+	for i = 1, 40 do
+		local data = CLocData(i);
+		if not data then break end
 
+		local customString = LoseControlDB.customString
+
+		local locType = data.locType;
+		local spellID = data.spellID;
+		local text = data.displayText;
+		local iconTexture = data.iconTexture;
+		local startTime = data.startTime;
+		local timeRemaining = data.timeRemaining;
+		local duration = data.duration;
+		local lockoutSchool = data.lockoutSchool;
+		local priority = data.priority;
+		local displayType = data.displayType;
+		local name, instanceType, _, _, _, _, _, instanceID, _, _ = GetInstanceInfo()
+		local ZoneName = GetZoneText()
+		local Type
+
+		if locType == "SCHOOL_INTERRUPT" then text = strformat("%s Locked", GetSchoolString(lockoutSchool)) end
+
+		string[spellID] = customString[spellID] or text
+
+		if not spellIds[spellID] and  (lockoutSchool == 0 or nil or false) then
+			if (locType == "STUN_MECHANIC") or (locType =="PACIFY") or (locType =="STUN") or (locType =="FEAR") or (locType =="CHARM") or (locType =="CONFUSE") or (locType =="POSSESS") or (locType =="FEAR_MECHANIC") or (locType =="FEAR") then
+				print("Found New CC",locType,"", spellID)
+				Type = "CC"
+			elseif locType == "DISARM" then
+				print("Found New Disarm",locType,"", spellID)
+				Type = "Disarm"
+			elseif (locType == "PACIFYSILENCE") or (locType =="SILENCE") then
+				print("Found New Silence",locType,"", spellID)
+				Type = "Silence"
+			elseif locType == "ROOT" then
+				print("Found New Root",locType,"", spellID)
+				Type = "Root"
+			else
+				print("Found New Other",locType,"", spellID)
+				Type = "Other"
+			end
+			spellIds[spellID] = Type
+			LoseControlDB.spellEnabled[spellID]= true
+			tblinsert(LoseControlDB.customSpellIds, {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
+			tblinsert(L.spells[#L.spells][tabsIndex[Type]], {spellID, Type, instanceType, name.."\n"..ZoneName, nil, "Discovered", #L.spells})
+			L.SpellsPVEConfig:UpdateTab(#L.spells-1)
+		elseif (not interruptsIds[spellID]) and lockoutSchool > 0 then
+			print("Found New Interrupt",locType,"", spellID)
+			interruptsIds[spellID] = duration
+			LoseControlDB.spellEnabled[spellID]= true
+			tblinsert(LoseControlDB.customSpellIds, {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
+			tblinsert(L.spells[#L.spells][tabsIndex["Interrupt"]], {spellID, "Interrupt", instanceType, name.."\n"..ZoneName, duration, "Discovered", #L.spells})
+			L.SpellsPVEConfig:UpdateTab(#L.spells-1)
+		else
+		end
+	end
+end
+
+
+function LoseControl:ARENA_OPPONENT_UPDATE(...)
+	local unit, arg2 = ...;
 	local unitId = self.unitId
 	local frame = self.frame
-	if (frame == nil) or (unitId == nil) or not(strfind(unitId, "arena")) then
-		return
-	end
-	local inInstance, instanceType = IsInInstance()
-	self:RegisterUnitEvents(
-		frame.enabled and not (
-			inInstance and instanceType == "pvp" and LoseControlDB.disableArenaInBG
-		)
-	)
-	self.unitGUID = UnitGUID(self.unitId)
-	self:CheckSUFUnitsAnchors(true)
-	self:CheckGladiusUnitsAnchors(true)
-  	self:CheckGladdyUnitsAnchors(true)
+	if unit and unitId and UnitIsUnit(unitId, unit) then
+		local guid = UnitGUID(unit)
+		if arg2 == "seen" and UnitExists(unit) then
+			if (frame == nil) or (unitId == nil) or not(strfind(unitId, "arena")) then
+				return
+			end
 
+			local inInstance, instanceType = IsInInstance()
+			self:RegisterUnitEvents(
+				frame.enabled and not (
+					inInstance and instanceType == "pvp" and LoseControlDB.disableArenaInBG
+				)
+			)
+			self.unitGUID = UnitGUID(self.unitId)
+	
+			self:CheckGladiusUnitsAnchors(true)
+		
+			if (unit =="arena1") and (GladiusClassIconFramearena1) then
+				if GladiusClassIconFramearena1 then GladiusClassIconFramearena1:SetAlpha(1) end		
+			end
+			if (unit =="arena2") and (GladiusClassIconFramearena2) then
+				if GladiusClassIconFramearena2 then GladiusClassIconFramearena2:SetAlpha(1) end
+			end
+			if (unit =="arena3") and (GladiusClassIconFramearena3) then
+				if GladiusClassIconFramearena3 then GladiusClassIconFramearena3:SetAlpha(1) end
+			end
+			if (unit =="arena4") and (GladiusClassIconFramearena4) then
+				if GladiusClassIconFramearena4 then GladiusClassIconFramearena4:SetAlpha(1) end
+			end
+			if (unit =="arena5") and (GladiusClassIconFramearena5) then
+				if GladiusClassIconFramearena5 then GladiusClassIconFramearena5:SetAlpha(1) end
+			end
 
-	if enabled and not self.unlockMode then
-		self:UNIT_AURA(unitId, updatedAuras, 0)
+			Arenastealth[unit] = nil
+
+			if guid and not self.unlockMode then
+				UpdateUnitAuraByUnitGUID(guid, -250)
+			end
+		elseif arg2 == "unseen" then
+			if guid and not self.unlockMode then
+				UpdateUnitAuraByUnitGUID(guid, -200)
+			end
+		elseif arg2 == "destroyed" then
+			Arenastealth[unit] = nil
+			if guid and not self.unlockMode then
+				UpdateUnitAuraByUnitGUID(guid, -200)
+			end
+		elseif arg2 == "cleared" then
+			Arenastealth[unit] = nil
+			if guid and not self.unlockMode then
+				UpdateUnitAuraByUnitGUID(guid, -200)
+			end
+		end
 	end
 end
 
 function LoseControl:ARENA_PREP_OPPONENT_SPECIALIZATIONS()
 	self:CheckGladiusUnitsAnchors(true)
- 	self:CheckGladdyUnitsAnchors(true)
 	self:ARENA_OPPONENT_UPDATE()
 end
 
 
-local ArenaSeen = CreateFrame("Frame")
-ArenaSeen:RegisterEvent("ARENA_OPPONENT_UPDATE")
-ArenaSeen:SetScript("OnEvent", function(self, event, ...)
-	local unit, arg2 = ...;
-	if (event == "ARENA_OPPONENT_UPDATE") then
-		if (unit =="arena1") or (unit =="arena2") or (unit =="arena3") or (unit =="arena4") or (unit =="arena5") then
-			if arg2 == "seen" then
-				if UnitExists(unit) then
-					if (unit =="arena1") and (GladiusClassIconFramearena1 or GladdyButtonFrame1) then
-						if GladiusClassIconFramearena1 then GladiusClassIconFramearena1:SetAlpha(1) end
-						if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(1) end
-						local guid = UnitGUID(unit)
-						UpdateUnitAuraByUnitGUID(guid, -250)
-					end
-					if (unit =="arena2") and (GladiusClassIconFramearena2 or GladdyButtonFrame2) then
-						if GladiusClassIconFramearena2 then GladiusClassIconFramearena2:SetAlpha(1) end
-						if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(1) end
-						local guid = UnitGUID(unit)
-						UpdateUnitAuraByUnitGUID(guid, -250)
-					end
-					if (unit =="arena3") and (GladiusClassIconFramearena3 or GladdyButtonFrame3) then
-						if GladiusClassIconFramearena3 then GladiusClassIconFramearena3:SetAlpha(1) end
-						if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(1) end
-						local guid = UnitGUID(unit)
-						UpdateUnitAuraByUnitGUID(guid, -250)
-					end
-					if (unit =="arena4") and (GladiusClassIconFramearena4 or GladdyButtonFrame4) then
-						if GladiusClassIconFramearena4 then GladiusClassIconFramearena4:SetAlpha(1) end
-						if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(1) end
-						local guid = UnitGUID(unit)
-						UpdateUnitAuraByUnitGUID(guid, -250)
-					end
-					if (unit =="arena5") and (GladiusClassIconFramearena5 or GladdyButtonFrame5) then
-						if GladiusClassIconFramearena5 then GladiusClassIconFramearena5:SetAlpha(1) end
-						if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(1) end
-						local guid = UnitGUID(unit)
-						UpdateUnitAuraByUnitGUID(guid, -250)
-					end
-					Arenastealth[unit] = nil
-				end
-			elseif arg2 == "unseen" then
-				local guid = UnitGUID(unit)
-				UpdateUnitAuraByUnitGUID(guid, -200)
-			elseif arg2 == "destroyed" then
-				Arenastealth[unit] = nil
-			elseif arg2 == "cleared" then
-				Arenastealth[unit] = nil
+--[[local DNEtooltip = CreateFrame("GameTooltip", "LCDNEScanSpellDescTooltip", UIParent, "GameTooltipTemplate")
+
+local function ObjectDNE(guid) --Used for Infrnals and Ele
+	DNEtooltip:SetOwner(WorldFrame, 'ANCHOR_NONE')
+	DNEtooltip:SetHyperlink("unit:"..guid or '')
+
+	for i = 1 , DNEtooltip:NumLines() do
+		local text =_G["LCDNEScanSpellDescTooltipTextLeft"..i]; 
+		text = text:GetText()
+		if text and (type(text == "string")) then
+			--print(i.." "..text)
+			if strfind(text, "Level ??") or strfind(text, "Corpse") then 
+				return "Despawned"
 			end
 		end
 	end
-end)
+end]]
 
 local function ObjectDNE(guid) --Used for Infrnals and Ele
 	local tooltipData =  C_TooltipInfo.GetHyperlink('unit:' .. guid or '')
@@ -8470,7 +8357,7 @@ end
 function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 	if self.unitId == "target" then
 		-- Check Interrupts
-		local _, event, _, sourceGUID, sourceName, sourceFlags, _, destGUID, _, _, _, spellId, _, _, _, _, spellSchool = CombatLogGetCurrentEventInfo()
+		local _, event, _, sourceGUID, sourceName, sourceFlags, _, destGUID, destName, _, _, spellId, _, _, _, _, spellSchool = CombatLogGetCurrentEventInfo()
 		if (destGUID ~= nil) then --Diables Kicks for Player
 			if (event == "SPELL_INTERRUPT") then
 				local duration = interruptsIds[spellId]
@@ -8497,7 +8384,6 @@ function LoseControl:COMBAT_LOG_EVENT_UNFILTERED()
 		  		end
 			end
 		end
-
    		-- Check Channel Interrupts for player
      	if (event == "SPELL_CAST_SUCCESS") then
 		    if interruptsIds[spellId] then
@@ -9011,7 +8897,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 	local maxExpirationTime = 0
 	local newExpirationTime = 0
 	local maxPriorityIsInterrupt = false
-	local Icon, Duration, Hue, Name, Spell, Count, Text, DispelType
+	local Icon, Duration, Hue, Name, Spell, Count, Text, DispelType, SpellCategory, INDEX
 	local LayeredHue = nil
 	local forceEventUnitAuraAtEnd = false
 	local buffs= {} 
@@ -9168,6 +9054,13 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 				icon = 236925
 			end
 
+			if spellId == 454787 then --Ice Prison
+				--icon = 463560
+				--icon = 236922
+				icon = 4226156
+			end
+
+
 			if spellId == 334693 then --Abosolute Zero Frost Dk Legendary Stun to Cube
 				icon = 517161
 			end
@@ -9284,9 +9177,9 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			-----------------------------------------------------------------------------------------------------------------
 			--Hue Change
 			-----------------------------------------------------------------------------------------------------------------
-			if spellId == 320035 then -- Mirros of Torment Haste Reduction
+			--[[if spellId == 320035 then -- Mirros of Torment Haste Reduction
 				hue = "Purple"
-			end
+			end]]
 
 			local spellCategory = spellIds[spellId] or spellIds[name]
 			local Priority = priority[spellCategory]
@@ -9330,6 +9223,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								if dispelType then DispelType = dispelType else DispelType = "none" end
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							elseif Priority > maxPriority then
@@ -9343,6 +9238,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								if dispelType then DispelType = dispelType else DispelType = "none" end
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							end
@@ -9357,6 +9254,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								if dispelType then DispelType = dispelType else DispelType = "none" end
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							elseif Priority > maxPriority then
@@ -9370,6 +9269,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								if dispelType then DispelType = dispelType else DispelType = "none" end
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							end
@@ -9394,7 +9295,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 				localForceEventUnitAuraAtEnd = (self.unitId == "targettarget")
 			end
 
-			-----------------------------------------------------------------------------------------------------------------
+				-----------------------------------------------------------------------------------------------------------------
 			--Barrier Add Timer Check For Arena
 			-----------------------------------------------------------------------------------------------------------------
 			if spellId == 81782 then -- Barrier
@@ -9763,6 +9664,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								DispelType = "Buff"
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							elseif Priority > maxPriority then
@@ -9776,6 +9679,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								DispelType = "Buff"
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							end
@@ -9790,6 +9695,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								DispelType = "Buff"
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							elseif Priority > maxPriority then
@@ -9803,6 +9710,8 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								Name = name
 								Count = count
 								Spell = spellId
+								INDEX = i
+								SpellCategory = spellCategory
 								DispelType = "Buff"
 								Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 							end
@@ -9901,6 +9810,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 										Name = name
 										Count = count
 										Spell = spellId
+										SpellCategory = spellCategory
 										DispelType = "CLEU"
 										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 										local nextTimerUpdate = expirationTime - GetTime() + 0.05
@@ -9934,6 +9844,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 										Name = name
 										Count = count
 										Spell = spellId
+										SpellCategory = spellCategory
 										DispelType = "CLEU"
 										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 										local nextTimerUpdate = expirationTime - GetTime() + 0.05
@@ -9968,6 +9879,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 										Name = name
 										Count = count
 										Spell = spellId
+										SpellCategory = spellCategory
 										DispelType = "CLEU"
 										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 										local nextTimerUpdate = expirationTime - GetTime() + 0.05
@@ -10001,6 +9913,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 										Name = name
 										Count = count
 										Spell = spellId
+										SpellCategory = spellCategory
 										DispelType = "CLEU"
 										Text = customString[spellId] or customString[name] or string[spellId] or defaultString[spellCategory]
 										local nextTimerUpdate = expirationTime - GetTime() + 0.05
@@ -10094,7 +10007,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								self:UNIT_AURA(unitId, updatedAuras, -5)
 						end)
 						foundbuff = 1
-						--print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
 					elseif ((buffs[i].col1 == priority.Special_High and StealthTable[buffs[i].col3.spellId]) or (buffs[i].col3.name == "FriendlyShadowyDuel") or (buffs[i].col3.name == "EnemyShadowyDuel")) then --and ((duration == 0) or (buffs[i].col3.expirationTime < (GetTime() + .10))) then
 						maxExpirationTime = GetTime() + 1
@@ -10104,7 +10017,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 						Hue = buffs[i].col3.hue
 						Name = buffs[i].col3.name
 						foundbuff = 1
-						--print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
+						print(unitId, "Permanent Stealthed w/", buffs[i].col3.name)
 						break
 					elseif ((buffs[i].col3.expirationTime > GetTime() + .10) and (buffs[i].col3.duration ~= 0 ) and (buffs[i].col1 <= priority.Special_High and not StealthTable[buffs[i].col3.spellId])) then
 						maxExpirationTime = buffs[i].col3.expirationTime
@@ -10121,7 +10034,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 								self:UNIT_AURA(unitId, updatedAuras, -5)
 						end)
 						foundbuff = 1
-						--print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
+						print(unitId, "Unseen or Stealth w/", buffs[i].col3.name)
 						break
 					end
 				end
@@ -10132,31 +10045,27 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 					forceEventUnitAuraAtEnd = forceEventUnitAuraAtEnd
 					Hue = Hue
 					Name = Name
-					--print(unitId, "No Stealth Buff Found")
+					print(unitId, "No Stealth Buff Found")
 					if unitId == "arena1" and GladiusClassIconFramearena1 and GladiusHealthBararena1 then
 						GladiusClassIconFramearena1:SetAlpha(GladiusHealthBararena1:GetAlpha())
-						if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(GladiusHealthBararena1:GetAlpha()) end
 					end
 					if unitId == "arena2" and GladiusClassIconFramearena2 and GladiusHealthBararena2 then
 						GladiusClassIconFramearena2:SetAlpha(GladiusHealthBararena2:GetAlpha())
-						if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(GladiusHealthBararena2:GetAlpha()) end
 					end
 					if unitId == "arena3" and GladiusClassIconFramearena3 and GladiusHealthBararena3 then
 						GladiusClassIconFramearena3:SetAlpha(GladiusHealthBararena3:GetAlpha())
-							if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(GladiusHealthBararena3:GetAlpha()) end
 					end
 					if unitId == "arena4" and GladiusClassIconFramearena4 and GladiusHealthBararena4 then
 						GladiusClassIconFramearena4:SetAlpha(GladiusHealthBararena4:GetAlpha())
-						if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(GladiusHealthBararena4:GetAlpha()) end
 					end
 					if unitId == "arena5" and GladiusClassIconFramearena5 and GladiusHealthBararena5 then
 						GladiusClassIconFramearena5:SetAlpha(GladiusHealthBararena5:GetAlpha())
-						if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(GladiusHealthBararena5:GetAlpha()) end
 					end
 				end
 			end
 		end
 	end
+
 
 	for i = 1, #buffs do --creates a layered hue for every icon when a specific priority, or spellid is present
 		if not buffs[i] then break end
@@ -10167,17 +10076,21 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 						self.LayeredHue = true
 						Hue = "Red"
 					end
-				local remaining = buffs[i].col3.expirationTime - GetTime() -- refires on layer exit, to reset the icons
-				if  remaining  < 0.05 then
-					 remaining  = 0.05
-				end
-				Ctimer(remaining + .05, function() self:UNIT_AURA(unitId, updatedAuras, -55) end)
+					local remaining = buffs[i].col3.expirationTime - GetTime() -- refires on layer exit, to reset the icons
+					if  remaining  < 0.05 then
+						remaining  = 0.05
+					end
+					if not self.EnemySmokeBomb_Found then
+						Ctimer(remaining + .05, function() --[[print(self:GetName().." "..buffs[i].col3.spellId.." ".. GetTime());]]  self.EnemySmokeBomb_Found = nil; self:UNIT_AURA(unitId, updatedAuras, -55) end)
+						self.EnemySmokeBomb_Found = true
+					end
+				break
 			end
 		end
 	end
 
 	if typeUpdate == -999 then 
-		SecondaryIconData = {["maxPriority"] = maxPriority, ["maxExpirationTime"] = maxExpirationTime, ["newExpirationTime"] = newExpirationTime, ["Duration"] = Duration, ["Icon"] = Icon, ["forceEventUnitAuraAtEnd"] = forceEventUnitAuraAtEnd, ["Hue"] = Hue, ["Name"] = Name, ["Count"] = Count, ["DispelType"] = DispelType, ["Text"] = Text, ["Spell"] = Spell, ["LayeredHue"] = LayeredHue}
+		SecondaryIconData = {["maxPriority"] = maxPriority, ["maxExpirationTime"] = maxExpirationTime, ["newExpirationTime"] = newExpirationTime, ["Duration"] = Duration, ["Icon"] = Icon, ["forceEventUnitAuraAtEnd"] = forceEventUnitAuraAtEnd, ["Hue"] = Hue, ["Name"] = Name, ["Count"] = Count, ["DispelType"] = DispelType, ["Text"] = Text, ["Spell"] = Spell, ["LayeredHue"] = LayeredHue,  ["SpellCategory"] = SpellCategory, ["INDEX "] = INDEX }
 		return 
 	end
 
@@ -10191,7 +10104,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 	if (maxExpirationTime == 0) then -- no (de)buffs found
 		self.maxExpirationTime = 0
     	if self.anchor ~= UIParent and self.drawlayer then
-			if self.drawanchor == self.anchor and self.anchor.GetDrawLayer and self.anchor.SetDrawLayer then
+			if self.drawanchor == self.anchor and self.anchor.GetDrawLayer and self.anchor.SetDrawLayer then 
 				self.anchor:SetDrawLayer(self.drawlayer) -- restore the original draw layer
 			else
 				self.drawlayer = nil
@@ -10225,16 +10138,14 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			end
 		end
 
-		if LoseControlDB.EnableGladiusGloss and (self.unitId == "arena1") or (self.unitId == "arena2") or (self.unitId == "arena3")  or (self.unitId == "arena4") or (self.unitId == "arena5") and (self.frame.anchor == "Gladius" or self.frame.anchor == "Gladdy") then
+		if LoseControlDB.EnableGladiusGloss and (self.unitId == "arena1") or (self.unitId == "arena2") or (self.unitId == "arena3")  or (self.unitId == "arena4") or (self.unitId == "arena5") and (self.frame.anchor == "Gladius") then
 			self.gloss:SetNormalTexture("Interface\\AddOns\\Gladius\\Images\\Gloss")
 			self.gloss.normalTexture = _G[self.gloss:GetName().."NormalTexture"]
 			self.gloss.normalTexture:SetHeight(self.frame.size)
 			self.gloss.normalTexture:SetWidth(self.frame.size)
-			if self.frame.anchor == "Gladdy" then
-				self.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
-			else
-				self.gloss.normalTexture:SetScale(.89) --.88 Gladius 
-			end
+			
+			self.gloss.normalTexture:SetScale(.89) --.88 Gladius 
+
 			self.gloss.normalTexture:ClearAllPoints()
 			self.gloss.normalTexture:SetPoint("CENTER", self, "CENTER")
 			self.gloss:SetNormalTexture("Interface\\AddOns\\LoseControl\\Textures\\Gloss")
@@ -10248,6 +10159,55 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 				self.gloss:Hide()
 			end
 		end
+
+
+		if spellIds[Spell] and strfind(spellIds[Spell], "Snare") and unitId == "player" and typeUpdate ~= -999 then 
+			local found, number, SnareP
+			if spellIds[Spell] == "SnareSpecial" then
+				SnareP = "**"
+			elseif spellIds[Spell] == "SnarePhysical70" then 
+				SnareP = "70"
+			elseif spellIds[Spell] == "SnareMagic70" then 
+				SnareP = "70"
+			elseif spellIds[Spell] == "SnarePhysical50" then
+				SnareP = "50" 
+			elseif spellIds[Spell] == "SnarePosion50" then 
+				SnareP = "50"
+			elseif spellIds[Spell] == "SnareMagic50" then 
+				SnareP = "50"
+			elseif spellIds[Spell] == "SnarePhysical30" then 
+				SnareP = "30"
+			elseif spellIds[Spell] == "SnareMagic30" then 
+				SnareP = "30"
+			elseif spellIds[Spell] == "Snare" then
+				local tooltipData = _G["LCSnareScanSpellDescTooltip"] or CreateFrame("GameTooltip", "LCSnareScanSpellDescTooltip", UIParent, "GameTooltipTemplate")
+				tooltipData:SetOwner(UIParent, "ANCHOR_NONE")
+				if unitId and INDEX then
+					tooltipData:SetUnitDebuff(unitId, INDEX, "HARMFUL")
+				else
+					tooltipData:SetSpellByID(Spell)
+				end
+				for i = 1 , tooltipData:NumLines() do
+					local text =_G["LCSnareScanSpellDescTooltipTextLeft"..i]; 
+					text = text:GetText()
+					if text and (type(text == "string")) then
+						if strmatch(text, "%%") then
+							if strmatch(text, "%d+")  then 
+								number =  strmatch(text, "%d+") 
+								found = true
+								break
+							end
+						end
+					end
+				end
+			end
+			if found then 
+				Text = Text.." ("..number.."%)"
+			elseif SnareP then
+				Text = Text.." ("..SnareP.."%)"
+			end
+		end
+
 
 		if Count then
 			if ((unitId == "player" and LoseControlDB.CountTextplayer) or ((unitId == "party1" or unitId == "party2" or unitId == "party3" or unitId == "party4") and  LoseControlDB.CountTextparty)) and not (self.frame.anchor == "Blizzard") then
@@ -10304,7 +10264,7 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			--Do Nothing
 		else
 			if Text and unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
-				self.Ltext:SetFont(STANDARD_TEXT_FONT, self.frame.size*.25, "OUTLINE")
+				self.Ltext:SetFont(STANDARD_TEXT_FONT, self.frame.size*.225, "OUTLINE")
 				self.Ltext:SetText(Text)
 				self.Ltext:Show()
 			elseif unitId == "player" and self.frame.anchor ~= "Blizzard" then
@@ -10313,6 +10273,51 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 				end
 			end
 		end
+
+		if strmatch(unitId, "arena") then
+			local i = strmatch(unitId, "%d") 
+			local anchor = _G["GladiusClassIconFramearena"..i]
+			local frame = LoseControlDB.frames[unitId]
+			local icon = LCframes[unitId]
+			if self.frame.anchor == "Gladius" and (anchor and icon.anchor ~= anchor) then  
+				icon.anchor = anchor
+				local Fpoint, FrelativeTo, FrelativePoint, FxOfs, FyOfs = self:GetPoint()
+				icon.parent:SetParent(icon.anchor:GetParent()) -- or LoseControl) -- If Hide() is called on the parent frame, its children are hidden too. This also sets the frame strata to be the same as the parent's.
+				icon:ClearAllPoints() -- if we don't do this then the frame won't always move
+				icon:GetParent():ClearAllPoints()
+				icon:SetWidth(frame.size)
+				icon:SetHeight(frame.size)
+				icon:GetParent():SetWidth(frame.size)
+				icon:SetPoint("CENTER",	anchor, "CENTER", 0,	0)
+				icon:GetParent():SetPoint("CENTER",	anchor, "CENTER", 0,	0)
+				if icon.anchor:GetParent() then
+					icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
+				end
+			end
+		end
+
+		--[[
+		if strmatch(unitId, "party") then
+			local i = strmatch(unitId, "%d") 
+			local anchor = _G["PartyAnchor"..i]
+			local frame = LoseControlDB.frames[unitId]
+			local icon = LCframes[unitId]
+			if self.frame.anchor == "BambiUI" and (anchor and icon.anchor ~= anchor) then  
+				icon.anchor = anchor
+				local Fpoint, FrelativeTo, FrelativePoint, FxOfs, FyOfs = self:GetPoint()
+				icon.parent:SetParent(icon.anchor:GetParent()) -- or LoseControl) -- If Hide() is called on the parent frame, its children are hidden too. This also sets the frame strata to be the same as the parent's.
+				icon:ClearAllPoints() -- if we don't do this then the frame won't always move
+				icon:GetParent():ClearAllPoints()
+				icon:SetWidth(frame.size)
+				icon:SetHeight(frame.size)
+				icon:GetParent():SetWidth(frame.size)
+				icon:SetPoint("CENTER",	anchor, "CENTER", 0,	0)
+				icon:GetParent():SetPoint("CENTER",	anchor, "CENTER", 0,	0)
+				if icon.anchor:GetParent() then
+					icon:SetFrameLevel(icon.anchor:GetParent():GetFrameLevel()+((frame.anchor ~= "None" and frame.anchor ~= "Blizzard") and 3 or 0))
+				end
+			end
+		end]]
 
 		if  unitId == "player" and self.frame.anchor ~= "Blizzard" and LoseControlDB.displayTypeDot and DispelType then
 			self.dispelTypeframe:SetHeight(self.frame.size*.105)
@@ -10382,7 +10387,9 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 					self:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)	---- Orginally 0.8 This is the default alpha of the normal swipe cooldown texture ADD OPTION FOR THIS
 				end
 			else
-				SetPortraitToTexture(self.texture, Icon) -- Sets the texture to be displayed from a filHuee applying a circular opacity mask making it look round like portraits
+				--self.texture:SetTexture(Icon)
+				--SetPortraitToTexture(self.texture, self.texture:GetTexture()) -- Sets the texture to be displayed from a filHuee applying a circular opacity mask making it look round like portraits
+				SetPortraitToTexture(self.texture, Icon)
 				self:SetSwipeTexture("Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
 				self.texture:SetDesaturated(nil) --Destaurate Icon
 				self.texture:SetVertexColor(1, 1, 1)
@@ -10441,7 +10448,9 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 		else
 			ActionButton_HideOverlayGlow(self)
 		end
+
 		self.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+
 		self.spellCategory = spellIds[Spell]
 		self.Priority = priority[self.spellCategory]
 		self:Show()
@@ -10474,27 +10483,27 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 					if unitId == "arena1" and GladiusClassIconFramearena1 then
 						self:GetParent():SetAlpha(0.8)
 						GladiusClassIconFramearena1:SetAlpha(0)
-						--if GladdyButtonFrame1 then GladdyButtonFrame1:SetAlpha(0) end
+
 					end
 					if unitId == "arena2" and GladiusClassIconFramearena2 then
 						self:GetParent():SetAlpha(0.8)
 						GladiusClassIconFramearena2:SetAlpha(0)
-						--if GladdyButtonFrame2 then GladdyButtonFrame2:SetAlpha(0) end
+
 					end
 					if unitId == "arena3" and GladiusClassIconFramearena3 then
 						self:GetParent():SetAlpha(0.8)
 						GladiusClassIconFramearena3:SetAlpha(0)
-						--if GladdyButtonFrame3 then GladdyButtonFrame3:SetAlpha(0) end
+
 					end
 					if unitId == "arena4" and GladiusClassIconFramearena4 then
 						self:GetParent():SetAlpha(0.8)
 						GladiusClassIconFramearena4:SetAlpha(0)
-						--if GladdyButtonFrame4 then GladdyButtonFrame4:SetAlpha(0) end
+
 					end
 					if unitId == "arena5" and GladiusClassIconFramearena5 then
 						self:GetParent():SetAlpha(0.8)
 						GladiusClassIconFramearena5:SetAlpha(0)
-						--if GladdyButtonFrame5 then GladdyButtonFrame5:SetAlpha(0) end
+
 					end
 				end
 			end
@@ -10502,14 +10511,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 			self:GetParent():SetAlpha(self.frame.alpha) -- hack to apply transparency to the cooldown timer
 		end
 	end
-	if unitId == "player" and LoseControlDB.SilenceIcon and self.frame.anchor ~= "Blizzard" and not self.fakeUnitId then
-		if self.Priority and self.Priority > LoseControlDB.priority["Silence"] then
-		--	LoseControl:Silence(LoseControlplayer, LayeredHue, self.spellCategory)
-		else
-			if playerSilence then playerSilence:Hide() end
-		end
-	end
-
 	if unitId == "player" and LoseControlDB.SecondaryIcon and self.frame.anchor ~= "Blizzard" and not self.fakeUnitId then
 		--if self.spellCategory  and self.spellCategory ~= "CC" and (self.spellCategory == "Silence" or self.spellCategory == "RootPhyiscal_Special" or self.spellCategory == "RootMagic_Special" or self.spellCategory == "Root") then
 		if self.spellCategory then 
@@ -10520,111 +10521,6 @@ function LoseControl:UNIT_AURA(unitId, updatedAuras, typeUpdate, playerPrimarysp
 	end
 end
 
-
-
-
-function LoseControl:Silence(frame,  LayeredHue, spellCategory)
-  	local playerSilence = frame.playerSilence
-  	local Icon, Duration, maxPriority, maxExpirationTime, DispelType
-	local maxPriority = 1
-	local maxExpirationTime = 0
-	local priority = LoseControlDB.priority
-	for i = 1, 40 do
-		local name, icon, count, debuffType, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HARMFUL")
-		if duration == 0 and expirationTime == 0 then
-			expirationTime = GetTime() + 1 -- normal expirationTime = 0
-		end
-		local spellCategory = spellIds[spellId] or spellIds[name]
-		local Priority = priority[spellCategory]
-		if spellCategory == "Silence" then
-			if expirationTime > maxExpirationTime then
-				maxExpirationTime = expirationTime
-				Duration = duration
-				Icon = icon
-				DispelType = debuffType
-			end
-		end
-  	end
-	for i = 1, 40 do
-		local name, icon, count, debuffType, duration, expirationTime, source, _, _, spellId = UnitAura("player", i, "HELPFUL")
-		if duration == 0 and expirationTime == 0 then
-			expirationTime = GetTime() + 1 -- normal expirationTime = 0
-		end
-		local spellCategory = spellIds[spellId] or spellIds[name]
-		local Priority = priority[spellCategory]
-		if spellCategory == "Silence" then
-			if expirationTime > maxExpirationTime then
-				maxExpirationTime = expirationTime
-				Duration = duration
-				Icon = icon
-				DispelType = debuffType
-			end
-		end
-	end
-	playerSilence:SetWidth(frame:GetWidth()*.9)
-	playerSilence:SetHeight(frame:GetHeight()*.9)
-	playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-	playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
-	playerSilence.Ltext:SetText("Silence")
-	if maxExpirationTime == 0 then
-		playerSilence.maxExpirationTime = 0
-		playerSilence:Hide()
-	elseif maxExpirationTime then
-		playerSilence.maxExpirationTime = maxExpirationTime
-		if LoseControlDB.DrawSwipeSetting > 0 then
-			playerSilence.cooldown:SetDrawSwipe(true)
-		else
-			playerSilence.cooldown:SetDrawSwipe(false)
-		end
-		if LoseControlDB.displayTypeDot and DispelType then
-			playerSilence.dispelTypeframe:SetHeight(frame:GetWidth()*.09)
-			playerSilence.dispelTypeframe:SetWidth(frame:GetWidth()*.09)
-			playerSilence.dispelTypeframe.tex:SetDesaturated(nil)
-			playerSilence.dispelTypeframe.tex:SetVertexColor(colorTypes[DispelType][1], colorTypes[DispelType][2], colorTypes[DispelType][3]);
-			playerSilence.dispelTypeframe:ClearAllPoints()
-			if playerSilence.Ltext:IsShown() then
-				playerSilence.dispelTypeframe:SetPoint("LEFT", playerSilence.Ltext, "RIGHT", 1, -1.25)
-			else
-				playerSilence.dispelTypeframe:SetPoint("TOP", playerSilence, "BOTTOM", 0, -1)
-			end
-			playerSilence.dispelTypeframe:Show()
-		else
-			if playerSilence.dispelTypeframe:IsShown() then
-				playerSilence.dispelTypeframe:Hide()
-			end
-		end
-		if LayeredHue then
-			playerSilence.texture:SetTexture(Icon)   --Set Icon
-			playerSilence.texture:SetDesaturated(1) --Destaurate Icon
-			playerSilence.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
-		else
-			playerSilence.texture:SetTexture(Icon)
-			playerSilence.texture:SetDesaturated(nil) --Destaurate Icon
-			playerSilence.texture:SetVertexColor(1, 1, 1)
-		end
-		playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-		if Duration > 0 then
-			if (maxExpirationTime - GetTime()) > (9*60+59) then
-				playerSilence.cooldown:SetCooldown(GetTime(), 0)
-				playerSilence.cooldown:SetCooldown(GetTime(), 0)
-			else
-				playerSilence.cooldown:SetCooldown( maxExpirationTime - Duration, Duration )
-			end
-		else
-			if playerSilence.cooldown:GetDrawSwipe() then
-				if LoseControlDB.DrawSwipeSetting > 0 then
-					playerSilence.cooldown:SetDrawSwipe(true)
-				else
-					playerSilence.cooldown:SetDrawSwipe(false)
-				end
-			end
-			playerSilence.cooldown:SetCooldown(GetTime(), 0)
-			playerSilence.cooldown:SetCooldown(GetTime(), 0)	--needs execute two times (or the icon can dissapear; yes, it's weird...)
-		end
-		local inInstance, instanceType = IsInInstance()
-		playerSilence:Show()
-	end
-end
 
 function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 	local playerSecondaryIcon = frame.playerSecondaryIcon
@@ -10643,16 +10539,71 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 	local DispelType = SecondaryIconData.DispelType
 	local Text = SecondaryIconData.Text
 	local Spell = SecondaryIconData.Spell
-	local LayeredHue = SecondaryIconData.LayeredHue
+	local SecondaryLayeredHue = SecondaryIconData.LayeredHue
+	local SpellCategory = SecondaryIconData.SpellCategory
+	local INDEX = SecondaryIconData.INDEX
+
+	if SpellCategory == "Friendly_Smoke_Bomb" then -- If the Second Icon is Ever Friendly Bomb it Needs to be White
+		LayeredHue = nil
+		SecondaryLayeredHue = nil
+		Hue = nil
+	end
+
+	if SpellCategory and strfind(SpellCategory, "Snare") then 
+		local found, number, SnareP
+		if spellIds[Spell] == "SnareSpecial" then
+			SnareP = "**"
+		elseif spellIds[Spell] == "SnarePhysical70" then 
+			SnareP = "70"
+		elseif spellIds[Spell] == "SnareMagic70" then 
+			SnareP = "70"
+		elseif spellIds[Spell] == "SnarePhysical50" then
+			SnareP = "50" 
+		elseif spellIds[Spell] == "SnarePosion50" then 
+			SnareP = "50"
+		elseif spellIds[Spell] == "SnareMagic50" then 
+			SnareP = "50"
+		elseif spellIds[Spell] == "SnarePhysical30" then 
+			SnareP = "30"
+		elseif spellIds[Spell] == "SnarePhysical30" then 
+			SnareP = "30"
+		elseif spellIds[Spell] == "Snare" then
+			local tooltipData = _G["LCPSnareScanSpellDescTooltip"] or CreateFrame("GameTooltip", "LCPSnareScanSpellDescTooltip", UIParent, "GameTooltipTemplate")
+			tooltipData:SetOwner(UIParent, "ANCHOR_NONE")
+			if INDEX then
+				tooltipData:SetUnitDebuff("player", INDEX, "HARMFUL")
+			else
+				tooltipData:SetSpellByID(Spell)
+			end
+			for i = 1 , tooltipData:NumLines() do
+				local text =_G["LCPSnareScanSpellDescTooltipTextLeft"..i]; 
+				text = text:GetText()
+				if text and (type(text == "string")) then
+					if strmatch(text, "%%") then
+						if strmatch(text, "%d+")  then 
+							number =  strmatch(text, "%d+") 
+							found = true
+							break
+						end
+					end
+				end
+			end
+		end
+		if found then 
+			Text = Text.." ("..number.."%)"
+		elseif SnareP then
+			Text = Text.." ("..SnareP.."%)"
+		end
+	end
 	
-	playerSecondaryIcon:SetWidth(frame:GetWidth()*.9)
-	playerSecondaryIcon:SetHeight(frame:GetHeight()*.9)
+	playerSecondaryIcon:SetWidth(frame:GetWidth()*.85)
+	playerSecondaryIcon:SetHeight(frame:GetHeight()*.85)
 	playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-	playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
+	playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.8*.25, "OUTLINE")
 	--playerSecondaryIcon.Ltext:SetJustifyH("CENTER")
 	--playerSecondaryIcon.Ltext:SetPoint("TOPLEFT", o.playerSecondaryIcon, "BOTTOMLEFT",  0 , -1.25)
 	if Text and LoseControlDB.PlayerText then
-		playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.9*.225, "OUTLINE")
+		playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, frame:GetHeight()*.8*.25, "OUTLINE")
 		playerSecondaryIcon.Ltext:SetText(Text)
 		playerSecondaryIcon.Ltext:Show()
 	else
@@ -10666,8 +10617,8 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 		playerSecondaryIcon:Hide()
 	elseif maxExpirationTime then
 		playerSecondaryIcon.maxExpirationTime = maxExpirationTime
-		if Hue then
-			if Hue == "Red" then -- Changes Icon Hue to Red
+		if Hue or LayeredHue or SecondaryLayeredHue then
+			if Hue == "Red" or LayeredHue or SecondaryLayeredHue then -- Changes Icon Hue to Red
 				playerSecondaryIcon.texture:SetTexture(Icon)   --Set Icon
 				playerSecondaryIcon.texture:SetDesaturated(1) --Destaurate Icon
 				playerSecondaryIcon.texture:SetVertexColor(1, .25, 0); --Red Hue Set For Icon
@@ -10701,8 +10652,8 @@ function LoseControl:SecondaryIcon(frame, LayeredHue, spellCategory)
 				end
 				playerSecondaryIcon.count:ClearAllPoints()
 				playerSecondaryIcon.count:SetParent(playerSecondaryIcon)
-				playerSecondaryIcon.count:SetFont(STANDARD_TEXT_FONT, (frame:GetWidth()*.9)*.415, "OUTLINE")
-				playerSecondaryIcon.count:SetPoint("TOPRIGHT", -1, (frame:GetWidth()*.9)*.415/2.5);
+				playerSecondaryIcon.count:SetFont(STANDARD_TEXT_FONT, (frame:GetWidth()*.8)*.415, "OUTLINE")
+				playerSecondaryIcon.count:SetPoint("TOPRIGHT", -1, (frame:GetWidth()*.8)*.415/2.5);
 				playerSecondaryIcon.count:SetJustifyH("RIGHT");
 				playerSecondaryIcon.count:SetText(countText)
 				playerSecondaryIcon.count:Show();
@@ -10887,34 +10838,6 @@ function LoseControl:new(unitId)
 		o.dispelTypeframe.tex:SetAllPoints(o.dispelTypeframe)
 		SetPortraitToTexture(o.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
 		o.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-		o.playerSilence = CreateFrame("Frame", "playerSilence", frame)
-		o.playerSilence:SetPoint("BOTTOMLEFT", o, "BOTTOMRIGHT", 1, 0)
-		o.playerSilence:SetParent(o)
-		o.playerSilence.texture = o.playerSilence:CreateTexture(nil, "BACKGROUND")
-		o.playerSilence.texture:SetAllPoints(true)
-		o.playerSilence.cooldown = CreateFrame("Cooldown", nil,   o.playerSilence, 'CooldownFrameTemplate')
-		o.playerSilence.cooldown:SetAllPoints(o.playerSilence)
-		o.playerSilence.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")    --("Interface\\Cooldown\\edge-LoC") Blizz LC CD
-		o.playerSilence.cooldown:SetDrawSwipe(true)
-		o.playerSilence.cooldown:SetDrawEdge(false)
-		o.playerSilence.cooldown:SetReverse(true) --will reverse the swipe if actionbars or debuff, by default bliz sets the swipe to actionbars if this = true it will be set to debuffs
-		o.playerSilence.cooldown:SetDrawBling(false)
-		o.playerSilence.Ltext = o.playerSilence:CreateFontString(nil, "ARTWORK")
-		o.playerSilence.Ltext:SetParent(o.playerSilence)
-		o.playerSilence.Ltext:SetJustifyH("CENTER")
-		o.playerSilence.Ltext:SetTextColor(1, 1, 1, 1)
-		o.playerSilence.Ltext:SetPoint("TOP", o.playerSilence, "BOTTOM", 0 , -1.25)
-		o.playerSilence.dispelTypeframe  = CreateFrame("Frame", addonName .. "playerSilence.dispelTypeframe" .. unitId, o.playerSilence)
-		o.playerSilence.dispelTypeframe:ClearAllPoints()
-		o.playerSilence.dispelTypeframe:SetAlpha(1)
-		o.playerSilence.dispelTypeframe:SetFrameLevel(3)
-		o.playerSilence.dispelTypeframe:SetFrameStrata("MEDIUM")
-		o.playerSilence.dispelTypeframe:EnableMouse(false)
-		o.playerSilence.dispelTypeframe.tex = o.playerSilence.dispelTypeframe:CreateTexture()
-		o.playerSilence.dispelTypeframe.tex:SetAllPoints(o.playerSilence.dispelTypeframe)
-		SetPortraitToTexture(o.playerSilence.dispelTypeframe.tex, "Interface\\CHARACTERFRAME\\TempPortraitAlphaMaskSmall")
-		o.playerSilence.dispelTypeframe.tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-
 		o.playerSecondaryIcon = CreateFrame("Frame", "playerSecondaryIcon", frame)
 		o.playerSecondaryIcon:SetPoint("BOTTOMLEFT", o, "BOTTOMRIGHT", 1, 0)
 		o.playerSecondaryIcon:SetParent(o)
@@ -11038,8 +10961,13 @@ function LoseControl:new(unitId)
 	o:RegisterEvent("GROUP_ROSTER_UPDATE")
 	o:RegisterEvent("GROUP_JOINED")
 	o:RegisterEvent("GROUP_LEFT")
-	o:RegisterEvent("ARENA_OPPONENT_UPDATE")
-	o:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
+	if strmatch(unitId, "arena") then
+		o:RegisterEvent("ARENA_OPPONENT_UPDATE")
+		o:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
+	end
+	if unitId == "player" then
+		o:RegisterEvent("LOSS_OF_CONTROL_ADDED")
+	end
 
 	return o
 end
@@ -11054,7 +10982,17 @@ LCframeplayer2 = LoseControl:new("player2")
 LCframeplayer3 = LoseControl:new("player3")
 LCframes["player3"] = LCframeplayer3
 
+local function AddSubCategory(panel)
+	local category = Settings.GetCategory(panel.parent)
+	local subcategory = Settings.RegisterCanvasLayoutSubcategory(category, panel, panel.name, panel.name)
+	subcategory.ID = panel.name
+end
 
+local function AddCategory(panel)
+	local category = Settings.RegisterCanvasLayoutCategory(panel, panel.name, panel.name)
+	category.ID = panel.name
+	Settings.RegisterAddOnCategory(category)
+end
 
 function OptionsFunctions:UpdateAll()
 	for k, v in pairs(LCframes) do
@@ -11354,7 +11292,7 @@ function Unlock:OnClick()
 				local Types = { "Magic", "Curse", "Disease", "Poison", "none", "Buff", "CLEU" }
 				local Text = "Text For".."\n".."Spell Type"
 				if Text and (k == "player" or k == "player3") and v.frame.anchor ~= "Blizzard" and LoseControlDB.PlayerText  then
-					v.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.25, "OUTLINE")
+					v.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.225, "OUTLINE")
 					v.Ltext:SetText(Text)
 					v.Ltext:Show()
 				elseif (k == "player" or k == "player3") then
@@ -11385,22 +11323,22 @@ function Unlock:OnClick()
 				v:GetParent():Show()
 				v:SetDrawSwipe(true)
 				if (k == "player") and v.frame.anchor ~= "Blizzard" then
-					v.playerSilence:SetWidth(v.frame.size*.9)
-					v.playerSilence:SetHeight(v.frame.size*.9)
-					v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
-					v.playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.9*.25, "OUTLINE")
-					v.playerSilence.Ltext:SetText("Second \nIcon")
+					v.playerSecondaryIcon:SetWidth(v.frame.size*.85)
+					v.playerSecondaryIcon:SetHeight(v.frame.size*.85)
+					v.playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+					v.playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, v.frame.size*.8*.25, "OUTLINE")
+					v.playerSecondaryIcon.Ltext:SetText("Second \nIcon")
 					if not newDuration or newDuration < 1 then
-						v.playerSilence.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
-						v.playerSilence.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
-						v.playerSilence.cooldown:SetCooldown( GetTime(), 15 )
+						v.playerSecondaryIcon.texture:SetTexture(select(3, GetSpellInfo(keys[random(#keys)])))
+						v.playerSecondaryIcon.texture:SetTexCoord(0.01, .99, 0.01, .99) -- smallborder
+						v.playerSecondaryIcon.cooldown:SetCooldown( GetTime(), 15 )
 					end
 				end
 				if (k == "player") and v.frame.anchor ~= "Blizzard" and LoseControlDB.SilenceIcon then
-					v.playerSilence:Show()
+					v.playerSecondaryIcon:Show()
 				elseif not LoseControlDB.SilenceIcon and (k == "player" or k == "player3") then
-					if v.playerSilence:IsShown() then
-						v.playerSilence:Hide()
+					if v.playerSecondaryIcon:IsShown() then
+						v.playerSecondaryIcon:Hide()
 					end
 				end
 				if frame.anchor == "Blizzard" then
@@ -11423,15 +11361,10 @@ function Unlock:OnClick()
 					v:RegisterForDrag("LeftButton")
 					v:EnableMouse(true)
 				end
-				if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
+				if k == "arena3" and (frame.anchor == "Gladius") then
 					if GladiusButtonBackground and GladiusButtonBackground:GetAlpha() == 0 then
 						DEFAULT_CHAT_FRAME.editBox:SetText("/gladius test")
 						ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-					end
-					if GladdyButtonFrame3 then
-						GladdyButtonFrame3:SetAlpha(.5)
-						GladdyButtonFrame3.classIcon:SetAlpha(0)
-						v:SetAlpha(.5)
 					end
 					if GladiusClassIconFramearena3 then
 						GladiusButtonFramearena3:SetAlpha(.5)
@@ -11439,25 +11372,19 @@ function Unlock:OnClick()
 						v:SetAlpha(.5)
 					end
 				end
-				if LoseControlDB.EnableGladiusGloss and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
+				if LoseControlDB.EnableGladiusGloss and (frame.anchor == "Gladius") then
 					v.gloss:SetFrameLevel((v:GetParent():GetFrameLevel()) + 10)
 					v.gloss:SetNormalTexture("Interface\\AddOns\\LoseControl\\Textures\\Gloss")
 					v.gloss.normalTexture = _G[v.gloss:GetName().."NormalTexture"]
 					v.gloss.normalTexture:ClearAllPoints()
 					v.gloss.normalTexture:SetPoint("CENTER", v, "CENTER")
 					v.gloss.normalTexture:SetVertexColor(1, 1, 1, 0.3)
-					if frame.anchor == "Gladdy" then
-						v.gloss.normalTexture:SetHeight(v.frame.size + 2)
-						v.gloss.normalTexture:SetWidth(v.frame.size + 2)
-					else
-						v.gloss.normalTexture:SetHeight(v.frame.size )
-						v.gloss.normalTexture:SetWidth(v.frame.size )
-					end
-					if frame.anchor == "Gladdy" then
-						v.gloss.normalTexture:SetScale(.81) --.81 for Gladdy
-					else
-						v.gloss.normalTexture:SetScale(.89) --.81 for Gladius
-					end
+					
+					v.gloss.normalTexture:SetHeight(v.frame.size)
+					v.gloss.normalTexture:SetWidth(v.frame.size)
+
+
+					v.gloss.normalTexture:SetScale(.89) --.81 for Gladius
 				
 					if (not v.gloss:IsShown()) then
 							v.gloss:Show()
@@ -11538,18 +11465,13 @@ function Unlock:OnClick()
 		for k, v in pairs(LCframes) do
 			unlocknewline:Hide()
 			local frame = LoseControlDB.frames[k]
-			if k == "arena3" and (frame.anchor == "Gladius" or frame.anchor == "Gladdy") then
-				if GladdyButtonFrame3 then
-				GladdyButtonFrame3:SetAlpha(1)
-				GladdyButtonFrame3.classIcon:SetAlpha(1)
-				v:SetAlpha(1)
-				end
+			if k == "arena3" and (frame.anchor == "Gladius") then
 				if GladiusClassIconFramearena3 then
-				GladiusButtonFramearena3:SetAlpha(1)
-				GladiusClassIconFramearena3:SetAlpha(1)
-				v:SetAlpha(1)
-				DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
-				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+					GladiusButtonFramearena3:SetAlpha(1)
+					GladiusClassIconFramearena3:SetAlpha(1)
+					v:SetAlpha(1)
+					DEFAULT_CHAT_FRAME.editBox:SetText("/gladius hide")
+					ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				end
 			end
 			v.unlockMode = false
@@ -11808,8 +11730,8 @@ DrawSwipeSlider.Func = function(self, value)
       v:SetSwipeTexture("Interface\Cooldown\edge")
       v:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
       if k == "player" then
-        v.playerSilence.cooldown:SetSwipeTexture("Interface\Cooldown\edge")
-        v.playerSilence.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
+        v.playerSecondaryIcon.cooldown:SetSwipeTexture("Interface\Cooldown\edge")
+        v.playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
 		v.playerSecondaryIcon.cooldown:SetSwipeTexture("Interface\Cooldown\edge")
         v.playerSecondaryIcon.cooldown:SetSwipeColor(0, 0, 0, LoseControlDB.DrawSwipeSetting)
       end
@@ -12129,6 +12051,7 @@ OptionsPanel.default = function() -- This method will run when the player clicks
 	LCframeplayer2:PLAYER_ENTERING_WORLD()
 end
 
+
 OptionsPanel.refresh = function() -- This method will run when the Interface Options frame calls its OnShow function and after defaults have been applied via the panel.default method described above.
 	DisableCooldownCount:SetChecked(LoseControlDB.noCooldownCount)
 	DisableBlizzardCooldownCount:SetChecked(LoseControlDB.noBlizzardCooldownCount)
@@ -12172,7 +12095,8 @@ OptionsPanel.refresh = function() -- This method will run when the Interface Opt
 	end
 end
 
-InterfaceOptions_AddCategory(OptionsPanel)
+OptionsPanel:HookScript("OnShow", OptionsPanel.refresh)
+AddCategory(OptionsPanel)
 
 -------------------------------------------------------------------------------
 -- DropDownMenu helper function
@@ -12435,27 +12359,7 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 						ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 					end
 				end
-				if self.value == "Gladdy" and strfind(unitId, "arena") then
-					if strfind(unitId, "arena") then
-						LCframes[unitId]:CheckGladdyUnitsAnchors(true)
-					end
-					if GladdyButtonFrame1.classIcon then
-						local W = GladdyButtonFrame1.classIcon:GetWidth()
-						local H = GladdyButtonFrame1.classIcon:GetWidth()
-						print("|cff00ccffLoseControl|r".." : "..unitId.." GladdyClassIconFrame Size "..mathfloor(H))
-						portrSizeValue = W
-					else
-						if (strfind(unitId, "arena")) then
-						portrSizeValue = 42
-						end
-					end
-					frame.size = portrSizeValue
-					icon:SetWidth(portrSizeValue)
-					icon:SetHeight(portrSizeValue)
-					icon:GetParent():SetWidth(portrSizeValue)
-					icon:GetParent():SetHeight(portrSizeValue)
-					_G[OptionsPanelFrame:GetName() .. "IconSizeSlider"]:SetValue(portrSizeValue)
-				end
+				
 				if self.value == "BambiUI" then
 					if (strfind(unitId, "party")) then
 						if not EditModeManagerFrame:UseRaidStylePartyFrames() then
@@ -12631,10 +12535,10 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 				LCframes[frame].count:SetJustifyH("RIGHT");
 				LCframes[frame].dispelTypeframe:SetHeight(value*.105)
 				LCframes[frame].dispelTypeframe:SetWidth(value*.105)
-				LCframes[frame].Ltext:SetFont(STANDARD_TEXT_FONT, value*.25, "OUTLINE")
-				LCframes[frame].playerSilence:SetWidth(value*.9)
-				LCframes[frame].playerSilence:SetHeight(value*.9)
-				LCframes[frame].playerSilence.Ltext:SetFont(STANDARD_TEXT_FONT, value*.9*.25, "OUTLINE")
+				LCframes[frame].Ltext:SetFont(STANDARD_TEXT_FONT, value*.225, "OUTLINE")
+				LCframes[frame].playerSecondaryIcon:SetWidth(value*.9)
+				LCframes[frame].playerSecondaryIcon:SetHeight(value*.9)
+				LCframes[frame].playerSecondaryIcon.Ltext:SetFont(STANDARD_TEXT_FONT, value*.9*.25, "OUTLINE")
 			end
 			SetInterruptIconsSize(LCframes[frame], value)
 		end
@@ -13878,8 +13782,6 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 		end
 		if unitId ~= "player3" then
 			LCframes[unitId]:CheckGladiusUnitsAnchors(true)
-			LCframes[unitId]:CheckGladdyUnitsAnchors(true)
-			LCframes[unitId]:CheckSUFUnitsAnchors(true)
 		end
 		for _, checkbuttonframe in pairs(CategoriesCheckButtons) do
 			if checkbuttonframe.auraType ~= "interrupt" then
@@ -14020,11 +13922,9 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 				if Gladius then AddItem(AnchorDropDown, "Gladius", "Gladius") end
 			end
 			if v ~= "player3" then 
-				if IsAddOnLoaded("Gladdy") then AddItem(AnchorDropDown, "Gladdy", "Gladdy") end
 				if _G[anchors["Perl"][unitId]] or (type(anchors["Perl"][unitId])=="table" and anchors["Perl"][unitId]) then AddItem(AnchorDropDown, "Perl", "Perl") end
 				if _G[anchors["XPerl"][unitId]] or (type(anchors["XPerl"][unitId])=="table" and anchors["XPerl"][unitId]) then AddItem(AnchorDropDown, "XPerl", "XPerl") end
 				if _G[anchors["LUI"][unitId]] or (type(anchors["LUI"][unitId])=="table" and anchors["LUI"][unitId]) then AddItem(AnchorDropDown, "LUI", "LUI") end
-				if _G[anchors["SUF"][unitId]] or (type(anchors["SUF"][unitId])=="table" and anchors["SUF"][unitId]) then AddItem(AnchorDropDown, "SUF", "SUF") end
 				if _G[anchors["SyncFrames"][unitId]] or (type(anchors["SyncFrames"][unitId])=="table" and anchors["SyncFrames"][unitId]) then AddItem(AnchorDropDown, "SyncFrames", "SyncFrames") end
 			end
 		end)
@@ -14035,13 +13935,12 @@ for _, v in ipairs({ "player", "player3", "pet", "target", "targettarget", "focu
 				if _G[anchors["Perl"][unitId]] or (type(anchors["Perl"][unitId])=="table" and anchors["Perl"][unitId]) then AddItem(AnchorDropDown2, "Perl", "Perl") end
 				if _G[anchors["XPerl"][unitId]] or (type(anchors["XPerl"][unitId])=="table" and anchors["XPerl"][unitId]) then AddItem(AnchorDropDown2, "XPerl", "XPerl") end
 				if _G[anchors["LUI"][unitId]] or (type(anchors["LUI"][unitId])=="table" and anchors["LUI"][unitId]) then AddItem(AnchorDropDown2, "LUI", "LUI") end
-				if _G[anchors["SUF"][unitId]] or (type(anchors["SUF"][unitId])=="table" and anchors["SUF"][unitId]) then AddItem(AnchorDropDown2, "SUF", "SUF") end
 			end)
 			UIDropDownMenu_SetSelectedValue(AnchorDropDown2, LoseControlDB.frames.player2.anchor)
 		end
 	end
-
-	InterfaceOptions_AddCategory(OptionsPanelFrame)
+	OptionsPanelFrame:HookScript("OnShow", OptionsPanelFrame.refresh)
+	AddSubCategory(OptionsPanelFrame)
 end
 
 -------------------------------------------------------------------------------
@@ -14156,7 +14055,7 @@ SlashCmdList[addonName] = function(cmd)
 		SlashCmd[args[1]](unpack(args))
 	else
 		print("|cff00ccffLoseControl|r", ": Type \"/lc help\" for more options.")
-		InterfaceOptionsFrame_OpenToCategory(OptionsPanel)
-		InterfaceOptionsFrame_OpenToCategory(OptionsPanel)
+		Settings.OpenToCategory(OptionsPanel.name)
+
 	end
 end

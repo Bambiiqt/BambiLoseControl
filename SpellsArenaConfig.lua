@@ -6,8 +6,6 @@ local SpellsArenaConfig = L.SpellsArenaConfig;
 local UISpellsArenaConfig;
 local tooltip = CreateFrame("GameTooltip", "fPBMouseoverTooltip", UIParent, "GameTooltipTemplate")
 local UIParent = UIParent -- it's faster to keep local references to frequently used global vars
-local UnitAura = UnitAura
-local UnitBuff = UnitBuff
 local UnitCanAttack = UnitCanAttack
 local UnitClass = UnitClass
 local UnitExists = UnitExists
