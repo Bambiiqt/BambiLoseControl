@@ -1,9 +1,9 @@
 local _, L = ...;
 
-L.SpellsArenaConfig = {}; -- adds SpellsArenaConfig table to addon namespace
+L.SpellsArenaClassConfig = {}; -- adds SpellsArenaClassConfig table to addon namespace
 
-local SpellsArenaConfig = L.SpellsArenaConfig;
-local UISpellsArenaConfig;
+local SpellsArenaClassConfig = L.SpellsArenaClassConfig;
+local UISpellsArenaClassConfig;
 local tooltip = CreateFrame("GameTooltip", "fPBMouseoverTooltip", UIParent, "GameTooltipTemplate")
 local UIParent = UIParent -- it's faster to keep local references to frequently used global vars
 local UnitCanAttack = UnitCanAttack
@@ -94,6 +94,25 @@ local defaults = {
 
 
 local tabs = {
+	"DEATHKNIGHT",
+	"DEMONHUNTER",
+	"DRUID",
+	"EVOKER",
+	"HUNTER", -- Needs to be same
+	"MAGE",
+	"MONK",
+	"PALADIN",
+	"PRIEST",
+	"ROGUE",
+	"SHAMAN",
+	"WARLOCK",
+	"WARRIOR",
+	"Racials",
+	"PvP",
+}
+
+
+local tabsdropdown = {
 	"Drink_Purge",
 	"Immune_Arena",
 	"CC_Arena",
@@ -115,41 +134,17 @@ local tabs = {
 	"Snares_Casted_Melee",
 }
 
-local classtabs = {
-	"DEATHKNIGHT",
-	"DEMONHUNTER",
-	"DRUID",
-	"EVOKER",
-	"HUNTER", -- Needs to be same
-	"MAGE",
-	"MONK",
-	"PALADIN",
-	"PRIEST",
-	"ROGUE",
-	"SHAMAN",
-	"WARLOCK",
-	"WARRIOR",
-	"Racials",
-	"PvP",
-}
-
-local classtabsIndex = {}
-for i = 1, #classtabs do
-	classtabsIndex[classtabs[i]] = i
-end
-
-
 local tabsIndex = {}
-for i = 1, #tabs do
-	tabsIndex[tabs[i]] = i
+for i = 1, #tabsdropdown do
+	tabsIndex[tabsdropdown[i]] = i
 end
 
 local tabsDrop = {}
-for i = 1, #tabs + 1 do
-	if not tabs[i] then
+for i = 1, # tabsdropdown + 1 do
+	if not  tabsdropdown[i] then
 		tabsDrop[i] = "Delete"
 	else
-		tabsDrop[i] = tabs[i]
+		tabsDrop[i] =  tabsdropdown[i]
 	end
 end
 
@@ -258,12 +253,12 @@ end
 local function Tab_OnClick(self)
 	PanelTemplates_SetTab(self:GetParent(), self:GetID());
 
-	local scrollChild = UISpellsArenaConfig.ScrollFrame:GetScrollChild();
+	local scrollChild = UISpellsArenaClassConfig.ScrollFrame:GetScrollChild();
 	if (scrollChild) then
 		scrollChild:Hide();
 	end
 
-	UISpellsArenaConfig.ScrollFrame:SetScrollChild(self.content);
+	UISpellsArenaClassConfig.ScrollFrame:SetScrollChild(self.content);
 	self.content:Show();
 end
 
@@ -302,90 +297,120 @@ local function GetSpellFrame(spellID, duration, c)
 		return _G[c:GetName().."spellCheck"..spellID]
 	else
 		return false
-	end
+	end 
 end
 
-local function CustomAddedCompileSpells(spell, prio)
+local function CustomAddedCompileSpells(spell, prio, i)
+	local class = tabs[i]
+
 	for k, v in ipairs(_G.LoseControlDB.customSpellIdsArena) do
 		if spell == v[1] then
 			tblremove(_G.LoseControlDB.customSpellIdsArena, k)
 			break
 		end
 	end
-	for i = 1, #L.spellsArena do
-		for k, v in ipairs(L.spellsArena[i]) do
-			local spellID, oldPrio, _, _, duration, customname = unpack(v)
+	local oldPrioF
+	for y = 1, #L.spellsArena do
+		for l = 1, #L.spellsArena[y] do
+			local spellID, oldPrio, _, _, duration, customname = unpack(L.spellsArena[y][l])
 			if spell == spellID and (not duration) then
+				print(oldPrio)
+				oldPrioF = oldPrio
 				local priotext = L[oldPrio] or oldPrio
-				L.SpellsArenaConfig:WipeSpellList(i); print("|cff00ccffLoseControl|r : ".."|cff009900Removed |r"..spellID.." |cff009900from : |r"..priotext.." (Arena)")
-				tblremove(L.spellsArena[i], k)
-				L.SpellsArenaConfig:UpdateSpellList(i)
+				L.SpellsArenaClassConfig:WipeSpellList(i); print("|cff00ccffLoseControl|r : ".."|cff009900Removed |r"..spellID.." |cff009900from : |r"..priotext.." (Arena)")
+				L.spellsArena[y][l] = nil 
+				tblremove(L.spellsArena[y], l)
 				break
 			end
 		end
 	end
+	L.classIds[spell] = class
+	local name = GetSpellInfo(spell)
+	if name then 
+		L.classIds[name] = class
+	end
 	L.spellIdsArena[spell] = prio
 	_G.LoseControlDB.spellEnabledArena[spell]= true
-	L.SpellsArenaConfig:WipeSpellList(tabsIndex[prio])
-	tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, prio, nil, nil, nil, "Custom Spell"})
-	tblinsert(L.spellsArena[tabsIndex[prio]], 1, {spell, prio, nil, nil, nil, "Custom Spell"})
-	L.SpellsArenaConfig:UpdateSpellList(tabsIndex[prio])
+	if _G["LoseControlSpellsArenaConfig"] and oldPrioF then 
+		L.SpellsArenaConfig:WipeSpellList(tabsIndex[oldPrioF])
+	end
+	if _G["LoseControlSpellsArenaConfig"] then
+		L.SpellsArenaConfig:WipeSpellList(tabsIndex[prio]) 
+	end
+	tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, prio, nil, nil, nil, "Custom Spell", nil, nil, class})
+	tblinsert(L.spellsArena[tabsIndex[prio]], 1, {spell, prio, nil, nil, nil, "Custom Spell",  nil, nil, class})
+	if _G["LoseControlSpellsArenaConfig"] and oldPrioF then 
+		L.SpellsArenaConfig:UpdateSpellList(tabsIndex[oldPrioF]) 
+	end
+	if _G["LoseControlSpellsArenaConfig"] then
+		L.SpellsArenaConfig:UpdateSpellList(tabsIndex[prio]) 
+	end
 	local priotext = L[prio] or prio
 	print("|cff00ccffLoseControl|r : ".."|cff009900Added |r"..spell.." |cff009900to to list: |r"..priotext.." (Arena)")
+	L.SpellsArenaClassConfig:WipeSpellList(i)
+	L.SpellsArenaClassConfig:UpdateSpellList(i)
 	L.OptionsFunctions:UpdateAll()
 end
 
-local function CustomPVPDropDownCompileSpells(spell , newPrio, oldPrio, c, duration, class)
-	local i = classtabsIndex[class]
-
+local function CustomPVPDropDownCompileSpells(spell , newPrio, i, c, duration)
+	local class = tabs[i]
 	for k, v in ipairs(_G.LoseControlDB.customSpellIdsArena) do
 		if spell == v[1] then
 			tblremove(_G.LoseControlDB.customSpellIdsArena, k)
 			break
 		end
 	end
-	for k, v in ipairs(L.spellsArena[tabsIndex[oldPrio]]) do
-		local spellID, _, _, _, duration, customname = unpack(v)
-		if spell == spellID and (not duration) then
-			SpellsArenaConfig:WipeSpellList(tabsIndex[oldPrio])
-			if _G["LoseControlSpellsArenaClassConfig"] and i then 
-				L.SpellsArenaClassConfig:WipeSpellList(i)
+	for y = 1, #L.spellsArena do
+		for l = 1, #L.spellsArena[y] do
+			local spellID, oldPrio, _, _, duration, customname = unpack(L.spellsArena[y][l])
+			if spell == spellID and (not duration) then
+				if _G["LoseControlSpellsArenaConfig"] then 
+					L.SpellsArenaConfig:WipeSpellList(tabsIndex[oldPrio])
+				end
+				L.spellsArena[y][l] = nil 
+				tblremove(L.spellsArena[y], l)
+				local priotext = L[oldPrio] or oldPrio
+				print("|cff00ccffLoseControl|r : ".."|cff009900Removed |r"..spellID.." |cff009900from list: |r"..priotext.." (Arena)")
+				if newPrio == "Delete" then
+					L.spellIdsArena[spell] = nil
+					_G.LoseControlDB.spellEnabledArena[spell]= nil
+					if L.spellsArenaLua[spell] then
+						tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, newPrio, nil, nil, nil, customname})  --v[7]: Category Tab to enter spell
+					end
+					DeleteSpellFrame(spell, duration, c)
+					local name = GetSpellInfo(spellID)
+					if L.classIds[spellID] then 
+						L.classIds[spellID] = nil
+					end
+					if L.classIds[name] then 
+						L.classIds[name] = nil 
+					end
+					if _G["LoseControlSpellsArenaConfig"] then 
+						L.SpellsArenaConfig:UpdateSpellList(tabsIndex[oldPrio])
+					end
+					SpellsArenaClassConfig:WipeSpellList(i)
+					SpellsArenaClassConfig:UpdateSpellList(i)
+					L.OptionsFunctions:UpdateAll()
+				else
+					L.spellIdsArena[spell] = newPrio
+					tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, newPrio, nil, nil, nil, "Custom Priority", nil, nil, class})
+					tblinsert(L.spellsArena[tabsIndex[newPrio]], 1, {spell, newPrio, nil, nil, nil, "Custom Priority", nil, nil, class})
+					local priotext = L[newPrio] or newPrio
+					print("|cff00ccffLoseControl|r : ".."|cff009900Added |r"..spell.." |cff009900to to list: |r"..priotext.." (Arena)")
+					L.classIds[spellID] = class
+					local name = GetSpellInfo(spellID)
+					if name then 
+						L.classIds[name] = class
+					end
+					if _G["LoseControlSpellsArenaConfig"] then 
+						L.SpellsArenaConfig:UpdateSpellList(tabsIndex[oldPrio]);L.SpellsArenaConfig:UpdateTab(tabsIndex[newPrio]);
+					end
+					SpellsArenaClassConfig:WipeSpellList(i)
+					SpellsArenaClassConfig:UpdateSpellList(i);
+					L.OptionsFunctions:UpdateAll()
+				end
+				return
 			end
-			tblremove(L.spellsArena[tabsIndex[oldPrio]], k)
-			local priotext = L[oldPrio] or oldPrio
-			print("|cff00ccffLoseControl|r : ".."|cff009900Removed |r"..spellID.." |cff009900from list: |r"..priotext.." (Arena)")
-			if newPrio == "Delete" then
-			 	L.spellIdsArena[spell] = nil
-				_G.LoseControlDB.spellEnabledArena[spell]= nil
-				if L.spellsArenaLua[spell] then
-				tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, newPrio, nil, nil, nil, customname})  --v[7]: Category Tab to enter spell
-				end
-				DeleteSpellFrame(spell, duration, c)
-				local name = GetSpellInfo(spellID)
-				if L.classIds[spellID] then 
-					L.classIds[spellID] = nil
-				end
-				if L.classIds[name] then 
-					L.classIds[name] = nil 
-				end
-				SpellsArenaConfig:UpdateSpellList(tabsIndex[oldPrio])
-				if _G["LoseControlSpellsArenaClassConfig"]  and i then 
-					L.SpellsArenaClassConfig:UpdateSpellList(i)
-				end
-				L.OptionsFunctions:UpdateAll()
-			else
-				L.spellIdsArena[spell] = newPrio
-				tblinsert(_G.LoseControlDB.customSpellIdsArena, {spell, newPrio, nil, nil, nil, "Custom Priority"})
-				tblinsert(L.spellsArena[tabsIndex[newPrio]], 1, {spell, newPrio, nil, nil, nil, "Custom Priority"})
-				local priotext = L[newPrio] or newPrio
-				print("|cff00ccffLoseControl|r : ".."|cff009900Added |r"..spell.." |cff009900to to list: |r"..priotext.." (Arena)")
-				SpellsArenaConfig:UpdateSpellList(tabsIndex[oldPrio]);SpellsArenaConfig:UpdateTab(tabsIndex[newPrio]);
-				if _G["LoseControlSpellsArenaClassConfig"]  and i then 
-					L.SpellsArenaClassConfig:UpdateSpellList(i);
-				end
-				L.OptionsFunctions:UpdateAll()
-			end
-			break
 		end
 	end
 end
@@ -423,6 +448,52 @@ local function createDropdown(opts)
 						if val == default_val then
 							info.checked = true
 						end
+			info.menuList= key
+			info.hasArrow = false
+			info.func = function(b)
+				UIDropDownMenu_SetSelectedValue(dropdown, b.value, b.value)
+				UIDropDownMenu_SetText(dropdown, b.value)
+				b.checked = true
+				change_func(dropdown, b.value)
+			end
+			UIDropDownMenu_AddButton(info)
+		end
+	end)
+
+	return dropdown
+end
+
+
+local function createDropdownAdd(opts)
+	local dropdown_name = '$parent_' .. opts['name'] .. '_dropdown'
+	local menu_items = opts['items'] or {}
+	local title_text = opts['title'] or ''
+	local dropdown_width = 0
+	local default_val = opts['defaultVal'] or ''
+	local change_func = opts['changeFunc'] or function (dropdown_val) end
+
+	local dropdown = CreateFrame("Frame", dropdown_name, opts['parent'], 'UIDropDownMenuTemplate')
+	local dd_title = dropdown:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+	dd_title:SetPoint("TOPLEFT", 20, 10)
+
+	for _, item in pairs(menu_items) do -- Sets the dropdown width to the largest item string width.
+		dd_title:SetText(item)
+		local text_width = dd_title:GetStringWidth() + 20
+		if text_width > dropdown_width then
+			dropdown_width = text_width
+		end
+	end
+
+	UIDropDownMenu_SetWidth(dropdown, dropdown_width)
+	UIDropDownMenu_SetText(dropdown, dropdown_val)
+	dd_title:SetText(title_text)
+
+	UIDropDownMenu_Initialize(dropdown, function(self, level, _)
+		local info = UIDropDownMenu_CreateInfo()
+		for key, val in pairs(menu_items) do
+					if L[val] then val = L[val] end
+			info.text = val;
+			info.checked = false
 			info.menuList= key
 			info.hasArrow = false
 			info.func = function(b)
@@ -496,7 +567,7 @@ local function SetTabs(frame, numTabs, ...)
 		end)
 
 		tab:SetScript("OnClick", Tab_OnClick);
-		tab.content = CreateFrame("Frame", tab:GetName()..'Content', UISpellsArenaConfig.ScrollFrame);
+		tab.content = CreateFrame("Frame", tab:GetName()..'Content', UISpellsArenaClassConfig.ScrollFrame);
 		tab.content:SetSize(760, 360);
 		tab.content:Hide();
 		tab.content.bg = tab.content:CreateTexture(nil, "BACKGROUND");
@@ -509,25 +580,46 @@ local function SetTabs(frame, numTabs, ...)
 		if tabs[i] == "Interrupt" then
 		else
 			tab.content.input = CreateFrame("EditBox", tab:GetName()..'CustomSpells', 	tab.content, 'InputBoxTemplate')
-			tab.content.input:SetSize(150,22)
+			tab.content.input:SetSize(170,22)
 			tab.content.input:SetAutoFocus(false)
 			tab.content.input:SetMaxLetters(30)
-			tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 45, -14)
+			tab.content.input:SetPoint("TOPLEFT", tab.content, "TOPRIGHT", 25, -14)
 			tab.content.input:SetScript('OnChar', function(self, customspelltext)
 				tab.content.input.customspelltext = self:GetText()
 	    	end)
-	    
+			
+
+			local drop_val
+			local drop_opts = {
+					['name']='raid',
+					['parent']= tab.content.input,
+					['title']='',
+					['items']= tabsdropdown,
+					['defaultVal']='',
+					['changeFunc'] = function(dropdown_frame, dropdown_val)
+					drop_val = dropdown_val
+					for k, v in ipairs(tabsdropdown) do
+							if dropdown_val == L[v] then
+								drop_val = v
+							end
+						end
+					end
+			}
+			local dropdown = createDropdownAdd(drop_opts)
+			dropdown:SetPoint("TOP", tab.content.input, "CENTER", 0, -10)
+			dropdown:SetScale(.8)
+
 			tab.content.add = CreateFrame("Button",  tab:GetName()..'CustomSpellsButton', 	tab.content.input, "UIPanelButtonTemplate")
-			tab.content.add:SetSize(50,22)
+			tab.content.add:SetSize(40, 22)
 			tab.content.add:SetPoint("TOPLEFT",	tab.content.input, "TOPRIGHT", 2, 0)
 			tab.content.add:SetText("Add")
 			tab.content.add:SetScript("OnClick", function(self, addenemy)
-				if tab.content.input.customspelltext then
 				local spell = GetSpellInfo(tonumber(tab.content.input.customspelltext))
 				if spell then spell = tonumber(tab.content.input.customspelltext) else spell = tab.content.input.customspelltext end
-				CustomAddedCompileSpells(spell, tabs[i])
+				if drop_val and tab.content.input.customspelltext then
+					CustomAddedCompileSpells(spell, drop_val, i)
 				else
-					print("|cff00ccffLoseControl|r : Please Enter a spellId or Name")
+					print("|cff00ccffLoseControl|r : Please Select a Spell Type or Enter a spellId or Name")
 				end
 	    	end)
 		end
@@ -542,7 +634,7 @@ local function SetTabs(frame, numTabs, ...)
 		end
 		tab.content.reset:SetText("Enable All")
 		tab.content.reset:SetScript("OnClick", function(self, enable)
-			SpellsArenaConfig:EnableAll(i)
+			SpellsArenaClassConfig:EnableAll(i)
 			L.OptionsFunctions:UpdateAll()
 		end)
 
@@ -553,13 +645,13 @@ local function SetTabs(frame, numTabs, ...)
 		tab.content.disable:SetPoint("CENTER",	tab.content.reset,  "CENTER", 0, -20)
 		tab.content.disable:SetText("Disable All")
 		tab.content.disable:SetScript("OnClick", function(self, disable)
-			SpellsArenaConfig:DisableAll(i)
+			SpellsArenaClassConfig:DisableAll(i)
 			L.OptionsFunctions:UpdateAll()
 		end)
 
 
 		if (i == 1) then
-		tab:SetPoint("TOPLEFT", UISpellsArenaConfig, "BOTTOMLEFT", 6, 7);
+		tab:SetPoint("TOPLEFT", UISpellsArenaClassConfig, "BOTTOMLEFT", 6, 7);
 		rowCount = 1
 		else
 			if rowCount <= 9 then
@@ -567,7 +659,7 @@ local function SetTabs(frame, numTabs, ...)
 				rowCount = rowCount + 1
 	    	else
 				y = 7 - (25 * rows)
-				tab:SetPoint("TOPLEFT", UISpellsArenaConfig, "BOTTOMLEFT", 6, y);
+				tab:SetPoint("TOPLEFT", UISpellsArenaClassConfig, "BOTTOMLEFT", 6, y);
 				rows = rows + 1
 				rowCount = 1
 	    	end
@@ -580,89 +672,120 @@ local function SetTabs(frame, numTabs, ...)
 end
 
 local function CreateMenu()
-	UISpellsArenaConfig = CreateFrame("Frame", "LoseControlSpellsArenaConfig", UIParent, "UIPanelDialogTemplate");
+	UISpellsArenaClassConfig = CreateFrame("Frame", "LoseControlSpellsArenaClassConfig", UIParent, "UIPanelDialogTemplate");
 	local hex = select(4, GetThemeColor());
 	local BambiTag = string.format("|cff%s%s|r", hex:upper(), "By Bambi");
-	UISpellsArenaConfig.Title:SetText('LoseControl PVP Spells Config '..BambiTag)
-	UISpellsArenaConfig:SetFrameStrata("DIALOG");
-	UISpellsArenaConfig:SetFrameLevel(20);
-	UISpellsArenaConfig:EnableMouse(true);
-	UISpellsArenaConfig:SetMovable(true)
-	UISpellsArenaConfig:RegisterForDrag("LeftButton")
-	UISpellsArenaConfig:SetScript("OnDragStart", UISpellsArenaConfig.StartMoving)
-	UISpellsArenaConfig:SetScript("OnDragStop", UISpellsArenaConfig.StopMovingOrSizing)
+	UISpellsArenaClassConfig.Title:SetText('LoseControl PVP Spells Config '..BambiTag)
+	UISpellsArenaClassConfig:SetFrameStrata("DIALOG");
+	UISpellsArenaClassConfig:SetFrameLevel(20);
+	UISpellsArenaClassConfig:EnableMouse(true);
+	UISpellsArenaClassConfig:SetMovable(true)
+	UISpellsArenaClassConfig:RegisterForDrag("LeftButton")
+	UISpellsArenaClassConfig:SetScript("OnDragStart", UISpellsArenaClassConfig.StartMoving)
+	UISpellsArenaClassConfig:SetScript("OnDragStop", UISpellsArenaClassConfig.StopMovingOrSizing)
 
-	UISpellsArenaConfig:SetSize(1050, 400);
-	UISpellsArenaConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
+	UISpellsArenaClassConfig:SetSize(1050, 400);
+	UISpellsArenaClassConfig:SetPoint("CENTER"); -- Doesn't need to be ("CENTER", UIParent, "CENTER")
 
 
-	UISpellsArenaConfig.ScrollFrame = CreateFrame("ScrollFrame", nil, UISpellsArenaConfig, "ScrollFrameTemplate");
-	UISpellsArenaConfig.ScrollFrame:SetPoint("TOPLEFT", LoseControlSpellsArenaConfigDialogBG, "TOPLEFT", 4, -8);
-	UISpellsArenaConfig.ScrollFrame:SetPoint("BOTTOMRIGHT", LoseControlSpellsArenaConfigDialogBG, "BOTTOMRIGHT", -3, 4);
-	UISpellsArenaConfig.ScrollFrame:SetClipsChildren(true);
-	UISpellsArenaConfig.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
+	UISpellsArenaClassConfig.ScrollFrame = CreateFrame("ScrollFrame", nil, UISpellsArenaClassConfig, "ScrollFrameTemplate");
+	UISpellsArenaClassConfig.ScrollFrame:SetPoint("TOPLEFT", LoseControlSpellsArenaClassConfigDialogBG, "TOPLEFT", 4, -8);
+	UISpellsArenaClassConfig.ScrollFrame:SetPoint("BOTTOMRIGHT", LoseControlSpellsArenaClassConfigDialogBG, "BOTTOMRIGHT", -3, 4);
+	UISpellsArenaClassConfig.ScrollFrame:SetClipsChildren(true);
+	UISpellsArenaClassConfig.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
 
-	UISpellsArenaConfig.ScrollFrame.ScrollBar:ClearAllPoints();
-  	UISpellsArenaConfig.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", UISpellsArenaConfig.ScrollFrame, "TOPRIGHT", -12, -18);
- 	UISpellsArenaConfig.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", UISpellsArenaConfig.ScrollFrame, "BOTTOMRIGHT", -7, 18);
+	UISpellsArenaClassConfig.ScrollFrame.ScrollBar:ClearAllPoints();
+  	UISpellsArenaClassConfig.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", UISpellsArenaClassConfig.ScrollFrame, "TOPRIGHT", -12, -18);
+ 	UISpellsArenaClassConfig.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", UISpellsArenaClassConfig.ScrollFrame, "BOTTOMRIGHT", -7, 18);
 
-	local allContents = SetTabs(UISpellsArenaConfig, #tabs, unpack(tabs));
+	local allContents = SetTabs(UISpellsArenaClassConfig, #tabs, unpack(tabs));
 
-	UISpellsArenaConfig:Hide();
-	return UISpellsArenaConfig;
+	UISpellsArenaClassConfig:Hide();
+	return UISpellsArenaClassConfig;
 end
 
 --------------------------------------
--- SpellsArenaConfig functions
+-- SpellsArenaClassConfig functions
 --------------------------------------
-function SpellsArenaConfig:Addon_Load()
-	if not UISpellsArenaConfig then CreateMenu(); SpellsArenaConfig:UpdateAllSpellList() end
+function SpellsArenaClassConfig:Addon_Load()
+	if not UISpellsArenaClassConfig then CreateMenu(); SpellsArenaClassConfig:UpdateAllSpellList() end
 end
 
-function SpellsArenaConfig:Toggle() --Builds the Table
-	if not UISpellsArenaConfig then CreateMenu(); SpellsArenaConfig:UpdateAllSpellList() end
-	local menu = UISpellsArenaConfig
+function SpellsArenaClassConfig:Toggle() --Builds the Table
+	if not UISpellsArenaClassConfig then CreateMenu(); SpellsArenaClassConfig:UpdateAllSpellList() end
+	local menu = UISpellsArenaClassConfig
 	menu:SetShown(not menu:IsShown());
 end
 
-function SpellsArenaConfig:UpdateTab(i)
-	if not UISpellsArenaConfig then return end
-	SpellsArenaConfig:WipeSpellList(i)
-	SpellsArenaConfig:UpdateSpellList(i);
+function SpellsArenaClassConfig:UpdateTab(i)
+	if not UISpellsArenaClassConfig then return end
+	SpellsArenaClassConfig:WipeSpellList(i)
+	SpellsArenaClassConfig:UpdateSpellList(i);
 end
 
-function SpellsArenaConfig:WipeAll()
-if not UISpellsArenaConfig then return end
-	SpellsArenaConfig:WipeAllSpellList()
+function SpellsArenaClassConfig:WipeAll()
+	if not UISpellsArenaClassConfig then return end
+	SpellsArenaClassConfig:WipeAllSpellList()
 end
 
-function SpellsArenaConfig:UpdateAll()
-if not UISpellsArenaConfig then return end
-	SpellsArenaConfig:UpdateAllSpellList()
+function SpellsArenaClassConfig:UpdateAll()
+	if not UISpellsArenaClassConfig then return end
+	SpellsArenaClassConfig:UpdateAllSpellList()
 end
 
-function SpellsArenaConfig:WipeAllSpellList()
+function SpellsArenaClassConfig:WipeAllSpellList()
 	for i = 1, #tabs do
-	SpellsArenaConfig:WipeSpellList(i)
+		SpellsArenaClassConfig:WipeSpellList(i)
 	end
 end
 
-function SpellsArenaConfig:UpdateAllSpellList()
+function SpellsArenaClassConfig:UpdateAllSpellList()
 	for i = 1, #tabs do
-	SpellsArenaConfig:UpdateSpellList(i)
+		SpellsArenaClassConfig:UpdateSpellList(i)
 	end
 end
 
-function SpellsArenaConfig:ResetAllSpellList()
+function SpellsArenaClassConfig:ResetAllSpellList()
 	for i = 1, #tabs do
-	SpellsArenaConfig:EnableAll(i)
+		SpellsArenaClassConfig:EnableAll(i)
 	end
 end
 
-function SpellsArenaConfig:EnableAll(i)
+function SpellsArenaClassConfig:EnableAll(i)
+
+	local CLASSTBL = {
+		["DEATHKNIGHT"] = {},
+		["DEMONHUNTER"] = {},
+		["DRUID"] = {},
+		["EVOKER"] = {},
+		["HUNTER"] = {},
+		["MAGE"] = {},
+		["MONK"] = {},
+		["PALADIN"] = {},
+		["PRIEST"] = {},
+		["ROGUE"] = {},
+		["SHAMAN"] = {},
+		["WARLOCK"] = {},
+		["WARRIOR"] = {},
+		["Racials"] = {},
+		["PvP"] = {}
+	}
+
+	for y = 1, #L.spellsArena do
+		for l = 1, #L.spellsArena[y] do
+			local spellID = unpack(L.spellsArena[y][l])
+			local name = GetSpellInfo(spellID)
+			if L.classIds[spellID] or L.classIds[name] then
+				local table = L.classIds[spellID] or L.classIds[name]
+				tblinsert(CLASSTBL[table], L.spellsArena[y][l])
+			end
+		end
+	end
+
+
 	local c = contents[i]
-	for l = 1, (#L.spellsArena[i]) do
-		local spellID, _, _, _, duration = unpack(L.spellsArena[i][l])
+	for l = 1, #CLASSTBL[tabs[i]] do
+		local spellID, prio, _, _, duration, customname, _, cleuEvent = unpack(CLASSTBL[tabs[i]][l])
 		local spellCheck = GetSpellFrame(spellID, duration, c)
 		spellCheck.icon = _G[spellCheck:GetName().."Icon"]
 		spellCheck.icon.check = spellCheck
@@ -670,17 +793,47 @@ function SpellsArenaConfig:EnableAll(i)
 		_G.LoseControlDB.spellEnabledArena[spellID] = true
 		spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);
 	end
-	if _G["LoseControlSpellsArenaClassConfig"] then 
-		for i = 1, #classtabs do
-			L.SpellsArenaClassConfig:UpdateSpellList(i)
+	if _G["LoseControlSpellsArenaConfig"] then 
+		for i = 1, #tabsdropdown do
+			L.SpellsArenaConfig:UpdateSpellList(i)
 		end
 	end
 end
 
-function SpellsArenaConfig:DisableAll(i)
+function SpellsArenaClassConfig:DisableAll(i)
+
+	local CLASSTBL = {
+		["DEATHKNIGHT"] = {},
+		["DEMONHUNTER"] = {},
+		["DRUID"] = {},
+		["EVOKER"] = {},
+		["HUNTER"] = {},
+		["MAGE"] = {},
+		["MONK"] = {},
+		["PALADIN"] = {},
+		["PRIEST"] = {},
+		["ROGUE"] = {},
+		["SHAMAN"] = {},
+		["WARLOCK"] = {},
+		["WARRIOR"] = {},
+		["Racials"] = {},
+		["PvP"] = {}
+	}
+
+	for y = 1, #L.spellsArena do
+		for l = 1, #L.spellsArena[y] do
+			local spellID = unpack(L.spellsArena[y][l])
+			local name = GetSpellInfo(spellID)
+			if L.classIds[spellID] or L.classIds[name] then
+				local table = L.classIds[spellID] or L.classIds[name]
+				tblinsert(CLASSTBL[table], L.spellsArena[y][l])
+			end
+		end
+	end
+
 	local c = contents[i]
-	for l = 1, (#L.spellsArena[i]) do
-		local spellID, _, _, _, duration = unpack(L.spellsArena[i][l])
+	for l = 1, #CLASSTBL[tabs[i]] do
+		local spellID, prio, _, _, duration, customname, _, cleuEvent = unpack(CLASSTBL[tabs[i]][l])
 		local spellCheck = GetSpellFrame(spellID, duration, c)
 		spellCheck.icon = _G[spellCheck:GetName().."Icon"]
 		spellCheck.icon.check = spellCheck
@@ -688,14 +841,14 @@ function SpellsArenaConfig:DisableAll(i)
 		_G.LoseControlDB.spellEnabledArena[spellID] = false
 		spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);
 	end
-	if _G["LoseControlSpellsArenaClassConfig"] then 
-		for i = 1, #classtabs do
-			L.SpellsArenaClassConfig:UpdateSpellList(i)
+	if _G["LoseControlSpellsArenaConfig"] then 
+		for i = 1, #tabsdropdown do
+			L.SpellsArenaConfig:UpdateSpellList(i)
 		end
 	end
 end
 
-function SpellsArenaConfig:WipeSpellList(i)
+function SpellsArenaClassConfig:WipeSpellList(i)
 local c = contents[i]
  	for l = 1, (#L.spellsArena[i]) do
 		local spellID, _, _, _, duration = unpack(L.spellsArena[i][l])
@@ -705,8 +858,7 @@ local c = contents[i]
 	end
 end
 
-function SpellsArenaConfig:UpdateSpellList(i)
-
+function SpellsArenaClassConfig:UpdateSpellList(i)
 	local numberOfSpellChecksPerRow = 5
 	if i == nil then return end
 	local c = contents[i]
@@ -715,11 +867,43 @@ function SpellsArenaConfig:UpdateSpellList(i)
 	local X = 230
 	local spellCount = 1
 
+
 	c.spellstext:SetText("|cff00ccffSpells|r : "..#L.spellsArena[i])
 	c.spellstext:SetPoint("TOPLEFT", c, "TOPLEFT", 5, 0);
 
-	for l = 1, #L.spellsArena[i] do
-		local spellID, prio, _, _, duration, customname, _, cleuEvent = unpack(L.spellsArena[i][l])
+	local CLASSTBL = {
+		["DEATHKNIGHT"] = {},
+		["DEMONHUNTER"] = {},
+		["DRUID"] = {},
+		["EVOKER"] = {},
+		["HUNTER"] = {},
+		["MAGE"] = {},
+		["MONK"] = {},
+		["PALADIN"] = {},
+		["PRIEST"] = {},
+		["ROGUE"] = {},
+		["SHAMAN"] = {},
+		["WARLOCK"] = {},
+		["WARRIOR"] = {},
+		["Racials"] = {},
+		["PvP"] = {}
+	}
+
+
+	for y = 1, #L.spellsArena do
+		for l = 1, #L.spellsArena[y] do
+			local spellID = unpack(L.spellsArena[y][l])
+			local name = GetSpellInfo(spellID)
+			if L.classIds[spellID] or L.classIds[name] then
+				local table = L.classIds[spellID] or L.classIds[name]
+				tblinsert(CLASSTBL[table], L.spellsArena[y][l])
+			end
+		end
+	end
+
+
+	for l = 1, #CLASSTBL[tabs[i]] do
+		local spellID, prio, _, _, duration, customname, _, cleuEvent = unpack(CLASSTBL[tabs[i]][l])
 		if (spellID) then
 			local spellCheck = GetSpellFrame(spellID, duration, c)
 			if spellCheck then
@@ -728,25 +912,28 @@ function SpellsArenaConfig:UpdateSpellList(i)
 						Y = Y-40
 						X = 30
 					end
+					spellCheck:ClearAllPoints()
 					spellCheck:SetPoint("TOPLEFT", c, "TOPLEFT", X, Y);
 					X = X+200
 				else
+					spellCheck:ClearAllPoints()
 					spellCheck:SetPoint("TOPLEFT", c, "TOPLEFT", 30, -10);
 				end
 				spellCheck:Show()
-				spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);
+				spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);   --Error on 1st ADDON_LOADED
 				local aString = spellID
 				if type(spellID) == "number" then
 					if duration then
-					aString = substring(GetSpellInfo(spellID), 0, 19)..": "..duration or "SPELL REMOVED: "..spellID
+						aString = substring(GetSpellInfo(spellID), 0, 21).."\n"..substring(prio, 0, 21)..": "..duration or "SPELL REMOVED: "..spellID
 					else
-					aString = GetSpellInfo(spellID) or "SPELL REMOVED: "..spellID
+						local name = GetSpellInfo(spellID)
+						if name then aString = substring(name, 0, 21).."\n"..substring(prio, 0, 21) else aString = "SPELL REMOVED: "..spellID end
 					end
 					spellCheck.icon:SetNormalTexture(GetSpellTexture(spellID) or 1)
 				else
 				spellCheck.icon:SetNormalTexture(1008124)
 				end
-				local cutString = substring(aString, 0, 23);
+				local cutString = aString
 				if customname then
 					cutString = cutString.."\n".."("..customname..")"
 				end
@@ -755,6 +942,7 @@ function SpellsArenaConfig:UpdateSpellList(i)
 					cutString = Colorize(cutString, L.classIds[spellID]) or Colorize(cutString, L.classIds[name]) or cutString
 				end
 				spellCheck.text:SetText(cutString);
+				spellCheck.text:SetJustifyH('LEFT')
 			else
 				if not duration then
 					spellCheck = CreateFrame("CheckButton", c:GetName().."spellCheck"..spellID, c, "UICheckButtonTemplate");
@@ -772,7 +960,7 @@ function SpellsArenaConfig:UpdateSpellList(i)
 					spellCheck:SetPoint("TOPLEFT", c, "TOPLEFT", 30, -10);
 				end
 				spellCheck:Show()
-
+				spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);
 				spellCheck.icon = CreateFrame("Button", spellCheck:GetName().."Icon", spellCheck, "ActionButtonTemplate")
 				spellCheck.icon:Disable()
 				spellCheck.icon:SetPoint("CENTER", spellCheck, "CENTER", -85, 0)
@@ -782,15 +970,16 @@ function SpellsArenaConfig:UpdateSpellList(i)
 				local aString = spellID
 				if type(spellID) == "number" then
 					if duration then
-					aString = substring(GetSpellInfo(spellID), 0, 19)..": "..duration or "SPELL REMOVED: "..spellID
+						aString = substring(GetSpellInfo(spellID), 0, 21).."\n"..substring(prio, 0, 21)..": "..duration or "SPELL REMOVED: "..spellID
 					else
-					aString = GetSpellInfo(spellID) or "SPELL REMOVED: "..spellID
+						local name = GetSpellInfo(spellID)
+						if name then aString = substring(name, 0, 21).."\n"..substring(prio, 0, 21) else aString = "SPELL REMOVED: "..spellID end
 					end
 					spellCheck.icon:SetNormalTexture(GetSpellTexture(spellID) or 1)
 				else
 				spellCheck.icon:SetNormalTexture(1008124)
 				end
-				local cutString = substring(aString, 0, 23);
+				local cutString = aString
 				if customname then
 					cutString = cutString.."\n".."("..customname..")"
 				end
@@ -799,6 +988,7 @@ function SpellsArenaConfig:UpdateSpellList(i)
 					cutString = Colorize(cutString, L.classIds[spellID]) or Colorize(cutString, L.classIds[name]) or cutString
 				end
 				spellCheck.text:SetText(cutString);
+				spellCheck.text:SetJustifyH('LEFT')
 				if cleuEvent then spellID = customname end
 				spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false);   --Error on 1st ADDON_LOADED
 				spellCheck.spellID = spellID
@@ -812,12 +1002,12 @@ function SpellsArenaConfig:UpdateSpellList(i)
 				    ['changeFunc'] = function(dropdown_frame, dropdown_val)
 					local spell = GetSpellInfo(tonumber(spellID))
 						if spell then spell = tonumber(spellID) else spell = spellID end
-						for k, v in ipairs(tabs) do
+						for k, v in ipairs(tabsdropdown) do
 							if dropdown_val == L[v] then
 								dropdown_val = v
 							end
 						end
-						CustomPVPDropDownCompileSpells(spell, dropdown_val, tabs[i], c, duration, L.classIds[spellID] or L.classIds[name])
+						CustomPVPDropDownCompileSpells(spell, dropdown_val, i, c, duration)
 						spellCheck:SetChecked(_G.LoseControlDB.spellEnabledArena[spellID] or false)
 					end
 				}
@@ -828,12 +1018,12 @@ function SpellsArenaConfig:UpdateSpellList(i)
 				dropdown:SetScale(.55)
 				end
 
-				spellCheck:SetScript("OnClick", function()
+				spellCheck:SetScript("OnClick",function()
 					GameTooltip:Hide()
 					_G.LoseControlDB.spellEnabledArena[spellCheck.spellID] = spellCheck:GetChecked()
-					if _G["LoseControlSpellsArenaClassConfig"] then 
-						for i = 1, #classtabs do
-							L.SpellsArenaClassConfig:UpdateSpellList(i)
+					if _G["LoseControlSpellsArenaConfig"] then 
+						for i = 1, #tabsdropdown do
+							L.SpellsArenaConfig:UpdateSpellList(i)
 						end
 					end
 					L.OptionsFunctions:UpdateAll()

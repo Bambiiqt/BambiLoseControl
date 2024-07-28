@@ -25,3 +25,4 @@ LoseControl.lua
 SpellsConfig.lua
 SpellsPVEConfig.lua
 SpellsArenaConfig.lua
+SpellsArenaClassConfig.lua

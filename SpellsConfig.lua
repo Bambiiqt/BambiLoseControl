@@ -733,8 +733,8 @@ function SpellsConfig:UpdateSpellList(i)
 
 				spellCheck.icon = CreateFrame("Button", spellCheck:GetName().."Icon", spellCheck, "ActionButtonTemplate")
 				spellCheck.icon:Disable()
-				spellCheck.icon:SetPoint("CENTER", spellCheck, "CENTER", -90, 0)
-				spellCheck.icon:SetScale(0.3)
+				spellCheck.icon:SetPoint("CENTER", spellCheck, "CENTER", -85, 0)
+				spellCheck.icon:SetScale(0.35)
 				spellCheck.icon:Show()
 				spellCheck.icon.check = spellCheck
 				local aString = spellID

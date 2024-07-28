@@ -7663,6 +7663,17 @@ function LoseControl:CompileSpells(typeUpdate)
 		end
 	end
 
+	for i = 1, #_G.LoseControlDB.customSpellIdsArena do
+		local spellID, prio, instanceType, zone, duration, customname, _, cleuEvent, class  = unpack(_G.LoseControlDB.customSpellIdsArena[i])
+		if class then
+			classIds[spellID] = class
+			local name = GetSpellInfo(spellID)
+			if name and not classIds[name] then
+				classIds[name] = class
+			end
+		end
+	end
+
 	
 	L.classIds = classIds
 
@@ -11600,12 +11611,20 @@ LossOfControlSpells:SetScript("OnClick", function(self)
   L.SpellsConfig:Toggle()
 end)
 local LossOfControlSpellsArena = CreateFrame("Button", O.."LossOfControlSpellsArena", OptionsPanel, "GameMenuButtonTemplate")
-_G[O.."LossOfControlSpellsArena"]:SetText("Arena123")
+_G[O.."LossOfControlSpellsArena"]:SetText("Arena Spell By Type")
 LossOfControlSpellsArena:SetHeight(18)
 LossOfControlSpellsArena:SetWidth(185)
 LossOfControlSpellsArena:SetScale(1)
 LossOfControlSpellsArena:SetScript("OnClick", function(self)
   L.SpellsArenaConfig:Toggle()
+end)
+local LossOfControlSpellsArenaClass = CreateFrame("Button", O.."LossOfControlSpellsArenaClass", OptionsPanel, "GameMenuButtonTemplate")
+_G[O.."LossOfControlSpellsArenaClass"]:SetText("Arena Spell By CLass")
+LossOfControlSpellsArenaClass:SetHeight(18)
+LossOfControlSpellsArenaClass:SetWidth(185)
+LossOfControlSpellsArenaClass:SetScale(1)
+LossOfControlSpellsArenaClass:SetScript("OnClick", function(self)
+  L.SpellsArenaClassConfig:Toggle()
 end)
 local LossOfControlSpellsPVE = CreateFrame("Button", O.."LossOfControlSpellsPVE", OptionsPanel, "GameMenuButtonTemplate")
 _G[O.."LossOfControlSpellsPVE"]:SetText("PVE Spells")
@@ -11970,6 +11989,7 @@ durtiontypeArenaText:SetPoint("TOPLEFT", PriorityDescription, "BOTTOMLEFT", -1, 
 LossOfControlSpells:SetPoint("CENTER",PrioritySlider.Speed_Freedoms, "CENTER", 8, 55)
 LossOfControlSpellsPVE:SetPoint("CENTER", LossOfControlSpells, "CENTER", 0, -20)
 LossOfControlSpellsArena:SetPoint("CENTER", PrioritySliderArena.Drink_Purge, "CENTER", 8, 36)
+LossOfControlSpellsArenaClass:SetPoint("CENTER", LossOfControlSpellsArena, "CENTER", 8, 36)
 
 
 SetInterruptIcons = CreateFrame("CheckButton", O.."SetInterruptIcons", OptionsPanel, "OptionsBaseCheckButtonTemplate")
@@ -12037,14 +12057,17 @@ OptionsPanel.default = function() -- This method will run when the player clicks
 	L.SpellsConfig:ResetAllSpellList()
 	L.SpellsPVEConfig:ResetAllSpellList()
 	L.SpellsArenaConfig:ResetAllSpellList()
+	L.SpellsArenaClassConfig:ResetAllSpellList()
 	_G.LoseControlDB = nil
 	L.SpellsPVEConfig:WipeAll()
 	L.SpellsConfig:WipeAll()
 	L.SpellsArenaConfig:WipeAll()
+	L.SpellsArenaClassConfig:WipeAll()
 	LoseControl:ADDON_LOADED(addonName)
 	L.SpellsConfig:UpdateAll()
 	L.SpellsPVEConfig:UpdateAll()
 	L.SpellsArenaConfig:UpdateAll()
+	L.SpellsArenaClassConfig:UpdateAll()
 	for _, v in pairs(LCframes) do
 		v:PLAYER_ENTERING_WORLD()
 	end
